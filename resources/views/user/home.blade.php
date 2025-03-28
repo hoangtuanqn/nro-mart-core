@@ -1,4 +1,5 @@
 @extends('layouts.user.app')
+@section('title', 'Trang chủ')
 @section('content')
     <!-- Hero Section -->
     <section class="hero">

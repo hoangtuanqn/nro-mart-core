@@ -1,0 +1,152 @@
+/* Register Page Styles */
+.register-section {
+    padding: 60px 0;
+    background-color: var(--bg-color);
+}
+
+.register-container {
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 40px;
+}
+
+.register-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.register-title {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.register-title::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 1px;
+    margin: 15px auto 0;
+    border-bottom: 3px solid var(--accent-color);
+}
+
+.register-subtitle {
+    font-size: 1.6rem;
+    color: var(--text-light);
+    margin-top: 10px;
+}
+
+.register-form {
+    margin-top: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--primary-color);
+}
+
+.form-input {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1.5rem;
+    transition: var(--transition);
+}
+
+.form-input:focus {
+    border-color: var(--accent-color);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(255, 0, 0, 0.1);
+}
+
+.form-error {
+    color: var(--accent-color);
+    font-size: 1.3rem;
+    margin-top: 5px;
+}
+
+.register-btn {
+    width: 100%;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 14px;
+    font-size: 1.6rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-top: 10px;
+}
+
+.register-btn:hover {
+    background-color: #d40000;
+    transform: translateY(-2px);
+}
+
+.login-link {
+    text-align: center;
+    margin-top: 25px;
+    font-size: 1.5rem;
+    color: var(--text-light);
+}
+
+.login-link a {
+    color: var(--accent-color);
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.login-link a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .register-container {
+        max-width: 90%;
+        padding: 30px 20px;
+    }
+    
+    .register-title {
+        font-size: 2.4rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .register-section {
+        padding: 40px 0;
+    }
+    
+    .register-container {
+        padding: 25px 15px;
+    }
+    
+    .register-title {
+        font-size: 2.2rem;
+    }
+    
+    .form-input {
+        padding: 10px 12px;
+    }
+    
+    .register-btn {
+        padding: 12px;
+    }
+}

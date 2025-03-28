@@ -17,6 +17,12 @@ require __DIR__ . '/auth.php';
 Route::get('/', function () {
     return view('user.home');
 });
+// Route::get('/register', function () {
+//     return view('user.register');
+// })->name('register');
+// Route::get('/login', function () {
+//     return view('user.register');
+// })->name('login');
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');

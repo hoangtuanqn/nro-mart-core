@@ -113,6 +113,7 @@ a {
 .nav__action {
     margin-left: 10px;
     display: flex;
+    align-items: center;
     gap: 15px;
 }
 
@@ -124,6 +125,7 @@ a {
     border-radius: 20px;
     border: 1px solid #e2e2e2;
     transition: var(--transition);
+    display: inline-block;
 }
 
 .action__link:hover {
@@ -143,38 +145,29 @@ a {
     background-color: #d40000;
 }
 
-/* Hero Section */
-.hero {
-    padding: 80px 0;
-    background: linear-gradient(135deg, #333, #111);
-    color: white;
+/* Add styles for logout button */
+.nav__action form button.action__link {
+    background-color: var(--accent-color) !important;
+    color: white !important;
+    border: 1px solid var(--accent-color) !important;
+    font-size: 1.4rem;
     text-align: center;
-    margin-bottom: 60px;
+    min-width: 120px;
+    padding: 8px 18px;
+    border-radius: 20px;
+    transition: var(--transition);
+    cursor: pointer;
 }
 
-.hero__title {
-    font-size: 4.5rem;
-    font-weight: 700;
-    margin-bottom: 20px;
-    text-transform: uppercase;
+.nav__action form button.action__link:hover {
+    background-color: #d40000 !important;
+    transform: translateY(-2px);
 }
 
-.hero__desc {
-    font-size: 1.8rem;
-    max-width: 700px;
-    margin: 0 auto 40px;
-    opacity: 0.9;
-}
-
-.hero__actions {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-}
-
+/* Button styles - keep in global since they're used across pages */
 .btn {
     display: inline-block;
-    padding: 12px 24px;
+    padding: 8px 35px;
     border-radius: 30px;
     font-weight: 600;
     text-transform: uppercase;
@@ -205,135 +198,6 @@ a {
     background-color: white;
     color: var(--text-color);
     transform: translateY(-3px);
-}
-
-/* Main Content */
-/* Menu Common */
-.menu {
-    margin: 100px 0;
-    position: relative;
-}
-
-.menu__header {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 50px;
-}
-
-.menu__header__title {
-    color: var(--text-color);
-    font-weight: 600;
-    text-transform: uppercase;
-    font-size: 3rem;
-    position: relative;
-    padding-bottom: 15px;
-}
-
-.menu__header__title::after {
-    content: "";
-    display: block;
-    width: 100px;
-    height: 1px;
-    margin: 20px auto;
-    border-bottom: 4px solid var(--accent-color);
-}
-
-/* Transaction Section */
-.transaction__list {
-    display: flex;
-    margin: 50px 0 30px;
-    justify-content: space-between;
-}
-
-.transaction__item {
-    padding: 30px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    transition: var(--transition);
-}
-
-.transaction__item:hover {
-    transform: translateY(-10px);
-}
-
-.transaction__img {
-    aspect-ratio: 1 / 1;
-    border-radius: 25px;
-    width: 200px;
-}
-
-.text__transaction__item {
-    margin-top: 10px;
-    text-align: center;
-    font-weight: 600;
-}
-
-.transaction__item:hover .text__transaction__item {
-    color: var(--accent-color);
-}
-
-/* Category Section */
-.category__list {
-    margin-top: 50px;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 30px;
-}
-
-.category__item {
-    border: 1px solid #cccccc;
-    padding: 2px;
-    text-align: center;
-    border-radius: 4px;
-    transition: var(--transition);
-    background-color: white;
-}
-
-.category__item:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow);
-}
-
-.category__img {
-    aspect-ratio: 1.7 / 1;
-    width: 100%;
-}
-
-.category__title {
-    margin: 10px 0 20px;
-    color: var(--primary-color);
-    font-weight: 800;
-    text-transform: uppercase;
-    font-size: 1.6rem;
-}
-
-.category__item .category__desc {
-    margin-top: 10px;
-    color: #3a3f45a4;
-}
-
-.category__item p {
-    margin-bottom: 15px;
-}
-
-.category__action {
-    width: 70%;
-    margin: 0 auto;
-    text-align: center;
-    border: 1px solid var(--accent-color);
-    padding: 5px;
-    color: var(--accent-color);
-    text-transform: uppercase;
-    border-radius: 6px;
-    transition: var(--transition);
-}
-
-.category__item:hover .category__action {
-    background-color: var(--accent-color);
-    color: white;
 }
 
 /* Footer */
@@ -436,179 +300,7 @@ a {
     font-size: 1.4rem;
 }
 
-/* Responsive */
-@media (max-width: 992px) {
-    .nav {
-        padding: 15px 0;
-    }
-
-    .nav__menu {
-        gap: 10px;
-    }
-
-    .menu__item {
-        padding: 10px 15px;
-    }
-
-    .hero {
-        padding: 60px 0;
-    }
-
-    .hero__title {
-        font-size: 3.8rem;
-    }
-
-    .menu {
-        margin: 70px 0;
-    }
-
-    .transaction__list {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 20px;
-    }
-
-    .transaction__item {
-        padding: 20px;
-        width: 45%;
-    }
-
-    .transaction__img {
-        width: 150px;
-    }
-
-    .category__list {
-        grid-template-columns: repeat(2, 1fr);
-    }
-
-    .footer__content {
-        grid-template-columns: 1fr 1fr;
-        gap: 40px;
-    }
-}
-
-@media (max-width: 768px) {
-    .announcement {
-        padding: 5px 0;
-    }
-
-    .nav {
-        position: relative;
-        padding: 15px 0;
-    }
-
-    .nav .container.row {
-        flex-wrap: wrap;
-    }
-
-    .nav__logo {
-        height: 40px;
-    }
-
-    .nav__menu {
-        display: none;
-    }
-
-    .nav__action {
-        margin-left: auto;
-        margin-right: 0;
-    }
-
-    .action__link {
-        min-width: 100px;
-        padding: 8px 12px;
-        font-size: 1.3rem;
-    }
-
-    .hero {
-        padding: 50px 0;
-        margin-bottom: 40px;
-    }
-
-    .hero__title {
-        font-size: 3rem;
-    }
-
-    .hero__desc {
-        font-size: 1.5rem;
-        margin-bottom: 30px;
-    }
-
-    .hero__actions {
-        flex-direction: column;
-        gap: 15px;
-        max-width: 200px;
-        margin: 0 auto;
-    }
-
-    .menu {
-        margin: 50px 0;
-    }
-
-    .menu__header__title {
-        font-size: 2.5rem;
-    }
-
-    .transaction__list {
-        margin: 30px 0;
-    }
-
-    .transaction__item {
-        width: 100%;
-        padding: 15px;
-    }
-
-    .category__list {
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-    }
-
-    .footer {
-        padding: 40px 0 0;
-    }
-
-    .footer__content {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-
-    .footer__title {
-        font-size: 1.8rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .container {
-        max-width: calc(100% - 30px);
-    }
-
-    .nav__action {
-        gap: 10px;
-    }
-
-    .action__link {
-        min-width: auto;
-        padding: 6px 10px;
-    }
-
-    .hero__title {
-        font-size: 2.5rem;
-    }
-
-    .transaction__img {
-        width: 120px;
-    }
-
-    .category__title {
-        font-size: 1.4rem;
-    }
-
-    .category__action {
-        width: 90%;
-    }
-}
-
-/* Mobile Menu - Add this section to your CSS file */
+/* Mobile Menu */
 .mobile-menu-toggle {
     display: none;
     font-size: 2.4rem;
@@ -678,6 +370,88 @@ a {
     display: block;
 }
 
+/* Responsive styles for global elements */
+@media (max-width: 992px) {
+    .nav {
+        padding: 15px 0;
+    }
+
+    .nav__menu {
+        gap: 10px;
+    }
+
+    .menu__item {
+        padding: 10px 15px;
+    }
+
+    .footer__content {
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .announcement {
+        padding: 5px 0;
+    }
+
+    .nav {
+        position: relative;
+        padding: 15px 0;
+    }
+
+    .nav .container.row {
+        flex-wrap: wrap;
+    }
+
+    .nav__logo {
+        height: 40px;
+    }
+
+    .nav__menu {
+        display: none;
+    }
+
+    .nav__action {
+        margin-left: auto;
+        margin-right: 0;
+    }
+
+    .action__link {
+        min-width: 100px;
+        padding: 8px 12px;
+        font-size: 1.3rem;
+    }
+
+    .footer {
+        padding: 40px 0 0;
+    }
+
+    .footer__content {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
+    .footer__title {
+        font-size: 1.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        max-width: calc(100% - 30px);
+    }
+
+    .nav__action {
+        gap: 10px;
+    }
+
+    .action__link {
+        min-width: auto;
+        padding: 6px 10px;
+    }
+}
+
 /* Fix responsive styles for announcement section */
 @media (max-width: 768px) {
     .announcement .row {
@@ -697,27 +471,5 @@ a {
 
     .nav__action {
         display: none;
-    }
-}
-
-/* Fix transaction section on mobile */
-@media (max-width: 768px) {
-    .transaction__list {
-        flex-wrap: wrap;
-        gap: 20px;
-    }
-
-    .transaction__item {
-        width: 45%;
-    }
-}
-
-@media (max-width: 480px) {
-    .transaction__item {
-        width: 100%;
-    }
-
-    .transaction__img {
-        width: 120px;
     }
 }

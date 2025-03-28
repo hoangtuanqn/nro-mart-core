@@ -12,7 +12,9 @@
 <!-- Nav -->
 <nav class="nav">
     <div class="container row">
-        <img src="https://acc957.com/upload-usr/images/logo.png" alt="Logo Game" class="nav__logo" />
+        <a href="/">
+            <img src="https://acc957.com/upload-usr/images/logo.png" alt="Logo Game" class="nav__logo" />
+        </a>
         <div class="nav__menu">
             <a href="#" class="text menu__item">Trang chủ</a>
             <a href="#" class="text menu__item">Nạp tiền</a>
@@ -24,8 +26,19 @@
             <i class="fa-solid fa-bars"></i>
         </div>
         <div class="nav__action">
-            <a href="#" class="text action__link"><i class="fa-solid fa-user"></i> Đăng nhập</a>
-            <a href="#" class="text action__link action__link--primary"><i class="fa-solid fa-key"></i> Đăng ký</a>
+            @guest
+                <a href="{{ route('login') }}" class="text action__link"><i class="fa-solid fa-user"></i> Đăng nhập</a>
+                <a href="{{ route('register') }}" class="text action__link action__link--primary"><i
+                        class="fa-solid fa-key"></i> Đăng ký</a>
+            @else
+                <a href="#" class="text action__link"><i class="fa-solid fa-user"></i> {{ Auth::user()->username }}</a>
+                <form method="POST" action="{{ route('logout') }}" style="display: inline;">
+                    @csrf
+                    <button type="submit" class="text action__link action__link--primary">
+                        <i class="fa-solid fa-sign-out-alt"></i> Đăng xuất
+                    </button>
+                </form>
+            @endguest
         </div>
     </div>
 </nav>
