@@ -57,46 +57,16 @@
                 <h2 class="menu__header__title">MENU MỤC GAME</h2>
             </header>
             <div class="category__list">
-                <a href="#" class="category__item">
-                    <img src="http://img.acc957.com//20240215164859nickhsnr.jpg" alt="Image Category"
-                        class="category__img" />
-                    <h2 class="category__title">NICK HỒI SINH NGỌC RỒNG</h2>
-                    <p class="category__desc">Số tài khoản: 167</p>
-                    <p class="category__desc">Đã bán: 2899</p>
-                    <p class="text category__action">Xem Thêm</p>
-                </a>
-                <a href="#" class="category__item">
-                    <img src="http://img.acc957.com//20240215164859nickhsnr.jpg" alt="Image Category"
-                        class="category__img" />
-                    <h2 class="category__title">NICK HỒI SINH NGỌC RỒNG</h2>
-                    <p class="category__desc">Số tài khoản: 167</p>
-                    <p class="category__desc">Đã bán: 2899</p>
-                    <p class="text category__action">Xem Thêm</p>
-                </a>
-                <a href="#" class="category__item">
-                    <img src="http://img.acc957.com//20240215164859nickhsnr.jpg" alt="Image Category"
-                        class="category__img" />
-                    <h2 class="category__title">NICK HỒI SINH NGỌC RỒNG</h2>
-                    <p class="category__desc">Số tài khoản: 167</p>
-                    <p class="category__desc">Đã bán: 2899</p>
-                    <p class="text category__action">Xem Thêm</p>
-                </a>
-                <a href="#" class="category__item">
-                    <img src="http://img.acc957.com//20240215164859nickhsnr.jpg" alt="Image Category"
-                        class="category__img" />
-                    <h2 class="category__title">NICK HỒI SINH NGỌC RỒNG</h2>
-                    <p class="category__desc">Số tài khoản: 167</p>
-                    <p class="category__desc">Đã bán: 2899</p>
-                    <p class="text category__action">Xem Thêm</p>
-                </a>
-                <a href="#" class="category__item">
-                    <img src="http://img.acc957.com//20240215164859nickhsnr.jpg" alt="Image Category"
-                        class="category__img" />
-                    <h2 class="category__title">NICK HỒI SINH NGỌC RỒNG</h2>
-                    <p class="category__desc">Số tài khoản: 167</p>
-                    <p class="category__desc">Đã bán: 2899</p>
-                    <p class="text category__action">Xem Thêm</p>
-                </a>
+                @foreach ($categories as $category)
+                    {{-- {{ route('user.category', ['id' => $category->id]) }} --}}
+                    <a href="" class="category__item">
+                        <img src="{{ $category->thumbnail }}" alt="{{ $category->name }}" class="category__img" />
+                        <h2 class="category__title">{{ $category->name }}</h2>
+                        <p class="category__desc">Tổng giao dịch: {{ number_format($sold) }}</p>
+                        <p class="text category__action">Mua ngay</p>
+                    </a>
+                @endforeach
+
             </div>
         </div>
     </section>

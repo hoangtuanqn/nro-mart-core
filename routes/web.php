@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,9 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 require __DIR__ . '/auth.php';
-Route::get('/', function () {
-    return view('user.home');
-});
+Route::get('/', [HomeController::class, 'index'])->name('home');
 // Route::get('/register', function () {
 //     return view('user.register');
 // })->name('register');
