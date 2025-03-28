@@ -31,7 +31,8 @@
                 <a href="{{ route('register') }}" class="text action__link action__link--primary"><i
                         class="fa-solid fa-key"></i> Đăng ký</a>
             @else
-                <a href="#" class="text action__link"><i class="fa-solid fa-user"></i> {{ Auth::user()->username }}</a>
+                <a href="#" class="text action__link"><i class="fa-solid fa-user"></i> {{ Auth::user()->username }} -
+                    {{ number_format(Auth::user()->balance) }}đ</a>
                 <form method="POST" action="{{ route('logout') }}" style="display: inline;">
                     @csrf
                     <button type="submit" class="text action__link action__link--primary">

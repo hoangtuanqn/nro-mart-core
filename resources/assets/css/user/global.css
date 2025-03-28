@@ -166,7 +166,9 @@ a {
 
 /* Button styles - keep in global since they're used across pages */
 .btn {
-    display: inline-block;
+    /* display: inline-block; */
+    display: flex;
+    align-items: center;
     padding: 8px 35px;
     border-radius: 30px;
     font-weight: 600;
