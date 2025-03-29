@@ -13,6 +13,7 @@ return new class extends Migration {
         Schema::create('game_categories', function (Blueprint $table) {
             $table->id(); // ID danh mục
             $table->string('name'); // Tên danh mục
+            $table->string('slug'); // URL friendly version of name
             $table->string('thumbnail'); // Ảnh đại diện
             $table->text('description'); // Mô tả (chứa HTML/JS)
             $table->boolean('active')->default(true); // Trạng thái (1: Hoạt động, 0: Ẩn)
