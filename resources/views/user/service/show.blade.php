@@ -7,6 +7,39 @@
     <div class="service">
         <div class="container">
 
+            <!-- Thêm phần thông báo lỗi và thành công -->
+            @if (session('error'))
+                <div class="service__alert service__alert--error">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <span>{{ session('error') }}</span>
+                    <button type="button" class="service__alert-close">&times;</button>
+                </div>
+            @endif
+
+            @if (session('success'))
+                <div class="service__alert service__alert--success">
+                    <i class="fas fa-check-circle"></i>
+                    <span>{{ session('success') }}</span>
+                    <button type="button" class="service__alert-close">&times;</button>
+                </div>
+            @endif
+
+            @if ($errors->any())
+                <div class="service__alert service__alert--error">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <div>
+                        <span>Đã có lỗi xảy ra:</span>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    <button type="button" class="service__alert-close">&times;</button>
+                </div>
+            @endif
+            <!-- Kết thúc phần thông báo -->
+
             <div class="service__cards">
                 <div class="service__card service__card--rules">
                     <div class="service__card-icon">
@@ -30,8 +63,6 @@
                         <p>Chọn sever để xem chi tiết bảng giá nhiệm vụ. Chúng tôi cung cấp dịch vụ trên tất cả các máy chủ
                             của game Ngọc Rồng Online. Mỗi máy chủ sẽ có bảng giá riêng tùy theo độ khó của nhiệm vụ và số
                             lượng người chơi. Vui lòng chọn máy chủ phù hợp để xem bảng giá chi tiết và đặt dịch vụ.</p>
-
-
                     </div>
                 </div>
 
@@ -56,66 +87,95 @@
                 </div>
             </div>
 
-
             <div class="service__form">
                 <h3 class="service__form-title">Thông tin</h3>
 
-                <div class="service__form-row">
-                    <div class="service__form-group">
-                        <label for="server"><i class="fas fa-server"></i> Máy chủ</label>
-                        <select id="server" class="service__form-control">
-                            <option value="">Chọn Máy chủ</option>
-                            <option value="1">Server 1</option>
-                            <option value="2">Server 2</option>
-                            <option value="3">Server 3</option>
-                        </select>
+                <form action="{{ route('service.order', $service->slug) }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="service_id" value="{{ $service->id }}">
+
+                    <div class="service__form-row">
+                        <div class="service__form-group">
+                            <label for="server"><i class="fas fa-server"></i> Máy chủ</label>
+                            <select id="server" name="server" class="service__form-control" required>
+                                <option value="">Chọn Máy chủ</option>
+                                @for ($i = 1; $i <= 13; $i++)
+                                    <option value="{{ $i }}" {{ old('server') == $i ? 'selected' : '' }}>Server
+                                        {{ $i }}</option>
+                                @endfor
+                            </select>
+                            @error('server')
+                                <div class="service__form-error">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <div class="service__form-group">
+                            <label for="package_id"><i class="fas fa-cogs"></i> Dịch vụ</label>
+                            <select id="package_id" name="package_id" class="service__form-control" required>
+                                <option value="">Vui lòng chọn</option>
+                                @foreach ($service->packages as $package)
+                                    <option value="{{ $package->id }}"
+                                        {{ old('package_id') == $package->id ? 'selected' : '' }}
+                                        data-price="{{ $package->price }}">
+                                        {{ $package->name }} ({{ $package->description }})
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('package_id')
+                                <div class="service__form-error">{{ $message }}</div>
+                            @enderror
+                        </div>
                     </div>
 
-                    <div class="service__form-group">
-                        <label for="service"><i class="fas fa-cogs"></i> Dịch vụ</label>
-                        <select id="service" class="service__form-control">
-                            <option value="">Vui lòng chọn</option>
-                        </select>
-                    </div>
-                </div>
+                    <div class="service__form-row">
+                        <div class="service__form-group">
+                            <label for="username"><i class="fas fa-user"></i> Tài khoản</label>
+                            <input type="text" id="username" name="username" class="service__form-control"
+                                value="{{ old('username') }}" placeholder="Tài khoản game" required>
+                            @error('username')
+                                <div class="service__form-error">{{ $message }}</div>
+                            @enderror
+                        </div>
 
-                <div class="service__form-row">
-                    <div class="service__form-group">
-                        <label for="username"><i class="fas fa-user"></i> Tài khoản</label>
-                        <input type="text" id="username" class="service__form-control" value=""
-                            placeholder="Tài khoản game">
-                    </div>
-
-                    <div class="service__form-group">
-                        <label for="password"><i class="fas fa-lock"></i> Mật khẩu</label>
-                        <input type="password" id="password" class="service__form-control" value=""
-                            placeholder="Mật khẩu game">
-                    </div>
-                </div>
-
-                <div class="service__form-row">
-                    <div class="service__form-group">
-                        <label for="amount"><i class="fas fa-coins"></i> Tổng tiền</label>
-                        <input type="text" id="amount" class="service__form-control" value="0" readonly>
+                        <div class="service__form-group">
+                            <label for="password"><i class="fas fa-lock"></i> Mật khẩu</label>
+                            <input type="password" id="password" name="password" class="service__form-control"
+                                value="{{ old('password') }}" placeholder="Mật khẩu game" required>
+                            @error('password')
+                                <div class="service__form-error">{{ $message }}</div>
+                            @enderror
+                        </div>
                     </div>
 
-                    <div class="service__form-group">
-                        <label for="giftcode"><i class="fas fa-gift"></i> Mã giftcode</label>
-                        <input type="text" id="giftcode" class="service__form-control" placeholder="Nhập mã nếu có">
-                    </div>
-                </div>
+                    <div class="service__form-row">
+                        <div class="service__form-group">
+                            <label for="amount"><i class="fas fa-coins"></i> Tổng tiền</label>
+                            <input type="text" id="amount" class="service__form-control" value="0" readonly>
+                        </div>
 
-                <div class="service__form-actions">
-                    @if (Auth::check())
-                        <button type="submit" class="service__btn service__btn--primary service__btn--block">
-                            Thanh toán
-                        </button>
-                    @else
-                        <button type="submit" class="service__btn service__btn--primary service__btn--block">
-                            <i class="fas fa-sign-in-alt"></i> Đăng nhập để thanh toán
-                        </button>
-                    @endif
-                </div>
+                        <div class="service__form-group">
+                            <label for="giftcode"><i class="fas fa-gift"></i> Mã giftcode</label>
+                            <input type="text" id="giftcode" name="giftcode" class="service__form-control"
+                                placeholder="Nhập mã nếu có" value="{{ old('giftcode') }}">
+                            @error('giftcode')
+                                <div class="service__form-error">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="service__form-actions">
+                        @if (Auth::check())
+                            <button type="submit" class="service__btn service__btn--primary service__btn--block">
+                                <i class="fas fa-check-circle"></i> Thanh toán
+                            </button>
+                        @else
+                            <a href="{{ route('login') }}"
+                                class="service__btn service__btn--primary service__btn--block">
+                                <i class="fas fa-sign-in-alt"></i> Đăng nhập để thanh toán
+                            </a>
+                        @endif
+                    </div>
+                </form>
             </div>
 
             <div class="service__price-section">
@@ -130,8 +190,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($service->packages as $index => $package)
-                                <tr class="service__price-row" data-id="{{ $package->id }}" data-price="{{ $package->price }}">
+                            @foreach ($service->packages as $index => $package)
+                                <tr class="service__price-row" data-id="{{ $package->id }}"
+                                    data-price="{{ $package->price }}">
                                     <td>{{ $index + 1 }}</td>
                                     <td>{{ $package->name }} ({{ $package->description }})</td>
                                     <td>{{ number_format($package->price, 0, ',', ',') }} VNĐ</td>
@@ -141,63 +202,59 @@
                     </table>
                 </div>
             </div>
-
-
-
         </div>
     </div>
 @endsection
 
 @push('scripts')
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener('DOMContentLoaded', function() {
+            // Xử lý đóng thông báo
+            const alertCloseButtons = document.querySelectorAll('.service__alert-close');
+            alertCloseButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const alert = this.closest('.service__alert');
+                    alert.style.opacity = '0';
+                    alert.style.transform = 'translateY(-10px)';
+                    setTimeout(() => {
+                        alert.remove();
+                    }, 300);
+                });
+            });
+
             // Server selection
             const serverBtns = document.querySelectorAll('.service__server-btn');
+            const serverSelect = document.getElementById('server');
+            const packageSelect = document.getElementById('package_id');
+            const amountInput = document.getElementById('amount');
+
+            // Server Buttons
             serverBtns.forEach(btn => {
-                btn.addEventListener('click', function (e) {
+                btn.addEventListener('click', function(e) {
                     e.preventDefault();
+
+                    // Update UI
                     serverBtns.forEach(b => b.classList.remove('service__server-btn--active'));
                     this.classList.add('service__server-btn--active');
-                    // Could update server dropdown here
+
+                    // Update form select
+                    const serverId = this.textContent.replace('Server', '').trim();
+                    serverSelect.value = serverId;
                 });
             });
 
             // Price table rows
             const priceRows = document.querySelectorAll('.service__price-row');
-            const serviceSelect = document.getElementById('service');
-            const amountInput = document.getElementById('amount');
 
-            // Initialize service dropdown
-            function initServiceOptions() {
-                // Clear existing options except default
-                while (serviceSelect.options.length > 1) {
-                    serviceSelect.remove(1);
-                }
-
-                // Add options from price table
-                priceRows.forEach(row => {
-                    const serviceId = row.dataset.id;
-                    const servicePrice = row.dataset.price;
-                    const serviceText = row.cells[1].textContent;
-
-                    const option = document.createElement('option');
-                    option.value = serviceId;
-                    option.dataset.price = servicePrice;
-                    option.textContent = serviceText;
-
-                    serviceSelect.appendChild(option);
-                });
-            }
-
-            // Highlight selected service in price table
-            serviceSelect.addEventListener('change', function () {
+            // Highlight the row and update amount when package is selected
+            function updateSelectedPackage() {
                 // Remove highlight from all rows
                 priceRows.forEach(row => row.classList.remove('service__price-row--selected'));
 
-                if (this.value) {
+                if (packageSelect.value) {
                     // Find and highlight selected row
                     const selectedRow = document.querySelector(
-                        `.service__price-row[data-id="${this.value}"]`);
+                        `.service__price-row[data-id="${packageSelect.value}"]`);
                     if (selectedRow) {
                         selectedRow.classList.add('service__price-row--selected');
                         selectedRow.scrollIntoView({
@@ -212,19 +269,27 @@
                 } else {
                     amountInput.value = '0';
                 }
-            });
+            }
+
+            // Highlight selected service in price table
+            packageSelect.addEventListener('change', updateSelectedPackage);
 
             // Make price rows clickable
             priceRows.forEach(row => {
-                row.addEventListener('click', function () {
+                row.addEventListener('click', function() {
                     const serviceId = this.dataset.id;
-                    serviceSelect.value = serviceId;
-                    serviceSelect.dispatchEvent(new Event('change'));
+                    packageSelect.value = serviceId;
+                    updateSelectedPackage();
                 });
             });
 
-            // Initialize
-            initServiceOptions();
+            // Initialize with selected values
+            document.addEventListener('DOMContentLoaded', function() {
+                // Trigger highlight for pre-selected package (from old input)
+                if (packageSelect.value) {
+                    updateSelectedPackage();
+                }
+            });
         });
     </script>
 @endpush

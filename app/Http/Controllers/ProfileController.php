@@ -12,6 +12,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\GameAccount;
 use App\Models\MoneyTransaction;
+use App\Models\ServiceHistory;  // Fix the import here
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -70,5 +71,48 @@ class ProfileController extends Controller
     {
         $transactions = GameAccount::where('buyer_id', Auth::id())->where('status', 'sold')->get();
         return view('user.profile.purchased-accounts', compact('transactions')); // Return the view for purchased accounts lis
+    }
+
+    public function servicesHistory()
+    {
+        $serviceHistories = ServiceHistory::with(['gameService', 'servicePackage'])
+            ->where('user_id', Auth::id())
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
+        return view('user.profile.services-history', compact('serviceHistories'));
+    }
+
+    // Remove this duplicate use statement
+    // use App\Models\ServiceHistory;  // Remove this line
+
+    public function getServiceDetail($id)
+    {
+        try {
+            $service = ServiceHistory::with(['gameService', 'servicePackage'])
+                ->where('user_id', Auth::id())
+                ->findOrFail($id);
+    
+            return response()->json([
+                'status' => 'success',
+                'id' => $service->id,
+                'game_service' => [
+                    'name' => $service->gameService->name
+                ],
+                'game_account' => $service->game_account,
+                'server' => $service->server,
+                'service_package' => [
+                    'name' => $service->servicePackage->name
+                ],
+                'price' => $service->price,
+                'status' => $service->status,
+                'admin_note' => $service->admin_note ?? 'Không có ghi chú'
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Không thể tải thông tin dịch vụ'
+            ], 500);
+        }
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-function display_status($status)
+function display_status_nap_tien($status)
 {
     switch ($status) {
         case 'success':
@@ -11,6 +11,21 @@ function display_status($status)
             return '<span class="status-badge processing">Đang xử lý</span>';
         default:
             return '<span class="status-badge unknown">Không xác định</span>';
+    }
+}
+function display_status_service($status)
+{
+    switch ($status) {
+        case 'pending':
+            return '<span class="status-badge warning">Chờ xử lý</span>';
+        case 'processing':
+            return '<span class="status-badge info">Đang xử lý</span>';
+        case 'completed':
+            return '<span class="status-badge success">Hoàn thành</span>';
+        case 'cancelled':
+            return '<span class="status-badge error">Đã hủy</span>';
+        default:
+            return '<span class="status-badge secondary">Không xác định</span>';
     }
 }
 function display_hanh_tinh($planet)

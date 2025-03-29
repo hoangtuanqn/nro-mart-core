@@ -494,6 +494,21 @@ body.no-scroll {
     color: #212529;
 }
 
+.status-badge.warning {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.status-badge.info {
+    background-color: #17a2b8;
+    color: white;
+}
+
+.status-badge.secondary {
+    background-color: #6c757d;
+    color: white;
+}
+
 /* Responsive styles for global elements */
 @media (max-width: 992px) {
     .nav {

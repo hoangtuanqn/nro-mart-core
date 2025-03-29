@@ -42,9 +42,8 @@
                 <i class="fa-solid fa-clock-rotate-left"></i> Lịch sử vận may
             </a>
         </li>
-        <li class="sidebar-item">
-            <a href="{{ route('profile.purchased-accounts') }}"
-                class="sidebar-link {{ request()->routeIs('profile.purchased-accounts') ? 'active' : '' }}">
+        <li class="sidebar-item {{ request()->routeIs('profile.purchased-accounts') ? 'active' : '' }}">
+            <a href="{{ route('profile.purchased-accounts') }}" class="sidebar-link">
                 <i class="fa-solid fa-shopping-cart"></i> Tài khoản đã mua
             </a>
         </li>
@@ -53,8 +52,8 @@
                 <i class="fa-solid fa-money-bill"></i> Tài khoản trả góp
             </a>
         </li>
-        <li class="sidebar-item">
-            <a href="#" class="sidebar-link">
+        <li class="sidebar-item {{ request()->routeIs('profile.services-history') ? 'active' : '' }}">
+            <a href="{{ route('profile.services-history') }}" class="sidebar-link">
                 <i class="fa-solid fa-gear"></i> Dịch vụ đã thuê
             </a>
         </li>
