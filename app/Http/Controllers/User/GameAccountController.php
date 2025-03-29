@@ -7,7 +7,8 @@
  * @facebook  fb.com/phamhoangtuanqn
  */
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
+use App\Http\Controllers\Controller;
 
 use App\Models\GameAccount;
 use App\Models\MoneyTransaction;

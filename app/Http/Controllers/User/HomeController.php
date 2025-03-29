@@ -7,13 +7,13 @@
  * @facebook  fb.com/phamhoangtuanqn
  */
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
+use App\Http\Controllers\Controller;
 
 use App\Models\Category;
 use App\Models\GameAccount;
 use App\Models\GameService;
 use App\Models\ServiceHistory;
-use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {

@@ -6,8 +6,8 @@
  * @email     phamhoangtuanqn@gmail.com
  * @facebook  fb.com/phamhoangtuanqn
  */
-
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\User;
+use App\Http\Controllers\Controller;
 
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\GameAccount;

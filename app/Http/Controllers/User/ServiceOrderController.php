@@ -8,8 +8,8 @@
  */
 
 namespace App\Http\Controllers\User;
-
 use App\Http\Controllers\Controller;
+use App\Models\MoneyTransaction;
 use App\Models\ServiceHistory;
 use App\Models\ServicePackage;
 use App\Models\GameService;
@@ -20,28 +20,6 @@ use Illuminate\Support\Facades\Validator;
 
 class ServiceOrderController extends Controller
 {
-    /**
-     * Hiển thị lịch sử dịch vụ đã thuê
-     */
-    public function history(Request $request)
-    {
-        $query = ServiceHistory::with(['gameService', 'servicePackage'])
-            ->where('user_id', auth()->id())
-            ->latest();
-
-        // Lọc theo trạng thái nếu có
-        if ($request->has('status') && $request->status) {
-            $query->where('status', $request->input('status'));
-        }
-
-        $orders = $query->paginate(10);
-
-        return view('user.service.history', compact('orders'));
-    }
-
-    /**
-     * Xử lý đặt dịch vụ
-     */
     public function processOrder(Request $request)
     {
         // Validate dữ liệu đầu vào
@@ -91,6 +69,16 @@ class ServiceOrderController extends Controller
             $user->balance -= $package->price;
             $user->save();
 
+            // Add balance transaction history
+            MoneyTransaction::create([
+                'user_id' => $user->id,
+                'type' => 'purchase',
+                'amount' => -$package->price,
+                'balance_before' => $user->balance + $package->price,
+                'balance_after' => $user->balance,
+                'description' => 'Thuê ' . GameService::find($request->input('service_id'))->name . ' #' . $serviceHistory->id,
+                'reference_id' => $serviceHistory->id
+            ]);
             DB::commit();
 
             return back()->with('success', 'Đặt dịch vụ thành công. Chúng tôi sẽ xử lý trong thời gian sớm nhất.');
@@ -99,49 +87,6 @@ class ServiceOrderController extends Controller
             return redirect()->back()
                 ->with('error', 'Có lỗi xảy ra: ' . $e->getMessage())
                 ->withInput();
-        }
-    }
-
-    /**
-     * Hiển thị chi tiết đơn hàng
-     */
-    public function orderDetail($id)
-    {
-        $order = ServiceHistory::with(['gameService', 'servicePackage', 'user'])
-            ->where('user_id', auth()->id())
-            ->findOrFail($id);
-
-        return view('user.service.detail', compact('order'));
-    }
-
-    /**
-     * Hủy đơn hàng
-     */
-    public function cancelOrder($id)
-    {
-        $order = ServiceHistory::where('user_id', auth()->id())
-            ->where('status', 'pending')
-            ->findOrFail($id);
-
-        DB::beginTransaction();
-        try {
-            // Hoàn tiền cho người dùng
-            $user = User::findOrFail(auth()->id());
-            $user->balance += $order->price;
-            $user->save();
-
-            // Cập nhật trạng thái đơn
-            $order->status = 'cancelled';
-            $order->save();
-
-            DB::commit();
-
-            return redirect()->route('user.services.history')
-                ->with('success', 'Đơn hàng đã được hủy và tiền đã được hoàn lại vào tài khoản của bạn.');
-        } catch (\Exception $e) {
-            DB::rollBack();
-            return redirect()->back()
-                ->with('error', 'Không thể hủy đơn hàng. Vui lòng thử lại sau.');
         }
     }
 }

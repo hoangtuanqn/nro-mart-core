@@ -7,14 +7,13 @@
  * @facebook  fb.com/phamhoangtuanqn
  */
 
-use App\Http\Controllers\CardDepositController;
-use App\Http\Controllers\GameAccountController;
-use App\Http\Controllers\GameCategoryController;
-use App\Http\Controllers\GameServiceController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\User\CardDepositController;
+use App\Http\Controllers\User\GameAccountController;
+use App\Http\Controllers\User\GameCategoryController;
+use App\Http\Controllers\User\GameServiceController;
+use App\Http\Controllers\User\HomeController;
+use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\ServiceOrderController;
-use App\Models\GameAccount;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -55,13 +54,5 @@ Route::middleware('auth')->group(function () {
             ->name('profile.service.detail');
     });
 
-    // Route::prefix('user')->name('user.')->group(function () {
-    //     Route::prefix('services')->name('services.')->group(function () {
-    //         Route::get('/history', [ServiceOrderController::class, 'history'])->name('history');
-    //         Route::get('/order/{id}', [ServiceOrderController::class, 'orderSuccess'])->name('order.success');
-    //         Route::post('/order/{id}/cancel', [ServiceOrderController::class, 'cancelOrder'])->name('order.cancel');
-    //         Route::get('/order/{id}/detail', [ServiceOrderController::class, 'orderDetail'])->name('order.detail');
-    //     });
-    // });
 });
 
