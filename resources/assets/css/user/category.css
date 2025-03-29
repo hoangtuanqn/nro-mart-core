@@ -75,13 +75,14 @@
 .account-filter__actions {
     display: flex;
     gap: 15px;
-    justify-content: center;
+    justify-content: right;
     padding-top: 25px;
     margin-top: 5px;
     border-top: 1px solid #eee;
 }
 
 .account-filter__button {
+    border-radius: 999px;
     cursor: pointer;
     min-width: 180px;
     height: 44px;
