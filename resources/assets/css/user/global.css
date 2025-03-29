@@ -169,6 +169,7 @@ a {
 .btn {
     /* display: inline-block; */
     display: flex;
+    justify-content: center;
     align-items: center;
     padding: 8px 35px;
     border-radius: 30px;
@@ -389,7 +390,7 @@ a {
 .alert-danger {
     color: #721c24;
     background-color: #f8d7da;
-    border-color: #f5c6cb; 
+    border-color: #f5c6cb;
 }
 
 .status-badge {
