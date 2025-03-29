@@ -50,13 +50,13 @@
                                 <div class="info-row">
                                     <div class="info-label">Số dư:</div>
                                     <div class="info-value info-value--highlight">
-                                        {{ number_format(number_format(Auth::user()->balance) ?? 0) }} VND
+                                        {{ number_format(Auth::user()->balance ?? 0) }} VND
                                     </div>
                                 </div>
                                 <div class="info-row">
                                     <div class="info-label">Tổng tiền đã nạp:</div>
                                     <div class="info-value info-value--highlight">
-                                        {{ number_format(number_format(Auth::user()->total_deposited) ?? 0) }} VND
+                                        {{ number_format(Auth::user()->total_deposited ?? 0) }} VND
                                     </div>
                                 </div>
 
