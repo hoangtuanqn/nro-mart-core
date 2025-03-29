@@ -209,19 +209,6 @@
 @push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Xử lý đóng thông báo
-            const alertCloseButtons = document.querySelectorAll('.service__alert-close');
-            alertCloseButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const alert = this.closest('.service__alert');
-                    alert.style.opacity = '0';
-                    alert.style.transform = 'translateY(-10px)';
-                    setTimeout(() => {
-                        alert.remove();
-                    }, 300);
-                });
-            });
-
             // Server selection
             const serverBtns = document.querySelectorAll('.service__server-btn');
             const serverSelect = document.getElementById('server');

@@ -23,26 +23,22 @@
                             </div>
 
                             <div class="info-content">
-                                @if(session('success'))
-                                    <div class="alert alert-success">
-                                        {{ session('success') }}
+                                <!-- Thêm phần thông báo lỗi và thành công -->
+                                @if ($errors->any())
+                                    <div class="service__alert service__alert--error">
+                                        <i class="fas fa-exclamation-circle"></i>
+                                        <div>
+                                            <span>Đã có lỗi xảy ra:</span>
+                                            <ul>
+                                                @foreach ($errors->all() as $error)
+                                                    <li>{{ $error }}</li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                        <button type="button" class="service__alert-close">&times;</button>
                                     </div>
                                 @endif
-                                @if($errors->any())
-                                    <div class="alert alert-danger">
-                                        <ul>
-                                            @foreach($errors->all() as $error)
-                                                <li>{{ $error }}</li>
-                                            @endforeach
-                                        </ul>
-                                    </div>
-                                @endif
-
-                                @if(session('error'))
-                                    <div class="alert alert-danger">
-                                        {{ session('error') }}
-                                    </div>
-                                @endif
+                                <!-- Kết thúc phần thông báo -->
 
                                 <form method="POST" action="{{ route('profile.deposit-card') }}" class="register-form">
                                     @csrf
@@ -126,8 +122,8 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @if(isset($transactions) && count($transactions) > 0)
-                                                    @foreach($transactions as $transaction)
+                                                @if (isset($transactions) && count($transactions) > 0)
+                                                    @foreach ($transactions as $transaction)
                                                         <tr>
                                                             <td>{!! display_status_nap_tien($transaction->status) !!}</td>
                                                             <td>{{ $transaction->created_at }}</td>

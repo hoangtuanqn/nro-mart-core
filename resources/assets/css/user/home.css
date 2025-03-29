@@ -80,7 +80,7 @@
 .transaction__img {
     aspect-ratio: 1 / 1;
     border-radius: 25px;
-    width: 200px;
+    width: 100%;
 }
 
 .text__transaction__item {
