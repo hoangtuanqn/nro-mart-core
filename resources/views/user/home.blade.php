@@ -69,7 +69,8 @@
                     <a href="{{ route('category.index', ['slug' => $category->slug]) }}" class="category__item">
                         <img src="{{ $category->thumbnail }}" alt="{{ $category->name }}" class="category__img" />
                         <h2 class="category__title">{{ $category->name }}</h2>
-                        <p class="category__desc">Tổng giao dịch: {{ number_format($sold) }}</p>
+                        <p class="category__desc">Tổng tài khoản: {{ number_format($allAccount) }}</p>
+                        <p class="category__desc">Acc đã bán: {{ number_format($sold) }}</p>
                         <p class="text category__action">Mua ngay</p>
                     </a>
                 @endforeach
@@ -90,20 +91,20 @@
                         class="category__img" />
                     <h2 class="category__title">BÁN VÀNG TỰ ĐỘNG</h2>
                     <p class="category__desc">Tổng giao dịch: 188</p>
-                    <p class="text category__action">Mua ngay</p>
+                    <p class="text category__action">Thuê ngay</p>
                 </a>
                 <a href="#" class="category__item">
                     <img src="https://acc957.com/upload-usr/images/dichvugame-2.png" alt="Image Category"
                         class="category__img" />
                     <h2 class="category__title">BÁN NGỌC TỰ ĐỘNG</h2>
                     <p class="category__desc">Tổng giao dịch: 188</p>
-                    <p class="text category__action">Mua ngay</p>
+                    <p class="text category__action">Thuê ngay</p>
                 </a>
                 <a href="#" class="category__item">
                     <img src="https://acc957.com/Img/NRO_UBK.png" alt="Image Category" class="category__img" />
                     <h2 class="category__title">ÚP BÍ KIẾP</h2>
                     <p class="category__desc">Tổng giao dịch: 188</p>
-                    <p class="text category__action">Mua ngay</p>
+                    <p class="text category__action">Thuê ngay</p>
                 </a>
             </div>
         </div>

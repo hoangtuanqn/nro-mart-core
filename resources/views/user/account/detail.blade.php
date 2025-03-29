@@ -11,14 +11,8 @@
 @section('title', 'Chi tiết tài khoản #' . $account->id)
 
 @section('content')
-    <section class="hero hero--small">
-        <div class="container">
-            <div class="hero__content">
-                <h1 class="hero__title">THÔNG TIN TÀI KHOẢN #{{ $account->id }}</h1>
-                <p class="hero__desc">Để xem thêm chi tiết về tài khoản và bộ sưu tập bên dưới</p>
-            </div>
-        </div>
-    </section>
+    <x-hero-header title="THÔNG TIN TÀI KHOẢN #{{ $account->id }}"
+        description="Để xem thêm chi tiết về tài khoản và bộ sưu tập bên dưới" />
 
     <section class="detail">
         <div class="container">

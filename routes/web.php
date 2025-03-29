@@ -34,6 +34,13 @@ Route::prefix('account')->name('account.')->group(function () {
     Route::get('/{id}', [GameAccountController::class, 'show'])->name(name: 'show');
     Route::post('/{id}/purchase', [GameAccountController::class, 'purchase'])->name('purchase');
 });
+// Route::prefix('service')->name('account.')->group(function () {
+//     Route::get('/{id}', [GameAccountController::class, 'show'])->name(name: 'show');
+//     Route::post('/{id}/purchase', [GameAccountController::class, 'purchase'])->name('purchase');
+// });
+Route::get('/game', function () {
+    return view('user.service.show');
+});
 Route::middleware('auth')->group(function () {
     Route::prefix('profile')->name('profile.')->group(function () {
         Route::get('/', [ProfileController::class, 'index'])->name(name: 'index');

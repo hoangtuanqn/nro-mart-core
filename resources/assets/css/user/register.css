@@ -51,13 +51,13 @@
     margin-bottom: 20px;
 }
 
-.form-label {
+/* .form-label {
     display: block;
     font-size: 1.5rem;
     font-weight: 600;
     margin-bottom: 8px;
     color: var(--primary-color);
-}
+} */
 
 .form-input {
     width: 100%;

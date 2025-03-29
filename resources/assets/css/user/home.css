@@ -29,7 +29,7 @@
 
 /* Menu Common */
 .menu {
-    margin: 50px 0 100px;
+    margin: 50px 0 80px;
     position: relative;
 }
 
@@ -46,7 +46,6 @@
     text-transform: uppercase;
     font-size: 3rem;
     position: relative;
-    padding-bottom: 15px;
 }
 
 .menu__header__title::after {

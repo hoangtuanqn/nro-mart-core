@@ -29,7 +29,8 @@
                 class="text menu__item {{ request()->routeIs('profile.deposit-card') ? 'active' : '' }}">Nạp tiền</a>
             <a href="#" class="text menu__item {{ request()->is('services*') ? 'active' : '' }}">Dịch vụ</a>
             <a href="#" class="text menu__item {{ request()->is('nick-game*') ? 'active' : '' }}">Nick game</a>
-            <a href="#" class="text menu__item {{ request()->is('hack-game*') ? 'active' : '' }}">Tải hack game</a>
+            {{-- <a href="#" class="text menu__item {{ request()->is('hack-game*') ? 'active' : '' }}">Tải hack game</a>
+            --}}
         </div>
         <div class="mobile-menu-toggle">
             <i class="fa-solid fa-bars"></i>

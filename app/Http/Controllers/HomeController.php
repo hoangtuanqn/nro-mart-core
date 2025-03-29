@@ -10,6 +10,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\GameAccount;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -19,7 +20,8 @@ class HomeController extends Controller
     {
         $categories = Category::where('active', 1)->get();
         // Quan hệ 1 nhiều => Lấy ra số tài khoản đã bán
-        $sold = 0;
-        return view('user.home', compact('categories', 'sold'));
+        $sold = GameAccount::where('status', 'sold')->count();
+        $allAccount = GameAccount::all()->count();
+        return view('user.home', compact('categories', 'allAccount', 'sold'));
     }
 }

@@ -12,14 +12,10 @@
 
 @section('content')
     <!-- Hero Section -->
-    <section class="hero hero--small">
-        <div class="container">
-            <div class="hero__content">
-                <h1 class="hero__title">{{ $category->name }}</h1>
-                <p class="hero__desc">{!! $category->description !!}</p>
-            </div>
-        </div>
-    </section>
+<x-hero-header 
+    title="{{ $category->name }}" 
+    description="{{ $category->description }}" 
+/>
 
     <!-- Account List Section -->
     <section class="account-section">
@@ -138,14 +134,15 @@
                                 </div>
                                 <div class="info-item">
                                     <span class="info-item__title">Bông tai:</span>
-                                    <span class="info-value">{{ $account->earring ? "Có" : "Không" }}</span>
+                                    <span class="info-value">{{ $account->earring ? 'Có' : 'Không' }}</span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="account-actions">
                             <div class="card-price">TIỀN CARD: {{ number_format($account->card_price) }} VND</div>
-                            <a href="{{ route('account.show', ['id' => $account->id]) }}" class="action-btn action-btn--detail">Chi tiết</a>
+                            <a href="{{ route('account.show', ['id' => $account->id]) }}"
+                                class="action-btn action-btn--detail">Chi tiết</a>
                         </div>
                     </div>
                 @empty
