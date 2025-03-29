@@ -113,30 +113,29 @@
                         <div class="account-info">
                             <div class="account-row">
                                 <div class="info-item">
-                                    <span class="info-label">Máy chủ:</span>
+                                    <span class="info-item__title">Máy chủ:</span>
                                     <span class="info-value">Server {{ $account->server }}</span>
                                 </div>
                                 <div class="info-item">
-                                    <span class="info-label">Hành tinh:</span>
-                                    <span class="info-value">{{ $account->planet }}</span>
+                                    <span class="info-item__title">Hành tinh:</span>
+                                    <span class="info-value">{{ display_hanh_tinh($account->planet) }}</span>
                                 </div>
                             </div>
                             <div class="account-row">
                                 <div class="info-item">
-                                    <span class="info-label">Đăng ký:</span>
-                                    <span class="info-value">{{ $account->registration_type }}</span>
+                                    <span class="info-item__title">Đăng ký:</span>
+                                    <span class="info-value">{{ display_dang_ky($account->registration_type) }}</span>
                                 </div>
                                 <div class="info-item">
-                                    <span class="info-label">Thành viên:</span>
-                                    <span class="info-value">{{ $account->member_type }}</span>
+                                    <span class="info-item__title">Bông tai:</span>
+                                    <span class="info-value">{{ $account->earring ? "Có" : "Không" }}</span>
                                 </div>
                             </div>
                         </div>
 
                         <div class="account-actions">
                             <div class="card-price">TIỀN CARD: {{ number_format($account->card_price) }} VND</div>
-                            {{-- {{ route('account.detail', $account->id) }} --}}
-                            <a href="" class="action-btn action-btn--detail">Chi tiết</a>
+                            <a href="{{ route('account.detail', ['id' => $account->id]) }} }}" class="action-btn action-btn--detail">Chi tiết</a>
                         </div>
                     </div>
                 @empty
