@@ -3,13 +3,13 @@
         <h2 class="sidebar-title">MENU TÀI KHOẢN</h2>
     </div>
     <ul class="sidebar-menu">
-        <li class="sidebar-item active">
-            <a href="{{ route('profile') }}" class="sidebar-link">
+        <li class="sidebar-item {{ request()->is('profile') ? 'active' : '' }}">
+            <a href="{{ route('profile.index') }}" class="sidebar-link">
                 <i class="fa-solid fa-user"></i> Thông tin tài khoản
             </a>
         </li>
-        <li class="sidebar-item">
-            <a href="#" class="sidebar-link">
+        <li class="sidebar-item {{ request()->is('profile/deposit/card') ? 'active' : '' }}">
+            <a href="{{ route('profile.deposit.card') }}" class="sidebar-link">
                 <i class="fa-solid fa-credit-card"></i> Nạp tiền thẻ cào
             </a>
         </li>

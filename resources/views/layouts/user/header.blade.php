@@ -16,7 +16,7 @@
             <img src="https://acc957.com/upload-usr/images/logo.png" alt="Logo Game" class="nav__logo" />
         </a>
         <div class="nav__menu">
-            <a href="#" class="text menu__item">Trang chủ</a>
+            <a href="/" class="text menu__item">Trang chủ</a>
             <a href="#" class="text menu__item">Nạp tiền</a>
             <a href="#" class="text menu__item">Dịch vụ</a>
             <a href="#" class="text menu__item">Nick game</a>

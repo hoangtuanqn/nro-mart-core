@@ -1,5 +1,13 @@
 <?php
+/**
+ * Copyright (c) 2025 FPT University
+ * 
+ * @author    Phạm Hoàng Tuấn
+ * @email     phamhoangtuanqn@gmail.com
+ * @facebook  fb.com/phamhoangtuanqn
+ */
 
+use App\Http\Controllers\CardDepositController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -18,32 +26,20 @@ require __DIR__ . '/auth.php';
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
-    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::prefix('profile')->name('profile.')->group(function () {
+        Route::get('/', [ProfileController::class, 'index'])->name('index');
+
+        // Nạp thẻ cào
+        Route::get('/deposit/card', [CardDepositController::class, 'showCardDepositForm'])->name('deposit.card');
+        Route::post('/deposit/card', [CardDepositController::class, 'processCardDeposit']);
+
+    });
+    // Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    // Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    // Deposit routes
+
+
 });
 
-
-// Route::get('/register', function () {
-//     return view('user.register');
-// })->name('register');
-// Route::get('/login', function () {
-//     return view('user.register');
-// })->name('login');
-
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
-// Route::middleware('auth')->group(function () {
-//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-// });
-
-
-
-// use App\Http\Controllers\Member\HomeController;
-
-// Route::get('/', [HomeController::class, 'index'])->name('home');

@@ -1,0 +1,343 @@
+/* Deposit Page Styles */
+.deposit-section {
+    padding: 60px 0;
+    background-color: var(--bg-color);
+}
+
+.deposit-container {
+    background-color: #fff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.deposit-header {
+    background-color: var(--primary-color);
+    padding: 20px 30px;
+    border-bottom: 4px solid var(--accent-color);
+    text-align: center;
+}
+
+.deposit-title {
+    color: #fff;
+    font-size: 2.4rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 0;
+}
+
+.deposit-balance {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.balance-label {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-right: 10px;
+}
+
+.balance-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent-color);
+}
+
+/* Form Styles */
+.deposit-form {
+    padding: 30px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.form-label {
+    width: 120px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.form-select,
+.form-input {
+    flex: 1;
+    padding: 12px 15px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1.5rem;
+    transition: var(--transition);
+}
+
+.form-select:focus,
+.form-input:focus {
+    border-color: var(--accent-color);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(255, 0, 0, 0.1);
+}
+
+.receive-amount {
+    flex: 1;
+    padding: 12px 15px;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--accent-color);
+}
+
+.captcha-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.captcha-image {
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+.captcha-image img {
+    border-radius: 6px;
+    max-width: 100%;
+    height: auto;
+}
+
+.deposit-btn {
+    width: 100%;
+    background-color: var(--accent-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 14px;
+    font-size: 1.6rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-top: 10px;
+}
+
+.deposit-btn:hover {
+    background-color: #d40000;
+    transform: translateY(-2px);
+}
+
+/* Notice Styles */
+.deposit-notice {
+    margin: 20px 0;
+    padding: 20px;
+    background-color: #e3f2fd;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.notice-header {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    margin-bottom: 10px;
+}
+
+.notice-content {
+    font-size: 1.6rem;
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+
+.notice-warning {
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--accent-color);
+}
+
+/* History Styles */
+.deposit-history {
+    margin: 30px 0;
+    padding-bottom: 30px;
+}
+
+.history-header {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--accent-color);
+}
+
+.history-table-container {
+    overflow-x: auto;
+}
+
+.history-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.history-table th,
+.history-table td {
+    padding: 12px 15px;
+    text-align: center;
+    border: 1px solid #e0e0e0;
+}
+
+.history-table th {
+    background-color: #f5f5f5;
+    font-weight: 600;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    font-size: 1.4rem;
+}
+
+.history-table td {
+    font-size: 1.4rem;
+    color: var(--text-color);
+}
+
+.history-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.history-table tr:hover {
+    background-color: #f0f0f0;
+}
+
+.no-data {
+    text-align: center;
+    padding: 20px;
+    font-style: italic;
+    color: var(--text-light);
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    gap: 5px;
+}
+
+.pagination-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: #f5f5f5;
+    color: var(--text-color);
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.pagination-item:hover {
+    background-color: #e0e0e0;
+}
+
+.pagination-item.active {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .deposit-section {
+        padding: 40px 0;
+    }
+    
+    .deposit-header {
+        padding: 15px 20px;
+    }
+    
+    .deposit-title {
+        font-size: 2rem;
+    }
+    
+    .deposit-form {
+        padding: 20px;
+    }
+    
+    .form-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .form-label {
+        width: 100%;
+        margin-bottom: 8px;
+    }
+    
+    .deposit-notice,
+    .deposit-history {
+        margin: 15px;
+    }
+    
+    .history-table th,
+    .history-table td {
+        padding: 10px;
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .deposit-section {
+        padding: 30px 0;
+    }
+    
+    .deposit-header {
+        padding: 12px 15px;
+    }
+    
+    .deposit-title {
+        font-size: 1.8rem;
+    }
+    
+    .balance-label,
+    .balance-value {
+        font-size: 1.6rem;
+    }
+    
+    .deposit-form {
+        padding: 15px;
+    }
+    
+    .form-select,
+    .form-input,
+    .receive-amount {
+        padding: 10px;
+        font-size: 1.4rem;
+    }
+    
+    .deposit-btn {
+        padding: 12px;
+        font-size: 1.5rem;
+    }
+    
+    .notice-header {
+        font-size: 1.6rem;
+    }
+    
+    .notice-content,
+    .notice-warning {
+        font-size: 1.4rem;
+    }
+    
+    .history-header {
+        font-size: 1.7rem;
+    }
+}

@@ -1,4 +1,11 @@
 <?php
+/**
+ * Copyright (c) 2025 FPT University
+ * 
+ * @author    Phạm Hoàng Tuấn
+ * @email     phamhoangtuanqn@gmail.com
+ * @facebook  fb.com/phamhoangtuanqn
+ */
 
 namespace App\Http\Controllers;
 
@@ -16,7 +23,7 @@ class ProfileController extends Controller
      */
     public function index(Request $request): View
     {
-        return view('user.profile', [
+        return view('user.profile.profile', [
             'user' => $request->user(),
         ]);
     }

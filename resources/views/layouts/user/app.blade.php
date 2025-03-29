@@ -10,7 +10,7 @@
         @yield('content')
     </main>
     @include('layouts.user.footer')
-    @yield('script')
+    @stack('scripts')
 
 </body>
 
