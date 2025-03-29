@@ -105,7 +105,7 @@
                 @forelse($accounts as $account)
                     <div class="account-card">
                         <div class="account-media">
-                            <img src="{{ $account->thumbnail }}" alt="Account Preview" class="account-img">
+                            <img src="{{ $account->thumb }}" alt="Account Preview" class="account-img">
                             <div class="account-code">Mã số: {{ $account->id }}</div>
                             <div class="account-price-top">ATM/VÍ ĐIỆN TỬ: {{ number_format($account->price) }} VND</div>
                         </div>

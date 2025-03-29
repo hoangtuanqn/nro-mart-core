@@ -502,7 +502,6 @@ a {
 /* Fix responsive styles for announcement section */
 @media (max-width: 768px) {
     .announcement .row {
-        flex-direction: column;
         align-items: center;
         gap: 5px;
     }
