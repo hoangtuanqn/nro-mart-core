@@ -58,8 +58,7 @@
             </header>
             <div class="category__list">
                 @foreach ($categories as $category)
-                    {{-- {{ route('user.category', ['id' => $category->id]) }} --}}
-                    <a href="" class="category__item">
+                    <a href="{{ route('category.index', ['slug' => $category->slug]) }}" class="category__item">
                         <img src="{{ $category->thumbnail }}" alt="{{ $category->name }}" class="category__img" />
                         <h2 class="category__title">{{ $category->name }}</h2>
                         <p class="category__desc">Tổng giao dịch: {{ number_format($sold) }}</p>

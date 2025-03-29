@@ -20,8 +20,9 @@ return new class extends Migration {
             $table->integer('server'); // Máy chủ (1-13 hoặc tên)
             $table->enum('registration_type', ['virtual', 'real']); // Đăng ký (Ảo/Thật)
             $table->enum('planet', ['earth', 'namek', 'xayda']); // Hành tinh
-            $table->foreignId('buyer_id')->nullable()->constrained('users'); // Người mua (FK users)
+            $table->foreignId('buyer_id')->nullable()->constrained('users')->nullOnDelete(); // Người mua (FK users)
             $table->text('note')->nullable(); // Ghi chú (Nếu có)
+            $table->text('images')->nullable(); // List of images
             $table->timestamps();
         });
     }

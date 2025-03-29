@@ -8,6 +8,7 @@
  */
 
 use App\Http\Controllers\CardDepositController;
+use App\Http\Controllers\GameCategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -30,11 +31,11 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [ProfileController::class, 'index'])->name(name: 'index');
         Route::get('/change-password', [ProfileController::class, 'viewChangePassword'])->name('change-password');
 
-
-        // Nạp thẻ cào
         Route::get('/deposit/card', [CardDepositController::class, 'showCardDepositForm'])->name('deposit-card');
         Route::post('/deposit/card', [CardDepositController::class, 'processCardDeposit']);
-
+    });
+    Route::prefix('category')->name('category.')->group(function () {
+        Route::get('/category/{slug}', [GameCategoryController::class, 'index'])->name('index');
     });
     // Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     // Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

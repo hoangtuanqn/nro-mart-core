@@ -1,0 +1,316 @@
+/* Hero Small Variant */
+.hero--small {
+    padding: 40px 0;
+    margin-bottom: 40px;
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.hero--small .hero__title {
+    font-size: 3.2rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.hero--small .hero__desc {
+    font-size: 1.6rem;
+    margin-bottom: 0;
+    opacity: 0.9;
+}
+
+/* Filter Bar Styles */
+.account-filter {
+    background: white;
+    padding: 25px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 30px;
+}
+
+.account-filter__row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.account-filter__group {
+    position: relative;
+}
+
+.account-filter__label {
+    display: block;
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+}
+
+.account-filter__input {
+    width: 100%;
+    height: 42px;
+    padding: 8px 16px;
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 1.4rem;
+    transition: all 0.3s ease;
+    background-color: #f8f9fa;
+    color: var(--text-color);
+}
+
+.account-filter__input:hover {
+    border-color: #bdbdbd;
+}
+
+.account-filter__input:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    background-color: #fff;
+    box-shadow: 0 0 0 3px rgba(255, 0, 0, 0.1);
+}
+
+.account-filter__input--select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 40px;
+}
+
+.account-filter__actions {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    padding-top: 25px;
+    margin-top: 5px;
+    border-top: 1px solid #eee;
+}
+
+.account-filter__button {
+    cursor: pointer;
+    min-width: 180px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+}
+
+.account-filter__button--primary {
+    background: var(--accent-color);
+    color: white;
+    border: none;
+}
+
+.account-filter__button--primary:hover {
+    background: #d40000;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(255, 0, 0, 0.2);
+}
+
+.account-filter__button--outline {
+    border: 2px solid var(--accent-color);
+    color: var(--accent-color);
+    background: transparent;
+}
+
+.account-filter__button--outline:hover {
+    background: var(--accent-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Account Grid */
+.account-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.account-card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    overflow: hidden;
+    transition: transform 0.2s ease;
+    border: 1px solid #e0e0e0;
+}
+
+.account-card:hover {
+    transform: translateY(-5px);
+}
+
+.account-media {
+    position: relative;
+    width: 100%;
+    height: 200px;
+}
+
+.account-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.account-code {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #ff4d4d;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.account-price-top {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    color: white;
+    font-size: 1.4rem;
+    font-weight: 600;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+    background: rgba(0,0,0,0.6);
+    padding: 5px;
+}
+
+.account-info {
+    padding: 15px;
+}
+
+.account-row {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.info-label {
+    color: #666;
+    font-size: 1.3rem;
+}
+
+.info-value {
+    font-weight: 600;
+    color: #333;
+    font-size: 1.3rem;
+}
+
+.info-value.highlight {
+    color: #ff4d4d;
+}
+
+.account-actions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    padding: 15px;
+    border-top: 1px solid #eee;
+    align-items: center;
+}
+
+.action-btn {
+    padding: 8px 15px;
+    border-radius: 4px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    text-align: center;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.action-btn--card {
+    background: #ff4d4d;
+    color: white;
+    border: none;
+}
+
+.action-btn--card:hover {
+    background: #ff3333;
+}
+
+.action-btn--detail {
+    background: #28a745;
+    color: white;
+    border: none;
+}
+
+.action-btn--detail:hover {
+    background: #218838;
+    transform: translateY(-2px);
+}
+
+/* No Data State */
+.no-data {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 40px;
+}
+
+.no-data-img {
+    width: 150px;
+    margin-bottom: 20px;
+    opacity: 0.5;
+}
+
+.no-data-text {
+    font-size: 1.6rem;
+    color: var(--text-light);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .account-filter__row {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .account-filter__actions {
+        flex-direction: column;
+    }
+
+    .account-filter__button {
+        width: 100%;
+    }
+
+    .account-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 15px;
+    }
+
+    .account-media {
+        height: 180px;
+    }
+}
+
+@media (max-width: 480px) {
+    .account-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.card-price {
+    background: #ff4d4d;
+    color: white;
+    padding: 8px 15px;
+    border-radius: 4px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    text-align: center;
+}
