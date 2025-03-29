@@ -3,15 +3,7 @@
 @section('title', 'Làm Nhiệm Vụ - Ngọc Rồng')
 
 @section('content')
-    {{-- <section class="hero hero--small">
-        <div class="container">
-            <div class="hero__content">
-                <h1 class="hero__title">LÀM NHIỆM VỤ</h1>
-                <p class="hero__desc">Hoàn thành nhiệm vụ - Nhận thưởng hấp dẫn</p>
-            </div>
-        </div>
-    </section> --}}
-    <x-hero-header title="LÀM NHIỆM VỤ" description="Hoàn thành nhiệm vụ - Nhận thưởng hấp dẫn" />
+    <x-hero-header title="{{ $service->name }}" description="{{ $service->description }}" />
     <div class="service">
         <div class="container">
 
@@ -35,12 +27,10 @@
                     </div>
                     <div class="service__card-content">
                         <h3 class="service__card-title">Chọn Server</h3>
-                        <p>Chọn sever để xem chi tiết bảng giá nhiệm vụ</p>
-                        <div class="service__server-buttons">
-                            <a href="#" class="service__server-btn">Server 1</a>
-                            <a href="#" class="service__server-btn">Server 2</a>
-                            <a href="#" class="service__server-btn">Server 3</a>
-                        </div>
+                        <p>Chọn sever để xem chi tiết bảng giá nhiệm vụ. Chúng tôi cung cấp dịch vụ trên tất cả các máy chủ
+                            của game Ngọc Rồng Online. Mỗi máy chủ sẽ có bảng giá riêng tùy theo độ khó của nhiệm vụ và số
+                            lượng người chơi. Vui lòng chọn máy chủ phù hợp để xem bảng giá chi tiết và đặt dịch vụ.</p>
+
 
                     </div>
                 </div>
@@ -68,7 +58,7 @@
 
 
             <div class="service__form">
-                <h3 class="service__form-title">Thông tin đăng nhập</h3>
+                <h3 class="service__form-title">Thông tin</h3>
 
                 <div class="service__form-row">
                     <div class="service__form-group">
@@ -140,41 +130,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="service__price-row" data-id="1" data-price="40000">
-                                <td>1</td>
-                                <td>Tiêu Diệt Fide (cứ thuê acc như thế nào shop cũng làm được)</td>
-                                <td>40,000 VNĐ</td>
-                            </tr>
-                            <tr class="service__price-row" data-id="2" data-price="40000">
-                                <td>2</td>
-                                <td>Apk 13, 14, 15 (cứ thuê acc như thế nào shop cũng làm được)</td>
-                                <td>40,000 VNĐ</td>
-                            </tr>
-                            <tr class="service__price-row" data-id="3" data-price="60000">
-                                <td>3</td>
-                                <td>Apk 19, 20 (cứ thuê acc như thế nào shop cũng làm được)</td>
-                                <td>60,000 VNĐ</td>
-                            </tr>
-                            <tr class="service__price-row" data-id="4" data-price="60000">
-                                <td>4</td>
-                                <td>Plc, Poc, King Kong (cứ thuê acc như thế nào shop cũng làm được)</td>
-                                <td>60,000 VNĐ</td>
-                            </tr>
-                            <tr class="service__price-row" data-id="5" data-price="100000">
-                                <td>5</td>
-                                <td>Xbh 1, 2, hoàn thiện (cứ thuê acc như thế nào shop cũng làm được)</td>
-                                <td>100,000 VNĐ</td>
-                            </tr>
-                            <tr class="service__price-row" data-id="6" data-price="100000">
-                                <td>6</td>
-                                <td>Tiểu Đội Sát Thủ (cứ thuê acc như thế nào cũng làm được)</td>
-                                <td>100,000 VNĐ</td>
-                            </tr>
-                            <tr class="service__price-row" data-id="7" data-price="120000">
-                                <td>7</td>
-                                <td>Siêu bọ hung (cứ thuê acc như thế nào shop cũng làm được)</td>
-                                <td>120,000 VNĐ</td>
-                            </tr>
+                            @foreach($service->packages as $index => $package)
+                                <tr class="service__price-row" data-id="{{ $package->id }}" data-price="{{ $package->price }}">
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ $package->name }} ({{ $package->description }})</td>
+                                    <td>{{ number_format($package->price, 0, ',', ',') }} VNĐ</td>
+                                </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -188,11 +150,11 @@
 
 @push('scripts')
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             // Server selection
             const serverBtns = document.querySelectorAll('.service__server-btn');
             serverBtns.forEach(btn => {
-                btn.addEventListener('click', function(e) {
+                btn.addEventListener('click', function (e) {
                     e.preventDefault();
                     serverBtns.forEach(b => b.classList.remove('service__server-btn--active'));
                     this.classList.add('service__server-btn--active');
@@ -228,7 +190,7 @@
             }
 
             // Highlight selected service in price table
-            serviceSelect.addEventListener('change', function() {
+            serviceSelect.addEventListener('change', function () {
                 // Remove highlight from all rows
                 priceRows.forEach(row => row.classList.remove('service__price-row--selected'));
 
@@ -254,7 +216,7 @@
 
             // Make price rows clickable
             priceRows.forEach(row => {
-                row.addEventListener('click', function() {
+                row.addEventListener('click', function () {
                     const serviceId = this.dataset.id;
                     serviceSelect.value = serviceId;
                     serviceSelect.dispatchEvent(new Event('change'));

@@ -69,8 +69,8 @@
                     <a href="{{ route('category.index', ['slug' => $category->slug]) }}" class="category__item">
                         <img src="{{ $category->thumbnail }}" alt="{{ $category->name }}" class="category__img" />
                         <h2 class="category__title">{{ $category->name }}</h2>
-                        <p class="category__desc">Tổng tài khoản: {{ number_format($allAccount) }}</p>
-                        <p class="category__desc">Acc đã bán: {{ number_format($sold) }}</p>
+                        <p class="category__desc">Tổng tài khoản: {{ number_format($category->allAccount) }}</p>
+                        <p class="category__desc">Acc đã bán: {{ number_format($category->soldCount) }}</p>
                         <p class="text category__action">Mua ngay</p>
                     </a>
                 @endforeach
@@ -86,26 +86,16 @@
                 <h2 class="menu__header__title">DỊCH VỤ GAME</h2>
             </header>
             <div class="category__list">
-                <a href="#" class="category__item">
-                    <img src="http://img.acc957.com//20240215164859nickhsnr.jpg" alt="Image Category"
-                        class="category__img" />
-                    <h2 class="category__title">BÁN VÀNG TỰ ĐỘNG</h2>
-                    <p class="category__desc">Tổng giao dịch: 188</p>
-                    <p class="text category__action">Thuê ngay</p>
-                </a>
-                <a href="#" class="category__item">
-                    <img src="https://acc957.com/upload-usr/images/dichvugame-2.png" alt="Image Category"
-                        class="category__img" />
-                    <h2 class="category__title">BÁN NGỌC TỰ ĐỘNG</h2>
-                    <p class="category__desc">Tổng giao dịch: 188</p>
-                    <p class="text category__action">Thuê ngay</p>
-                </a>
-                <a href="#" class="category__item">
-                    <img src="https://acc957.com/Img/NRO_UBK.png" alt="Image Category" class="category__img" />
-                    <h2 class="category__title">ÚP BÍ KIẾP</h2>
-                    <p class="category__desc">Tổng giao dịch: 188</p>
-                    <p class="text category__action">Thuê ngay</p>
-                </a>
+                @foreach ($services as $service)
+                    @if ($service->active)
+                        <a href="{{ route('service.show', ['slug' => $service->slug]) }}" class="category__item">
+                            <img src="{{ $service->thumbnail }}" alt="{{ $service->name }}" class="category__img" />
+                            <h2 class="category__title">{{ strtoupper($service->name) }}</h2>
+                            <p class="category__desc">Tổng giao dịch: {{ number_format($service->orderCount) }}</p>
+                            <p class="text category__action">Thuê ngay</p>
+                        </a>
+                    @endif
+                @endforeach
             </div>
         </div>
     </section>

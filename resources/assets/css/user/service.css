@@ -92,11 +92,15 @@
     background-color: #e57373;
 }
 
-.service__card--rules .service__card-content p {
+.service__card--rules .service__card-content p,
+.service__card--server .service__card-content p {
     color: #c22b2b;
     font-weight: 500;
     line-height: 1.5;
     text-align: center;
+}
+.service__card--server .service__card-content p {
+    color: unset;
 }
 
 /* Server Selection Card */
