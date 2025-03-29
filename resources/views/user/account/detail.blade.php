@@ -1,3 +1,11 @@
+{{-- /**
+* Copyright (c) 2025 FPT University
+*
+* @author Phạm Hoàng Tuấn
+* @email phamhoangtuanqn@gmail.com
+* @facebook fb.com/phamhoangtuanqn
+*/ --}}
+
 @extends('layouts.user.app')
 
 @section('title', 'Chi tiết tài khoản #' . $account->id)
@@ -172,7 +180,7 @@
                             }
 
                             // Reload page to update UI
-                            window.location.reload();
+                            window.location.href = '{{ route('profile.purchased-accounts') }}';
                         } else {
                             alert(data.message || 'Có lỗi xảy ra khi mua tài khoản');
                         }

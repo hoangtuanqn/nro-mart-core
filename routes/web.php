@@ -40,6 +40,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/change-password', [ProfileController::class, 'viewChangePassword'])->name('change-password');
 
         Route::get('/transaction-history', [ProfileController::class, 'transactionHistory'])->name('transaction-history');
+        Route::get('/purchased-accounts', [ProfileController::class, 'purchasedAccounts'])->name('purchased-accounts');
 
         Route::get('/deposit/card', [CardDepositController::class, 'showCardDepositForm'])->name('deposit-card');
         Route::post('/deposit/card', [CardDepositController::class, 'processCardDeposit']);

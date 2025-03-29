@@ -603,3 +603,6 @@ body.no-scroll {
 .text-danger {
     color: #d40000 !important;
 }
+.text-bold {
+    font-weight: 600 !important;
+}

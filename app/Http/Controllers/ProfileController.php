@@ -10,6 +10,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\GameAccount;
 use App\Models\MoneyTransaction;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -63,5 +64,11 @@ class ProfileController extends Controller
     {
         $transactions = MoneyTransaction::where('user_id', Auth::id())->orderBy('created_at', 'desc')->get();
         return view('user.profile.transaction-history', compact('transactions'));
+    }
+
+    public function purchasedAccounts()
+    {
+        $transactions = GameAccount::where('buyer_id', Auth::id())->where('status', 'sold')->get();
+        return view('user.profile.purchased-accounts', compact('transactions')); // Return the view for purchased accounts lis
     }
 }

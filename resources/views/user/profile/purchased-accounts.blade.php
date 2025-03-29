@@ -1,13 +1,13 @@
 @extends('layouts.user.app')
 
-@section('title', 'Lịch sử giao dịch')
+@section('title', 'Tài khoản đã mua')
 
 @section('content')
     <section class="profile-section">
         <div class="container">
             <div class="profile-container">
                 <div class="profile-header">
-                    <h1 class="profile-title">LỊCH SỬ GIAO DỊCH</h1>
+                    <h1 class="profile-title">TÀI KHOẢN ĐÃ MUA</h1>
                 </div>
 
                 <div class="profile-content">
@@ -17,7 +17,7 @@
                         <div class="profile-info-card">
                             <div class="info-header">
                                 <div class="balance-info">
-                                    <span class="balance-label">LỊCH SỬ GIAO DỊCH</span>
+                                    <span class="balance-label">TÀI KHOẢN ĐÃ MUA</span>
                                 </div>
                             </div>
 
@@ -28,28 +28,30 @@
                                             <thead>
                                                 <tr>
                                                     <th>Thời gian</th>
-                                                    <th>Giao dịch</th>
-                                                    <th>Trước giao dịch</th>
+                                                    <th>Mã</th>
+                                                    <th>Máy chủ</th>
+                                                    <th>Tài khoản</th>
+                                                    <th>Mật khẩu</th>
                                                     <th>Số tiền</th>
-                                                    <th>Sau giao dịch</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 @forelse($transactions as $transaction)
                                                     <tr>
                                                         <td>{{ $transaction->created_at->format('H:i d/m/Y') }}</td>
-                                                        <td>{{ $transaction->description }}</td>
-                                                        <td>{{ number_format($transaction->balance_before) }} VND</td>
-
-                                                        <td
-                                                            class="amount {{ $transaction->amount >= 0 ? 'text-success' : 'text-danger' }}">
-                                                            {{ number_format($transaction->amount) }} VND
+                                                        <td><a target="_blank" class="text-danger"
+                                                                href="{{ route("account.show", ['id' => $transaction->id]) }}">#{{ $transaction->id }}</a>
                                                         </td>
-                                                        <td>{{ number_format($transaction->balance_after) }} VND</td>
+                                                        <td>Server {{ $transaction->server }}</td>
+                                                        <td class="text-bold">{{ $transaction->account_name }}</td>
+                                                        <td class="text-bold">{{ $transaction->password }}</td>
+                                                        <td class="amount text-danger">
+                                                            -{{ number_format($transaction->price) }} VND
+                                                        </td>
                                                     </tr>
                                                 @empty
                                                     <tr>
-                                                        <td colspan="4" class="no-data">Không có dữ liệu</td>
+                                                        <td colspan="6" class="no-data">Không có dữ liệu</td>
                                                     </tr>
                                                 @endforelse
                                             </tbody>

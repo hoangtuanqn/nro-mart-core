@@ -13,7 +13,7 @@ class GameAccountSeeder extends Seeder
             [
                 'game_category_id' => 1,
                 'account_name' => 'player1',
-                'password' => bcrypt('password123'),
+                'password' => '123456',
                 'price' => 100000,
                 'status' => 'available',
                 'server' => 1,
@@ -36,7 +36,7 @@ class GameAccountSeeder extends Seeder
             [
                 'game_category_id' => 1,
                 'account_name' => 'player2',
-                'password' => bcrypt('password456'),
+                'password' => '123456',
                 'price' => 150000,
                 'status' => 'sold',
                 'server' => 2,
@@ -59,7 +59,7 @@ class GameAccountSeeder extends Seeder
             [
                 'game_category_id' => 1,
                 'account_name' => 'player3',
-                'password' => bcrypt('password789'),
+                'password' => '123456',
                 'price' => 200000,
                 'status' => 'available',
                 'server' => 3,
@@ -82,7 +82,7 @@ class GameAccountSeeder extends Seeder
             [
                 'game_category_id' => 1,
                 'account_name' => 'player4',
-                'password' => bcrypt('password987'),
+                'password' => '123456',
                 'price' => 50000,
                 'status' => 'sold',
                 'server' => 4,
@@ -105,7 +105,7 @@ class GameAccountSeeder extends Seeder
             [
                 'game_category_id' => 1,
                 'account_name' => 'player5',
-                'password' => bcrypt('password654'),
+                'password' => '123456',
                 'price' => 120000,
                 'status' => 'available',
                 'server' => 5,

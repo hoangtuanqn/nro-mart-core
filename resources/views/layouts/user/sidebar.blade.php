@@ -43,7 +43,8 @@
             </a>
         </li>
         <li class="sidebar-item">
-            <a href="#" class="sidebar-link">
+            <a href="{{ route('profile.purchased-accounts') }}"
+                class="sidebar-link {{ request()->routeIs('profile.purchased-accounts') ? 'active' : '' }}">
                 <i class="fa-solid fa-shopping-cart"></i> Tài khoản đã mua
             </a>
         </li>
