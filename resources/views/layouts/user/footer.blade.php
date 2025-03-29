@@ -54,21 +54,3 @@
     </div>
 </footer>
 
-<!-- Mobile Menu -->
-<div class="mobile-menu">
-    <div class="mobile-menu__close">
-        <i class="fa-solid fa-xmark"></i>
-    </div>
-    <div class="mobile-menu__list">
-        <a href="#" class="mobile-menu__item">Trang chủ</a>
-        <a href="#" class="mobile-menu__item">Nạp tiền</a>
-        <a href="#" class="mobile-menu__item">Dịch vụ</a>
-        <a href="#" class="mobile-menu__item">Nick game</a>
-        <a href="#" class="mobile-menu__item">Tải hack game</a>
-    </div>
-    <div class="mobile-menu__actions">
-        <a href="#" class="text action__link"><i class="fa-solid fa-user"></i> Đăng nhập</a>
-        <a href="#" class="text action__link action__link--primary"><i class="fa-solid fa-key"></i> Đăng ký</a>
-    </div>
-</div>
-<div class="overlay"></div>

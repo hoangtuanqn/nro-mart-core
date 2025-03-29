@@ -6,7 +6,7 @@ export default defineConfig({
         laravel({
             input: [
                 'resources/assets/css/app.css', // Đường dẫn đến file CSS
-                'resources/js/app.js',
+                'resources/assets/css/app.js'
             ],
             refresh: true,
         }),

@@ -17,9 +17,15 @@
     <main>
         @yield('content')
     </main>
-    @include('layouts.user.footer')
-    @stack('scripts')
 
+    @include('layouts.user.footer')
+    @include('layouts.user.menu-mobile')
+
+
+
+    <!-- Scripts -->
+    @vite(['resources/assets/js/app.js'])
+    @stack('scripts')
 </body>
 
 </html>
