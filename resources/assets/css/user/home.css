@@ -29,7 +29,7 @@
 
 /* Menu Common */
 .menu {
-    margin: 100px 0;
+    margin: 50px 0 100px;
     position: relative;
 }
 
@@ -37,7 +37,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 50px;
+    margin-bottom: 10px;
 }
 
 .menu__header__title {
@@ -62,7 +62,6 @@
 .transaction__list {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    margin: 50px 0 30px;
     justify-content: space-between;
 }
 
@@ -97,7 +96,7 @@
 
 /* Category Section */
 .category__list {
-    margin-top: 50px;
+    margin-top: 10px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 30px;
@@ -171,9 +170,8 @@
     }
 
     .transaction__list {
-        grid-template-columns: 1fr 1fr;
         justify-content: center;
-        gap: 20px;
+        gap: 0;
     }
 
     .transaction__item {
@@ -221,7 +219,8 @@
     }
 
     .transaction__list {
-        margin: 30px 0;
+        grid-template-columns: 1fr 1fr;
+        justify-content: center;
     }
 
     .transaction__item {

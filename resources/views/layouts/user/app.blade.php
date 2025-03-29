@@ -21,11 +21,11 @@
     @include('layouts.user.footer')
     @include('layouts.user.menu-mobile')
 
-
-
-    <!-- Scripts -->
-    @vite(['resources/assets/js/app.js'])
     @stack('scripts')
+
+    @vite(['resources/assets/js/app.js'])
+
+    <!-- Add before closing body tag -->
 </body>
 
 </html>

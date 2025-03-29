@@ -40,7 +40,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/{slug}', [GameCategoryController::class, 'index'])->name('index');
     });
     Route::prefix('account')->name('account.')->group(function () {
-        Route::get('/{id}', [GameAccountController::class, 'index'])->name('detail');
+        Route::get('/{id}', [GameAccountController::class, 'show'])->name(name: 'show');
+        Route::post('/{id}/purchase', [GameAccountController::class, 'purchase'])->name('purchase');
     });
 
 

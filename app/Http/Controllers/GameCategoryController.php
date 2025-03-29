@@ -14,6 +14,9 @@ class GameCategoryController extends Controller
 
         // Get all accounts linked to this category
         $accounts = GameAccount::where('game_category_id', $category->id);
+        if (!$request->filled('status')) {
+            $accounts->where('status', 'available');
+        }
 
         // Apply filters if any are set
         if ($request->hasAny(['code', 'price_range', 'status', 'planet', 'registration', 'server'])) {

@@ -6,11 +6,6 @@
     color: white;
 }
 
-.hero--small .hero__title {
-    font-size: 3.2rem;
-    font-weight: 700;
-    margin-bottom: 15px;
-}
 
 .hero--small .hero__desc {
     font-size: 1.6rem;

@@ -105,7 +105,9 @@
                 @forelse($accounts as $account)
                     <div class="account-card">
                         <div class="account-media">
-                            <img src="{{ $account->thumb }}" alt="Account Preview" class="account-img">
+                            <a href="{{ route('account.show', ['id' => $account->id]) }}">
+                                <img src="{{ $account->thumb }}" alt="Account Preview" class="account-img">
+                            </a>
                             <div class="account-code">Mã số: {{ $account->id }}</div>
                             <div class="account-price-top">ATM/VÍ ĐIỆN TỬ: {{ number_format($account->price) }} VND</div>
                         </div>
@@ -135,7 +137,7 @@
 
                         <div class="account-actions">
                             <div class="card-price">TIỀN CARD: {{ number_format($account->card_price) }} VND</div>
-                            <a href="{{ route('account.detail', ['id' => $account->id]) }} }}" class="action-btn action-btn--detail">Chi tiết</a>
+                            <a href="{{ route('account.show', ['id' => $account->id]) }}" class="action-btn action-btn--detail">Chi tiết</a>
                         </div>
                     </div>
                 @empty
