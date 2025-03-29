@@ -44,7 +44,7 @@
                                     </div>
                                 @endif
 
-                                <form method="POST" action="{{ route('profile.deposit.card') }}" class="register-form">
+                                <form method="POST" action="{{ route('profile.deposit-card') }}" class="register-form">
                                     @csrf
 
                                     <div class="form-group">
@@ -122,7 +122,6 @@
                                                     <th>Nhà mạng</th>
                                                     <th>Mệnh giá</th>
                                                     <th>Thực nhận</th>
-                                                    <th>Serial</th>
                                                     <th>Mã thẻ</th>
                                                 </tr>
                                             </thead>
@@ -130,12 +129,11 @@
                                                 @if(isset($transactions) && count($transactions) > 0)
                                                     @foreach($transactions as $transaction)
                                                         <tr>
-                                                            <td>{{ $transaction->status }}</td>
+                                                            <td>{!! display_status($transaction->status) !!}</td>
                                                             <td>{{ $transaction->created_at }}</td>
                                                             <td>{{ $transaction->telco }}</td>
                                                             <td>{{ number_format($transaction->amount) }} VND</td>
                                                             <td>{{ number_format($transaction->received_amount) }} VND</td>
-                                                            <td>{{ $transaction->serial }}</td>
                                                             <td>{{ substr($transaction->pin, 0, 3) . '******' }}</td>
                                                         </tr>
                                                     @endforeach

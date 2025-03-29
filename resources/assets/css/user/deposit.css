@@ -63,12 +63,6 @@
     margin-bottom: 20px;
 }
 
-.form-label {
-    width: 120px;
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--primary-color);
-}
 
 .form-select,
 .form-input {

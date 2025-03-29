@@ -22,7 +22,7 @@
                 <h2 class="menu__header__title">MENU GIAO DỊCH</h2>
             </header>
             <div class="transaction__list">
-                <a href="{{ route('profile.deposit.card') }}" class="transaction__item">
+                <a href="{{ route('profile.deposit-card') }}" class="transaction__item">
                     <div class="transaction__icon">
                         <img src="https://acc957.com/Img/NapThe.png" alt="Item" class="transaction__img" />
                     </div>

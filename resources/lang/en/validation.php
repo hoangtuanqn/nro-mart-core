@@ -5,6 +5,7 @@ return [
     'string' => 'Trường :attribute phải là chuỗi ký tự',
     'numeric' => 'Trường :attribute phải là số',
     'integer' => 'Trường :attribute phải là số nguyên',
+    'current_password' => 'Mật khẩu hiện tại không đúng',
     'min' => [
         'numeric' => 'Trường :attribute không được nhỏ hơn :min',
         'string' => 'Trường :attribute phải có ít nhất :min ký tự',

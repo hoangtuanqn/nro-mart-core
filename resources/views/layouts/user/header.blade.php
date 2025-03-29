@@ -1,3 +1,11 @@
+{{-- /**
+* Copyright (c) 2025 FPT University
+*
+* @author Phạm Hoàng Tuấn
+* @email phamhoangtuanqn@gmail.com
+* @facebook fb.com/phamhoangtuanqn
+*/ --}}
+
 <!-- Announcement -->
 <header class="announcement">
     <div class="container row">
@@ -16,11 +24,12 @@
             <img src="https://acc957.com/upload-usr/images/logo.png" alt="Logo Game" class="nav__logo" />
         </a>
         <div class="nav__menu">
-            <a href="/" class="text menu__item">Trang chủ</a>
-            <a href="#" class="text menu__item">Nạp tiền</a>
-            <a href="#" class="text menu__item">Dịch vụ</a>
-            <a href="#" class="text menu__item">Nick game</a>
-            <a href="#" class="text menu__item">Tải hack game</a>
+            <a href="/" class="text menu__item {{ request()->is('/') ? 'active' : '' }}">Trang chủ</a>
+            <a href="{{ route('profile.deposit-card') }}"
+                class="text menu__item {{ request()->routeIs('profile.deposit-card') ? 'active' : '' }}">Nạp tiền</a>
+            <a href="#" class="text menu__item {{ request()->is('services*') ? 'active' : '' }}">Dịch vụ</a>
+            <a href="#" class="text menu__item {{ request()->is('nick-game*') ? 'active' : '' }}">Nick game</a>
+            <a href="#" class="text menu__item {{ request()->is('hack-game*') ? 'active' : '' }}">Tải hack game</a>
         </div>
         <div class="mobile-menu-toggle">
             <i class="fa-solid fa-bars"></i>

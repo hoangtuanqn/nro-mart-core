@@ -1,3 +1,11 @@
+{{-- /**
+* Copyright (c) 2025 FPT University
+*
+* @author Phạm Hoàng Tuấn
+* @email phamhoangtuanqn@gmail.com
+* @facebook fb.com/phamhoangtuanqn
+*/ --}}
+
 @extends('layouts.user.app')
 
 @section('title', 'Thông tin tài khoản')
@@ -35,22 +43,24 @@
                                     <div class="info-label">Mật khẩu:</div>
                                     <div class="info-value">
                                         ********
-                                        <a href="#" class="change-password-link">Nhấn đổi mật khẩu</a>
+                                        <a href="{{ route('profile.change-password') }}" class="change-password-link">Nhấn
+                                            đổi mật khẩu</a>
                                     </div>
                                 </div>
                                 <div class="info-row">
                                     <div class="info-label">Số dư:</div>
                                     <div class="info-value info-value--highlight">
-                                        {{ number_format(Auth::user()->balance ?? 0) }} VND
+                                        {{ number_format(number_format(Auth::user()->balance) ?? 0) }} VND
                                     </div>
                                 </div>
                                 <div class="info-row">
-                                    <div class="info-label">Số điện thoại:</div>
-                                    <div class="info-value">
-                                        {{ Auth::user()->phone ?? 'Chưa cập nhật' }}
-                                        <a href="#" class="update-phone-link">Cập nhật</a>
+                                    <div class="info-label">Tổng tiền đã nạp:</div>
+                                    <div class="info-value info-value--highlight">
+                                        {{ number_format(number_format(Auth::user()->total_deposited) ?? 0) }} VND
                                     </div>
                                 </div>
+
+
                                 <div class="info-row">
                                     <div class="info-label">Ngày tham gia:</div>
                                     <div class="info-value">{{ Auth::user()->created_at->format('d/m/Y H:i:s A') }}</div>

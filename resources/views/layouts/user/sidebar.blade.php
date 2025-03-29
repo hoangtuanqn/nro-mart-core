@@ -1,3 +1,11 @@
+{{-- /**
+* Copyright (c) 2025 FPT University
+*
+* @author Phạm Hoàng Tuấn
+* @email phamhoangtuanqn@gmail.com
+* @facebook fb.com/phamhoangtuanqn
+*/ --}}
+
 <div class="profile-sidebar">
     <div class="sidebar-header">
         <h2 class="sidebar-title">MENU TÀI KHOẢN</h2>
@@ -9,7 +17,7 @@
             </a>
         </li>
         <li class="sidebar-item {{ request()->is('profile/deposit/card') ? 'active' : '' }}">
-            <a href="{{ route('profile.deposit.card') }}" class="sidebar-link">
+            <a href="{{ route('profile.deposit-card') }}" class="sidebar-link">
                 <i class="fa-solid fa-credit-card"></i> Nạp tiền thẻ cào
             </a>
         </li>

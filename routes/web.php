@@ -27,10 +27,12 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::middleware('auth')->group(function () {
     Route::prefix('profile')->name('profile.')->group(function () {
-        Route::get('/', [ProfileController::class, 'index'])->name('index');
+        Route::get('/', [ProfileController::class, 'index'])->name(name: 'index');
+        Route::get('/change-password', [ProfileController::class, 'viewChangePassword'])->name('change-password');
+
 
         // Nạp thẻ cào
-        Route::get('/deposit/card', [CardDepositController::class, 'showCardDepositForm'])->name('deposit.card');
+        Route::get('/deposit/card', [CardDepositController::class, 'showCardDepositForm'])->name('deposit-card');
         Route::post('/deposit/card', [CardDepositController::class, 'processCardDeposit']);
 
     });

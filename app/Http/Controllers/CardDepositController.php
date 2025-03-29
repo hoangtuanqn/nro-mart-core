@@ -46,7 +46,7 @@ class CardDepositController extends Controller
         ]);
 
         if (CardDeposit::where('status', 'processing')->where('user_id', Auth::id())->count() >= 5) {
-            return redirect()->route('profile.deposit.card')
+            return redirect()->route('profile.deposit-card')
                 ->with('error', 'Bạn có quá nhiều thẻ đang chờ xử lý. Vui lòng đợi!')->withInput();
         }
         try {
@@ -61,13 +61,13 @@ class CardDepositController extends Controller
             $deposit->status = 'processing'; // Initial status
             $deposit->save();
 
-            return redirect()->route('profile.deposit.card')
+            return redirect()->route('profile.deposit-card')
                 ->with('success', 'Thẻ của bạn đang được xử lý. Vui lòng đợi trong giây lát.');
 
         } catch (\Exception $e) {
             // Log::error('Card deposit error: ' . $e->getMessage());
 
-            return redirect()->route('profile.deposit.card')
+            return redirect()->route('profile.deposit-card')
                 ->with('error', 'Có lỗi xảy ra khi xử lý thẻ. Vui lòng thử lại sau.')->withInput();
         }
     }

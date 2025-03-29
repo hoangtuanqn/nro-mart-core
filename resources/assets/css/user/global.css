@@ -106,7 +106,8 @@ a {
     transition: color 0.3s ease;
 }
 
-.menu__item:hover {
+.menu__item:hover,
+.menu__item.active  {
     color: var(--accent-color);
 }
 
@@ -389,6 +390,30 @@ a {
     color: #721c24;
     background-color: #f8d7da;
     border-color: #f5c6cb; 
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.status-badge.success {
+    background-color: #28a745;
+    color: white;
+}
+
+.status-badge.error {
+    background-color: #dc3545;
+    color: white;
+}
+
+.status-badge.processing {
+    background-color: #ffc107;
+    color: #212529;
 }
 
 /* Responsive styles for global elements */
