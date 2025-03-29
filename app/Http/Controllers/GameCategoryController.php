@@ -56,7 +56,7 @@ class GameCategoryController extends Controller
             }
 
         }
-        $accounts = $accounts->get();
+        $accounts = $accounts->orderBy('id', 'DESC')->get();
         return view('user.category.show', compact('category', 'accounts'));
     }
 }

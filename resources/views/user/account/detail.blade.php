@@ -37,14 +37,14 @@
                         </div>
                         <div class="detail__info-item">
                             <span class="detail__info-label">HÀNH TINH:</span>
-                            <span class="detail__info-value">{{ $planetNames[$account->planet] }}</span>
+                            <span class="detail__info-value">{{ display_hanh_tinh($account->planet) }}</span>
                         </div>
                     </div>
 
                     <div class="detail__info-row">
                         <div class="detail__info-item">
                             <span class="detail__info-label">ĐĂNG KÝ:</span>
-                            <span class="detail__info-value">{{ $registrationTypes[$account->registration_type] }}</span>
+                            <span class="detail__info-value">{{ display_dang_ky($account->registration_type) }}</span>
                         </div>
                         <div class="detail__info-item">
                             <span class="detail__info-label">BÔNG TAI:</span>
@@ -128,11 +128,11 @@
                         <a class="modal__btn modal__btn--card" href="{{ route('profile.deposit-card') }}">NẠP THẺ CÀO</a>
                         <button class="modal__btn modal__btn--wallet" onclick="showRechargeModal('wallet')">NẠP ATM/VÍ</button>
                     @else
-                        <button class="modal__btn modal__btn--primary" onclick="purchaseAccount({{ $account->id }})">XÁC NHẬN
+                        <button class="modal__btn modal__btn--card" onclick="purchaseAccount({{ $account->id }})">XÁC NHẬN
                             MUA</button>
                     @endif
                 @else
-                    <a class="modal__btn modal__btn--primary" href="{{ route('login') }}">ĐĂNG NHẬP</a>
+                    <a class="modal__btn modal__btn--wallet" href="{{ route('login') }}">ĐĂNG NHẬP</a>
                 @endauth
                 <button class="modal__btn modal__btn--close" onclick="closePurchaseModal()">ĐÓNG</button>
             </div>

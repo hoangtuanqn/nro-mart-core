@@ -596,3 +596,10 @@ body.no-scroll {
         display: none;
     }
 }
+
+.text-success {
+    color: #28a745 !important;
+}
+.text-danger {
+    color: #d40000 !important;
+}

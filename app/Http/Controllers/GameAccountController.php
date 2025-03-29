@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\GameAccount;
+use App\Models\MoneyTransaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -13,21 +14,10 @@ class GameAccountController extends Controller
     {
         $account = GameAccount::findOrFail($id);
 
-        $planetNames = [
-            'earth' => 'Trái Đất',
-            'namek' => 'Namek',
-            'xayda' => 'Xayda'
-        ];
-
-        $registrationTypes = [
-            'virtual' => 'Ảo',
-            'real' => 'Thật'
-        ];
-
         // Convert JSON string to array or provide empty array if null
         $images = json_decode($account->images) ?? [];
 
-        return view("user.account.detail", compact('account', 'planetNames', 'registrationTypes', 'images'));
+        return view("user.account.detail", compact('account', 'images'));
     }
 
     public function purchase($id)
@@ -58,6 +48,19 @@ class GameAccountController extends Controller
             $account->buyer_id = $user->id;
             // $account->purchased_at = now();
             $account->save();
+
+
+            // Thêm lịch sử biến động số dư
+            MoneyTransaction::create([
+                'user_id' => $user->id,
+                'type' => 'purchase',
+                'amount' => -$account->price,
+                'balance_before' => $user->balance + $account->price,
+                'balance_after' => $user->balance,
+                'description' => 'Mua tài khoản #' . $account->id,
+                'reference_id' => $account->id
+            ]);
+
 
             DB::commit();
 

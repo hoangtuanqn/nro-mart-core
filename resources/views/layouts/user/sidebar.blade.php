@@ -11,12 +11,12 @@
         <h2 class="sidebar-title">MENU TÀI KHOẢN</h2>
     </div>
     <ul class="sidebar-menu">
-        <li class="sidebar-item {{ request()->is('profile') ? 'active' : '' }}">
+        <li class="sidebar-item {{ request()->routeIs('profile.index') ? 'active' : '' }}">
             <a href="{{ route('profile.index') }}" class="sidebar-link">
                 <i class="fa-solid fa-user"></i> Thông tin tài khoản
             </a>
         </li>
-        <li class="sidebar-item {{ request()->is('profile/deposit/card') ? 'active' : '' }}">
+        <li class="sidebar-item {{ request()->routeIs('profile.deposit-card') ? 'active' : '' }}">
             <a href="{{ route('profile.deposit-card') }}" class="sidebar-link">
                 <i class="fa-solid fa-credit-card"></i> Nạp tiền thẻ cào
             </a>
@@ -26,8 +26,8 @@
                 <i class="fa-solid fa-money-bill-transfer"></i> Nạp tiền ATM - Ví điện tử
             </a>
         </li>
-        <li class="sidebar-item">
-            <a href="#" class="sidebar-link">
+        <li class="sidebar-item {{ request()->routeIs('profile.transaction-history') ? 'active' : '' }}">
+            <a href="{{ route('profile.transaction-history') }}" class="sidebar-link">
                 <i class="fa-solid fa-clock-rotate-left"></i> Lịch sử giao dịch
             </a>
         </li>
