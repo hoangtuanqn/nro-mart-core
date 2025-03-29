@@ -28,7 +28,7 @@
                     </div>
                     <p class="text text__transaction__item">NẠP THẺ</p>
                 </a>
-                <a href="#" class="transaction__item">
+                <a href="/profile" class="transaction__item">
                     <div class="transaction__icon">
                         <img src="https://acc957.com/Img/TaiKhoan.png" alt="Item" class="transaction__img" />
                     </div>
