@@ -126,11 +126,11 @@
     @push('scripts')
         <script>
             function showServiceDetail(serviceId) {
-                fetch(`/service-history/${serviceId}`, {
-                    headers: {
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                    }
-                })
+                fetch(`/profile/service-history/${serviceId}`, {
+                        headers: {
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                        }
+                    })
                     .then(response => {
                         if (!response.ok) {
                             throw new Error('Network response was not ok');
@@ -147,7 +147,8 @@
                         document.getElementById('gameAccount').textContent = data.game_account;
                         document.getElementById('serverNumber').textContent = 'Server ' + data.server;
                         document.getElementById('packageName').textContent = data.service_package.name;
-                        document.getElementById('servicePrice').textContent = new Intl.NumberFormat('vi-VN').format(data.price) + ' VND';
+                        document.getElementById('servicePrice').textContent = new Intl.NumberFormat('vi-VN').format(data
+                            .price) + ' VND';
                         document.getElementById('serviceStatus').textContent = data.status;
                         document.getElementById('adminNote').textContent = data.admin_note;
 
@@ -168,9 +169,9 @@
             }
 
             // Close modal when clicking outside
-            document.addEventListener('DOMContentLoaded', function () {
+            document.addEventListener('DOMContentLoaded', function() {
                 const modal = document.getElementById('serviceDetailModal');
-                window.addEventListener('click', function (event) {
+                window.addEventListener('click', function(event) {
                     if (event.target === modal) {
                         closeServiceModal();
                     }
