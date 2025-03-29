@@ -92,7 +92,7 @@
                     </div>
                     <div class="modal__row">
                         <span class="modal__label">Tài khoản game:</span>
-                        <span class="modal__value" id="gameAccount"></span>
+                        <span class="modal__value text-danger" id="gameAccount"></span>
                     </div>
                     <div class="modal__row">
                         <span class="modal__label">Server:</span>
@@ -127,10 +127,10 @@
         <script>
             function showServiceDetail(serviceId) {
                 fetch(`/profile/service-history/${serviceId}`, {
-                        headers: {
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-                        }
-                    })
+                    headers: {
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    }
+                })
                     .then(response => {
                         if (!response.ok) {
                             throw new Error('Network response was not ok');
@@ -149,7 +149,7 @@
                         document.getElementById('packageName').textContent = data.service_package.name;
                         document.getElementById('servicePrice').textContent = new Intl.NumberFormat('vi-VN').format(data
                             .price) + ' VND';
-                        document.getElementById('serviceStatus').textContent = data.status;
+                        document.getElementById('serviceStatus').innerHTML = data.status_html;
                         document.getElementById('adminNote').textContent = data.admin_note;
 
                         const modal = document.getElementById('serviceDetailModal');
@@ -169,9 +169,9 @@
             }
 
             // Close modal when clicking outside
-            document.addEventListener('DOMContentLoaded', function() {
+            document.addEventListener('DOMContentLoaded', function () {
                 const modal = document.getElementById('serviceDetailModal');
-                window.addEventListener('click', function(event) {
+                window.addEventListener('click', function (event) {
                     if (event.target === modal) {
                         closeServiceModal();
                     }

@@ -129,19 +129,19 @@
 
                     <div class="service__form-row">
                         <div class="service__form-group">
-                            <label for="username"><i class="fas fa-user"></i> Tài khoản</label>
-                            <input type="text" id="username" name="username" class="service__form-control"
-                                value="{{ old('username') }}" placeholder="Tài khoản game" required>
-                            @error('username')
+                            <label for="game_account"><i class="fas fa-user"></i> Tài khoản</label>
+                            <input type="text" id="game_account" name="game_account" class="service__form-control"
+                                value="{{ old('game_account') }}" placeholder="Tài khoản game" required>
+                            @error('game_account')
                                 <div class="service__form-error">{{ $message }}</div>
                             @enderror
                         </div>
 
                         <div class="service__form-group">
-                            <label for="password"><i class="fas fa-lock"></i> Mật khẩu</label>
-                            <input type="password" id="password" name="password" class="service__form-control"
-                                value="{{ old('password') }}" placeholder="Mật khẩu game" required>
-                            @error('password')
+                            <label for="game_password"><i class="fas fa-lock"></i> Mật khẩu</label>
+                            <input type="text" id="game_password" name="game_password" class="service__form-control"
+                                value="{{ old('game_password') }}" placeholder="Mật khẩu game" required>
+                            @error('game_password')
                                 <div class="service__form-error">{{ $message }}</div>
                             @enderror
                         </div>

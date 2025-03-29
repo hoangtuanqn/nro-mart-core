@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) 2025 FPT University
- * 
+ *
  * @author    Phạm Hoàng Tuấn
  * @email     phamhoangtuanqn@gmail.com
  * @facebook  fb.com/phamhoangtuanqn
@@ -92,7 +92,7 @@ class ProfileController extends Controller
             $service = ServiceHistory::with(['gameService', 'servicePackage'])
                 ->where('user_id', Auth::id())
                 ->findOrFail($id);
-    
+
             return response()->json([
                 'status' => 'success',
                 'id' => $service->id,
@@ -106,6 +106,7 @@ class ProfileController extends Controller
                 ],
                 'price' => $service->price,
                 'status' => $service->status,
+                'status_html' => display_status_service($service->status),
                 'admin_note' => $service->admin_note ?? 'Không có ghi chú'
             ]);
         } catch (\Exception $e) {

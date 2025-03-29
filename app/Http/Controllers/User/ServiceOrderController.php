@@ -1,4 +1,11 @@
 <?php
+/**
+ * Copyright (c) 2025 FPT University
+ * 
+ * @author    Phạm Hoàng Tuấn
+ * @email     phamhoangtuanqn@gmail.com
+ * @facebook  fb.com/phamhoangtuanqn
+ */
 
 namespace App\Http\Controllers\User;
 
@@ -70,8 +77,8 @@ class ServiceOrderController extends Controller
             // Tạo lịch sử dịch vụ
             $serviceHistory = ServiceHistory::create([
                 'user_id' => auth()->id(),
-                'service_id' => $request->input('service_id'),
-                'package_id' => $package->id,
+                'game_service_id' => $request->input('service_id'),
+                'service_package_id' => $package->id,
                 'game_account' => $request->input('game_account'),
                 'game_password' => $request->input('game_password'),
                 'server' => $request->input('server'),
@@ -86,8 +93,7 @@ class ServiceOrderController extends Controller
 
             DB::commit();
 
-            return redirect()->route('user.services.order.detail', $serviceHistory->id)
-                ->with('success', 'Đặt dịch vụ thành công. Chúng tôi sẽ xử lý trong thời gian sớm nhất.');
+            return back()->with('success', 'Đặt dịch vụ thành công. Chúng tôi sẽ xử lý trong thời gian sớm nhất.');
         } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()

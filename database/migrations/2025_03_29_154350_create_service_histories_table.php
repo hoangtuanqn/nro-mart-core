@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->integer('server'); // Máy chủ (1-13 hoặc tên server)
 
             // Thông tin giao dịch
-            $table->bigInteger('amount'); // Số lượng (VD: 1000 vàng, 50 ngọc)
+            $table->bigInteger('amount')->default(0); // Số lượng (VD: 1000 vàng, 50 ngọc)
             $table->bigInteger('price'); // Tổng tiền
             $table->string('discount_code')->nullable(); // Mã giảm giá (nếu có)
             $table->decimal('discount_amount', 10, 2)->default(0); // Số tiền được giảm

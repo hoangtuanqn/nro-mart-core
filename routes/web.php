@@ -55,13 +55,13 @@ Route::middleware('auth')->group(function () {
             ->name('profile.service.detail');
     });
 
-    Route::prefix('user')->name('user.')->group(function () {
-        Route::prefix('services')->name('services.')->group(function () {
-            Route::get('/history', [ServiceOrderController::class, 'history'])->name('history');
-            Route::get('/order/{id}', [ServiceOrderController::class, 'orderSuccess'])->name('order.success');
-            Route::post('/order/{id}/cancel', [ServiceOrderController::class, 'cancelOrder'])->name('order.cancel');
-            Route::get('/order/{id}/detail', [ServiceOrderController::class, 'orderDetail'])->name('order.detail');
-        });
-    });
+    // Route::prefix('user')->name('user.')->group(function () {
+    //     Route::prefix('services')->name('services.')->group(function () {
+    //         Route::get('/history', [ServiceOrderController::class, 'history'])->name('history');
+    //         Route::get('/order/{id}', [ServiceOrderController::class, 'orderSuccess'])->name('order.success');
+    //         Route::post('/order/{id}/cancel', [ServiceOrderController::class, 'cancelOrder'])->name('order.cancel');
+    //         Route::get('/order/{id}/detail', [ServiceOrderController::class, 'orderDetail'])->name('order.detail');
+    //     });
+    // });
 });
 
