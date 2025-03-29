@@ -6,6 +6,7 @@
  * @email     phamhoangtuanqn@gmail.com
  * @facebook  fb.com/phamhoangtuanqn
  */
+
 namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 
@@ -35,41 +36,15 @@ class ProfileController extends Controller
         return view('user.profile.change-password');
     }
 
-    /**
-     * Display the user's profile form.
-     */
-    public function edit(Request $request): View
-    {
-        return view('profile.edit', [
-            'user' => $request->user(),
-        ]);
-    }
-
-    /**
-     * Update the user's profile information.
-     */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
-    {
-        $request->user()->fill($request->validated());
-
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
-
-        $request->user()->save();
-
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
-    }
-
     public function transactionHistory()
     {
-        $transactions = MoneyTransaction::where('user_id', Auth::id())->orderBy('created_at', 'desc')->get();
+        $transactions = MoneyTransaction::where('user_id', Auth::id())->orderBy('created_at', 'desc')->paginate(10);
         return view('user.profile.transaction-history', compact('transactions'));
     }
 
     public function purchasedAccounts()
     {
-        $transactions = GameAccount::where('buyer_id', Auth::id())->where('status', 'sold')->get();
+        $transactions = GameAccount::where('buyer_id', Auth::id())->where('status', 'sold')->paginate(perPage: 10);
         return view('user.profile.purchased-accounts', compact('transactions')); // Return the view for purchased accounts lis
     }
 
@@ -105,7 +80,6 @@ class ProfileController extends Controller
                     'name' => $service->servicePackage->name
                 ],
                 'price' => $service->price,
-                'status' => $service->status,
                 'status_html' => display_status_service($service->status),
                 'admin_note' => $service->admin_note ?? 'Không có ghi chú'
             ]);

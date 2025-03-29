@@ -218,35 +218,6 @@
     color: var(--text-light);
 }
 
-/* Pagination */
-.pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 20px;
-    gap: 5px;
-}
-
-.pagination-item {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    background-color: #f5f5f5;
-    color: var(--text-color);
-    font-weight: 600;
-    transition: var(--transition);
-}
-
-.pagination-item:hover {
-    background-color: #e0e0e0;
-}
-
-.pagination-item.active {
-    background-color: var(--accent-color);
-    color: white;
-}
 
 /* Responsive Styles */
 @media (max-width: 768px) {

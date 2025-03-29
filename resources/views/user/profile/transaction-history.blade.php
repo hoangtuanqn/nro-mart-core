@@ -57,7 +57,7 @@
                                     </div>
 
                                     <div class="pagination">
-                                        {{-- {{ $transactions->links() }} --}}
+                                        {{ $transactions->links() }}
                                     </div>
                                 </div>
                             </div>

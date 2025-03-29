@@ -142,10 +142,7 @@
                                         </table>
                                     </div>
                                     <div class="pagination">
-                                        <a href="#" class="pagination-item active">1</a>
-                                        <a href="#" class="pagination-item">2</a>
-                                        <a href="#" class="pagination-item">3</a>
-                                        <a href="#" class="pagination-item next"><i class="fa-solid fa-angle-right"></i></a>
+                                        {{ $transactions->links() }}
                                     </div>
                                 </div>
                             </div>

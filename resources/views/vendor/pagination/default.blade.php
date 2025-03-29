@@ -14,23 +14,35 @@
             @endif
 
             {{-- Pagination Elements --}}
-            @foreach ($elements as $element)
-                {{-- "Three Dots" Separator --}}
-                @if (is_string($element))
-                    <a href="#" class="pagination-item disabled" aria-disabled="true">{{ $element }}</a>
-                @endif
+            @php
+                $window = 2; // Show 2 numbers on each side of current page
+                $current = $paginator->currentPage();
+                $last = $paginator->lastPage();
+                $start = max(1, $current - $window);
+                $end = min($last, $current + $window);
+            @endphp
 
-                {{-- Array Of Links --}}
-                @if (is_array($element))
-                    @foreach ($element as $page => $url)
-                        @if ($page == $paginator->currentPage())
-                            <a href="#" class="pagination-item active" aria-current="page">{{ $page }}</a>
-                        @else
-                            <a href="{{ $url }}" class="pagination-item">{{ $page }}</a>
-                        @endif
-                    @endforeach
+            @if($start > 1)
+                <a href="{{ $paginator->url(1) }}" class="pagination-item">1</a>
+                @if($start > 2)
+                    <a href="#" class="pagination-item disabled" aria-disabled="true">...</a>
                 @endif
-            @endforeach
+            @endif
+
+            @for($i = $start; $i <= $end; $i++)
+                @if($i == $current)
+                    <a href="#" class="pagination-item active" aria-current="page">{{ $i }}</a>
+                @else
+                    <a href="{{ $paginator->url($i) }}" class="pagination-item">{{ $i }}</a>
+                @endif
+            @endfor
+
+            @if($end < $last)
+                @if($end < $last - 1)
+                    <a href="#" class="pagination-item disabled" aria-disabled="true">...</a>
+                @endif
+                <a href="{{ $paginator->url($last) }}" class="pagination-item">{{ $last }}</a>
+            @endif
 
             {{-- Next Page Link --}}
             @if ($paginator->hasMorePages())
