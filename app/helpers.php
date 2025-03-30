@@ -1,5 +1,5 @@
 <?php
-
+use App\Models\Config;
 function display_status_nap_tien($status)
 {
     switch ($status) {
@@ -52,4 +52,9 @@ function display_dang_ky($planet)
         default:
             return 'Không xác định';
     }
+}
+// Hàm gọi setting trong DB
+function get_config($key, $default = null)
+{
+    return Config::where('key', $key)->value('value') ?? $default;
 }

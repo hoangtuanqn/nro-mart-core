@@ -18,6 +18,7 @@ class DatabaseSeeder extends Seeder
             GameAccountSeeder::class,
             GameServicesSeeder::class,
             ServicePackagesSeeder::class,
+            ConfigSeeder::class
         ]);
     }
 }
