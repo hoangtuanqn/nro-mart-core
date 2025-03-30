@@ -25,6 +25,7 @@ return new class extends Migration {
             $table->integer('received_amount'); // Số tiền thực nhận
             $table->string('serial'); // Số serial của thẻ
             $table->string('pin'); // Mã pin của thẻ
+            $table->bigInteger('request_id'); // Mã pin của thẻ
             $table->enum('status', ['success', 'error', 'processing'])->default('processing'); // Trạng thái nạp thẻ
             $table->text('response')->nullable(); // Phản hồi từ hệ thống (có thể để trống)
             $table->timestamps(); // Thời gian tạo và cập nhật

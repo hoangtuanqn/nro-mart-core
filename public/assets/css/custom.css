@@ -12,3 +12,8 @@
 .text-danger {
     color: red;
 }
+.a_link {
+    text-transform: uppercase;
+    font-weight: 600;
+    color: #000;
+}

@@ -16,6 +16,7 @@ class CardDeposit extends Model
         'received_amount',
         'serial',
         'pin',
+        'request_id',
         'status',
     ];
 

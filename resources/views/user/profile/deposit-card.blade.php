@@ -38,6 +38,19 @@
                                         <button type="button" class="service__alert-close">&times;</button>
                                     </div>
                                 @endif
+                                @foreach (['error', 'success'] as $msg)
+                                    @if (session($msg))
+                                        <div
+                                            class="service__alert service__alert--{{ $msg === 'error' ? 'error' : 'success' }}">
+                                            <i
+                                                class="fas fa-{{ $msg === 'error' ? 'exclamation-circle' : 'check-circle' }}"></i>
+                                            <div>
+                                                <span>{{ session($msg) }}</span>
+                                            </div>
+                                            <button type="button" class="service__alert-close">&times;</button>
+                                        </div>
+                                    @endif
+                                @endforeach
                                 <!-- Kết thúc phần thông báo -->
 
                                 <form method="POST" action="{{ route('profile.deposit-card') }}" class="register-form">
@@ -155,12 +168,12 @@
 
     @push('scripts')
         <script>
-            document.addEventListener('DOMContentLoaded', function () {
+            document.addEventListener('DOMContentLoaded', function() {
                 const amountSelect = document.getElementById('amount');
                 const receiveAmount = document.getElementById('receive-amount');
 
                 // Update received amount when amount changes
-                amountSelect.addEventListener('change', function () {
+                amountSelect.addEventListener('change', function() {
                     receiveAmount.textContent = new Intl.NumberFormat('vi-VN').format(this.value) + ' VND';
                 });
 

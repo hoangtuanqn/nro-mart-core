@@ -21,6 +21,22 @@
                 <!-- Statistics Cards Row -->
                 <div class="row">
                     <!-- Game Accounts Stats -->
+                    <div class="card-body">
+                        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                            <strong>Chào mừng bạn đến với hệ thống tuyệt vời của chúng tôi!</strong> Bạn đang trải nghiệm
+                            sản phẩm chất lượng từ <a href="https://tuanori.vn" target="_blank"
+                                class="a_link">tuanori.vn</a>. Nếu bạn mong muốn mở rộng
+                            tính năng cho website của mình, đừng ngần ngại liên hệ với chúng tôi qua Zalo <a
+                                href="https://zalo.me/0812665001" class="a_link" target="_blank">0812665001</a> hoặc
+                            Facebook <a href="https://www.facebook.com/phamhoangtuanqn/" class="a_link" target="_blank">Phạm
+                                Hoàng Tuấn</a>
+                            để nhận được sự hỗ trợ tận tình (Có tính phí). Chúc bạn có một ngày thật tuyệt vời và thành công
+                            rực rỡ! <br />
+                            <b class="text-bold">Lưu ý: Tất cả các giao dịch liên quan đến mã nguồn
+                                này với bên thứ ba (ngoại trừ nhà cung cấp) đều có khả năng là lừa đảo. Hãy cẩn trọng!</b>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </div>
                     <div class="col-lg-3 col-sm-6 col-12 d-flex">
                         <div class="dash-count">
                             <div class="dash-counts">
@@ -202,10 +218,12 @@
                                                         @elseif($serviceType->type == 'leveling')
                                                             <span class="badge bg-success">Cày thuê</span>
                                                         @else
-                                                            <span class="badge bg-secondary">{{ $serviceType->type }}</span>
+                                                            <span
+                                                                class="badge bg-secondary">{{ $serviceType->type }}</span>
                                                         @endif
                                                     </td>
-                                                    <td><span class="badge bg-primary">{{ $serviceType->total }}</span></td>
+                                                    <td><span class="badge bg-primary">{{ $serviceType->total }}</span>
+                                                    </td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -222,30 +240,34 @@
                             </div>
                             <div class="card-body">
                                 <div class="stats-list">
-                                    <div class="stats-info">
-                                        <p>Admin <span class="badge rounded-pill bg-primary">{{ $statistics['users']['admin'] }}</span></p>
+                                    <div class="stats-info mb-3">
+                                        <p>Admin <span
+                                                class="badge rounded-pill bg-primary">{{ $statistics['users']['admin'] }}</span>
+                                        </p>
                                         <div class="progress">
                                             <div class="progress-bar bg-primary" role="progressbar"
                                                 style="width: {{ ($statistics['users']['admin'] / $statistics['users']['total']) * 100 }}%"
-                                                aria-valuenow="{{ $statistics['users']['admin'] }}"
-                                                aria-valuemin="0"
+                                                aria-valuenow="{{ $statistics['users']['admin'] }}" aria-valuemin="0"
                                                 aria-valuemax="{{ $statistics['users']['total'] }}">
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="stats-info">
-                                        <p>Khách hàng <span class="badge rounded-pill bg-success">{{ $statistics['users']['user'] }}</span></p>
+                                    <div class="stats-info mb-3">
+                                        <p>Khách hàng <span
+                                                class="badge rounded-pill bg-success">{{ $statistics['users']['user'] }}</span>
+                                        </p>
                                         <div class="progress">
                                             <div class="progress-bar bg-success" role="progressbar"
                                                 style="width: {{ ($statistics['users']['user'] / $statistics['users']['total']) * 100 }}%"
-                                                aria-valuenow="{{ $statistics['users']['user'] }}"
-                                                aria-valuemin="0"
+                                                aria-valuenow="{{ $statistics['users']['user'] }}" aria-valuemin="0"
                                                 aria-valuemax="{{ $statistics['users']['total'] }}">
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="stats-info">
-                                        <p>Danh mục hiển thị <span class="badge rounded-pill bg-info">{{ $statistics['categories']['active'] }}</span></p>
+                                    <div class="stats-info mb-3">
+                                        <p>Danh mục hiển thị <span
+                                                class="badge rounded-pill bg-info">{{ $statistics['categories']['active'] }}</span>
+                                        </p>
                                         <div class="progress">
                                             <div class="progress-bar bg-info" role="progressbar"
                                                 style="width: {{ ($statistics['categories']['active'] / $statistics['categories']['total']) * 100 }}%"
@@ -287,7 +309,8 @@
                                             <td>{{ $transaction->id }}</td>
                                             <td class="productimgname">
                                                 <a class="product-img">
-                                                    <img src="{{ asset('assets/img/customer/profile.jpg') }}" alt="profile">
+                                                    <img src="{{ asset('assets/img/customer/profile.jpg') }}"
+                                                        alt="profile">
                                                 </a>
                                                 <a href="javascript:void(0);">{{ $transaction->user->name ?? 'N/A' }}</a>
                                             </td>
