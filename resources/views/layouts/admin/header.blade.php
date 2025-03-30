@@ -1,8 +1,8 @@
 <div class="header">
 
-    <div class="header-left active">
+    <div class="header-left active" style="display: flex; justify-content: center;">
         <a href="index.html" class="logo">
-            <img src="{{ asset('assets/img/logo.png') }}" alt="">
+            <img src="https://i.imgur.com/umPO8Vy.png" alt="">
         </a>
         <a href="index.html" class="logo-small">
             <img src="{{ asset('assets/img/logo-small.png') }}" alt="">
@@ -33,7 +33,8 @@
                             <span><img src="{{ asset('assets/img/icons/closes.svg') }}" alt="img"></span>
                         </div>
                     </div>
-                    <a class="btn" id="searchdiv"><img src="{{ asset('assets/img/icons/search.svg') }}" alt="img"></a>
+                    <a class="btn" id="searchdiv"><img src="{{ asset('assets/img/icons/search.svg') }}"
+                            alt="img"></a>
                 </form>
             </div>
         </li>
@@ -169,7 +170,8 @@
             <div class="dropdown-menu menu-drop-user">
                 <div class="profilename">
                     <div class="profileset">
-                        <span class="user-img"><img src="{{ asset('assets/img/profiles/avator1.jpg') }}" alt="">
+                        <span class="user-img"><img src="{{ asset('assets/img/profiles/avator1.jpg') }}"
+                                alt="">
                             <span class="status online"></span></span>
                         <div class="profilesets">
                             <h6>John Doe</h6>
@@ -183,7 +185,8 @@
                             data-feather="settings"></i>Settings</a>
                     <hr class="m-0">
                     <a class="dropdown-item logout pb-0" href="signin.html"><img
-                            src="{{ asset('assets/img/icons/log-out.svg') }}" class="me-2" alt="img">Logout</a>
+                            src="{{ asset('assets/img/icons/log-out.svg') }}" class="me-2"
+                            alt="img">Logout</a>
                 </div>
             </div>
         </li>
