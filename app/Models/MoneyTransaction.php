@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class MoneyTransaction extends Model
 {
@@ -18,4 +19,12 @@ class MoneyTransaction extends Model
         'description',
         'reference_id'
     ];
+
+    /**
+     * Get the user that owns the transaction.
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 }

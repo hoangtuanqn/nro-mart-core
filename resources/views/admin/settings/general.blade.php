@@ -35,22 +35,6 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label>Đơn vị tiền tệ <span class="text-danger">*</span></label>
-                                    <select name="currency" class="select @error('currency') is-invalid @enderror">
-                                        <option value="VND"
-                                            {{ old('currency', $configs['currency']) == 'VND' ? 'selected' : '' }}>VND (Việt
-                                            Nam Đồng)</option>
-                                        <option value="USD"
-                                            {{ old('currency', $configs['currency']) == 'USD' ? 'selected' : '' }}>USD (Đô
-                                            la Mỹ)</option>
-                                    </select>
-                                    @error('currency')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label>Mô tả trang web</label>

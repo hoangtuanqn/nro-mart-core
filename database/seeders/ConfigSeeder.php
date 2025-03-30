@@ -13,42 +13,79 @@ class ConfigSeeder extends Seeder
      */
     public function run(): void
     {
+        // Define base values to avoid duplication
+        $siteName = 'Shop Game Ngọc Rồng';
+        $siteDescription = 'Mua bán tài khoản game Ngọc Rồng';
+        $contactEmail = 'contact@example.com';
+        $contactPhone = '0123456789';
+
         $configs = [
-            // Thông tin chung của website
-            ['key' => 'site_title', 'value' => 'Shop bán acc game'],
-            ['key' => 'site_description', 'value' => 'Mua bán tài khoản game an toàn, uy tín, giá tốt nhất. Hệ thống tự động giao dịch, hỗ trợ khách hàng 24/7.'],
-            ['key' => 'site_keywords', 'value' => 'mua acc game, bán acc game, shop acc game, tài khoản game giá rẻ, mua bán game account'],
+            // General settings
+            'site_name' => $siteName,
+            'site_description' => $siteDescription,
+            'site_logo' => '',
+            'site_favicon' => '',
+            'address' => 'Hà Nội, Việt Nam',
+            'phone' => $contactPhone,
+            'email' => $contactEmail,
+            'facebook' => 'https://facebook.com/example',
+            'zalo' => $contactPhone, // Reusing phone number for Zalo
 
-            // Thông tin liên hệ
-            ['key' => 'contact_facebook', 'value' => 'https://facebook.com/shopbanaccgame'],
-            ['key' => 'contact_youtube', 'value' => 'https://youtube.com/@shopbanaccgame'],
-            ['key' => 'contact_phone', 'value' => '0912912912'],
-            ['key' => 'contact_address', 'value' => '123 Đường ABC, Quận XYZ, TP.HCM'],
-            ['key' => 'contact_discord', 'value' => 'https://discord.gg/accgame'],
-            ['key' => 'contact_tiktok', 'value' => 'https://tiktok.com/@shopbanaccgame'],
-            ['key' => 'contact_email', 'value' => 'support@shopbanaccgame.com'],
+            // Email settings
+            'mail_mailer' => 'smtp',
+            'mail_host' => 'smtp.gmail.com',
+            'mail_port' => '587',
+            'mail_username' => '',
+            'mail_password' => '',
+            'mail_encryption' => 'tls',
+            'mail_from_address' => $contactEmail, // Reusing contact email
+            'mail_from_name' => $siteName, // Reusing site name
 
-            // Cấu hình nạp tiền
-            ['key' => 'deposit_prefix', 'value' => 'NAPTIEN_'],
-            ['key' => 'deposit_discount', 'value' => '20'], // Chiết khấu 20%
-
-            // Cấu hình thanh toán đối tác qua THESIEURE, CARDVIP, ...
-            ['key' => 'partner_id', 'value' => '9833246561'],
-            ['key' => 'partner_key', 'value' => '2dea0df5c1a12a48b14141f0c0301bc6'],
-
-            // Cấu hình email
-            ['key' => 'email_smtp_host', 'value' => 'smtp.example.com'],
-            ['key' => 'email_smtp_port', 'value' => '587'],
-            ['key' => 'email_smtp_user', 'value' => 'noreply@shopbanaccgame.com'],
-            ['key' => 'email_smtp_password', 'value' => 'your_email_password'],
-
-            // Bản quyền hệ thống
-            ['key' => 'license_key', 'value' => 'ABC123-XYZ789-MNB456'],
+            // Payment settings
+            'payment' => [
+                'vnpay' => [
+                    'active' => '0',
+                    'terminal_id' => '',
+                    'secret_key' => '',
+                ],
+                'momo' => [
+                    'active' => '0',
+                    'partner_code' => '',
+                    'access_key' => '',
+                    'secret_key' => '',
+                ],
+                'bank_transfer' => [
+                    'active' => '1',
+                    'name' => 'Vietcombank',
+                    'account_number' => '1234567890',
+                    'account_name' => 'NGUYEN VAN A',
+                    'branch' => 'Chi nhánh Hà Nội',
+                ],
+            ],
         ];
 
-        // Chạy vòng lặp để insert hoặc update dữ liệu vào bảng configs
-        foreach ($configs as $config) {
-            Config::updateOrCreate(['key' => $config['key']], ['value' => $config['value']]);
+        // Process and save the configs
+        $this->saveConfigs($configs);
+    }
+
+    /**
+     * Save configs recursively
+     */
+    private function saveConfigs($configs, $prefix = '')
+    {
+        foreach ($configs as $key => $value) {
+            $fullKey = $prefix ? $prefix . '.' . $key : $key;
+
+            if (is_array($value)) {
+                // If value is an array, process it recursively
+                $this->saveConfigs($value, $fullKey);
+            } else {
+                // Save the config value
+                Config::updateOrCreate(
+                    ['key' => $fullKey],
+                    ['value' => $value]
+                );
+            }
         }
     }
 }

@@ -15,9 +15,7 @@ use App\Http\Controllers\Admin\ServicePackageController;
 use App\Http\Controllers\Admin\ConfigController;
 use Illuminate\Support\Facades\Route;
 Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(function () {
-    Route::get('/', function () {
-        return view('admin.dashboard');
-    })->name('index');
+    Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('index');
     Route::prefix('users')->name('users.')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('index');
         Route::get('/edit/{id}', [UserController::class, 'edit'])->name('edit')->where('id', '[0-9]+');

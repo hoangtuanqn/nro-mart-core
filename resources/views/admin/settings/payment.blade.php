@@ -33,9 +33,8 @@
                                         <input type="checkbox" id="vnpay_active" class="check" name="vnpay_active"
                                             value="1"
                                             {{ old('vnpay_active', $configs['vnpay_active']) ? 'checked' : '' }}>
-                                        <label for="vnpay_active" class="checktoggle">checkbox</label>
+                                        <label for="vnpay_active" class="checktoggle"></label>
                                     </div>
-                                    <label class="mt-2">Kích hoạt VNPAY</label>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-sm-6 col-12">
@@ -77,9 +76,8 @@
                                         <input type="checkbox" id="momo_active" class="check" name="momo_active"
                                             value="1"
                                             {{ old('momo_active', $configs['momo_active']) ? 'checked' : '' }}>
-                                        <label for="momo_active" class="checktoggle">checkbox</label>
+                                        <label for="momo_active" class="checktoggle"></label>
                                     </div>
-                                    <label class="mt-2">Kích hoạt MoMo</label>
                                 </div>
                             </div>
                             <div class="col-lg-3 col-sm-6 col-12">
@@ -134,9 +132,8 @@
                                         <input type="checkbox" id="bank_transfer_active" class="check"
                                             name="bank_transfer_active" value="1"
                                             {{ old('bank_transfer_active', $configs['bank_transfer_active']) ? 'checked' : '' }}>
-                                        <label for="bank_transfer_active" class="checktoggle">checkbox</label>
+                                        <label for="bank_transfer_active" class="checktoggle"></label>
                                     </div>
-                                    <label class="mt-2">Kích hoạt chuyển khoản</label>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-sm-6 col-12">
