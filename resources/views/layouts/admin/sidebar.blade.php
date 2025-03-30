@@ -3,11 +3,12 @@
         <div id="sidebar-menu" class="sidebar-menu">
             <ul>
                 <li class="active">
-                    <a href="index.html"><img src="assets/img/icons/dashboard.svg" alt="img"><span>
+                    <a href="index.html"><img src="{{ asset("assets/img/icons/dashboard.svg") }}" alt="img"><span>
                             Dashboard</span> </a>
                 </li>
-                <li class="submenu">
-                    <a href="javascript:void(0);"><img src="assets/img/icons/product.svg" alt="img"><span>
+                {{-- <li class="submenu">
+                    <a href="javascript:void(0);"><img src="{{ asset(" assets/img/icons/product.svg") }}"
+                            alt="img"><span>
                             Product</span> <span class="menu-arrow"></span></a>
                     <ul>
                         <li><a href="productlist.html">Product List</a></li>
@@ -23,7 +24,8 @@
                     </ul>
                 </li>
                 <li class="submenu">
-                    <a href="javascript:void(0);"><img src="assets/img/icons/sales1.svg" alt="img"><span>
+                    <a href="javascript:void(0);"><img src="{{ asset(" assets/img/icons/sales1.svg") }}"
+                            alt="img"><span>
                             Sales</span> <span class="menu-arrow"></span></a>
                     <ul>
                         <li><a href="saleslist.html">Sales List</a></li>
@@ -34,7 +36,8 @@
                     </ul>
                 </li>
                 <li class="submenu">
-                    <a href="javascript:void(0);"><img src="assets/img/icons/purchase1.svg" alt="img"><span>
+                    <a href="javascript:void(0);"><img src="{{ asset(" assets/img/icons/purchase1.svg") }}"
+                            alt="img"><span>
                             Purchase</span> <span class="menu-arrow"></span></a>
                     <ul>
                         <li><a href="purchaselist.html">Purchase List</a></li>
@@ -43,7 +46,8 @@
                     </ul>
                 </li>
                 <li class="submenu">
-                    <a href="javascript:void(0);"><img src="assets/img/icons/expense1.svg" alt="img"><span>
+                    <a href="javascript:void(0);"><img src="{{ asset(" assets/img/icons/expense1.svg") }}"
+                            alt="img"><span>
                             Expense</span> <span class="menu-arrow"></span></a>
                     <ul>
                         <li><a href="expenselist.html">Expense List</a></li>
@@ -52,7 +56,8 @@
                     </ul>
                 </li>
                 <li class="submenu">
-                    <a href="javascript:void(0);"><img src="assets/img/icons/quotation1.svg" alt="img"><span>
+                    <a href="javascript:void(0);"><img src="{{ asset(" assets/img/icons/quotation1.svg") }}"
+                            alt="img"><span>
                             Quotation</span> <span class="menu-arrow"></span></a>
                     <ul>
                         <li><a href="quotationList.html">Quotation List</a></li>
@@ -60,7 +65,8 @@
                     </ul>
                 </li>
                 <li class="submenu">
-                    <a href="javascript:void(0);"><img src="assets/img/icons/transfer1.svg" alt="img"><span>
+                    <a href="javascript:void(0);"><img src="{{ asset(" assets/img/icons/transfer1.svg") }}"
+                            alt="img"><span>
                             Transfer</span> <span class="menu-arrow"></span></a>
                     <ul>
                         <li><a href="transferlist.html">Transfer List</a></li>
@@ -69,7 +75,8 @@
                     </ul>
                 </li>
                 <li class="submenu">
-                    <a href="javascript:void(0);"><img src="assets/img/icons/return1.svg" alt="img"><span>
+                    <a href="javascript:void(0);"><img src="{{ asset(" assets/img/icons/return1.svg") }}"
+                            alt="img"><span>
                             Return</span> <span class="menu-arrow"></span></a>
                     <ul>
                         <li><a href="salesreturnlist.html">Sales Return List</a></li>
@@ -79,7 +86,8 @@
                     </ul>
                 </li>
                 <li class="submenu">
-                    <a href="javascript:void(0);"><img src="assets/img/icons/users1.svg" alt="img"><span>
+                    <a href="javascript:void(0);"><img src="{{ asset(" assets/img/icons/users1.svg") }}"
+                            alt="img"><span>
                             People</span> <span class="menu-arrow"></span></a>
                     <ul>
                         <li><a href="customerlist.html">Customer List</a></li>
@@ -93,7 +101,8 @@
                     </ul>
                 </li>
                 <li class="submenu">
-                    <a href="javascript:void(0);"><img src="assets/img/icons/places.svg" alt="img"><span>
+                    <a href="javascript:void(0);"><img src="{{ asset(" assets/img/icons/places.svg") }}"
+                            alt="img"><span>
                             Places</span> <span class="menu-arrow"></span></a>
                     <ul>
                         <li><a href="newcountry.html">New Country</a></li>
@@ -190,7 +199,8 @@
                     </ul>
                 </li>
                 <li class="submenu">
-                    <a href="javascript:void(0);"><img src="assets/img/icons/product.svg" alt="img"><span>
+                    <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/product.svg') }}"
+                            alt="img"><span>
                             Application</span> <span class="menu-arrow"></span></a>
                     <ul>
                         <li><a href="chat.html">Chat</a></li>
@@ -199,7 +209,7 @@
                     </ul>
                 </li>
                 <li class="submenu">
-                    <a href="javascript:void(0);"><img src="assets/img/icons/time.svg" alt="img"><span>
+                    <a href="javascript:void(0);"><img src="{{ asset(" assets/img/icons/time.svg") }}" alt="img"><span>
                             Report</span> <span class="menu-arrow"></span></a>
                     <ul>
                         <li><a href="purchaseorderreport.html">Purchase order report</a></li>
@@ -212,7 +222,8 @@
                     </ul>
                 </li>
                 <li class="submenu">
-                    <a href="javascript:void(0);"><img src="assets/img/icons/users1.svg" alt="img"><span>
+                    <a href="javascript:void(0);"><img src="{{ asset(" assets/img/icons/users1.svg") }}"
+                            alt="img"><span>
                             Users</span> <span class="menu-arrow"></span></a>
                     <ul>
                         <li><a href="newuser.html">New User </a></li>
@@ -220,7 +231,8 @@
                     </ul>
                 </li>
                 <li class="submenu">
-                    <a href="javascript:void(0);"><img src="assets/img/icons/settings.svg" alt="img"><span>
+                    <a href="javascript:void(0);"><img src="{{ asset(" assets/img/icons/settings.svg") }}"
+                            alt="img"><span>
                             Settings</span> <span class="menu-arrow"></span></a>
                     <ul>
                         <li><a href="generalsettings.html">General Settings</a></li>
@@ -230,7 +242,7 @@
                         <li><a href="grouppermissions.html">Group Permissions</a></li>
                         <li><a href="taxrates.html">Tax Rates</a></li>
                     </ul>
-                </li>
+                </li> --}}
             </ul>
         </div>
     </div>

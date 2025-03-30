@@ -27,6 +27,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 require __DIR__ . '/auth.php';
+require __DIR__ . '/admin.php';
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::prefix('category')->name('category.')->group(function () {
     Route::get('/{slug}', [GameCategoryController::class, 'index'])->name('index');
@@ -56,7 +57,3 @@ Route::middleware('auth')->group(function () {
 
 });
 
-
-Route::get('/admin', function () {
-    return view('admin.dashboard');
-});
