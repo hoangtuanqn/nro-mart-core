@@ -15,7 +15,7 @@ class GameCategoriesTableSeeder extends Seeder
                 'name' => 'NICK HỒI SINH NGỌC RỒNG',
                 'slug' => Str::slug('NICK HỒI SINH NGỌC RỒNG'), // Tạo slug tự động
                 'thumbnail' => 'http://img.acc957.com/20240215164859nickhsnr.jpg',
-                'description' => '<p>Đây là danh mục các tài khoản hồi sinh trong Ngọc Rồng Online.</p>',
+                'description' => 'Đây là danh mục các tài khoản hồi sinh trong Ngọc Rồng Online.',
                 'active' => true,
                 'created_at' => now(),
                 'updated_at' => now(),
