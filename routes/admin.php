@@ -10,7 +10,7 @@
 use App\Http\Controllers\Admin\GameAccountController;
 use App\Http\Controllers\Admin\GameCategoryController;
 use App\Http\Controllers\Admin\UserController;
-use App\Http\Controllers\GameServiceController;
+use App\Http\Controllers\Admin\GameServiceController;
 use Illuminate\Support\Facades\Route;
 Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(function () {
     Route::get('/', function () {
@@ -45,9 +45,9 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
         Route::get('/', [GameServiceController::class, 'index'])->name('index');
         Route::get('/create', [GameServiceController::class, 'create'])->name('create');
         Route::post('/store', [GameServiceController::class, 'store'])->name('store');
-        Route::get('/edit/{account}', [GameServiceController::class, 'edit'])->name('edit');
-        Route::put('/update/{account}', [GameServiceController::class, 'update'])->name('update');
-        Route::delete('/delete/{account}', [GameServiceController::class, 'destroy'])->name('destroy');
+        Route::get('/edit/{service}', [GameServiceController::class, 'edit'])->name('edit');
+        Route::put('/update/{service}', [GameServiceController::class, 'update'])->name('update');
+        Route::delete('/delete/{service}', [GameServiceController::class, 'destroy'])->name('destroy');
     });
 
 });
