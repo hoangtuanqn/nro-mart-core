@@ -1,8 +1,8 @@
 <div class="header">
 
     <div class="header-left active" style="display: flex; justify-content: center;">
-        <a href="index.html" class="logo">
-            <img src="https://i.imgur.com/umPO8Vy.png" alt="">
+        <a href="/admin" class="logo">
+            <img src="https://imgur.com/hIFVXRo.png" alt="TUANORI.VN">
         </a>
         <a href="index.html" class="logo-small">
             <img src="{{ asset('assets/img/logo-small.png') }}" alt="">
