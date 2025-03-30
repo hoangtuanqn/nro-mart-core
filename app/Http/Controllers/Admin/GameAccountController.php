@@ -8,7 +8,6 @@
  */
 
 namespace App\Http\Controllers\Admin;
-
 use App\Http\Controllers\Controller;
 use App\Models\GameAccount;
 use App\Models\GameCategory;
