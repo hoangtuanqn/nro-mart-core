@@ -32,7 +32,7 @@
     background: white;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
-    padding: 30px 25px;
+    padding: 30px 10px;
 }
 
 /* Price Section */
@@ -97,6 +97,7 @@
 
 .detail__btn--card,
 .detail__btn--wallet {
+    text-align: center;
     background: white;
     border: 2px solid var(--accent-color);
     color: var(--accent-color);
@@ -144,7 +145,7 @@
 }
 
 .detail__info-value {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
     color: var(--text-color);
 }
 
@@ -409,6 +410,9 @@
 }
 
 @media (max-width: 480px) {
+    .detail__info{
+        width: 100%;
+    }
     .account-detail__wrapper {
         padding: 15px;
     }

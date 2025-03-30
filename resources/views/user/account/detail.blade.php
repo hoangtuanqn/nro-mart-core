@@ -66,7 +66,8 @@
 
                 <!-- Account Images -->
                 <div class="detail__images">
-                    <h2 class="detail__images-title">Hình ảnh chi tiết của tài khoản Ngọc rồng Online #{{ $account->id }}
+                    <h2 class="detail__images-title">Hình ảnh chi tiết của tài khoản Ngọc rồng Online <span
+                            class="text-danger">#{{ $account->id }}</span>
                     </h2>
                     <div class="detail__images-list">
                         @foreach($images as $image)
