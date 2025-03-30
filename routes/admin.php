@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\GameAccountController;
 use App\Http\Controllers\Admin\GameCategoryController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\GameServiceController;
+use App\Http\Controllers\Admin\ServicePackageController;
 use Illuminate\Support\Facades\Route;
 Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(function () {
     Route::get('/', function () {
@@ -48,6 +49,17 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
         Route::get('/edit/{service}', [GameServiceController::class, 'edit'])->name('edit');
         Route::put('/update/{service}', [GameServiceController::class, 'update'])->name('update');
         Route::delete('/delete/{service}', [GameServiceController::class, 'destroy'])->name('destroy');
+    });
+
+    Route::prefix('packages')->name('packages.')->group(function () {
+        Route::get('/', [ServicePackageController::class, 'index'])->name('index');
+        Route::get('/service/{service_id}', [ServicePackageController::class, 'index'])->name('service');
+        Route::get('/create', [ServicePackageController::class, 'create'])->name('create');
+        Route::get('/create/{service_id}', [ServicePackageController::class, 'create'])->name('createForService');
+        Route::post('/store', [ServicePackageController::class, 'store'])->name('store');
+        Route::get('/edit/{package}', [ServicePackageController::class, 'edit'])->name('edit');
+        Route::put('/update/{package}', [ServicePackageController::class, 'update'])->name('update');
+        Route::delete('/delete/{package}', [ServicePackageController::class, 'destroy'])->name('destroy');
     });
 
 });

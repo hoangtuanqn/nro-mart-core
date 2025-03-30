@@ -17,7 +17,6 @@ class ServicePackagesSeeder extends Seeder
             [
                 'game_service_id' => $serviceId,
                 'name' => 'Tiêu Diệt Fide',
-                'amount' => 1,
                 'price' => 40000,
                 'estimated_time' => 60,
                 'description' => 'Cứ thuê acc như thế nào shop cũng làm được',
@@ -28,7 +27,6 @@ class ServicePackagesSeeder extends Seeder
             [
                 'game_service_id' => $serviceId,
                 'name' => 'Apk 13, 14, 15',
-                'amount' => 1,
                 'price' => 40000,
                 'estimated_time' => 60,
                 'description' => 'Cứ thuê acc như thế nào shop cũng làm được',
@@ -39,7 +37,6 @@ class ServicePackagesSeeder extends Seeder
             [
                 'game_service_id' => $serviceId,
                 'name' => 'Apk 19, 20',
-                'amount' => 1,
                 'price' => 60000,
                 'estimated_time' => 90,
                 'description' => 'Cứ thuê acc như thế nào shop cũng làm được',
@@ -50,7 +47,6 @@ class ServicePackagesSeeder extends Seeder
             [
                 'game_service_id' => $serviceId,
                 'name' => 'Plc, Poc, King Kong',
-                'amount' => 1,
                 'price' => 60000,
                 'estimated_time' => 90,
                 'description' => 'Cứ thuê acc như thế nào shop cũng làm được',
@@ -61,7 +57,6 @@ class ServicePackagesSeeder extends Seeder
             [
                 'game_service_id' => $serviceId,
                 'name' => 'Xbh 1, 2, hoàn thiện',
-                'amount' => 1,
                 'price' => 100000,
                 'estimated_time' => 120,
                 'description' => 'Cứ thuê acc như thế nào shop cũng làm được',
@@ -72,7 +67,6 @@ class ServicePackagesSeeder extends Seeder
             [
                 'game_service_id' => $serviceId,
                 'name' => 'Tiểu Đội Sát Thủ',
-                'amount' => 1,
                 'price' => 100000,
                 'estimated_time' => 120,
                 'description' => 'Cứ thuê acc như thế nào cũng làm được',
@@ -83,7 +77,6 @@ class ServicePackagesSeeder extends Seeder
             [
                 'game_service_id' => $serviceId,
                 'name' => 'Siêu bọ hung',
-                'amount' => 1,
                 'price' => 120000,
                 'estimated_time' => 150,
                 'description' => 'Cứ thuê acc như thế nào shop cũng làm được',

@@ -108,11 +108,10 @@
             <div class="card">
                 <div class="card-body">
                     <div class="table-top">
-                        <div class="search-set">
-
-                            <div class="search-input">
-                                <a class="btn btn-searchset"><img src="{{ asset('assets/img/icons/search-white.svg') }}"
-                                        alt="img"></a>
+                        <div class="page-header">
+                            <div class="page-title">
+                                <h4>Các gói dịch vụ hiện có</h4>
+                                <h6>Quản lý các gói dịch vụ thuộc {{ $service->name }}</h6>
                             </div>
                         </div>
                     </div>
@@ -120,15 +119,15 @@
 
                     <div class="col-lg-12">
                         <div class="form-group">
-                            <h5>Thông tin gói dịch vụ hiện có</h5>
                             <div class="table-responsive">
                                 <table class="table datanew">
                                     <thead>
                                         <tr>
                                             <th>ID</th>
                                             <th>Tên gói</th>
-                                            <th>Mô tả</th>
-                                            <th>Giá tiền</th>
+                                            <th>Giá</th>
+                                            <th>Thời gian ước tính</th>
+                                            <th>Trạng thái</th>
                                             <th>Thao tác</th>
                                         </tr>
                                     </thead>
@@ -137,26 +136,74 @@
                                             <tr>
                                                 <td>{{ $package->id }}</td>
                                                 <td>{{ $package->name }}</td>
-                                                <td>{{ $package->description }}</td>
                                                 <td>{{ number_format($package->price) }} đ</td>
                                                 <td>
-                                                    <a href="#" class="btn btn-sm btn-primary">Sửa</a>
-                                                    <a href="#" class="btn btn-sm btn-danger">Xóa</a>
+                                                    @if ($package->estimated_time)
+                                                        {{ $package->estimated_time }} phút
+                                                    @else
+                                                        -
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    <span
+                                                        class="badges {{ $package->active ? 'bg-lightgreen' : 'bg-lightred' }}">
+                                                        {{ $package->active ? 'Hoạt động' : 'Đã ẩn' }}
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <a href="{{ route('admin.packages.edit', $package->id) }}"
+                                                        class="btn btn-sm btn-primary">
+                                                        <img src="{{ asset('assets/img/icons/edit.svg') }}" alt="Sửa">
+                                                    </a>
+                                                    <a href="javascript:void(0);"
+                                                        class="btn btn-sm btn-danger delete-package"
+                                                        data-id="{{ $package->id }}" data-name="{{ $package->name }}">
+                                                        <img src="{{ asset('assets/img/icons/delete.svg') }}"
+                                                            alt="Xóa">
+                                                    </a>
                                                 </td>
                                             </tr>
                                         @empty
                                             <tr>
-                                                <td colspan="5" class="text-center">Chưa có gói dịch vụ nào</td>
+                                                <td colspan="7" class="text-center">Chưa có gói dịch vụ nào</td>
                                             </tr>
                                         @endforelse
                                     </tbody>
                                 </table>
                             </div>
                             <div class="mt-3">
-                                <a href="#" class="btn btn-primary">Thêm gói dịch vụ mới</a>
+                                <a href="{{ route('admin.packages.createForService', $service->id) }}"
+                                    class="btn btn-primary">
+                                    <img src="{{ asset('assets/img/icons/plus.svg') }}" alt="img" class="me-1">
+                                    Thêm gói dịch vụ mới
+                                </a>
+                                <a href="{{ route('admin.packages.service', $service->id) }}" class="btn btn-secondary">
+                                    <img src="{{ asset('assets/img/icons/eye.svg') }}" alt="img" class="me-1">
+                                    Xem tất cả gói dịch vụ
+                                </a>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal xác nhận xóa gói -->
+    <div class="modal fade" id="deletePackageModal" tabindex="-1" aria-labelledby="deletePackageModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deletePackageModalLabel">Xác nhận xóa gói dịch vụ</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Bạn có chắc chắn muốn xóa gói dịch vụ "<span id="package-name"></span>" không?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-danger" id="confirmDeletePackage">Xóa</button>
                 </div>
             </div>
         </div>
@@ -176,5 +223,57 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
+
+        // Xử lý xóa gói dịch vụ
+        $(document).ready(function() {
+            let packageId;
+
+            $('.delete-package').on('click', function() {
+                packageId = $(this).data('id');
+                const packageName = $(this).data('name');
+                $('#package-name').text(packageName);
+                $('#deletePackageModal').modal('show');
+            });
+
+            $('#confirmDeletePackage').on('click', function() {
+                $.ajax({
+                    url: '/admin/packages/delete/' + packageId,
+                    type: 'DELETE',
+                    data: {
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        $('#deletePackageModal').modal('hide');
+                        if (response.success) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Thành công!',
+                                text: 'Đã xóa gói dịch vụ thành công',
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then(() => {
+                                window.location.reload();
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Lỗi!',
+                                text: response.message ||
+                                    'Có lỗi xảy ra khi xóa gói dịch vụ',
+                            });
+                        }
+                    },
+                    error: function(xhr) {
+                        $('#deletePackageModal').modal('hide');
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Lỗi!',
+                            text: xhr.responseJSON?.message ||
+                                'Có lỗi xảy ra khi xóa gói dịch vụ',
+                        });
+                    }
+                });
+            });
+        });
     </script>
 @endpush
