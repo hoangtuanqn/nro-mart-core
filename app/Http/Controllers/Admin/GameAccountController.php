@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) 2025 FPT University
- * 
+ *
  * @author    Phạm Hoàng Tuấn
  * @email     phamhoangtuanqn@gmail.com
  * @facebook  fb.com/phamhoangtuanqn
@@ -55,7 +55,6 @@ class GameAccountController extends Controller
             $thumbPath = $request->file('thumb')->store('accounts/thumbnails', 'public');
             $data['thumb'] = "/storage/" . $thumbPath;
         }
-
         // Store multiple images
         if ($request->hasFile('images')) {
             $imagePaths = [];
@@ -63,11 +62,10 @@ class GameAccountController extends Controller
                 $path = $image->store('accounts/images', 'public');
                 $imagePaths[] = "/storage/" . $path;
             }
-            $data['images'] = implode(',', $imagePaths);
+            $data['images'] = json_encode($imagePaths);
         }
 
         GameAccount::create($data);
-
         return redirect()->route('admin.accounts.index')
             ->with('success', 'Tài khoản game đã được tạo thành công.');
     }
@@ -111,10 +109,10 @@ class GameAccountController extends Controller
         if ($request->hasFile('images')) {
             // Delete old images
             if ($account->images) {
-                $oldImages = explode(',', $account->images);
+                $oldImages = json_decode($account->images, true);
                 foreach ($oldImages as $image) {
-                    if (Storage::disk('public')->exists($image)) {
-                        Storage::disk('public')->delete($image);
+                    if (Storage::disk('public')->exists(str_replace('/storage/', '', $image))) {
+                        Storage::disk('public')->delete(str_replace('/storage/', '', $image));
                     }
                 }
             }
@@ -122,9 +120,10 @@ class GameAccountController extends Controller
             // Store new images
             $imagePaths = [];
             foreach ($request->file('images') as $image) {
-                $imagePaths[] = $image->store('accounts/images', 'public');
+                $path = $image->store('accounts/images', 'public');
+                $imagePaths[] = "/storage/" . $path;
             }
-            $data['images'] = implode(',', $imagePaths);
+            $data['images'] = json_encode($imagePaths);
         }
 
         $account->update($data);
@@ -143,10 +142,10 @@ class GameAccountController extends Controller
 
             // Delete additional images if exists
             if ($account->images) {
-                $images = explode(',', $account->images);
+                $images = json_decode($account->images, true);
                 foreach ($images as $image) {
-                    if (Storage::disk('public')->exists($image)) {
-                        Storage::disk('public')->delete($image);
+                    if (Storage::disk('public')->exists(str_replace('/storage/', '', $image))) {
+                        Storage::disk('public')->delete(str_replace('/storage/', '', $image));
                     }
                 }
             }
