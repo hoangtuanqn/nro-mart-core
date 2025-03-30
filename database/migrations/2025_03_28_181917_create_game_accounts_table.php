@@ -1,4 +1,11 @@
 <?php
+/**
+ * Copyright (c) 2025 FPT University
+ *
+ * @author    Phạm Hoàng Tuấn
+ * @email     phamhoangtuanqn@gmail.com
+ * @facebook  fb.com/phamhoangtuanqn
+ */
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
