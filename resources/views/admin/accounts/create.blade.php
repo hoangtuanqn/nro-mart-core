@@ -5,17 +5,15 @@
         <div class="content">
             <div class="page-header">
                 <div class="page-title">
-                    <h4>Chỉnh sửa tài khoản game</h4>
-                    <h6>Cập nhật thông tin tài khoản game</h6>
+                    <h4>Thêm tài khoản game mới</h4>
+                    <h6>Nhập thông tin tài khoản game</h6>
                 </div>
             </div>
 
             <div class="card">
                 <div class="card-body">
-                    <form action="{{ route('admin.accounts.update', $account->id) }}" method="POST"
-                        enctype="multipart/form-data">
+                    <form action="{{ route('admin.accounts.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
-                        @method('PUT')
                         <div class="row">
                             <div class="col-lg-6 col-sm-6 col-12">
                                 <div class="form-group">
@@ -24,7 +22,7 @@
                                         class="select @error('game_category_id') is-invalid @enderror">
                                         @foreach ($categories as $category)
                                             <option value="{{ $category->id }}"
-                                                {{ old('game_category_id', $account->game_category_id) == $category->id ? 'selected' : '' }}>
+                                                {{ old('game_category_id') == $category->id ? 'selected' : '' }}>
                                                 {{ $category->name }}
                                             </option>
                                         @endforeach
@@ -37,8 +35,7 @@
                             <div class="col-lg-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Tên tài khoản <span class="text-danger">*</span></label>
-                                    <input type="text" name="account_name"
-                                        value="{{ old('account_name', $account->account_name) }}"
+                                    <input type="text" name="account_name" value="{{ old('account_name') }}"
                                         class="form-control @error('account_name') is-invalid @enderror">
                                     @error('account_name')
                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -48,7 +45,7 @@
                             <div class="col-lg-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Mật khẩu <span class="text-danger">*</span></label>
-                                    <input type="text" name="password" value="{{ old('password', $account->password) }}"
+                                    <input type="text" name="password" value="{{ old('password') }}"
                                         class="form-control @error('password') is-invalid @enderror">
                                     @error('password')
                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -58,7 +55,7 @@
                             <div class="col-lg-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Giá tiền <span class="text-danger">*</span></label>
-                                    <input type="number" name="price" value="{{ old('price', $account->price) }}"
+                                    <input type="number" name="price" value="{{ old('price') ?? 0 }}"
                                         class="form-control @error('price') is-invalid @enderror">
                                     @error('price')
                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -69,11 +66,9 @@
                                 <div class="form-group">
                                     <label>Trạng thái</label>
                                     <select name="status" class="select @error('status') is-invalid @enderror">
-                                        <option value="available"
-                                            {{ old('status', $account->status) == 'available' ? 'selected' : '' }}>Còn hàng
-                                        </option>
-                                        <option value="sold"
-                                            {{ old('status', $account->status) == 'sold' ? 'selected' : '' }}>Đã bán
+                                        <option value="available" {{ old('status') == 'available' ? 'selected' : '' }}>Còn
+                                            hàng</option>
+                                        <option value="sold" {{ old('status') == 'sold' ? 'selected' : '' }}>Đã bán
                                         </option>
                                     </select>
                                     @error('status')
@@ -84,7 +79,7 @@
                             <div class="col-lg-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Máy chủ <span class="text-danger">*</span></label>
-                                    <input type="number" name="server" value="{{ old('server', $account->server) }}"
+                                    <input type="number" name="server" value="{{ old('server') ?? 13 }}"
                                         class="form-control @error('server') is-invalid @enderror">
                                     @error('server')
                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -97,10 +92,8 @@
                                     <select name="registration_type"
                                         class="select @error('registration_type') is-invalid @enderror">
                                         <option value="virtual"
-                                            {{ old('registration_type', $account->registration_type) == 'virtual' ? 'selected' : '' }}>
-                                            Ảo</option>
-                                        <option value="real"
-                                            {{ old('registration_type', $account->registration_type) == 'real' ? 'selected' : '' }}>
+                                            {{ old('registration_type') == 'virtual' ? 'selected' : '' }}>Ảo</option>
+                                        <option value="real" {{ old('registration_type') == 'real' ? 'selected' : '' }}>
                                             Thật</option>
                                     </select>
                                     @error('registration_type')
@@ -112,14 +105,11 @@
                                 <div class="form-group">
                                     <label>Hành tinh</label>
                                     <select name="planet" class="select @error('planet') is-invalid @enderror">
-                                        <option value="earth"
-                                            {{ old('planet', $account->planet) == 'earth' ? 'selected' : '' }}>Trái đất
+                                        <option value="earth" {{ old('planet') == 'earth' ? 'selected' : '' }}>Trái đất
                                         </option>
-                                        <option value="namek"
-                                            {{ old('planet', $account->planet) == 'namek' ? 'selected' : '' }}>Namek
+                                        <option value="namek" {{ old('planet') == 'namek' ? 'selected' : '' }}>Namek
                                         </option>
-                                        <option value="xayda"
-                                            {{ old('planet', $account->planet) == 'xayda' ? 'selected' : '' }}>Xayda
+                                        <option value="xayda" {{ old('planet') == 'xayda' ? 'selected' : '' }}>Xayda
                                         </option>
                                     </select>
                                     @error('planet')
@@ -131,10 +121,8 @@
                                 <div class="form-group">
                                     <label>Bông tai</label>
                                     <select name="earring" class="select @error('earring') is-invalid @enderror">
-                                        <option value="1"
-                                            {{ old('earring', $account->earring) == 1 ? 'selected' : '' }}>Có</option>
-                                        <option value="0"
-                                            {{ old('earring', $account->earring) == 0 ? 'selected' : '' }}>Không</option>
+                                        <option value="1" {{ old('earring') == 1 ? 'selected' : '' }}>Có</option>
+                                        <option value="0" {{ old('earring') == 0 ? 'selected' : '' }}>Không</option>
                                     </select>
                                     @error('earring')
                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -178,28 +166,21 @@
                                 </div>
                             </div>
                             <div class="col-lg-12 text-center">
-                                <img id="preview-thumb" src="{{ $account->thumb }}" alt="preview"
+                                <img id="preview-thumb" alt="preview" src="https://i.imgur.com/NpL6V6y.png"
                                     class="mx-auto d-block mb-3 preview-thumb">
-                                <div id="preview-images" class="d-flex flex-wrap justify-content-center gap-3 mb-3">
-                                    @if ($account->images)
-                                        @foreach (json_decode($account->images) as $image)
-                                            <img src="{{ $image }}" alt="preview"
-                                                style="max-width: 200px; max-height: 200px;">
-                                        @endforeach
-                                    @endif
-                                </div>
+                                <div id="preview-images" class="d-flex flex-wrap justify-content-center gap-3 mb-3"></div>
                             </div>
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label>Ghi chú</label>
-                                    <textarea name="note" class="form-control @error('note') is-invalid @enderror" rows="4">{{ old('note', $account->note) }}</textarea>
+                                    <textarea name="note" class="form-control @error('note') is-invalid @enderror" rows="4">{{ old('note') }}</textarea>
                                     @error('note')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
                             <div class="col-lg-12">
-                                <button type="submit" class="btn btn-submit me-2">Cập nhật</button>
+                                <button type="submit" class="btn btn-submit me-2">Thêm mới</button>
                                 <a href="{{ route('admin.accounts.index') }}" class="btn btn-cancel">Hủy bỏ</a>
                             </div>
                         </div>

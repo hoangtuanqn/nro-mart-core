@@ -72,7 +72,7 @@
                             </div>
                             <div class="col-lg-12 text-center">
                                 <img id="preview" src="{{ $category->thumbnail }}" alt="preview"
-                                    style="max-width: 500px; max-height: 500px;" class="mx-auto d-block">
+                                    class="mx-auto d-block preview-thumb">
                             </div>
                             <div class="col-lg-12 ">
                                 <div class="form-group">

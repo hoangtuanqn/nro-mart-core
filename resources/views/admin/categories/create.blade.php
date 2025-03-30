@@ -57,9 +57,8 @@
                                 </div>
                             </div>
                             <div class="col-lg-12 text-center hidden">
-                                <img id="preview" src="https://i.imgur.com/NpL6V6y.png"
-                                    style="max-width: 500px; max-height: 500px; display: none;" class="mx-auto d-block"
-                                    alt="preview">
+                                <img id="preview" src="https://i.imgur.com/NpL6V6y.png" style="display: none;"
+                                    class="mx-auto d-block preview-thumb" alt="preview">
                             </div>
                             <div class="col-lg-12">
                                 <div class="form-group">

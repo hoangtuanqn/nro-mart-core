@@ -20,19 +20,20 @@ class GameAccountController extends Controller
     public function index()
     {
         $title = 'Danh sách tài khoản game';
-        $accounts = GameAccount::with(['category', 'buyer'])->get();
+        $accounts = GameAccount::with(['category', 'buyer'])->orderBy('id', "DESC")->get();
         return view('admin.accounts.index', compact('title', 'accounts'));
     }
 
     public function create()
     {
+        $title = 'Thêm tài khoản game mới';
         $categories = GameCategory::where('active', true)->get();
-        return view('admin.accounts.create', compact('categories'));
+        return view('admin.accounts.create', compact('title', 'categories'));
     }
 
     public function store(Request $request)
     {
-        $validated = $request->validate([
+        $request->validate([
             'game_category_id' => 'required|exists:game_categories,id',
             'account_name' => 'required|string|max:255',
             'password' => 'required|string|max:255',
@@ -42,11 +43,30 @@ class GameAccountController extends Controller
             'planet' => 'required|in:earth,namek,xayda',
             'earring' => 'boolean',
             'note' => 'nullable|string',
-            'thumb' => 'required|string',
-            'images' => 'nullable|string'
+            'thumb' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'status' => 'required|in:available,sold'
         ]);
 
-        GameAccount::create($validated);
+        $data = $request->except(['thumb', 'images']);
+
+        // Store thumbnail
+        if ($request->hasFile('thumb')) {
+            $thumbPath = $request->file('thumb')->store('accounts/thumbnails', 'public');
+            $data['thumb'] = "/storage/" . $thumbPath;
+        }
+
+        // Store multiple images
+        if ($request->hasFile('images')) {
+            $imagePaths = [];
+            foreach ($request->file('images') as $image) {
+                $path = $image->store('accounts/images', 'public');
+                $imagePaths[] = "/storage/" . $path;
+            }
+            $data['images'] = implode(',', $imagePaths);
+        }
+
+        GameAccount::create($data);
 
         return redirect()->route('admin.accounts.index')
             ->with('success', 'Tài khoản game đã được tạo thành công.');
