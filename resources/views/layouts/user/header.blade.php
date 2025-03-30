@@ -29,8 +29,9 @@
                 class="text menu__item {{ request()->routeIs('profile.deposit-card') ? 'active' : '' }}">Nạp tiền</a>
             <a href="#" class="text menu__item {{ request()->is('services*') ? 'active' : '' }}">Dịch vụ</a>
             <a href="#" class="text menu__item {{ request()->is('nick-game*') ? 'active' : '' }}">Nick game</a>
-            {{-- <a href="#" class="text menu__item {{ request()->is('hack-game*') ? 'active' : '' }}">Tải hack game</a>
-            --}}
+            @if (Auth::check() && Auth()->user()->role == 'admin')
+                <a href="{{ route('admin.index') }}" target="_blank" class="text menu__item">ADMIN PANEL</a>
+            @endif
         </div>
         <div class="mobile-menu-toggle">
             <i class="fa-solid fa-bars"></i>

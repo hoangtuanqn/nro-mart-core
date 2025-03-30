@@ -1,4 +1,11 @@
 <?php
+/**
+ * Copyright (c) 2025 FPT University
+ * 
+ * @author    Phạm Hoàng Tuấn
+ * @email     phamhoangtuanqn@gmail.com
+ * @facebook  fb.com/phamhoangtuanqn
+ */
 
 namespace App\Http\Controllers\Admin;
 
@@ -6,13 +13,15 @@ use App\Http\Controllers\Controller;
 use App\Models\GameAccount;
 use App\Models\GameCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class GameAccountController extends Controller
 {
     public function index()
     {
+        $title = 'Danh sách tài khoản game';
         $accounts = GameAccount::with(['category', 'buyer'])->get();
-        return view('admin.accounts.index', compact('accounts'));
+        return view('admin.accounts.index', compact('title', 'accounts'));
     }
 
     public function create()
@@ -45,8 +54,9 @@ class GameAccountController extends Controller
 
     public function edit(GameAccount $account)
     {
+        $title = 'Chỉnh sửa tài khoản game';
         $categories = GameCategory::where('active', true)->get();
-        return view('admin.accounts.edit', compact('account', 'categories'));
+        return view('admin.accounts.edit', compact('title', 'account', 'categories'));
     }
 
     public function update(Request $request, GameAccount $account)
@@ -61,11 +71,43 @@ class GameAccountController extends Controller
             'planet' => 'required|in:earth,namek,xayda',
             'earring' => 'boolean',
             'note' => 'nullable|string',
-            'thumb' => 'required|string',
-            'images' => 'nullable|string'
+            'thumb' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'images.*' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
-        $account->update($validated);
+        $data = $request->except(['thumb', 'images']);
+
+        if ($request->hasFile('thumb')) {
+            // Delete old thumbnail
+            if ($account->thumb && Storage::disk('public')->exists($account->thumb)) {
+                Storage::disk('public')->delete($account->thumb);
+            }
+
+            // Store new thumbnail
+            $thumbPath = $request->file('thumb')->store('accounts/thumbnails', 'public');
+            $data['thumb'] = "/storage/" . $thumbPath;
+        }
+
+        if ($request->hasFile('images')) {
+            // Delete old images
+            if ($account->images) {
+                $oldImages = explode(',', $account->images);
+                foreach ($oldImages as $image) {
+                    if (Storage::disk('public')->exists($image)) {
+                        Storage::disk('public')->delete($image);
+                    }
+                }
+            }
+
+            // Store new images
+            $imagePaths = [];
+            foreach ($request->file('images') as $image) {
+                $imagePaths[] = $image->store('accounts/images', 'public');
+            }
+            $data['images'] = implode(',', $imagePaths);
+        }
+
+        $account->update($data);
 
         return redirect()->route('admin.accounts.index')
             ->with('success', 'Tài khoản game đã được cập nhật thành công.');
@@ -74,6 +116,22 @@ class GameAccountController extends Controller
     public function destroy(GameAccount $account)
     {
         try {
+            // Delete thumbnail if exists
+            if ($account->thumb && Storage::disk('public')->exists($account->thumb)) {
+                Storage::disk('public')->delete($account->thumb);
+            }
+
+            // Delete additional images if exists
+            if ($account->images) {
+                $images = explode(',', $account->images);
+                foreach ($images as $image) {
+                    if (Storage::disk('public')->exists($image)) {
+                        Storage::disk('public')->delete($image);
+                    }
+                }
+            }
+
+            // Delete the account record
             $account->delete();
             return response()->json(['success' => true]);
         } catch (\Exception $e) {
