@@ -153,3 +153,20 @@ if (!function_exists('config_clear_cache')) {
         Cache::flush();
     }
 }
+function get_id_bank($prefix, $comment)
+{
+    // Tìm vị trí của prefix trong comment (không phân biệt chữ hoa thường)
+    $pos = stripos($comment, $prefix);
+    if ($pos === false) {
+        // Nếu không tìm thấy prefix, trả về 0 (hoặc có thể trả về null tùy theo logic)
+        return 0;
+    }
+    // Lấy phần chuỗi sau prefix
+    $substr = substr($comment, $pos + strlen($prefix));
+    // Tìm số nguyên đầu tiên xuất hiện sau prefix
+    if (preg_match('/\d+/', $substr, $matches)) {
+        return (int) $matches[0];
+    }
+
+    return 0;
+}
