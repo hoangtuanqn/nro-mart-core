@@ -5,3 +5,9 @@
     object-fit: cover;
     border-radius: 10px;
 }
+.text-bold {
+    font-weight: bold;
+}
+.text-danger {
+    color: red;
+}

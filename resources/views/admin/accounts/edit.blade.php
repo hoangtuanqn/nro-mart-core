@@ -16,6 +16,11 @@
                         enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
+                        @if ($account->status == 'sold' && $account->buyer_id)
+                            <h4 class="text-danger">Tài khoản này đã được bán cho <a
+                                    href="{{ route('admin.users.edit', $account->buyer_id) }}" target="_blank"
+                                    class="text-bold">{{ $account->buyer->username }}</a></h4>
+                        @endif
                         <div class="row">
                             <div class="col-lg-6 col-sm-6 col-12">
                                 <div class="form-group">
