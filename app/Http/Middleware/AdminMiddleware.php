@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use Auth;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,9 +16,10 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        if (auth()->user()->role !== 'admin') {
-            abort(403, 'Unauthorized');
+        if (Auth::check() && Auth::user()->role === 'admin') {
+            return $next($request);
         }
-        return $next($request);
+
+        return redirect('/')->with('error', 'Bạn không có quyền truy cập!');
     }
 }

@@ -12,8 +12,8 @@ return new class extends Migration {
     {
         Schema::create('purchase_history', function (Blueprint $table) {
             $table->id(); // ID giao dịch
-            $table->foreignId('user_id')->constrained(); // Người mua
-            $table->foreignId('game_account_id')->constrained(); // Tài khoản mua
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete(); // Người mua
+            $table->foreignId('game_account_id')->constrained()->cascadeOnDelete(); // Tài khoản mua
             $table->bigInteger('amount'); // Số tiền
             $table->text('account_details')->nullable(); // Chi tiết tài khoản khi mua
             $table->timestamps();

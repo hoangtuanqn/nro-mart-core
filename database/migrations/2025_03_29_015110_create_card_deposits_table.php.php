@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('card_deposits', function (Blueprint $table) {
             $table->id(); // ID tự động tăng
-            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // ID người dùng, liên kết với bảng users
+            $table->foreignId('user_id')->constrained()->onDelete('cascade')->cascadeOnDelete(); // ID người dùng, liên kết với bảng users
             $table->string('telco'); // Nhà mạng thẻ cào
             $table->integer('amount'); // Mệnh giá thẻ nạp
             $table->integer('received_amount'); // Số tiền thực nhận

@@ -68,7 +68,8 @@
                                 <div class="form-group">
                                     <label>Trạng thái</label>
                                     <select name="banned" class="select @error('banned') is-invalid @enderror">
-                                        <option value="0" {{ $user->banned == 0 ? 'selected' : '' }}>Hoạt động</option>
+                                        <option value="0" {{ $user->banned == 0 ? 'selected' : '' }}>Hoạt động
+                                        </option>
                                         <option value="1" {{ $user->banned == 1 ? 'selected' : '' }}>Bị khóa</option>
                                     </select>
                                     @error('banned')
@@ -84,11 +85,72 @@
                     </form>
                 </div>
             </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="table-top">
+                        <div class="search-set">
+
+                            <div class="search-input">
+                                <a class="btn btn-searchset"><img src="{{ asset('assets/img/icons/search-white.svg') }}"
+                                        alt="img"></a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="table-responsive">
+                        <table class="table datanew">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Loại giao dịch</th>
+                                    <th>Số tiền</th>
+                                    <th>Số dư trước</th>
+                                    <th>Số dư sau</th>
+                                    <th>Mô tả</th>
+                                    <th>Thời gian</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($transactions as $key => $transaction)
+                                    <tr>
+                                        <td>{{ $key + 1 }}</td>
+                                        <td>
+                                            <span
+                                                class="badges {{ $transaction->type == 'deposit'
+                                                    ? 'bg-lightgreen'
+                                                    : ($transaction->type == 'withdraw'
+                                                        ? 'bg-lightred'
+                                                        : ($transaction->type == 'purchase'
+                                                            ? 'bg-lightyellow'
+                                                            : 'bg-lightblue')) }}">
+                                                {{ $transaction->type == 'deposit'
+                                                    ? 'Nạp tiền'
+                                                    : ($transaction->type == 'withdraw'
+                                                        ? 'Rút tiền'
+                                                        : ($transaction->type == 'purchase'
+                                                            ? 'Mua hàng'
+                                                            : 'Hoàn tiền')) }}
+                                            </span>
+                                        </td>
+                                        <td
+                                            class="{{ $transaction->type == 'deposit' || $transaction->type == 'refund' ? 'text-success' : 'text-danger' }}">
+                                            {{ ($transaction->type == 'deposit' || $transaction->type == 'refund' ? '+' : '') . number_format($transaction->amount) }}đ
+                                        </td>
+                                        <td>{{ number_format($transaction->balance_before) }}đ</td>
+                                        <td>{{ number_format($transaction->balance_after) }}đ</td>
+                                        <td>{{ $transaction->description }}</td>
+                                        <td>{{ $transaction->created_at->format('d/m/Y H:i:s') }}</td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
     </div>
 @endsection
-@push('scripts')
-    <script>
-
-    </script>
-@endpush

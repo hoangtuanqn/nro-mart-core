@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('game_accounts', function (Blueprint $table) {
             $table->id(); // ID tài khoản
-            $table->foreignId('game_category_id')->constrained(); // Liên kết danh mục
+            $table->foreignId('game_category_id')->constrained()->cascadeOnDelete(); // Liên kết danh mục
             $table->string('account_name'); // Tên tài khoản
             $table->string('password'); // Mật khẩu tài khoản
             $table->bigInteger('price')->unsigned(); // Giá tiền (>0)
@@ -21,7 +21,7 @@ return new class extends Migration {
             $table->enum('registration_type', ['virtual', 'real']); // Đăng ký (Ảo/Thật)
             $table->enum('planet', ['earth', 'namek', 'xayda']); // Hành tinh
             $table->boolean('earring')->default(false);
-            $table->foreignId('buyer_id')->nullable()->constrained('users')->nullOnDelete(); // Người mua (FK users)
+            $table->foreignId('buyer_id')->nullable()->constrained('users')->nullOnDelete()->cascadeOnDelete(); // Người mua (FK users)
             $table->text('note')->nullable(); // Ghi chú (Nếu có)
             $table->text('thumb'); // List of images
             $table->text('images')->nullable(); // List of images

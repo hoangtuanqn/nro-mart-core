@@ -12,7 +12,7 @@ return new class extends Migration {
     {
         Schema::create('money_transactions', function (Blueprint $table) {
             $table->id(); // ID giao dịch
-            $table->foreignId('user_id')->constrained(); // Người dùng
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete(); // Người dùng
             $table->enum('type', ['deposit', 'withdraw', 'purchase', 'refund']); // Loại giao dịch
             $table->bigInteger('amount'); // Số tiền
             $table->bigInteger('balance_before'); // Số dư trước giao dịch

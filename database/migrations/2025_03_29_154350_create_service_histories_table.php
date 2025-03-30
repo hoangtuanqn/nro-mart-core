@@ -9,9 +9,9 @@ return new class extends Migration {
     {
         Schema::create('service_histories', function (Blueprint $table) {
             $table->id(); // ID tự động tăng
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade'); // Người mua (liên kết bảng users)
-            $table->foreignId('game_service_id')->constrained('game_services')->onDelete('cascade'); // Loại dịch vụ (liên kết bảng game_services)
-            $table->foreignId('service_package_id')->nullable()->constrained('service_packages')->onDelete('set null'); // Gói dịch vụ (có thể null)
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete(); // Người mua (liên kết bảng users)
+            $table->foreignId('game_service_id')->constrained('game_services')->cascadeOnDelete(); // Loại dịch vụ (liên kết bảng game_services)
+            $table->foreignId('service_package_id')->nullable()->constrained('service_packages')->cascadeOnDelete(); // Gói dịch vụ (có thể null)
 
             // Thông tin tài khoản game
             $table->string('game_account'); // Tài khoản game
