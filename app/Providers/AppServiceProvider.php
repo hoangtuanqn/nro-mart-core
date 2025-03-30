@@ -20,6 +20,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        // Register ConfigHelper alias
+        $this->app->bind('config-helper', function () {
+            return new \App\Helpers\ConfigHelper();
+        });
+
         //
         Paginator::defaultView('vendor.pagination.default');
 

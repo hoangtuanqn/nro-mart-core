@@ -1,8 +1,9 @@
 <div class="header">
 
     <div class="header-left active" style="display: flex; justify-content: center;">
-        <a href="/admin" class="logo">
-            <img src="https://imgur.com/hIFVXRo.png" alt="TUANORI.VN">
+        <a href="{{ route('admin.index') }}" class="logo">
+            <img src="{{ \App\Facades\ConfigHelper::get('site_logo', asset('assets/img/logo.png')) }}" alt="Logo"
+                style="max-height: 40px;">
         </a>
         <a href="index.html" class="logo-small">
             <img src="https://i.imgur.com/J46gSIO.png" alt="">
