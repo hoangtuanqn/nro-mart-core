@@ -1,16 +1,16 @@
 @extends('layouts.admin.app')
-@section('title', 'Quản lý danh mục game')
+@section('title', 'Quản lý tài khoản game')
 @section('content')
     <div class="page-wrapper">
         <div class="content">
             <div class="page-header">
                 <div class="page-title">
-                    <h4>DANH SÁCH DANH MỤC GAME</h4>
-                    <h6>Quản lý danh mục game của bạn</h6>
+                    <h4>DANH SÁCH TÀI KHOẢN GAME</h4>
+                    <h6>Quản lý tài khoản game của bạn</h6>
                 </div>
                 <div class="page-btn">
-                    <a href="{{ route('admin.categories.create') }}" class="btn btn-added">
-                        <img src="{{ asset('assets/img/icons/plus.svg') }}" alt="img">Thêm danh mục mới
+                    <a href="{{ route('admin.accounts.create') }}" class="btn btn-added">
+                        <img src="{{ asset('assets/img/icons/plus.svg') }}" alt="img">Thêm tài khoản mới
                     </a>
                 </div>
             </div>
@@ -19,7 +19,6 @@
                 <div class="card-body">
                     <div class="table-top">
                         <div class="search-set">
-
                             <div class="search-input">
                                 <a class="btn btn-searchset"><img src="{{ asset('assets/img/icons/search-white.svg') }}"
                                         alt="img"></a>
@@ -38,15 +37,19 @@
                                         </label>
                                     </th>
                                     <th>ID</th>
-                                    <th>Tên danh mục</th>
-                                    <th>Ảnh đại diện</th>
+                                    <th>Danh mục</th>
+                                    <th>Tên tài khoản</th>
+                                    <th>Giá tiền</th>
                                     <th>Trạng thái</th>
-                                    <th>Ngày tạo</th>
+                                    <th>Máy chủ</th>
+                                    <th>Loại đăng ký</th>
+                                    <th>Hành tinh</th>
+                                    <th>Ảnh đại diện</th>
                                     <th>Thao tác</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($categories as $category)
+                                @foreach ($accounts as $account)
                                     <tr>
                                         <td>
                                             <label class="checkboxs">
@@ -54,22 +57,38 @@
                                                 <span class="checkmarks"></span>
                                             </label>
                                         </td>
-                                        <td>{{ $category->id }}</td>
-                                        <td class="text-bolds">{{ $category->name }}</td>
+                                        <td>{{ $account->id }}</td>
+                                        <td>{{ $account->category->name }}</td>
+                                        <td class="text-bolds">{{ $account->account_name }}</td>
+                                        <td>{{ number_format($account->price) }} VNĐ</td>
                                         <td>
-                                            <img src="{{ asset($category->thumbnail) }}" alt="{{ $category->name }}"
-                                                class="img-thumbnail" style="max-width: 200px;">
+                                            <span
+                                                class="badges {{ $account->status === 'available' ? 'bg-lightgreen' : 'bg-lightred' }}">
+                                                {{ $account->status === 'available' ? 'Còn hàng' : 'Đã bán' }}
+                                            </span>
                                         </td>
-                                        <td><span
-                                                class="badges {{ $category->active ? 'bg-lightgreen' : 'bg-lightred' }}">{{ $category->active ? 'Hoạt động' : 'Đã ẩn' }}</span>
-                                        </td>
-                                        <td>{{ $category->created_at->format('d/m/Y') }}</td>
+                                        <td>{{ $account->server }}</td>
+                                        <td>{{ $account->registration_type === 'real' ? 'Thật' : 'Ảo' }}</td>
                                         <td>
-                                            <a class="me-3" href="{{ route('admin.categories.edit', $category->id) }}">
+                                            @php
+                                                $planetNames = [
+                                                    'earth' => 'Trái Đất',
+                                                    'namek' => 'Namek',
+                                                    'xayda' => 'Xayda',
+                                                ];
+                                            @endphp
+                                            {{ $planetNames[$account->planet] }}
+                                        </td>
+                                        <td>
+                                            <img src="{{ asset($account->thumb) }}" alt="{{ $account->account_name }}"
+                                                class="img-thumbnail" style="max-width: 100px;">
+                                        </td>
+                                        <td>
+                                            <a class="me-3" href="{{ route('admin.accounts.edit', $account->id) }}">
                                                 <img src="{{ asset('assets/img/icons/edit.svg') }}" alt="img">
                                             </a>
                                             <a class="me-3 confirm-text" href="javascript:void(0);" data-bs-toggle="modal"
-                                                data-bs-target="#deleteModal" data-id="{{ $category->id }}">
+                                                data-bs-target="#deleteModal" data-id="{{ $account->id }}">
                                                 <img src="{{ asset('assets/img/icons/delete.svg') }}" alt="img">
                                             </a>
                                         </td>
@@ -80,7 +99,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
     </div>
 
@@ -93,8 +111,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Bạn có chắc chắn muốn xóa danh mục game này không? Tất cả dữ liệu có liên quan đến danh mục này sẽ
-                    biến mất khỏi hệ thống!
+                    Bạn có chắc chắn muốn xóa tài khoản game này không?
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
@@ -103,23 +120,22 @@
             </div>
         </div>
     </div>
-
-
 @endsection
+
 @push('scripts')
     <script>
         $(document).ready(function() {
-            let userId;
+            let accountId;
 
-            // Lưu ID user khi click nút xóa
+            // Lưu ID tài khoản khi click nút xóa
             $('.confirm-text').on('click', function() {
-                userId = $(this).data('id');
+                accountId = $(this).data('id');
             });
 
             // Xử lý sự kiện click nút xác nhận xóa
             $('#confirmDelete').on('click', function() {
                 $.ajax({
-                    url: '/admin/categories/delete/' + userId,
+                    url: '/admin/accounts/delete/' + accountId,
                     type: 'DELETE',
                     data: {
                         _token: '{{ csrf_token() }}'
@@ -131,7 +147,7 @@
                             Swal.fire({
                                 icon: 'success',
                                 title: 'Thành công!',
-                                text: 'Đã xóa danh mục game thành công',
+                                text: 'Đã xóa tài khoản game thành công',
                                 showConfirmButton: false,
                                 timer: 1500
                             }).then(() => {
@@ -144,7 +160,7 @@
                                 icon: 'error',
                                 title: 'Lỗi!',
                                 text: response.message ||
-                                    'Có lỗi xảy ra khi xóa danh mục game',
+                                    'Có lỗi xảy ra khi xóa tài khoản game',
                             });
                         }
                     },
@@ -154,7 +170,7 @@
                         Swal.fire({
                             icon: 'error',
                             title: 'Lỗi!',
-                            text: 'Có lỗi xảy ra khi xóa danh mục game',
+                            text: 'Có lỗi xảy ra khi xóa tài khoản game',
                         });
                     }
                 });
