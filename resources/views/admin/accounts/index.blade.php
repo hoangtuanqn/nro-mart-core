@@ -58,16 +58,19 @@
                                             </label>
                                         </td>
                                         <td>{{ $account->id }}</td>
-                                        <td>{{ $account->category->name }}</td>
+                                        <td>
+                                            <a
+                                                href="{{ route('admin.categories.edit', ['category' => $account->category->id]) }}">{{ $account->category->name }}</a>
+                                        </td>
                                         <td class="text-bolds">{{ $account->account_name }}</td>
                                         <td>{{ number_format($account->price) }} VNĐ</td>
                                         <td>
                                             <span
                                                 class="badges {{ $account->status === 'available' ? 'bg-lightgreen' : 'bg-lightred' }}">
-                                                {{ $account->status === 'available' ? 'Còn hàng' : 'Đã bán' }}
+                                                {{ $account->status === 'available' ? 'Chưa bán' : 'Đã bán' }}
                                             </span>
                                         </td>
-                                        <td>{{ $account->server }}</td>
+                                        <td>Server {{ $account->server }}</td>
                                         <td>{{ $account->registration_type === 'real' ? 'Thật' : 'Ảo' }}</td>
                                         <td>
                                             @php
