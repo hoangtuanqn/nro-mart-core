@@ -49,8 +49,8 @@
             </div>
         </div>
         <div class="footer__bottom">
-            <p class="copyright">© 2024 Shop Game. All rights reserved.</p>
+            <p class="copyright">Bản quyền © 2025. Thiết kế bởi <a href="https://tuanori.vn"
+                    target="_blank">TUANORI.VN</a></p>
         </div>
     </div>
 </footer>
-
