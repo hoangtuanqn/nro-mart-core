@@ -13,6 +13,9 @@
 
     <!-- CSS -->
     @vite(['resources/assets/css/app.css'])
+    <link rel="stylesheet" href="{{ asset('assets/css/random-accounts.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/random-account-detail.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/random-categories.css') }}" />
 
     <!-- Embed Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
