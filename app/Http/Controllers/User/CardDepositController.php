@@ -19,6 +19,12 @@ use Illuminate\Support\Facades\DB;
 
 class CardDepositController extends Controller
 {
+    public function __construct()
+    {
+        if (!config_get('payment.card.active', true)) {
+            abort(403, 'Truy cập không hợp lệ!');
+        }
+    }
     /**
      * Display the card deposit form.
      */
@@ -53,6 +59,8 @@ class CardDepositController extends Controller
                 ->with('error', 'Bạn có quá nhiều thẻ đang chờ xử lý. Vui lòng đợi!')->withInput();
         }
         try {
+            $partner_id = config_get('payment.card.partner_id', '');
+            $partner_key = config_get('payment.card.partner_key', '');
             $request_id = rand(111111111111, 9999999999999);
             $response = Http::withHeaders([
                 'Content-Type' => 'application/json'
@@ -62,8 +70,8 @@ class CardDepositController extends Controller
                         'serial' => $request->serial,
                         'amount' => $request->amount,
                         'request_id' => $request_id,
-                        'partner_id' => '3815279955',
-                        'sign' => md5('ceadb1292f9b40f50b4e1d5dee6f9f9f' . $request->pin . $request->serial),
+                        'partner_id' => $partner_id,
+                        'sign' => md5($partner_key . $request->pin . $request->serial),
                         'command' => 'charging'
                     ]);
             if (!$response->successful()) {
