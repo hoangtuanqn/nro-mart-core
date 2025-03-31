@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) 2025 FPT University
- * 
+ *
  * @author    Phạm Hoàng Tuấn
  * @email     phamhoangtuanqn@gmail.com
  * @facebook  fb.com/phamhoangtuanqn
@@ -19,5 +19,10 @@ class GameServiceController extends Controller
     {
         $service = GameService::with('packages')->where('slug', $slug)->firstOrFail();
         return view('user.service.show', compact('service'));
+    }
+    public function showAll()
+    {
+        $services = GameService::with('packages')->get();
+        return view('user.service.show-all', compact('services'));
     }
 }

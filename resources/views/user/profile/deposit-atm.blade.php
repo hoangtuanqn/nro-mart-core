@@ -140,7 +140,8 @@
                                                     @foreach ($transactions as $transaction)
                                                         <tr>
                                                             <td>{{ $transaction->created_at }}</td>
-                                                            <td>{{ number_format($transaction->amount) }} VND</td>
+                                                            <td class="text-success">
+                                                                {{ number_format($transaction->amount) }} VND</td>
                                                             <td>{{ $transaction->bank }}</td>
                                                             <td>{{ $transaction->content }}</td>
                                                         </tr>

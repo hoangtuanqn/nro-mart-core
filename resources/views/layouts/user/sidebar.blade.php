@@ -30,7 +30,7 @@
         </li>
         <li class="sidebar-item {{ request()->routeIs('profile.transaction-history') ? 'active' : '' }}">
             <a href="{{ route('profile.transaction-history') }}" class="sidebar-link">
-                <i class="fa-solid fa-clock-rotate-left"></i> Lịch sử giao dịch
+                <i class="fa-solid fa-chart-line"></i> Biến động số dư
             </a>
         </li>
     </ul>
@@ -49,11 +49,13 @@
                 <i class="fa-solid fa-shopping-cart"></i> Tài khoản đã mua
             </a>
         </li>
+        {{--
+            Chưa phát triển
         <li class="sidebar-item">
             <a href="#" class="sidebar-link">
                 <i class="fa-solid fa-money-bill"></i> Tài khoản trả góp
             </a>
-        </li>
+        </li> --}}
         <li class="sidebar-item {{ request()->routeIs('profile.services-history') ? 'active' : '' }}">
             <a href="{{ route('profile.services-history') }}" class="sidebar-link">
                 <i class="fa-solid fa-gear"></i> Dịch vụ đã thuê

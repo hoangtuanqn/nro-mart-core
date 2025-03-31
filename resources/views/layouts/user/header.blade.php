@@ -27,7 +27,8 @@
             <a href="/" class="text menu__item {{ request()->is('/') ? 'active' : '' }}">Trang chủ</a>
             <a href="{{ route('profile.deposit-card') }}"
                 class="text menu__item {{ request()->routeIs('profile.deposit-card') ? 'active' : '' }}">Nạp tiền</a>
-            <a href="#" class="text menu__item {{ request()->is('services*') ? 'active' : '' }}">Dịch vụ</a>
+            <a href="{{ route('service.show-all') }}"
+                class="text menu__item {{ request()->routeIs('service.*') ? 'active' : '' }}">Dịch vụ</a>
             <a href="#" class="text menu__item {{ request()->is('nick-game*') ? 'active' : '' }}">Nick game</a>
             @if (Auth::check() && Auth()->user()->role == 'admin')
                 <a href="{{ route('admin.index') }}" target="_blank" class="text menu__item">ADMIN PANEL</a>
