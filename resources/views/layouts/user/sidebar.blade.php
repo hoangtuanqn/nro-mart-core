@@ -23,7 +23,7 @@
         </li>
         <li class="sidebar-item">
             <a href="#" class="sidebar-link">
-                <i class="fa-solid fa-money-bill-transfer"></i> Nạp tiền ATM - Ví điện tử
+                <i class="fa-solid fa-money-bill-transfer"></i> Nạp tiền ATM
             </a>
         </li>
         <li class="sidebar-item {{ request()->routeIs('profile.transaction-history') ? 'active' : '' }}">

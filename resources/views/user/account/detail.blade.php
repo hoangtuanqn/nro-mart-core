@@ -19,11 +19,12 @@
             <div class="detail__content">
                 <!-- Action Buttons -->
                 <div class="detail__actions">
-                    @if($account->status === 'available')
+                    @if ($account->status === 'available')
                         <button class="detail__btn detail__btn--primary" onclick="buyAccount({{ $account->id }})">MUA
                             NGAY</button>
                         <a class="detail__btn detail__btn--card" href="{{ route('profile.deposit-card') }}">NẠP THẺ</a>
-                        <button class="detail__btn detail__btn--wallet" onclick="showRechargeModal('wallet')">ATM/VÍ</button>
+                        <button class="detail__btn detail__btn--wallet" onclick="showRechargeModal('wallet')">NẠP
+                            ATM</button>
                     @else
                         <div class="detail__purchased">
                             <h2 class="detail__purchased-title">Tài khoản này đã được mua</h2>
@@ -54,7 +55,7 @@
                         </div>
                     </div>
 
-                    @if($account->note)
+                    @if ($account->note)
                         <div class="detail__info-row">
                             <div class="detail__info-item">
                                 <span class="detail__info-label">NỔI BẬT:</span>
@@ -70,7 +71,7 @@
                             class="text-danger">#{{ $account->id }}</span>
                     </h2>
                     <div class="detail__images-list">
-                        @foreach($images as $image)
+                        @foreach ($images as $image)
                             <img src="{{ $image }}" alt="Account Preview" class="detail__images-item">
                         @endforeach
                     </div>
@@ -129,7 +130,7 @@
                 @auth
                     @if (Auth::user()->balance < $account->price)
                         <a class="modal__btn modal__btn--card" href="{{ route('profile.deposit-card') }}">NẠP THẺ CÀO</a>
-                        <button class="modal__btn modal__btn--wallet" onclick="showRechargeModal('wallet')">NẠP ATM/VÍ</button>
+                        <button class="modal__btn modal__btn--wallet" onclick="showRechargeModal('wallet')">NẠP ATM</button>
                     @else
                         <button class="modal__btn modal__btn--card" onclick="purchaseAccount({{ $account->id }})">XÁC NHẬN
                             MUA</button>
@@ -157,12 +158,12 @@
                 }
 
                 fetch(`/account/${accountId}/purchase`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                    }
-                })
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                        }
+                    })
                     .then(response => response.json())
                     .then(data => {
                         if (data.success) {
@@ -171,7 +172,8 @@
                             // Update balance display if exists
                             const balanceElement = document.querySelector('.balance-value');
                             if (balanceElement) {
-                                balanceElement.textContent = new Intl.NumberFormat('vi-VN').format(data.data.new_balance) + ' VND';
+                                balanceElement.textContent = new Intl.NumberFormat('vi-VN').format(data.data.new_balance) +
+                                    ' VND';
                             }
 
                             // Reload page to update UI
@@ -200,10 +202,10 @@
             }
 
             // Close modal when clicking outside
-            document.addEventListener('DOMContentLoaded', function () {
+            document.addEventListener('DOMContentLoaded', function() {
                 const modal = document.getElementById('purchaseModal');
                 if (modal) {
-                    window.addEventListener('click', function (event) {
+                    window.addEventListener('click', function(event) {
                         if (event.target === modal) {
                             closePurchaseModal();
                         }
