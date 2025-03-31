@@ -13,6 +13,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\Admin\GameServiceController;
 use App\Http\Controllers\Admin\ServicePackageController;
 use App\Http\Controllers\Admin\ConfigController;
+use App\Http\Controllers\Admin\BankAccountController;
 use Illuminate\Support\Facades\Route;
 Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(function () {
     Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('index');
@@ -73,5 +74,15 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
         // Cài đặt thanh toán
         Route::get('/payment', [ConfigController::class, 'payment'])->name('payment');
         Route::post('/payment', [ConfigController::class, 'updatePayment'])->name('payment.update');
+    });
+
+    // Quản lý tài khoản ngân hàng
+    Route::prefix('bank-accounts')->name('bank-accounts.')->group(function () {
+        Route::get('/', [BankAccountController::class, 'index'])->name('index');
+        Route::get('/create', [BankAccountController::class, 'create'])->name('create');
+        Route::post('/store', [BankAccountController::class, 'store'])->name('store');
+        Route::get('/edit/{bankAccount}', [BankAccountController::class, 'edit'])->name('edit');
+        Route::put('/update/{bankAccount}', [BankAccountController::class, 'update'])->name('update');
+        Route::delete('/delete/{bankAccount}', [BankAccountController::class, 'destroy'])->name('destroy');
     });
 });

@@ -2,7 +2,7 @@
     <div class="sidebar-inner slimscroll">
         <div id="sidebar-menu" class="sidebar-menu">
             <ul>
-                <li class="active">
+                <li class="{{ request()->routeIs('admin.index') ? 'active' : '' }}">
                     <a href="{{ route('admin.index') }}"><img src="{{ asset('assets/img/icons/dashboard.svg') }}"
                             alt="img"><span>Dashboard</span></a>
                 </li>
@@ -66,6 +66,20 @@
                         <li><a href="{{ route('admin.users.index') }}"
                                 class="{{ request()->routeIs('admin.users.index') ? 'active' : '' }}">Danh sách người
                                 dùng</a></li>
+                    </ul>
+                </li>
+
+                <li class="submenu">
+                    <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/dollar.svg') }}"
+                            alt="img"><span>Ngân hàng</span><span class="menu-arrow"></span></a>
+                    <ul>
+                        <li><a href="{{ route('admin.bank-accounts.index') }}"
+                                class="{{ request()->routeIs('admin.bank-accounts.index') ? 'active' : '' }}">Danh
+                                sách
+                                tài khoản</a></li>
+                        <li><a href="{{ route('admin.bank-accounts.create') }}"
+                                class="{{ request()->routeIs('admin.bank-accounts.create') ? 'active' : '' }}">Thêm tài
+                                khoản mới</a></li>
                     </ul>
                 </li>
 

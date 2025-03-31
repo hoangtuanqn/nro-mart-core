@@ -50,23 +50,10 @@ class ConfigSeeder extends Seeder
 
             // Payment settings
             'payment' => [
-                'vnpay' => [
-                    'active' => '0',
-                    'terminal_id' => '',
-                    'secret_key' => '',
-                ],
-                'momo' => [
-                    'active' => '0',
-                    'partner_code' => '',
-                    'access_key' => '',
-                    'secret_key' => '',
-                ],
-                'bank_transfer' => [
+                'card' => [
                     'active' => '1',
-                    'name' => 'Vietcombank',
-                    'account_number' => '1234567890',
-                    'account_name' => 'NGUYEN VAN A',
-                    'branch' => 'Chi nhánh Hà Nội',
+                    'partner_id' => '',
+                    'partner_key' => '',
                 ],
             ],
         ];

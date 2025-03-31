@@ -22,164 +22,44 @@
                     <form action="{{ route('admin.settings.payment.update') }}" method="POST">
                         @csrf
 
-                        <!-- VNPAY -->
+                        <!-- CÀI ĐẶT THẺ CÀO -->
                         <div class="section-header">
-                            <h5 class="mb-3">VNPay <span class="text-muted">(Thanh toán qua cổng VNPAY)</span></h5>
+                            <h5 class="mb-3">Cài đặt nạp thẻ <span class="text-muted">(Thanh toán qua thẻ cào)</span></h5>
                         </div>
                         <div class="row">
                             <div class="col-lg-3 col-sm-6 col-12">
                                 <div class="form-group">
                                     <div class="status-toggle">
-                                        <input type="checkbox" id="vnpay_active" class="check" name="vnpay_active"
+                                        <input type="checkbox" id="card_active" class="check" name="card_active"
                                             value="1"
-                                            {{ old('vnpay_active', $configs['vnpay_active']) ? 'checked' : '' }}>
-                                        <label for="vnpay_active" class="checktoggle"></label>
+                                            {{ old('card_active', $configs['card_active']) ? 'checked' : '' }}>
+                                        <label for="card_active" class="checktoggle"></label>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label>Terminal ID <span class="text-danger">*</span></label>
-                                    <input type="text" name="vnpay_terminal_id"
-                                        value="{{ old('vnpay_terminal_id', $configs['vnpay_terminal_id']) }}"
-                                        class="form-control @error('vnpay_terminal_id') is-invalid @enderror"
-                                        placeholder="Nhập Terminal ID">
-                                    @error('vnpay_terminal_id')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-lg-5 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label>Secret Key <span class="text-danger">*</span></label>
-                                    <input type="text" name="vnpay_secret_key"
-                                        value="{{ old('vnpay_secret_key', $configs['vnpay_secret_key']) }}"
-                                        class="form-control @error('vnpay_secret_key') is-invalid @enderror"
-                                        placeholder="Nhập Secret Key">
-                                    @error('vnpay_secret_key')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
                         </div>
 
-                        <hr class="my-3">
-
-                        <!-- MOMO -->
-                        <div class="section-header">
-                            <h5 class="mb-3">MoMo <span class="text-muted">(Thanh toán qua ví điện tử MoMo)</span></h5>
-                        </div>
                         <div class="row">
-                            <div class="col-lg-3 col-sm-6 col-12">
+                            <div class="col-lg-6 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <div class="status-toggle">
-                                        <input type="checkbox" id="momo_active" class="check" name="momo_active"
-                                            value="1"
-                                            {{ old('momo_active', $configs['momo_active']) ? 'checked' : '' }}>
-                                        <label for="momo_active" class="checktoggle"></label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label>Partner Code <span class="text-danger">*</span></label>
-                                    <input type="text" name="momo_partner_code"
-                                        value="{{ old('momo_partner_code', $configs['momo_partner_code']) }}"
-                                        class="form-control @error('momo_partner_code') is-invalid @enderror"
-                                        placeholder="Nhập Partner Code">
-                                    @error('momo_partner_code')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label>Access Key <span class="text-danger">*</span></label>
-                                    <input type="text" name="momo_access_key"
-                                        value="{{ old('momo_access_key', $configs['momo_access_key']) }}"
-                                        class="form-control @error('momo_access_key') is-invalid @enderror"
-                                        placeholder="Nhập Access Key">
-                                    @error('momo_access_key')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label>Secret Key <span class="text-danger">*</span></label>
-                                    <input type="text" name="momo_secret_key"
-                                        value="{{ old('momo_secret_key', $configs['momo_secret_key']) }}"
-                                        class="form-control @error('momo_secret_key') is-invalid @enderror"
-                                        placeholder="Nhập Secret Key">
-                                    @error('momo_secret_key')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                        </div>
-
-                        <hr class="my-3">
-
-                        <!-- BANK TRANSFER -->
-                        <div class="section-header">
-                            <h5 class="mb-3">Chuyển khoản ngân hàng <span class="text-muted">(Thanh toán qua chuyển khoản
-                                    ngân hàng)</span></h5>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-3 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <div class="status-toggle">
-                                        <input type="checkbox" id="bank_transfer_active" class="check"
-                                            name="bank_transfer_active" value="1"
-                                            {{ old('bank_transfer_active', $configs['bank_transfer_active']) ? 'checked' : '' }}>
-                                        <label for="bank_transfer_active" class="checktoggle"></label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label>Tên ngân hàng <span class="text-danger">*</span></label>
-                                    <input type="text" name="bank_name"
-                                        value="{{ old('bank_name', $configs['bank_name']) }}"
-                                        class="form-control @error('bank_name') is-invalid @enderror"
-                                        placeholder="Ví dụ: Vietcombank, BIDV...">
-                                    @error('bank_name')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-lg-5 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label>Số tài khoản <span class="text-danger">*</span></label>
-                                    <input type="text" name="bank_account_number"
-                                        value="{{ old('bank_account_number', $configs['bank_account_number']) }}"
-                                        class="form-control @error('bank_account_number') is-invalid @enderror"
-                                        placeholder="Nhập số tài khoản">
-                                    @error('bank_account_number')
+                                    <label>Partner ID <span class="text-danger">*</span></label>
+                                    <input type="text" name="partner_id_card"
+                                        value="{{ old('partner_id_card', $configs['partner_id_card']) }}"
+                                        class="form-control @error('partner_id_card') is-invalid @enderror"
+                                        placeholder="Nhập Partner ID">
+                                    @error('partner_id_card')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
                             <div class="col-lg-6 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <label>Tên chủ tài khoản <span class="text-danger">*</span></label>
-                                    <input type="text" name="bank_account_name"
-                                        value="{{ old('bank_account_name', $configs['bank_account_name']) }}"
-                                        class="form-control @error('bank_account_name') is-invalid @enderror"
-                                        placeholder="Nhập tên chủ tài khoản">
-                                    @error('bank_account_name')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label>Chi nhánh</label>
-                                    <input type="text" name="bank_branch"
-                                        value="{{ old('bank_branch', $configs['bank_branch']) }}"
-                                        class="form-control @error('bank_branch') is-invalid @enderror"
-                                        placeholder="Nhập chi nhánh ngân hàng">
-                                    @error('bank_branch')
+                                    <label>Partner Key <span class="text-danger">*</span></label>
+                                    <input type="text" name="partner_key_card"
+                                        value="{{ old('partner_key_card', $configs['partner_key_card']) }}"
+                                        class="form-control @error('partner_key_card') is-invalid @enderror"
+                                        placeholder="Nhập Partner Key">
+                                    @error('partner_key_card')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>

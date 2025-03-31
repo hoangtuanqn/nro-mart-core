@@ -150,30 +150,12 @@ class ConfigController extends Controller
     {
         $title = 'Cài đặt thanh toán';
 
-        // Lấy tất cả cấu hình thanh toán bằng phương thức mới
-        $vnpay = config_get_group('payment.vnpay');
-        $momo = config_get_group('payment.momo');
-        $bank = config_get_group('payment.bank_transfer');
-
-        // Chuyển đổi sang định dạng cũ để tương thích với view
+        // Lấy tất cả cấu hình thanh toán
         $configs = [
-            // Cài đặt thanh toán VNPay
-            'vnpay_active' => $vnpay['active'] ?? false,
-            'vnpay_terminal_id' => $vnpay['terminal_id'] ?? '',
-            'vnpay_secret_key' => $vnpay['secret_key'] ?? '',
-
-            // Cài đặt thanh toán Momo
-            'momo_active' => $momo['active'] ?? false,
-            'momo_partner_code' => $momo['partner_code'] ?? '',
-            'momo_access_key' => $momo['access_key'] ?? '',
-            'momo_secret_key' => $momo['secret_key'] ?? '',
-
-            // Cài đặt chuyển khoản ngân hàng
-            'bank_transfer_active' => $bank['active'] ?? true,
-            'bank_name' => $bank['name'] ?? '',
-            'bank_account_number' => $bank['account_number'] ?? '',
-            'bank_account_name' => $bank['account_name'] ?? '',
-            'bank_branch' => $bank['branch'] ?? '',
+            // Cài đặt nạp thẻ cào
+            'card_active' => config_get('payment.card.active', true),
+            'partner_id_card' => config_get('payment.card.partner_id', ''),
+            'partner_key_card' => config_get('payment.card.partner_key', ''),
         ];
 
         return view('admin.settings.payment', compact('title', 'configs'));
@@ -185,39 +167,15 @@ class ConfigController extends Controller
     public function updatePayment(Request $request)
     {
         $request->validate([
-            'vnpay_active' => 'nullable|boolean',
-            'vnpay_terminal_id' => 'nullable|string|max:50',
-            'vnpay_secret_key' => 'nullable|string|max:100',
-
-            'momo_active' => 'nullable|boolean',
-            'momo_partner_code' => 'nullable|string|max:50',
-            'momo_access_key' => 'nullable|string|max:100',
-            'momo_secret_key' => 'nullable|string|max:100',
-
-            'bank_transfer_active' => 'nullable|boolean',
-            'bank_name' => 'nullable|string|max:100',
-            'bank_account_number' => 'nullable|string|max:50',
-            'bank_account_name' => 'nullable|string|max:100',
-            'bank_branch' => 'nullable|string|max:255',
+            'card_active' => 'nullable|boolean',
+            'partner_id_card' => 'nullable|string|max:100',
+            'partner_key_card' => 'nullable|string|max:100',
         ]);
 
-        // VNPay
-        config_set('payment.vnpay.active', $request->has('vnpay_active') ? 1 : 0);
-        config_set('payment.vnpay.terminal_id', $request->vnpay_terminal_id);
-        config_set('payment.vnpay.secret_key', $request->vnpay_secret_key);
-
-        // Momo
-        config_set('payment.momo.active', $request->has('momo_active') ? 1 : 0);
-        config_set('payment.momo.partner_code', $request->momo_partner_code);
-        config_set('payment.momo.access_key', $request->momo_access_key);
-        config_set('payment.momo.secret_key', $request->momo_secret_key);
-
-        // Chuyển khoản ngân hàng
-        config_set('payment.bank_transfer.active', $request->has('bank_transfer_active') ? 1 : 0);
-        config_set('payment.bank_transfer.name', $request->bank_name);
-        config_set('payment.bank_transfer.account_number', $request->bank_account_number);
-        config_set('payment.bank_transfer.account_name', $request->bank_account_name);
-        config_set('payment.bank_transfer.branch', $request->bank_branch);
+        // Nạp thẻ cào
+        config_set('payment.card.active', $request->has('card_active') ? 1 : 0);
+        config_set('payment.card.partner_id', $request->partner_id_card);
+        config_set('payment.card.partner_key', $request->partner_key_card);
 
         // Xóa cache để cập nhật cài đặt
         config_clear_cache();
