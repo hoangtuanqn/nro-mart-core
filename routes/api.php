@@ -20,4 +20,3 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 Route::get('/callback/card', [CardDepositController::class, 'handleCallback'])->name('callback.card');
-Route::get('/fetch-mb-transactions', [TransactionController::class, 'fetch'])->name('fetch.transactions');

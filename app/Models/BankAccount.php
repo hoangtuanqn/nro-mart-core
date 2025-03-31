@@ -16,6 +16,7 @@ class BankAccount extends Model
         'note',             // Ghi chú
         'is_active',        // Trạng thái hiển thị
         'auto_confirm',      // Trạng thái tự động xác nhận chuyển tiền
-        'prefix'            // Cú pháp nạp tiền
+        'prefix',            // Cú pháp nạp tiền,
+        'access_token'      // Access Token bên SePay.VN
     ];
 }

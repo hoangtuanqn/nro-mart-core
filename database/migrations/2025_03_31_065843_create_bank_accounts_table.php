@@ -19,6 +19,7 @@ return new class extends Migration {
             $table->boolean('is_active')->default(true); // Trạng thái hiển thị (true: hiển thị, false: ẩn)
             $table->boolean('auto_confirm')->default(false); // Xác nhận tự động cộng tiền cho khách hàng (Cho phép chạy cron)
             $table->string('prefix'); // Prefix cú pháp nạp tiền
+            $table->string('access_token'); // Access Token bên SePay.VN
             $table->timestamps(); // Tạo trường created_at và updated_at
         });
     }
