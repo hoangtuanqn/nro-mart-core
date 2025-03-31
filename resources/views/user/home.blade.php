@@ -62,7 +62,7 @@
     <section class="menu">
         <div class="container">
             <header class="menu__header">
-                <h2 class="menu__header__title">MENU MỤC GAME</h2>
+                <h2 class="menu__header__title">DANH MỤC GAME</h2>
             </header>
             <div class="category__list">
                 @foreach ($categories as $category)
@@ -83,7 +83,7 @@
     <section class="menu">
         <div class="container">
             <header class="menu__header">
-                <h2 class="menu__header__title">DỊCH VỤ GAME</h2>
+                <h2 class="menu__header__title">DANH MỤC DỊCH VỤ</h2>
             </header>
             <div class="category__list">
                 @foreach ($services as $service)
@@ -93,6 +93,29 @@
                             <h2 class="category__title">{{ strtoupper($service->name) }}</h2>
                             <p class="category__desc">Tổng giao dịch: {{ number_format($service->orderCount) }}</p>
                             <p class="text category__action">Thuê ngay</p>
+                        </a>
+                    @endif
+                @endforeach
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Menu DANH MỤC RANDOM -->
+    <section class="menu">
+        <div class="container">
+            <header class="menu__header">
+                <h2 class="menu__header__title">DANH MỤC RANDOM</h2>
+            </header>
+            <div class="category__list">
+                @foreach ($randomCategories as $category)
+                    @if ($category->active)
+                        <a href="{{ route('random.index', ['slug' => $category->slug]) }}" class="category__item">
+                            <img src="{{ $category->thumbnail }}" alt="{{ $category->name }}" class="category__img" />
+                            <h2 class="category__title">{{ strtoupper($category->name) }}</h2>
+                            <p class="category__desc">Tổng tài khoản: {{ number_format($category->allAccount) }}</p>
+                            <p class="category__desc">Acc đã bán: {{ number_format($category->soldCount) }}</p>
+                            <p class="text category__action">Mua ngay</p>
                         </a>
                     @endif
                 @endforeach

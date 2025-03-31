@@ -83,6 +83,46 @@
                     </ul>
                 </li>
 
+
+                <li class="submenu">
+                    <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/product.svg') }}"
+                            alt="img"><span>Danh mục Random</span><span class="menu-arrow"></span></a>
+                    <ul>
+                        <li><a href="{{ route('admin.random-categories.index') }}"
+                                class="{{ request()->routeIs('admin.random-categories.index') ? 'active' : '' }}">Danh
+                                sách danh mục random</a></li>
+                        <li><a href="{{ route('admin.random-categories.create') }}"
+                                class="{{ request()->routeIs('admin.random-categories.create') ? 'active' : '' }}">Thêm
+                                danh mục random</a></li>
+                    </ul>
+                </li>
+
+                <li class="submenu">
+                    <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/product.svg') }}"
+                            alt="img"><span>Tài khoản Random</span><span class="menu-arrow"></span></a>
+                    <ul>
+                        <li><a href="{{ route('admin.random-accounts.index') }}"
+                                class="{{ request()->routeIs('admin.random-accounts.index') ? 'active' : '' }}">Danh
+                                sách tài khoản random</a></li>
+                        <li><a href="{{ route('admin.random-accounts.create') }}"
+                                class="{{ request()->routeIs('admin.random-accounts.create') ? 'active' : '' }}">Thêm
+                                tài khoản random</a></li>
+                    </ul>
+                </li>
+
+                <li class="submenu">
+                    <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/sales1.svg') }}"
+                            alt="img"><span>Mã giảm giá</span><span class="menu-arrow"></span></a>
+                    <ul>
+                        <li><a href="{{ route('admin.discount-codes.index') }}"
+                                class="{{ request()->routeIs('admin.discount-codes.index') ? 'active' : '' }}">Danh
+                                sách mã giảm giá</a></li>
+                        <li><a href="{{ route('admin.discount-codes.create') }}"
+                                class="{{ request()->routeIs('admin.discount-codes.create') ? 'active' : '' }}">Thêm mã
+                                giảm giá</a></li>
+                    </ul>
+                </li>
+
                 <li class="submenu">
                     <a href="javascript:void(0);"><i data-feather="settings"></i><span>Cài đặt hệ thống</span><span
                             class="menu-arrow"></span></a>
@@ -98,6 +138,8 @@
                                 thanh toán</a></li>
                     </ul>
                 </li>
+
+
             </ul>
         </div>
     </div>

@@ -14,6 +14,9 @@ use App\Http\Controllers\Admin\GameServiceController;
 use App\Http\Controllers\Admin\ServicePackageController;
 use App\Http\Controllers\Admin\ConfigController;
 use App\Http\Controllers\Admin\BankAccountController;
+use App\Http\Controllers\Admin\RandomCategoryController;
+use App\Http\Controllers\Admin\RandomCategoryAccountController;
+use App\Http\Controllers\Admin\DiscountCodeController;
 use Illuminate\Support\Facades\Route;
 Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(function () {
     Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('index');
@@ -31,6 +34,36 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
         Route::get('/edit/{category}', [GameCategoryController::class, 'edit'])->name('edit');
         Route::put('/update/{category}', [GameCategoryController::class, 'update'])->name('update');
         Route::delete('/delete/{category}', [GameCategoryController::class, 'destroy'])->name('destroy');
+    });
+
+    // Routes for Random Categories management
+    Route::prefix('random-categories')->name('random-categories.')->group(function () {
+        Route::get('/', [RandomCategoryController::class, 'index'])->name('index');
+        Route::get('/create', [RandomCategoryController::class, 'create'])->name('create');
+        Route::post('/store', [RandomCategoryController::class, 'store'])->name('store');
+        Route::get('/edit/{category}', [RandomCategoryController::class, 'edit'])->name('edit');
+        Route::put('/update/{category}', [RandomCategoryController::class, 'update'])->name('update');
+        Route::delete('/delete/{category}', [RandomCategoryController::class, 'destroy'])->name('destroy');
+    });
+
+    // Routes for Random Accounts management
+    Route::prefix('random-accounts')->name('random-accounts.')->group(function () {
+        Route::get('/', [RandomCategoryAccountController::class, 'index'])->name('index');
+        Route::get('/create', [RandomCategoryAccountController::class, 'create'])->name('create');
+        Route::post('/store', [RandomCategoryAccountController::class, 'store'])->name('store');
+        Route::get('/edit/{account}', [RandomCategoryAccountController::class, 'edit'])->name('edit');
+        Route::put('/update/{account}', [RandomCategoryAccountController::class, 'update'])->name('update');
+        Route::delete('/delete/{account}', [RandomCategoryAccountController::class, 'destroy'])->name('destroy');
+    });
+
+    // Routes for Discount Codes management
+    Route::prefix('discount-codes')->name('discount-codes.')->group(function () {
+        Route::get('/', [DiscountCodeController::class, 'index'])->name('index');
+        Route::get('/create', [DiscountCodeController::class, 'create'])->name('create');
+        Route::post('/store', [DiscountCodeController::class, 'store'])->name('store');
+        Route::get('/edit/{discountCode}', [DiscountCodeController::class, 'edit'])->name('edit');
+        Route::put('/update/{discountCode}', [DiscountCodeController::class, 'update'])->name('update');
+        Route::delete('/delete/{discountCode}', [DiscountCodeController::class, 'destroy'])->name('destroy');
     });
 
     Route::prefix('accounts')->name('accounts.')->group(function () {

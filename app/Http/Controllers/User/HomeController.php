@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) 2025 FPT University
- * 
+ *
  * @author    Phạm Hoàng Tuấn
  * @email     phamhoangtuanqn@gmail.com
  * @facebook  fb.com/phamhoangtuanqn
@@ -14,6 +14,8 @@ use App\Models\Category;
 use App\Models\GameAccount;
 use App\Models\GameService;
 use App\Models\ServiceHistory;
+use App\Models\RandomCategory;
+use App\Models\RandomCategoryAccount;
 
 class HomeController extends Controller
 {
@@ -34,6 +36,16 @@ class HomeController extends Controller
         foreach ($services as $service) {
             $service->orderCount = ServiceHistory::where('game_service_id', $service->id)->count();
         }
-        return view('user.home', compact('categories', 'services'));
+
+        // Random categories
+        $randomCategories = RandomCategory::where('active', 1)->get();
+        foreach ($randomCategories as $category) {
+            $category->soldCount = RandomCategoryAccount::where('random_category_id', $category->id)
+                ->where('status', 'sold')
+                ->count();
+            $category->allAccount = RandomCategoryAccount::where('random_category_id', $category->id)->count();
+        }
+
+        return view('user.home', compact('categories', 'services', 'randomCategories'));
     }
 }

@@ -15,6 +15,8 @@ use App\Http\Controllers\User\GameServiceController;
 use App\Http\Controllers\User\HomeController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\ServiceOrderController;
+use App\Http\Controllers\User\RandomCategoryController;
+use App\Http\Controllers\User\RandomAccountController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -58,5 +60,14 @@ Route::prefix('service')->name('service.')->group(function () {
     Route::get('/{slug}', [GameServiceController::class, 'show'])->name('show');
     Route::post('/{slug}/order', [ServiceOrderController::class, 'processOrder'])->name('order');
 });
+
+// Routes for random categories
+Route::prefix('random')->name('random.')->group(function () {
+    Route::get('/', [RandomCategoryController::class, 'showAll'])->name('show-all');
+    Route::get('/account/{id}', [RandomAccountController::class, 'show'])->name('account.show');
+    Route::post('/account/{id}/purchase', [RandomAccountController::class, 'purchase'])->name('account.purchase');
+    Route::get('/{slug}', [RandomCategoryController::class, 'index'])->name('index');
+});
+
 Route::get('/category-all', [GameCategoryController::class, 'showAll'])->name('category.show-all');
 Route::get('/service-all', [GameServiceController::class, 'showAll'])->name('service.show-all');
