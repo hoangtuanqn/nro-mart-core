@@ -1,6 +1,6 @@
 @extends('layouts.user.app')
 
-@section('title', 'Nạp tiền qua ngân hàng')
+@section('title', $title)
 
 @section('content')
 

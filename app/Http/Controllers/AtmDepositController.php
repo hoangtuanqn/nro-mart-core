@@ -12,6 +12,7 @@ class AtmDepositController extends Controller
     //
     public function index()
     {
+        $title = 'Nạp tiền qua ngân hàng';
         $bankAccounts = BankAccount::where('is_active', true)->get();
 
         // Get user's bank deposit history
@@ -19,6 +20,6 @@ class AtmDepositController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
-        return view('user.profile.deposit-atm', compact('bankAccounts', 'transactions'));
+        return view('user.profile.deposit-atm', compact('bankAccounts', 'transactions', 'title'));
     }
 }

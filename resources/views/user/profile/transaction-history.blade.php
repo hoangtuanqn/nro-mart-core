@@ -1,6 +1,6 @@
 @extends('layouts.user.app')
 
-@section('title', 'Lịch sử giao dịch')
+@section('title', $title)
 
 @section('content')
     <section class="profile-section">

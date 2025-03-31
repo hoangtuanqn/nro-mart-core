@@ -58,4 +58,5 @@ Route::prefix('service')->name('service.')->group(function () {
     Route::get('/{slug}', [GameServiceController::class, 'show'])->name('show');
     Route::post('/{slug}/order', [ServiceOrderController::class, 'processOrder'])->name('order');
 });
+Route::get('/category-all', [GameCategoryController::class, 'showAll'])->name('category.show-all');
 Route::get('/service-all', [GameServiceController::class, 'showAll'])->name('service.show-all');

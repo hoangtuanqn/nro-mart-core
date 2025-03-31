@@ -29,7 +29,10 @@
                 class="text menu__item {{ request()->routeIs('profile.deposit-card') ? 'active' : '' }}">Nạp tiền</a>
             <a href="{{ route('service.show-all') }}"
                 class="text menu__item {{ request()->routeIs('service.*') ? 'active' : '' }}">Dịch vụ</a>
-            <a href="#" class="text menu__item {{ request()->is('nick-game*') ? 'active' : '' }}">Nick game</a>
+
+            <a href="{{ route('category.show-all') }}"
+                class="text menu__item {{ request()->routeIs('category.*') ? 'active' : '' }}">Nick game</a>
+
             @if (Auth::check() && Auth()->user()->role == 'admin')
                 <a href="{{ route('admin.index') }}" target="_blank" class="text menu__item">ADMIN PANEL</a>
             @endif
@@ -43,7 +46,8 @@
                 <a href="{{ route('register') }}" class="text action__link action__link--primary"><i
                         class="fa-solid fa-key"></i> Đăng ký</a>
             @else
-                <a href="/profile" class="text action__link"><i class="fa-solid fa-user"></i> {{ Auth::user()->username }} -
+                <a href="/profile" class="text action__link"><i class="fa-solid fa-user"></i> {{ Auth::user()->username }}
+                    -
                     {{ number_format(Auth::user()->balance) }}đ</a>
                 <form method="POST" action="{{ route('logout') }}" style="display: inline;">
                     @csrf

@@ -1,6 +1,6 @@
 @extends('layouts.user.app')
 
-@section('title', 'Nạp tiền thẻ cào')
+@section('title', $title)
 
 @section('content')
     <section class="profile-section">

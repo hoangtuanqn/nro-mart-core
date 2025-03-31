@@ -1,6 +1,6 @@
 @extends('layouts.user.app')
 
-@section('title', 'Làm Nhiệm Vụ - Ngọc Rồng')
+@section('title', $title)
 
 @section('content')
     <x-hero-header title="{{ $service->name }}" description="{{ $service->description }}" />

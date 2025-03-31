@@ -8,7 +8,7 @@
 
 @extends('layouts.user.app')
 
-@section('title', 'Đổi mật khẩu')
+@section('title', $title)
 
 @section('content')
     <section class="profile-section">

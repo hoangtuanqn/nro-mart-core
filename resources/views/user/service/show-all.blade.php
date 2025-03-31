@@ -7,7 +7,7 @@
 */ --}}
 
 @extends('layouts.user.app')
-@section('title', 'Trang chủ')
+@section('title', $title)
 @section('content')
     <!-- Menu mục dịch vụ game -->
     <section class="menu">

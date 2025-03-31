@@ -1,6 +1,6 @@
 @extends('layouts.user.app')
 
-@section('title', 'Dịch vụ đã thuê')
+@section('title', $title)
 
 @section('content')
     <meta name="csrf-token" content="{{ csrf_token() }}">

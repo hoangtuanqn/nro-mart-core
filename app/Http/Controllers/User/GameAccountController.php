@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) 2025 FPT University
- * 
+ *
  * @author    Phạm Hoàng Tuấn
  * @email     phamhoangtuanqn@gmail.com
  * @facebook  fb.com/phamhoangtuanqn
@@ -27,6 +27,7 @@ class GameAccountController extends Controller
 
         return view("user.account.detail", compact('account', 'images'));
     }
+
 
     public function purchase($id)
     {

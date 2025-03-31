@@ -1,7 +1,7 @@
 <?php
 /**
  * Copyright (c) 2025 FPT University
- * 
+ *
  * @author    Phạm Hoàng Tuấn
  * @email     phamhoangtuanqn@gmail.com
  * @facebook  fb.com/phamhoangtuanqn
@@ -9,6 +9,7 @@
 
 namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\GameAccount;
 use App\Models\GameCategory;
 use Illuminate\Http\Request;
@@ -65,5 +66,12 @@ class GameCategoryController extends Controller
         }
         $accounts = $accounts->orderBy('id', 'DESC')->get();
         return view('user.category.show', compact('category', 'accounts'));
+    }
+
+    public function showAll()
+    {
+        $title = 'Danh mục bán nick game';
+        $categories = Category::all();
+        return view('user.category.show-all', compact('categories', 'title'));
     }
 }

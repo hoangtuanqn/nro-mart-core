@@ -18,11 +18,13 @@ class GameServiceController extends Controller
     public function show($slug)
     {
         $service = GameService::with('packages')->where('slug', $slug)->firstOrFail();
-        return view('user.service.show', compact('service'));
+        $title = $service->name;
+        return view('user.service.show', compact('service', 'title'));
     }
     public function showAll()
     {
+        $title = 'Dịch vụ thuê';
         $services = GameService::with('packages')->get();
-        return view('user.service.show-all', compact('services'));
+        return view('user.service.show-all', compact('services', 'title'));
     }
 }

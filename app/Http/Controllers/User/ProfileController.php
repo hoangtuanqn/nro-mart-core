@@ -33,29 +33,33 @@ class ProfileController extends Controller
     }
     public function viewChangePassword()
     {
-        return view('user.profile.change-password');
+        $title = 'Đổi mật khẩu';
+        return view('user.profile.change-password', compact('title'));
     }
 
     public function transactionHistory()
     {
+        $title = 'Lịch sử giao dịch';
         $transactions = MoneyTransaction::where('user_id', Auth::id())->orderBy('created_at', 'desc')->paginate(10);
-        return view('user.profile.transaction-history', compact('transactions'));
+        return view('user.profile.transaction-history', compact('transactions', 'title'));
     }
 
     public function purchasedAccounts()
     {
+        $title = 'Tài khoản đã mua';
         $transactions = GameAccount::where('buyer_id', Auth::id())->where('status', 'sold')->paginate(perPage: 10);
-        return view('user.profile.purchased-accounts', compact('transactions')); // Return the view for purchased accounts lis
+        return view('user.profile.purchased-accounts', compact('transactions', 'title')); // Return the view for purchased accounts lis
     }
 
     public function servicesHistory()
     {
+        $title = 'Dịch vụ đã thuê';
         $serviceHistories = ServiceHistory::with(['gameService', 'servicePackage'])
             ->where('user_id', Auth::id())
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
-        return view('user.profile.services-history', compact('serviceHistories'));
+        return view('user.profile.services-history', compact('serviceHistories', 'title'));
     }
 
     // Remove this duplicate use statement

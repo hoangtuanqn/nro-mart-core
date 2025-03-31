@@ -30,6 +30,7 @@ class CardDepositController extends Controller
      */
     public function showCardDepositForm()
     {
+        $title = 'Nạp thẻ cào';
         // Get user's card deposit transactions if authenticated
         $transactions = [];
         if (Auth::check()) {
@@ -38,7 +39,7 @@ class CardDepositController extends Controller
                 ->paginate(10);
         }
 
-        return view('user.profile.deposit-card', compact('transactions'));
+        return view('user.profile.deposit-card', compact('transactions', 'title'));
     }
 
     /**
