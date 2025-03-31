@@ -21,8 +21,8 @@
                 <i class="fa-solid fa-credit-card"></i> Nạp tiền thẻ cào
             </a>
         </li>
-        <li class="sidebar-item">
-            <a href="#" class="sidebar-link">
+        <li class="sidebar-item {{ request()->routeIs('profile.deposit-atm') ? 'active' : '' }}">
+            <a href="{{ route('profile.deposit-atm') }}" class="sidebar-link">
                 <i class="fa-solid fa-money-bill-transfer"></i> Nạp tiền ATM
             </a>
         </li>

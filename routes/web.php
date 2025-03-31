@@ -7,6 +7,7 @@
  * @facebook  fb.com/phamhoangtuanqn
  */
 
+use App\Http\Controllers\AtmDepositController;
 use App\Http\Controllers\User\CardDepositController;
 use App\Http\Controllers\User\GameAccountController;
 use App\Http\Controllers\User\GameCategoryController;

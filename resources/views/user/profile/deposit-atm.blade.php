@@ -1,13 +1,14 @@
 @extends('layouts.user.app')
 
-@section('title', 'Nạp tiền thẻ cào')
+@section('title', 'Nạp tiền qua ngân hàng')
 
 @section('content')
+
     <section class="profile-section">
         <div class="container">
             <div class="profile-container">
                 <div class="profile-header">
-                    <h1 class="profile-title">NẠP TIỀN THẺ CÀO</h1>
+                    <h1 class="profile-title">NẠP TIỀN QUA NGÂN HÀNG</h1>
                 </div>
 
                 <div class="profile-content">
@@ -23,7 +24,7 @@
                             </div>
 
                             <div class="info-content">
-                                <!-- Thêm phần thông báo lỗi và thành công -->
+                                <!-- Thông báo -->
                                 @if ($errors->any())
                                     <div class="service__alert service__alert--error">
                                         <i class="fas fa-exclamation-circle"></i>
@@ -51,112 +52,112 @@
                                         </div>
                                     @endif
                                 @endforeach
-                                <!-- Kết thúc phần thông báo -->
-
-                                <form method="POST" action="{{ route('profile.deposit-card') }}" class="register-form">
-                                    @csrf
-
-                                    <div class="form-group">
-                                        <label for="telco" class="form-label">Nhà mạng:</label>
-                                        <select id="telco" name="telco"
-                                            class="form-input @error('telco') is-invalid @enderror">
-                                            <option value="VIETTEL">Viettel</option>
-                                            <option value="MOBIFONE">Mobifone</option>
-                                            <option value="VINAPHONE">Vinaphone</option>
-                                            <option value="VIETNAMOBILE">Vietnamobile</option>
-                                        </select>
-                                        @error('telco')
-                                            <span class="form-error">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="amount" class="form-label">Mệnh giá:</label>
-                                        <select id="amount" name="amount"
-                                            class="form-input @error('amount') is-invalid @enderror">
-                                            <option value="10000">10,000 VND</option>
-                                            <option value="20000">20,000 VND</option>
-                                            <option value="50000">50,000 VND</option>
-                                            <option value="100000">100,000 VND</option>
-                                            <option value="200000">200,000 VND</option>
-                                            <option value="500000">500,000 VND</option>
-                                        </select>
-                                        @error('amount')
-                                            <span class="form-error">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label class="form-label">Nhận được:</label>
-                                        <div class="receive-amount form-input" id="receive-amount">10.000 VND</div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="serial" class="form-label">Số seri:</label>
-                                        <input type="text" id="serial" name="serial" value="{{ old('serial') }}"
-                                            class="form-input @error('serial') is-invalid @enderror"
-                                            placeholder="Nhập mã serial nằm sau thẻ" required>
-                                        @error('serial')
-                                            <span class="form-error">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="pin" class="form-label">Mã thẻ:</label>
-                                        <input type="text" id="pin" name="pin" value="{{ old('pin') }}"
-                                            class="form-input @error('pin') is-invalid @enderror"
-                                            placeholder="Nhập mã số sau lớp bạc mỏng" required>
-                                        @error('pin')
-                                            <span class="form-error">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-
-                                    <button type="submit" class="register-btn">NẠP THẺ</button>
-                                </form>
+                                <!-- Kết thúc thông báo -->
 
                                 <div class="deposit-notice">
-                                    <div class="notice-header">NẠP THẺ KHÔNG CHIẾT KHẤU</div>
-                                    <div class="notice-content">nạp 10k được 10k ...100k được 100k</div>
-                                    <div class="notice-warning">SAI MỆNH GIÁ -50% THẺ</div>
+                                    <div class="notice-header">HƯỚNG DẪN NẠP TIỀN QUA NGÂN HÀNG</div>
+                                    <div class="notice-content">
+                                        <p>1. Chuyển tiền vào một trong các tài khoản ngân hàng bên dưới</p>
+                                        <p>2. Yêu cầu chuyển đúng nội dung chuyển khoản bên dưới</p>
+                                        <p>3. Số tiền sẽ được cộng tự động vào tài khoản sau khi giao dịch hoàn tất</p>
+                                    </div>
+                                    <div class="notice-warning">CHÚ Ý: PHẢI ĐÚNG CÚ PHÁP NỘI DUNG CHUYỂN KHOẢN</div>
+                                </div>
+
+                                <div class="bank-accounts-container">
+                                    <div class="bank-accounts-title">THÔNG TIN TÀI KHOẢN NGÂN HÀNG</div>
+
+                                    <div class="bank-accounts-list">
+                                        @if (count($bankAccounts) > 0)
+                                            @foreach ($bankAccounts as $account)
+                                                <div class="bank-account-item">
+                                                    <div class="bank-account-info">
+                                                        <div class="bank-details">
+                                                            <h3 class="bank-name">{{ $account->bank_name }}</h3>
+                                                            <div class="account-number">
+                                                                <span class="label">Số tài khoản:</span>
+                                                                <span class="value">{{ $account->account_number }}</span>
+                                                                <button class="copy-btn"
+                                                                    data-clipboard-text="{{ $account->account_number }}">
+                                                                    <i class="far fa-copy"></i>
+                                                                </button>
+                                                            </div>
+                                                            <div class="branch">
+                                                                <span class="label">Chi nhánh:</span>
+                                                                <span class="value">{{ $account->branch }}</span>
+                                                            </div>
+                                                            @if ($account->note)
+                                                                <div class="note">
+                                                                    <span class="label">Ghi chú:</span>
+                                                                    <span class="value">{{ $account->note }}</span>
+                                                                </div>
+                                                            @endif
+                                                            @if ($account->note)
+                                                                <div class="note">
+                                                                    <span class="label">Nội dung:</span>
+                                                                    <span
+                                                                        class="value text-danger">{{ $account->prefix . Auth::user()->id }}</span>
+                                                                </div>
+                                                            @endif
+                                                            <div class="auto-confirm">
+                                                                <span class="label">Trạng thái:</span>
+                                                                <span
+                                                                    class="value {{ $account->auto_confirm ? 'auto' : 'manual' }}">
+                                                                    {{ $account->auto_confirm ? 'Tự động cộng tiền' : 'Cộng tiền thủ công' }}
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="bank-qr-code">
+                                                        <img src="https://img.vietqr.io/image/{{ $account->bank_name }}-{{ $account->account_number }}-qr_only.jpg"
+                                                            alt="QR Code">
+
+                                                    </div>
+                                                </div>
+                                            @endforeach
+                                        @else
+                                            <div class="no-bank-accounts">
+                                                <p>Hiện tại không có tài khoản ngân hàng nào được cấu hình</p>
+                                            </div>
+                                        @endif
+                                    </div>
                                 </div>
 
                                 <div class="deposit-history">
-                                    <div class="history-header">LỊCH SỬ NẠP THẺ</div>
+                                    <div class="history-header">LỊCH SỬ NẠP TIỀN</div>
                                     <div class="history-table-container">
                                         <table class="history-table">
                                             <thead>
                                                 <tr>
-                                                    <th>Trạng thái</th>
                                                     <th>Thời gian</th>
-                                                    <th>Nhà mạng</th>
-                                                    <th>Mệnh giá</th>
-                                                    <th>Thực nhận</th>
-                                                    <th>Mã thẻ</th>
+                                                    <th>Số tiền</th>
+                                                    <th>Ngân hàng</th>
+                                                    <th>Nội dung</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 @if (isset($transactions) && count($transactions) > 0)
                                                     @foreach ($transactions as $transaction)
                                                         <tr>
-                                                            <td>{!! display_status_nap_tien($transaction->status) !!}</td>
                                                             <td>{{ $transaction->created_at }}</td>
-                                                            <td>{{ $transaction->telco }}</td>
                                                             <td>{{ number_format($transaction->amount) }} VND</td>
-                                                            <td>{{ number_format($transaction->received_amount) }} VND</td>
-                                                            <td>{{ substr($transaction->pin, 0, 3) . '******' }}</td>
+                                                            <td>{{ $transaction->bank }}</td>
+                                                            <td>{{ $transaction->content }}</td>
                                                         </tr>
                                                     @endforeach
                                                 @else
                                                     <tr>
-                                                        <td colspan="7" class="no-data">Không có dữ liệu</td>
+                                                        <td colspan="4" class="no-data">Không có dữ liệu</td>
                                                     </tr>
                                                 @endif
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div class="pagination">
-                                        {{ $transactions->links() }}
-                                    </div>
+                                    @if (isset($transactions) && $transactions->hasPages())
+                                        <div class="pagination">
+                                            {{ $transactions->links() }}
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -167,18 +168,32 @@
     </section>
 
     @push('scripts')
+        <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script>
         <script>
             document.addEventListener('DOMContentLoaded', function() {
-                const amountSelect = document.getElementById('amount');
-                const receiveAmount = document.getElementById('receive-amount');
+                // Clipboard.js init
+                var clipboard = new ClipboardJS('.copy-btn');
 
-                // Update received amount when amount changes
-                amountSelect.addEventListener('change', function() {
-                    receiveAmount.textContent = new Intl.NumberFormat('vi-VN').format(this.value) + ' VND';
+                clipboard.on('success', function(e) {
+                    const originalText = e.trigger.innerHTML;
+                    e.trigger.innerHTML = '<i class="fas fa-check"></i>';
+
+                    setTimeout(function() {
+                        e.trigger.innerHTML = originalText;
+                    }, 2000);
+
+                    e.clearSelection();
                 });
 
-
+                // Close alert buttons
+                const alertCloseButtons = document.querySelectorAll('.service__alert-close');
+                alertCloseButtons.forEach(button => {
+                    button.addEventListener('click', function() {
+                        this.closest('.service__alert').remove();
+                    });
+                });
             });
         </script>
     @endpush
+
 @endsection

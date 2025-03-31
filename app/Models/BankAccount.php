@@ -15,6 +15,7 @@ class BankAccount extends Model
         'branch',           // Chi nhánh
         'note',             // Ghi chú
         'is_active',        // Trạng thái hiển thị
-        'auto_confirm'      // Trạng thái tự động xác nhận chuyển tiền
+        'auto_confirm',      // Trạng thái tự động xác nhận chuyển tiền
+        'prefix'            // Cú pháp nạp tiền
     ];
 }
