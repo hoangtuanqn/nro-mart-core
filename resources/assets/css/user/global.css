@@ -91,10 +91,6 @@ a {
     /* border-bottom: 1px solid #ccc; */
 }
 
-.nav__logo {
-    aspect-ratio: 4 / 1;
-    height: 50px;
-}
 
 .nav__menu {
     display: flex;
@@ -369,9 +365,6 @@ body.no-scroll {
         padding: 10px 0;
     }
 
-    .nav__logo {
-        height: 45px;
-    }
 
     .nav__menu {
         display: none;

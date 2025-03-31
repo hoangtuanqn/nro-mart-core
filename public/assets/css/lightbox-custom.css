@@ -1,6 +1,7 @@
 /* Custom Lightbox Styling */
 
 .detail__images-item {
+    max-width: 100%;
     cursor: zoom-in !important;
     transition: opacity 0.3s;
     position: relative;

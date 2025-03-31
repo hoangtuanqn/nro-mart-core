@@ -155,13 +155,6 @@
     margin-bottom: 20px;
     text-align: center;
 }
-
-.detail__images-list {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
-}
-
 .detail__images-item {
     width: 100%;
     border-radius: var(--border-radius);

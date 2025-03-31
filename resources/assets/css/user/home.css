@@ -29,7 +29,7 @@
 
 /* Menu Common */
 .menu {
-    margin: 50px 0 80px;
+    margin: 50px 0 60px;
     position: relative;
 }
 
@@ -238,7 +238,7 @@
     }
 
     .transaction__img {
-        width: 120px;
+        width: 150px;
     }
 
     .category__title {
