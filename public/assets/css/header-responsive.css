@@ -1,0 +1,182 @@
+/* Header Responsive Styles
+ * Optimizes the header for different screen sizes
+ */
+
+/* Default Desktop Styles */
+.nav {
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    padding: 10px 0;
+    position: relative;
+    z-index: 100;
+}
+
+.nav .container.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav__logo {
+    height: 50px;
+    object-fit: contain;
+}
+
+.nav__menu {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.menu__item {
+    font-size: 1.6rem;
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: all 0.3s;
+}
+
+.menu__item:hover {
+    background-color: #f8f9fa;
+    color: #ff4d4d;
+}
+
+.menu__item.active {
+    color: #ff4d4d;
+    font-weight: 600;
+}
+
+.nav__action {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.action__link {
+    font-size: 1.5rem;
+    text-decoration: none;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    color: #333;
+    padding: 8px 15px;
+    border-radius: 5px;
+    transition: all 0.3s;
+}
+
+.action__link i {
+    font-size: 1.4rem;
+}
+
+.action__link--primary {
+    background-color: #ff4d4d;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.action__link:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+}
+
+.action__link--primary:hover {
+    background-color: #f9333f;
+}
+
+/* Mobile Menu Toggle Button */
+.menu-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    font-size: 2.4rem;
+    color: #333;
+    cursor: pointer;
+    margin-right: 15px;
+}
+
+/* Tablet Responsive */
+@media (max-width: 992px) {
+    .nav__menu {
+        gap: 10px;
+    }
+
+    .menu__item {
+        font-size: 1.5rem;
+        padding: 5px 8px;
+    }
+
+    .nav__action {
+        gap: 10px;
+    }
+
+    .action__link {
+        font-size: 1.4rem;
+        padding: 6px 12px;
+    }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+        order: 3;
+    }
+
+    .nav__menu,
+    .nav__action {
+        display: none;
+    }
+
+    .nav .container.row {
+        flex-wrap: wrap;
+    }
+
+    .nav__logo {
+        height: 40px;
+        order: 1;
+    }
+
+    .nav__action {
+        order: 2;
+        margin-left: auto;
+    }
+
+    .action__link {
+        font-size: 0;
+        width: 40px;
+        height: 40px;
+        justify-content: center;
+        padding: 0;
+    }
+
+    .action__link i {
+        font-size: 1.8rem;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+    .nav .container.row {
+        padding: 0 10px;
+    }
+
+    .nav__logo {
+        height: 35px;
+    }
+
+    .action__link {
+        width: 38px;
+        height: 38px;
+    }
+
+    .announcement {
+        padding: 8px 0;
+    }
+
+
+}

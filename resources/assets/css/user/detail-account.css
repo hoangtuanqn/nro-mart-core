@@ -137,12 +137,6 @@
     gap: 10px;
 }
 
-.detail__info-label {
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: var(--text-light);
-    min-width: 100px;
-}
 
 .detail__info-value {
     font-size: 1.5rem;

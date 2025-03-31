@@ -2,7 +2,7 @@
 
     <div class="header-left active" style="display: flex; justify-content: center;">
         <a href="{{ route('admin.index') }}" class="logo">
-            <img src="https://imgur.com/hIFVXRo.png" alt="Logo" style="max-height: 40px;">
+            <img src="https://imgur.com/hIFVXRo.png" alt="Logo">
         </a>
         <a href="index.html" class="logo-small">
             <img src="https://i.imgur.com/J46gSIO.png" alt="Logo">

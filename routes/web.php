@@ -71,3 +71,6 @@ Route::prefix('random')->name('random.')->group(function () {
 
 Route::get('/category-all', [GameCategoryController::class, 'showAll'])->name('category.show-all');
 Route::get('/service-all', [GameServiceController::class, 'showAll'])->name('service.show-all');
+
+// Discount code routes
+Route::post('/discount-code/validate', [\App\Http\Controllers\DiscountCodeController::class, 'validateCode'])->name('discount.validate');

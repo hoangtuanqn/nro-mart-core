@@ -72,7 +72,11 @@
                     </h2>
                     <div class="detail__images-list">
                         @foreach ($images as $image)
-                            <img src="{{ $image }}" alt="Account Preview" class="detail__images-item">
+                            <a href="{{ $image }}" title="Xem ảnh lớn" class="detail__images-link">
+                                <img src="{{ $image }}"
+                                    alt="Tài khoản #{{ $account->id }} - Ảnh {{ $loop->iteration }}"
+                                    class="detail__images-item">
+                            </a>
                         @endforeach
                     </div>
                 </div>
@@ -100,17 +104,19 @@
                     </div>
                     <div class="modal__row">
                         <span class="modal__label">Giá tiền:</span>
-                        <span class="modal__value modal__value--price">{{ number_format($account->price) }} đ</span>
+                        <span class="modal__value modal__value--price"
+                            id="account-price">{{ number_format($account->price) }} đ</span>
                     </div>
                 </div>
 
                 <div class="modal__discount">
                     <div class="modal__row">
-                        <input type="text" class="modal__input" placeholder="Nhập mã giảm giá nếu có">
+                        <input type="text" id="discount-code" class="modal__input" placeholder="Nhập mã giảm giá nếu có">
+                        <button class="modal__btn modal__btn--check" onclick="checkDiscountCode('account')">Kiểm
+                            tra</button>
                     </div>
+                    <div id="discount-message" class="modal__discount-message"></div>
                 </div>
-
-
 
                 @auth
                     @if (Auth::user()->balance < $account->price)
@@ -144,11 +150,28 @@
     </div>
     @push('scripts')
         <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Initialize the lightbox for account images
+                const lightbox = new SimpleLightbox('.detail__images-link', {
+                    captionPosition: 'bottom',
+                    captionsData: 'alt',
+                    closeText: '×',
+                    navText: ['←', '→'],
+                    animationSpeed: 250,
+                    enableKeyboard: true,
+                    scaleImageToRatio: true,
+                    disableRightClick: true
+                });
+            });
+
             function buyAccount(accountId) {
                 const modal = document.getElementById('purchaseModal');
                 if (modal) {
                     modal.style.display = 'block';
                     document.body.style.overflow = 'hidden';
+
+                    // Initialize discount handler
+                    initDiscountHandler('account', accountId, {{ $account->price }});
                 }
             }
 
@@ -157,12 +180,20 @@
                     return;
                 }
 
+                // Get discount information
+                const discountInfo = getDiscountInfo();
+
+                const data = {
+                    discount_code: discountInfo.discountCode
+                };
+
                 fetch(`/account/${accountId}/purchase`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
                             'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                        }
+                        },
+                        body: JSON.stringify(data)
                     })
                     .then(response => response.json())
                     .then(data => {

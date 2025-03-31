@@ -52,7 +52,7 @@
 
                     <div class="detail__info-row">
                         <div class="detail__info-label">Giá:</div>
-                        <div class="detail__info-value">{{ number_format($account->price) }}đ</div>
+                        <div class="detail__info-value account-price-value">{{ number_format($account->price) }}đ</div>
                     </div>
 
                     @if (!empty($account->note))
@@ -70,7 +70,11 @@
                                 class="text-danger">#{{ $account->id }}</span>
                         </h2>
                         <div class="detail__images-list">
-                            <img src="{{ $account->thumbnail }}" alt="Account Preview" class="detail__images-item">
+                            <!-- Using data-src instead of src for SimpleLightbox -->
+                            <a href="{{ $account->thumbnail }}" title="Xem ảnh lớn" class="detail__images-link">
+                                <img src="{{ $account->thumbnail }}" alt="Tài khoản Random #{{ $account->id }}"
+                                    class="detail__images-item">
+                            </a>
                         </div>
                     </div>
                 @endif
@@ -99,14 +103,15 @@
                     <div class="modal__row">
                         <span class="modal__label">Giá tiền:</span>
                         <span class="modal__value modal__value--price"
-                            id="account-price">{{ number_format($account->price) }} đ</span>
+                            id="account-price">{{ number_format($account->price) }}đ</span>
                     </div>
                 </div>
 
                 <div class="modal__discount">
                     <div class="modal__row">
                         <input type="text" id="discount-code" class="modal__input" placeholder="Nhập mã giảm giá nếu có">
-                        <button class="modal__btn modal__btn--check" onclick="checkDiscountCode()">Kiểm tra</button>
+                        <button class="modal__btn modal__btn--check" onclick="checkDiscountCode('random_account')">Kiểm
+                            tra</button>
                     </div>
                     <div id="discount-message" class="modal__discount-message"></div>
                 </div>
@@ -114,7 +119,7 @@
                 @auth
                     @if (Auth::user()->balance < $account->price)
                         <div class="modal__notice">
-                            Bạn cần thêm {{ number_format($account->price - Auth::user()->balance) }} đ để mua tài khoản này.
+                            Bạn cần thêm {{ number_format($account->price - Auth::user()->balance) }}đ để mua tài khoản này.
                             Bạn hãy click vào nút nạp thẻ để nạp thêm và mua tài khoản.
                         </div>
                     @endif
@@ -145,15 +150,28 @@
 
 @push('scripts')
     <script>
-        let discountCode = '';
-        let originalPrice = {{ $account->price }};
-        let discountedPrice = originalPrice;
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize the lightbox for detail images
+            const lightbox = new SimpleLightbox('.detail__images-link', {
+                captionPosition: 'bottom',
+                captionsData: 'alt',
+                closeText: '×',
+                navText: ['←', '→'],
+                animationSpeed: 250,
+                enableKeyboard: true,
+                scaleImageToRatio: true,
+                disableRightClick: true
+            });
+        });
 
         function buyAccount(accountId) {
             const modal = document.getElementById('purchaseModal');
             if (modal) {
                 modal.style.display = 'block';
                 document.body.style.overflow = 'hidden';
+
+                // Initialize discount handler
+                initDiscountHandler('random_account', accountId, {{ $account->price }});
             }
         }
 
@@ -165,34 +183,16 @@
             }
         }
 
-        function checkDiscountCode() {
-            discountCode = document.getElementById('discount-code').value.trim();
-            const messageElement = document.getElementById('discount-message');
-
-            if (!discountCode) {
-                messageElement.innerHTML = 'Vui lòng nhập mã giảm giá!';
-                messageElement.className = 'modal__discount-message modal__discount-message--error';
-                return;
-            }
-
-            // Giả lập kiểm tra mã giảm giá
-            // Trong thực tế, gửi request đến server để kiểm tra
-            messageElement.innerHTML = 'Đang kiểm tra mã...';
-            messageElement.className = 'modal__discount-message';
-
-            // Reset price to original
-            discountedPrice = originalPrice;
-            document.getElementById('account-price').textContent = new Intl.NumberFormat('vi-VN').format(discountedPrice) +
-                ' đ';
-        }
-
         function purchaseAccount(accountId) {
             if (!confirm('Bạn có chắc chắn muốn mua tài khoản này?')) {
                 return;
             }
 
+            // Get discount information
+            const discountInfo = getDiscountInfo();
+
             const data = {
-                discount_code: discountCode
+                discount_code: discountInfo.discountCode
             };
 
             fetch(`/random/account/${accountId}/purchase`, {

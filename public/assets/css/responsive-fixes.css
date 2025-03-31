@@ -1,0 +1,178 @@
+/* Responsive Fixes - Mobile and Tablet Layout Improvements
+ * This file contains fixes for responsive issues in mobile and tablet views
+ */
+
+/* Global Responsive Fixes */
+html {
+  font-size: 62.5%; /* 10px as base for easier rem units */
+}
+
+body {
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+/* Fix for Mobile Menu */
+.menu-mobile {
+  z-index: 1050;
+}
+
+/* Mobile Grid Fixes */
+@media (max-width: 480px) {
+  .account-grid,
+  .service-grid,
+  .category__list,
+  .detail__images-list {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  /* Account Card Improvements */
+  .account-card,
+  .service-card {
+    width: 100%;
+    margin: 0 auto 20px;
+  }
+
+  .account-card__image,
+  .service-card__image,
+  .account-media {
+    height: 200px;
+  }
+
+  /* Buttons and Actions */
+  .detail__btn {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 12px 15px;
+    font-size: 1.4rem;
+  }
+
+  .detail__actions {
+    flex-direction: column;
+  }
+
+  /* Modal Fixes */
+  .modal__content,
+  .service-modal__content {
+    width: 95%;
+    margin: 10px auto;
+  }
+
+
+
+  .modal__label,
+  .service-modal__label {
+    margin-bottom: 5px;
+  }
+
+  .modal__discount .modal__row,
+  .service-modal__discount-row {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .modal__input,
+  .service-modal__discount-input,
+  .modal__btn--check,
+  .service-modal__discount-button {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 12px 0;
+  }
+
+  .modal__footer,
+  .service-modal__footer {
+    flex-direction: column;
+  }
+
+  .modal__btn,
+  .service-modal__btn {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+
+/* Tablet Grid Fixes */
+@media (min-width: 481px) and (max-width: 768px) {
+  .account-grid,
+  .service-grid,
+  .category__list {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 15px;
+  }
+
+  .detail__images-list {
+    grid-template-columns: 1fr;
+  }
+
+  /* Buttons and Actions */
+  .detail__btn {
+    padding: 12px 15px;
+    font-size: 1.5rem;
+    flex: 1;
+  }
+
+  .detail__actions {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  /* Modal Fixes */
+  .modal__content,
+  .service-modal__content {
+    width: 90%;
+    margin: 20px auto;
+  }
+}
+
+/* Larger Tablets and Small Desktops */
+@media (min-width: 769px) and (max-width: 992px) {
+  .account-grid,
+  .service-grid,
+  .category__list {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 20px;
+  }
+}
+
+/* Font Size Adjustments for Mobile */
+@media (max-width: 480px) {
+  h1, .h1 {
+    font-size: 2.4rem;
+  }
+
+  h2, .h2 {
+    font-size: 2rem;
+  }
+
+  h3, .h3 {
+    font-size: 1.8rem;
+  }
+
+  p {
+    font-size: 1.4rem;
+  }
+
+  .section-title {
+    font-size: 2.2rem;
+  }
+
+  .detail__info-title,
+  .detail__images-title {
+    font-size: 1.8rem;
+  }
+}

@@ -8,14 +8,31 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>@yield('title', 'Shop của Hoàng Tuấn')</title>
 
     <!-- CSS -->
     @vite(['resources/assets/css/app.css'])
+    <!-- Random Accounts CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/random-accounts.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/random-account-detail.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/random-categories.css') }}" />
+
+    <!-- Game Accounts CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/css/game-accounts.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/game-account-detail.css') }}" />
+
+    <!-- Services CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/css/service-cards.css') }}" />
+
+    <!-- Responsive Fixes -->
+    <link rel="stylesheet" href="{{ asset('assets/css/responsive-fixes.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/mobile-menu.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/header-responsive.css') }}" />
+
+    <!-- Lightbox CSS -->
+    <link rel="stylesheet" href="{{ asset('assets/libs/simplelightbox.min.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/lightbox-custom.css') }}" />
 
     <!-- Embed Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"

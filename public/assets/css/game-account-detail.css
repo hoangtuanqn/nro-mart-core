@@ -1,4 +1,4 @@
-/* Random Account Detail Page Styling */
+/* Game Account Detail Page Styling */
 .detail {
     padding: 50px 0;
     background-color: #f8f9fa;
@@ -104,11 +104,77 @@
     border-radius: 3px;
 }
 
+
+.detail__info-row:last-child {
+    border-bottom: none;
+    grid-template-columns: unset;
+}
+
+.detail__info-label {
+    min-width: 150px;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #666;
+}
+
 .detail__info-value {
     font-size: 1.7rem;
     color: #333;
     font-weight: 500;
     flex-grow: 1;
+}
+
+/* Account Stats */
+.detail__stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.stat-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid #eaeaea;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+    border-color: #d1d1d1;
+}
+
+.stat-card__icon {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #ff4d4d, #f9333f);
+    color: white;
+    border-radius: 12px;
+    font-size: 2rem;
+}
+
+.stat-card__content {
+    flex-grow: 1;
+}
+
+.stat-card__label {
+    font-size: 1.4rem;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.stat-card__value {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #333;
 }
 
 /* Images Section */
@@ -140,15 +206,17 @@
 
 .detail__images-list {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 20px;
 }
 
 .detail__images-item {
-    max-width: 100%;
+    width: 100%;
+    height: auto;
     border-radius: 10px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     transition: transform 0.3s ease;
+    cursor: pointer;
 }
 
 .detail__images-item:hover {
@@ -229,10 +297,6 @@
     display: flex;
     align-items: center;
     margin-bottom: 15px;
-}
-
-.modal__row:last-child {
-    margin-bottom: 0;
 }
 
 .modal__label {
@@ -366,6 +430,80 @@
     background: #d0d0d0;
 }
 
+/* Image Viewer Modal */
+.image-viewer {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 1100;
+    padding: 40px;
+}
+
+.image-viewer__content {
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.image-viewer__img {
+    max-width: 100%;
+    max-height: 80vh;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.image-viewer__close {
+    position: absolute;
+    top: -30px;
+    right: 0;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 3rem;
+    cursor: pointer;
+}
+
+.image-viewer__close:hover {
+    color: #ff4d4d;
+}
+
+.image-viewer__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 2.4rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.image-viewer__nav:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.image-viewer__prev {
+    left: -60px;
+}
+
+.image-viewer__next {
+    right: -60px;
+}
+
 /* Responsive Styles */
 @media (max-width: 992px) {
     .detail__content {
@@ -379,6 +517,27 @@
     .detail__btn {
         flex: 1;
         min-width: 160px;
+    }
+
+    .detail__stats {
+        grid-template-columns: 1fr;
+    }
+
+    .detail__images-list {
+        grid-template-columns: 1fr;
+    }
+
+    .image-viewer__nav {
+        width: 40px;
+        height: 40px;
+    }
+
+    .image-viewer__prev {
+        left: 10px;
+    }
+
+    .image-viewer__next {
+        right: 10px;
     }
 }
 
@@ -423,6 +582,7 @@
         padding: 20px;
     }
 
+
     .detail__info-label {
         margin-bottom: 5px;
     }
@@ -433,5 +593,9 @@
 
     .modal__btn {
         width: 100%;
+    }
+
+    .image-viewer {
+        padding: 20px;
     }
 }

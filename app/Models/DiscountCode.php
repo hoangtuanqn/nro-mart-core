@@ -16,23 +16,50 @@ class DiscountCode extends Model
 {
     use HasFactory;
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
         'code',
-        'description',
-        'type',
-        'value',
-        'max_discount',
+        'discount_type',
+        'discount_value',
+        'max_discount_value',
+        'min_purchase_amount',
+        'status',
         'usage_limit',
-        'is_active',
-        'expires_at',
+        'usage_count',
+        'per_user_limit',
+        'applicable_to',
+        'item_ids',
+        'expire_date',
+        'description'
     ];
 
+    /**
+     * The attributes that should be cast.
+     *
+     * @var array
+     */
     protected $casts = [
-        'value' => 'decimal:2',
-        'max_discount' => 'decimal:2',
-        'is_active' => 'boolean',
-        'expires_at' => 'datetime',
+        'expire_date' => 'datetime',
+        'item_ids' => 'json',
+        'usage_limit' => 'integer',
+        'usage_count' => 'integer',
+        'per_user_limit' => 'integer',
+        'discount_value' => 'float',
+        'max_discount_value' => 'float',
+        'min_purchase_amount' => 'float',
     ];
+
+    /**
+     * Get the discount code usages.
+     */
+    public function usages()
+    {
+        return $this->hasMany(DiscountCodeUsage::class);
+    }
 
     /**
      * Check if the discount code is valid
@@ -41,8 +68,8 @@ class DiscountCode extends Model
      */
     public function isValid(): bool
     {
-        return $this->is_active &&
-               $this->usage_limit > 0 &&
-               ($this->expires_at === null || $this->expires_at > now());
+        return $this->status === 'active' &&
+            $this->usage_limit > 0 &&
+            ($this->expire_date === null || $this->expire_date > now());
     }
 }
