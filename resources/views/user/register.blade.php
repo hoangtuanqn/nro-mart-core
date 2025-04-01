@@ -20,7 +20,7 @@
                     <h1 class="register-title">Đăng ký tài khoản</h1>
                     <p class="register-subtitle">Tạo tài khoản để mua game dễ dàng hơn</p>
                 </div>
-
+                <x-alert-error/>
                 <form method="POST" action="{{ route('register') }}" class="register-form">
                     @csrf
 

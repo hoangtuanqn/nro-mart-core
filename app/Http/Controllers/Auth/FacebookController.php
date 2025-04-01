@@ -35,7 +35,6 @@ class FacebookController extends Controller
 
             // Check if the user already exists in the system
             $existingUser = User::where('email', $facebookUser->email)->first();
-
             if ($existingUser) {
                 // User exists, update facebook_id if not present
                 if (empty($existingUser->facebook_id)) {
@@ -56,6 +55,7 @@ class FacebookController extends Controller
                     $counter++;
                 }
 
+
                 // Create a new user
                 $newUser = User::create([
                     'username' => $username,
@@ -70,10 +70,12 @@ class FacebookController extends Controller
                 return redirect()->intended(route('home'))
                     ->with('success', 'Bạn đã đăng ký tài khoản thành công');
             }
+
         } catch (Exception $e) {
             Log::error('Facebook login error: ' . $e->getMessage());
+            // dd($e->getMessage());
             return redirect()->route('login')
-                ->with('error', 'Đăng nhập  thất bại. Vui lòng thử lại sau.');
+                ->with('error', 'Đăng nhập thất bại. Vui lòng thử lại sau.');
         }
     }
 }

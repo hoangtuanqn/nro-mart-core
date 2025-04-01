@@ -20,7 +20,15 @@
                     <h1 class="register-title">Đăng nhập</h1>
                     <p class="register-subtitle">Đăng nhập để tiếp tục mua game</p>
                 </div>
-
+                @if (session('error'))
+                    <div class="service__alert service__alert--error">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <div>
+                            <span>{{ session('error') }}</span>
+                        </div>
+                        <button type="button" class="service__alert-close">&times;</button>
+                    </div>
+                @endif
                 <form method="POST" action="{{ route('login') }}" class="register-form">
                     @csrf
 

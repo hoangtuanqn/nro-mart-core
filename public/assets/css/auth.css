@@ -1,6 +1,6 @@
 /* Google Login Button Styles */
 .social-login {
-    margin-top: 20px;
+    margin-top: 40px;
     text-align: center;
 }
 
@@ -14,8 +14,8 @@
 .social-login-text::after {
     content: '';
     position: absolute;
-    top: 50%;
-    width: 45%;
+    top: -50%;
+    width: 50%;
     height: 1px;
     background-color: #ddd;
 }
