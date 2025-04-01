@@ -8,7 +8,7 @@
 
 @extends('layouts.user.app')
 
-@section('title', strtoupper($category->name))
+@section('title', $title)
 
 @section('content')
     <x-hero-header title="{{ strtoupper($category->name) }}" description="{{ $category->description }}" />

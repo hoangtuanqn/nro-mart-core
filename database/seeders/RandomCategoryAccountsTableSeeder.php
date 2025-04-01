@@ -24,7 +24,7 @@ class RandomCategoryAccountsTableSeeder extends Seeder
                 'server' => 1,
                 'buyer_id' => null,
                 'note' => 'Tài khoản cấp 50.',
-                'thumbnail' => 'images/account1.jpg',
+                'thumbnail' => 'https://cdn3.upanh.info/upload/server-sw3/images/Valentine/Nick/Th%E1%BB%AD%20V%E1%BA%ADn%20May%20Ng%E1%BB%8Dc%20R%E1%BB%93ng%20Vip%203.jpg',
             ],
             [
                 'random_category_id' => $categoryId,
@@ -35,7 +35,7 @@ class RandomCategoryAccountsTableSeeder extends Seeder
                 'server' => 2,
                 'buyer_id' => 1, // Giả sử đã có user_id = 1
                 'note' => 'Tài khoản có skin hiếm.',
-                'thumbnail' => 'images/account2.jpg',
+                'thumbnail' => 'https://cdn3.upanh.info/upload/server-sw3/images/Valentine/Nick/Th%E1%BB%AD%20V%E1%BA%ADn%20May%20Ng%E1%BB%8Dc%20R%E1%BB%93ng%20Vip%203.jpg',
             ],
             [
                 'random_category_id' => $categoryId,
@@ -57,7 +57,7 @@ class RandomCategoryAccountsTableSeeder extends Seeder
                 'server' => 4,
                 'buyer_id' => null,
                 'note' => 'Tài khoản đặc biệt.',
-                'thumbnail' => 'images/account4.jpg',
+                'thumbnail' => 'https://cdn3.upanh.info/upload/server-sw3/images/Valentine/Nick/Th%E1%BB%AD%20V%E1%BA%ADn%20May%20Ng%E1%BB%8Dc%20R%E1%BB%93ng%20Vip%203.jpg',
             ],
             [
                 'random_category_id' => $categoryId,
@@ -79,7 +79,7 @@ class RandomCategoryAccountsTableSeeder extends Seeder
                 'server' => 6,
                 'buyer_id' => null,
                 'note' => 'Tài khoản VIP.',
-                'thumbnail' => 'images/account6.jpg',
+                'thumbnail' => 'https://cdn3.upanh.info/upload/server-sw3/images/Valentine/Nick/Th%E1%BB%AD%20V%E1%BA%ADn%20May%20Ng%E1%BB%8Dc%20R%E1%BB%93ng%20Vip%203.jpg',
             ],
             [
                 'random_category_id' => $categoryId,
@@ -101,7 +101,7 @@ class RandomCategoryAccountsTableSeeder extends Seeder
                 'server' => 8,
                 'buyer_id' => 3, // Giả sử đã có user_id = 3
                 'note' => 'Tài khoản đã qua sử dụng.',
-                'thumbnail' => 'images/account8.jpg',
+                'thumbnail' => 'https://cdn3.upanh.info/upload/server-sw3/images/Valentine/Nick/Th%E1%BB%AD%20V%E1%BA%ADn%20May%20Ng%E1%BB%8Dc%20R%E1%BB%93ng%20Vip%203.jpg',
             ],
             [
                 'random_category_id' => $categoryId,
@@ -123,7 +123,7 @@ class RandomCategoryAccountsTableSeeder extends Seeder
                 'server' => 10,
                 'buyer_id' => null,
                 'note' => 'Tài khoản cao cấp nhất.',
-                'thumbnail' => 'images/account10.jpg',
+                'thumbnail' => 'https://cdn3.upanh.info/upload/server-sw3/images/Valentine/Nick/Th%E1%BB%AD%20V%E1%BA%ADn%20May%20Ng%E1%BB%8Dc%20R%E1%BB%93ng%20Vip%203.jpgg',
             ],
         ];
 

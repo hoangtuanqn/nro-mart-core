@@ -117,7 +117,9 @@
                                             @endforeach
                                         @else
                                             <div class="no-bank-accounts">
-                                                <p>Hiện tại không có tài khoản ngân hàng nào được cấu hình</p>
+                                                <p class="text-danger text-bold">Hiện tại không có tài khoản ngân hàng nào
+                                                    được cấu
+                                                    hình</p>
                                             </div>
                                         @endif
                                     </div>

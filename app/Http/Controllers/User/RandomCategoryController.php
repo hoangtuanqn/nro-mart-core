@@ -24,8 +24,8 @@ class RandomCategoryController extends Controller
             ->where('status', 'available')
             ->orderBy('id', 'DESC')
             ->paginate(12);
-
-        return view('user.random.category', compact('category', 'accounts'));
+        $title = mb_strtoupper($category->name, 'UTF-8');
+        return view('user.random.category', compact('category', 'accounts', 'title'));
     }
 
     public function showAll()

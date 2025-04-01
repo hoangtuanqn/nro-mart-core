@@ -31,6 +31,9 @@ class DiscountCodeHandler {
         // Reset any previous discount code
         this.discountCode = '';
 
+        // Reset any previous messages
+        this.showMessage('', 'info');
+
         // Update UI with initial price
         this.updatePriceDisplay(originalPrice);
     }
@@ -81,7 +84,7 @@ class DiscountCodeHandler {
                 this.discountedPrice = this.originalPrice;
                 this.updatePriceDisplay(this.originalPrice);
 
-                this.showMessage(data.message, 'error');
+                this.showMessage(data.message || 'Mã giảm giá không hợp lệ', 'error');
                 return false;
             }
         } catch (error) {
@@ -101,7 +104,7 @@ class DiscountCodeHandler {
         let priceElements = [];
 
         if (this.context === 'account' || this.context === 'random_account') {
-            priceElements = document.querySelectorAll('.modal__value--price, .account-price-value');
+            priceElements = document.querySelectorAll('#account-price, .account-price-value');
         } else if (this.context === 'service') {
             priceElements = document.querySelectorAll('.service-modal__value--price, .service-price-value');
         }
@@ -125,7 +128,7 @@ class DiscountCodeHandler {
         let messageElements = [];
 
         if (this.context === 'account' || this.context === 'random_account') {
-            messageElements = document.querySelectorAll('.modal__discount-message');
+            messageElements = document.querySelectorAll('#discount-message');
         } else if (this.context === 'service') {
             messageElements = document.querySelectorAll('.service-modal__discount-message');
         }
@@ -135,14 +138,13 @@ class DiscountCodeHandler {
             if (element) {
                 element.textContent = message;
 
-                // Remove existing classes
-                element.classList.remove('modal__discount-message--error', 'modal__discount-message--success');
-
-                // Add class based on message type
+                // Set color based on message type
                 if (type === 'error') {
-                    element.classList.add('modal__discount-message--error');
+                    element.style.color = 'red';
                 } else if (type === 'success') {
-                    element.classList.add('modal__discount-message--success');
+                    element.style.color = 'green';
+                } else {
+                    element.style.color = 'blue';
                 }
             }
         });
@@ -182,11 +184,7 @@ function initDiscountHandler(context, itemId, originalPrice) {
  * @param {string} contextSelector - The selector for the discount code input
  */
 async function checkDiscountCode(contextSelector) {
-    const inputSelector = contextSelector === 'service'
-        ? '.service-modal__discount-input'
-        : '#discount-code';
-
-    const codeInput = document.querySelector(inputSelector);
+    const codeInput = document.querySelector('#discount-code');
     if (!codeInput) return;
 
     const code = codeInput.value.trim();

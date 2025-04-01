@@ -16,7 +16,6 @@ use App\Models\GameService;
 use App\Models\ServiceHistory;
 use App\Models\RandomCategory;
 use App\Models\RandomCategoryAccount;
-
 class HomeController extends Controller
 {
     //

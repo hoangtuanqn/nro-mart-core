@@ -138,7 +138,7 @@
                         <a class="modal__btn modal__btn--card" href="{{ route('profile.deposit-card') }}">NẠP THẺ CÀO</a>
                         <button class="modal__btn modal__btn--wallet" onclick="showRechargeModal('wallet')">NẠP ATM</button>
                     @else
-                        <button class="modal__btn modal__btn--card" onclick="purchaseAccount({{ $account->id }})">XÁC NHẬN
+                        <button class="modal__btn modal__btn--card" onclick="submitPurchase()">XÁC NHẬN
                             MUA</button>
                     @endif
                 @else
@@ -175,47 +175,48 @@
                 }
             }
 
-            function purchaseAccount(accountId) {
-                if (!confirm('Bạn có chắc chắn muốn mua tài khoản này?')) {
-                    return;
-                }
-
-                // Get discount information
+            function submitPurchase() {
+                const accountId = {{ $account->id }};
                 const discountInfo = getDiscountInfo();
-
-                const data = {
-                    discount_code: discountInfo.discountCode
-                };
 
                 fetch(`/account/${accountId}/purchase`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                         },
-                        body: JSON.stringify(data)
+                        body: JSON.stringify({
+                            discount_code: discountInfo.discountCode
+                        })
                     })
                     .then(response => response.json())
                     .then(data => {
                         if (data.success) {
-                            alert('Mua tài khoản thành công!');
-
-                            // Update balance display if exists
-                            const balanceElement = document.querySelector('.balance-value');
-                            if (balanceElement) {
-                                balanceElement.textContent = new Intl.NumberFormat('vi-VN').format(data.data.new_balance) +
-                                    ' VND';
-                            }
-
-                            // Reload page to update UI
-                            window.location.href = '{{ route('profile.purchased-accounts') }}';
+                            Swal.fire({
+                                title: 'Thành công!',
+                                text: data.message,
+                                icon: 'success',
+                                confirmButtonText: 'OK'
+                            }).then(() => {
+                                window.location.href = data.redirect_url;
+                            });
                         } else {
-                            alert(data.message || 'Có lỗi xảy ra khi mua tài khoản');
+                            Swal.fire({
+                                title: 'Lỗi!',
+                                text: data.message,
+                                icon: 'error',
+                                confirmButtonText: 'OK'
+                            });
                         }
                     })
                     .catch(error => {
                         console.error('Error:', error);
-                        alert('Có lỗi xảy ra khi mua tài khoản');
+                        Swal.fire({
+                            title: 'Lỗi!',
+                            text: 'Đã xảy ra lỗi khi xử lý giao dịch',
+                            icon: 'error',
+                            confirmButtonText: 'OK'
+                        });
                     });
             }
 

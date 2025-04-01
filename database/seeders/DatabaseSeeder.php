@@ -25,8 +25,12 @@ class DatabaseSeeder extends Seeder
             GameAccountSeeder::class,
             GameServicesSeeder::class,
             ServicePackagesSeeder::class,
-            ConfigSeeder::class
+            ConfigSeeder::class,
+            RandomCategoriesTableSeeder::class,
+            RandomCategoryAccountsTableSeeder::class
         ]);
+        //php artisan migrate
+        // php artisan db:seed
     }
 }
 // Chạy câu lệnh: php artisan db:seed

@@ -91,7 +91,6 @@ a {
     /* border-bottom: 1px solid #ccc; */
 }
 
-
 .nav__menu {
     display: flex;
     margin-left: auto;
@@ -115,7 +114,7 @@ a {
 .action__link {
     font-size: 1.4rem;
     text-align: center;
-    min-width: 120px;
+    /* min-width: 120px; */
     padding: 8px 18px;
     border-radius: 20px;
     border: 1px solid #e2e2e2;

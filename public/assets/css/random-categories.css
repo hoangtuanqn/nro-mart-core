@@ -57,7 +57,7 @@
 }
 
 .category__desc {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     color: #666;
     margin-bottom: 10px;
     text-align: center;
@@ -136,9 +136,6 @@
         margin: 20px 0 10px;
     }
 
-    .category__desc {
-        font-size: 1.6rem;
-    }
 }
 
 @media (max-width: 480px) {

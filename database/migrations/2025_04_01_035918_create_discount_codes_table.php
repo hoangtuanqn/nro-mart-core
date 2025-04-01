@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->id(); // Khóa chính tự động tăng
             $table->string('code')->unique(); // Mã giảm giá, phải là duy nhất
             $table->enum('discount_type', ['percentage', 'fixed_amount'])->default('percentage'); // Loại giảm giá: phần trăm hoặc số tiền cố định
-            $table->decimal('discount_value', 10, 2); // Giá trị giảm giá
+            $table->decimal('discount_value', 10, 2)->default(0); // Giá trị giảm giá
             $table->decimal('max_discount_value', 10, 2)->nullable(); // Giá trị giảm giá tối đa
             $table->decimal('min_purchase_amount', 10, 2)->default(0); // Số tiền mua tối thiểu để áp dụng mã
             $table->enum('status', ['active', 'inactive'])->default('active'); // Trạng thái của mã: hoạt động hoặc không hoạt động

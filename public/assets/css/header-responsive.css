@@ -63,7 +63,7 @@
     align-items: center;
     gap: 5px;
     color: #333;
-    padding: 8px 15px;
+    /* padding: 8px 15px; */
     border-radius: 5px;
     transition: all 0.3s;
 }

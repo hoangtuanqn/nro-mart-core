@@ -8,6 +8,8 @@ use App\Models\RandomCategoryAccount;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class DiscountCodeController extends Controller
 {
@@ -127,18 +129,18 @@ class DiscountCodeController extends Controller
     {
         switch ($context) {
             case 'account':
-                // Get price from Account model
-                $account = Account::find($itemId);
+                // Get price from accounts table
+                $account = DB::table('accounts')->where('id', $itemId)->first();
                 return $account ? $account->price : 0;
 
             case 'random_account':
-                // Get price from RandomAccount model
-                $randomAccount = RandomCategoryAccount::find($itemId);
+                // Get price from random_category_accounts table
+                $randomAccount = DB::table('random_category_accounts')->where('id', $itemId)->first();
                 return $randomAccount ? $randomAccount->price : 0;
 
             case 'service':
-                // Get price from Service model
-                $service = Service::find($itemId);
+                // Get price from services table
+                $service = DB::table('services')->where('id', $itemId)->first();
                 return $service ? $service->price : 0;
 
             default:
@@ -180,19 +182,28 @@ class DiscountCodeController extends Controller
      */
     public function applyDiscountCode($discountCode, $context, $itemId, $userId, $originalPrice, $discountedPrice)
     {
-        // Increment usage count
-        $discountCode->usage_count++;
-        $discountCode->save();
+        try {
+            // Increment usage count
+            DB::table('discount_codes')
+                ->where('id', $discountCode->id)
+                ->increment('usage_count');
 
-        // Record usage
-        $discountCode->usages()->create([
-            'user_id' => $userId,
-            'context' => $context,
-            'item_id' => $itemId,
-            'original_price' => $originalPrice,
-            'discounted_price' => $discountedPrice,
-            'discount_amount' => $originalPrice - $discountedPrice,
-            'used_at' => now()
-        ]);
+            // Record usage
+            DB::table('discount_code_usages')->insert([
+                'discount_code_id' => $discountCode->id,
+                'user_id' => $userId,
+                'context' => $context,
+                'item_id' => $itemId,
+                'original_price' => $originalPrice,
+                'discounted_price' => $discountedPrice,
+                'discount_amount' => $originalPrice - $discountedPrice,
+                'used_at' => now(),
+                'created_at' => now(),
+                'updated_at' => now()
+            ]);
+        } catch (\Exception $e) {
+            // Log error but don't fail transaction
+            Log::error('Error applying discount code: ' . $e->getMessage());
+        }
     }
 }

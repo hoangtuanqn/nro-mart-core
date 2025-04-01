@@ -71,7 +71,20 @@ class GameCategoryController extends Controller
     public function showAll()
     {
         $title = 'Danh mục bán nick game';
+
+        // Get all categories with additional statistics
         $categories = Category::all();
+
+        foreach ($categories as $category) {
+            // Total accounts in this category
+            $category->allAccount = GameAccount::where('game_category_id', $category->id)->count();
+
+            // Sold accounts in this category
+            $category->soldCount = GameAccount::where('game_category_id', $category->id)
+                ->where('status', 'sold')
+                ->count();
+        }
+
         return view('user.category.show-all', compact('categories', 'title'));
     }
 }
