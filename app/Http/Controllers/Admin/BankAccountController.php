@@ -98,9 +98,28 @@ class BankAccountController extends Controller
      */
     public function destroy(BankAccount $bankAccount)
     {
-        $bankAccount->delete();
+        try {
+            $bankAccount->delete();
 
-        return redirect()->route('admin.bank-accounts.index')
-            ->with('success', 'Tài khoản ngân hàng đã được xóa thành công.');
+            if (request()->ajax()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Tài khoản ngân hàng đã được xóa thành công.'
+                ]);
+            }
+
+            return redirect()->route('admin.bank-accounts.index')
+                ->with('success', 'Tài khoản ngân hàng đã được xóa thành công.');
+        } catch (\Exception $e) {
+            if (request()->ajax()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Không thể xóa tài khoản ngân hàng. Lỗi: ' . $e->getMessage()
+                ], 500);
+            }
+
+            return redirect()->route('admin.bank-accounts.index')
+                ->with('error', 'Không thể xóa tài khoản ngân hàng. Lỗi: ' . $e->getMessage());
+        }
     }
 }

@@ -52,7 +52,19 @@ class DiscountCodeController extends Controller
             $data['code'] = Str::upper(Str::random(8));
         }
 
-        DiscountCode::create($data);
+        // Map field names to match the database column names
+        $discountCode = new DiscountCode();
+        $discountCode->code = $data['code'];
+        $discountCode->description = $data['description'] ?? null;
+        $discountCode->discount_type = $data['type'];
+        $discountCode->discount_value = $data['value'];
+        $discountCode->max_discount_value = $data['max_discount'] ?? null;
+        $discountCode->min_purchase_amount = 0; // Default value
+        $discountCode->status = $data['is_active'] ? 'active' : 'inactive';
+        $discountCode->usage_limit = $data['usage_limit'];
+        $discountCode->usage_count = 0;
+        $discountCode->expire_date = $data['expires_at'] ?? null;
+        $discountCode->save();
 
         return redirect()->route('admin.discount-codes.index')
             ->with('success', 'Mã giảm giá đã được tạo thành công!');
@@ -82,7 +94,16 @@ class DiscountCodeController extends Controller
             $data['is_active'] = false;
         }
 
-        $discountCode->update($data);
+        // Map field names to match the database column names
+        $discountCode->code = $data['code'];
+        $discountCode->description = $data['description'] ?? null;
+        $discountCode->discount_type = $data['type'];
+        $discountCode->discount_value = $data['value'];
+        $discountCode->max_discount_value = $data['max_discount'] ?? null;
+        $discountCode->status = $data['is_active'] ? 'active' : 'inactive';
+        $discountCode->usage_limit = $data['usage_limit'];
+        $discountCode->expire_date = $data['expires_at'] ?? null;
+        $discountCode->save();
 
         return redirect()->route('admin.discount-codes.index')
             ->with('success', 'Mã giảm giá đã được cập nhật thành công!');
@@ -90,9 +111,28 @@ class DiscountCodeController extends Controller
 
     public function destroy(DiscountCode $discountCode)
     {
-        $discountCode->delete();
+        try {
+            $discountCode->delete();
 
-        return redirect()->route('admin.discount-codes.index')
-            ->with('success', 'Mã giảm giá đã được xóa thành công!');
+            if (request()->ajax()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Mã giảm giá đã được xóa thành công!'
+                ]);
+            }
+
+            return redirect()->route('admin.discount-codes.index')
+                ->with('success', 'Mã giảm giá đã được xóa thành công!');
+        } catch (\Exception $e) {
+            if (request()->ajax()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Không thể xóa mã giảm giá. Lỗi: ' . $e->getMessage()
+                ]);
+            }
+
+            return redirect()->route('admin.discount-codes.index')
+                ->with('error', 'Không thể xóa mã giảm giá. Lỗi: ' . $e->getMessage());
+        }
     }
 }

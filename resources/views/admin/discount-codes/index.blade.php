@@ -26,7 +26,7 @@
                                 </a>
                             </div>
                         </div>
-                       
+
                     </div>
 
                     <div class="table-responsive">
@@ -60,22 +60,22 @@
                                         </td>
                                         <td>{{ $discountCode->id }}</td>
                                         <td class="text-bolds">{{ $discountCode->code }}</td>
-                                        <td>{{ $discountCode->type === 'percentage' ? 'Phần trăm' : 'Số tiền cố định' }}
+                                        <td>{{ $discountCode->discount_type === 'percentage' ? 'Phần trăm' : 'Số tiền cố định' }}
                                         </td>
                                         <td>
-                                            @if ($discountCode->type === 'percentage')
-                                                {{ $discountCode->value }}%
+                                            @if ($discountCode->discount_type === 'percentage')
+                                                {{ $discountCode->discount_value }}%
                                             @else
-                                                {{ number_format($discountCode->value) }}đ
+                                                {{ number_format($discountCode->discount_value) }}đ
                                             @endif
                                         </td>
                                         <td>{{ $discountCode->usage_limit }}</td>
-                                        <td>{{ $discountCode->expires_at ? $discountCode->expires_at->format('d/m/Y') : 'Không hết hạn' }}
+                                        <td>{{ $discountCode->expire_date ? date('d/m/Y', strtotime($discountCode->expire_date)) : 'Không hết hạn' }}
                                         </td>
                                         <td>
                                             <span
-                                                class="badges {{ $discountCode->is_active ? 'bg-lightgreen' : 'bg-lightred' }}">
-                                                {{ $discountCode->is_active ? 'Hoạt động' : 'Không hoạt động' }}
+                                                class="badges {{ $discountCode->status === 'active' ? 'bg-lightgreen' : 'bg-lightred' }}">
+                                                {{ $discountCode->status === 'active' ? 'Hoạt động' : 'Không hoạt động' }}
                                             </span>
                                         </td>
                                         <td class="text-center">
@@ -93,18 +93,12 @@
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="javascript:void(0);" class="dropdown-item confirm-text"
-                                                        onclick="event.preventDefault(); document.getElementById('delete-form-{{ $discountCode->id }}').submit();">
+                                                    <a href="javascript:void(0);" class="dropdown-item"
+                                                        onclick="showDeleteModal({{ $discountCode->id }})">
                                                         <img src="{{ asset('assets/img/icons/delete.svg') }}"
                                                             class="me-2" alt="img">
                                                         Xóa mã
                                                     </a>
-                                                    <form id="delete-form-{{ $discountCode->id }}"
-                                                        action="{{ route('admin.discount-codes.destroy', $discountCode->id) }}"
-                                                        method="POST" class="d-none">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                    </form>
                                                 </li>
                                             </ul>
                                         </td>
@@ -117,4 +111,86 @@
             </div>
         </div>
     </div>
+
+    <!-- Modal xác nhận xóa -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteModalLabel">Xác nhận xóa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Bạn có chắc chắn muốn xóa mã giảm giá này không? Tất cả dữ liệu có liên quan đến mã giảm giá này sẽ
+                    biến mất khỏi hệ thống!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                    <button type="button" class="btn btn-danger" id="confirmDelete">Xóa</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            let discountCodeId;
+
+            // Store ID when delete button is clicked
+            function showDeleteModal(id) {
+                discountCodeId = id;
+                $('#deleteModal').modal('show');
+            }
+
+            // Make showDeleteModal function globally available
+            window.showDeleteModal = showDeleteModal;
+
+            // Handle confirm delete button click
+            $('#confirmDelete').on('click', function() {
+                $.ajax({
+                    url: "{{ route('admin.discount-codes.destroy', ':id') }}".replace(':id',
+                        discountCodeId),
+                    type: 'DELETE',
+                    data: {
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        $('#deleteModal').modal('hide');
+                        if (response.success) {
+                            // Show success message
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Thành công!',
+                                text: 'Đã xóa mã giảm giá thành công',
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then(() => {
+                                // Reload page
+                                window.location.reload();
+                            });
+                        } else {
+                            // Show error message
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Lỗi!',
+                                text: response.message ||
+                                    'Có lỗi xảy ra khi xóa mã giảm giá',
+                            });
+                        }
+                    },
+                    error: function(xhr) {
+                        $('#deleteModal').modal('hide');
+                        // Show error message
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Lỗi!',
+                            text: 'Có lỗi xảy ra khi xóa mã giảm giá',
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+@endpush

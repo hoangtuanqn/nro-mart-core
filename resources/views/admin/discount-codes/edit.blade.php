@@ -32,10 +32,10 @@
                                     <select name="type" class="form-select @error('type') is-invalid @enderror"
                                         id="discountType">
                                         <option value="percentage"
-                                            {{ old('type', $discountCode->type) == 'percentage' ? 'selected' : '' }}>Phần
+                                            {{ old('type', $discountCode->discount_type) == 'percentage' ? 'selected' : '' }}>Phần
                                             trăm (%)</option>
                                         <option value="fixed"
-                                            {{ old('type', $discountCode->type) == 'fixed' ? 'selected' : '' }}>Số tiền cố
+                                            {{ old('type', $discountCode->discount_type) == 'fixed_amount' ? 'selected' : '' }}>Số tiền cố
                                             định (VNĐ)</option>
                                     </select>
                                     @error('type')
@@ -46,7 +46,7 @@
                             <div class="col-lg-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Giá trị <span class="text-danger">*</span></label>
-                                    <input type="number" name="value" value="{{ old('value', $discountCode->value) }}"
+                                    <input type="number" name="value" value="{{ old('value', $discountCode->discount_value) }}"
                                         class="form-control @error('value') is-invalid @enderror">
                                     @error('value')
                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -57,7 +57,7 @@
                                 <div class="form-group">
                                     <label>Giảm tối đa (0 = không giới hạn)</label>
                                     <input type="number" name="max_discount"
-                                        value="{{ old('max_discount', $discountCode->max_discount) }}"
+                                        value="{{ old('max_discount', $discountCode->max_discount_value) }}"
                                         class="form-control @error('max_discount') is-invalid @enderror">
                                     @error('max_discount')
                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -79,7 +79,7 @@
                                 <div class="form-group">
                                     <label>Ngày hết hạn (để trống = không hết hạn)</label>
                                     <input type="date" name="expires_at"
-                                        value="{{ old('expires_at', $discountCode->expires_at ? $discountCode->expires_at->format('Y-m-d') : '') }}"
+                                        value="{{ old('expires_at', $discountCode->expire_date ? date('Y-m-d', strtotime($discountCode->expire_date)) : '') }}"
                                         class="form-control @error('expires_at') is-invalid @enderror">
                                     @error('expires_at')
                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -91,10 +91,10 @@
                                     <label>Trạng thái <span class="text-danger">*</span></label>
                                     <select name="is_active" class="form-select @error('is_active') is-invalid @enderror">
                                         <option value="1"
-                                            {{ old('is_active', $discountCode->is_active) ? 'selected' : '' }}>Hoạt động
+                                            {{ old('is_active', $discountCode->status) === 'active' ? 'selected' : '' }}>Hoạt động
                                         </option>
                                         <option value="0"
-                                            {{ old('is_active', $discountCode->is_active) ? '' : 'selected' }}>Không hoạt
+                                            {{ old('is_active', $discountCode->status) !== 'active' ? 'selected' : '' }}>Không hoạt
                                             động</option>
                                     </select>
                                     @error('is_active')

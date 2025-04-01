@@ -97,21 +97,45 @@ class RandomCategoryController extends Controller
 
     public function destroy(RandomCategory $category)
     {
-        // Kiểm tra xem có tài khoản nào thuộc danh mục này không
-        if ($category->accounts()->count() > 0) {
+        try {
+            // Kiểm tra xem có tài khoản nào thuộc danh mục này không
+            if ($category->accounts()->count() > 0) {
+                if (request()->ajax()) {
+                    return response()->json([
+                        'success' => false,
+                        'message' => 'Không thể xóa danh mục này vì có tài khoản thuộc danh mục!'
+                    ], 400);
+                }
+                return redirect()->route('admin.random-categories.index')
+                    ->with('error', 'Không thể xóa danh mục này vì có tài khoản thuộc danh mục!');
+            }
+
+            // Delete thumbnail if exists
+            if ($category->thumbnail) {
+                $path = str_replace('/storage', 'public', $category->thumbnail);
+                Storage::delete($path);
+            }
+
+            $category->delete();
+
+            if (request()->ajax()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Danh mục random đã được xóa thành công!'
+                ]);
+            }
+
             return redirect()->route('admin.random-categories.index')
-                ->with('error', 'Không thể xóa danh mục này vì có tài khoản thuộc danh mục!');
+                ->with('success', 'Danh mục random đã được xóa thành công!');
+        } catch (\Exception $e) {
+            if (request()->ajax()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Không thể xóa danh mục random. Lỗi: ' . $e->getMessage()
+                ], 500);
+            }
+            return redirect()->route('admin.random-categories.index')
+                ->with('error', 'Không thể xóa danh mục random. Lỗi: ' . $e->getMessage());
         }
-
-        // Delete thumbnail if exists
-        if ($category->thumbnail) {
-            $path = str_replace('/storage', 'public', $category->thumbnail);
-            Storage::delete($path);
-        }
-
-        $category->delete();
-
-        return redirect()->route('admin.random-categories.index')
-            ->with('success', 'Danh mục random đã được xóa thành công!');
     }
 }

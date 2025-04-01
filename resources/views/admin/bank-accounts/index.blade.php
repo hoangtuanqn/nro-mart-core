@@ -23,6 +23,13 @@
                 </div>
             @endif
 
+            @if (session('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {{ session('error') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
             <div class="card">
                 <div class="card-body">
                     <div class="table-top">
@@ -85,8 +92,8 @@
                                             <a class="me-3" href="{{ route('admin.bank-accounts.edit', $account->id) }}">
                                                 <img src="{{ asset('assets/img/icons/edit.svg') }}" alt="img">
                                             </a>
-                                            <a class="me-3 confirm-text" href="javascript:void(0);" data-bs-toggle="modal"
-                                                data-bs-target="#deleteModal" data-id="{{ $account->id }}">
+                                            <a class="me-3" href="javascript:void(0);"
+                                                onclick="showDeleteModal({{ $account->id }})">
                                                 <img src="{{ asset('assets/img/icons/delete.svg') }}" alt="img">
                                             </a>
                                         </td>
@@ -117,11 +124,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                    <form id="deleteForm" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Xóa</button>
-                    </form>
+                    <button type="button" class="btn btn-danger" id="confirmDelete">Xóa</button>
                 </div>
             </div>
         </div>
@@ -131,10 +134,61 @@
 @push('scripts')
     <script>
         $(document).ready(function() {
-            // Lưu ID và cập nhật form xóa khi click nút xóa
-            $('.confirm-text').on('click', function() {
-                const id = $(this).data('id');
-                $('#deleteForm').attr('action', "{{ route('admin.bank-accounts.destroy', '') }}/" + id);
+            let bankAccountId;
+
+            // Store ID when delete button is clicked
+            function showDeleteModal(id) {
+                bankAccountId = id;
+                $('#deleteModal').modal('show');
+            }
+
+            // Make showDeleteModal function globally available
+            window.showDeleteModal = showDeleteModal;
+
+            // Handle confirm delete button click
+            $('#confirmDelete').on('click', function() {
+                $.ajax({
+                    url: "{{ route('admin.bank-accounts.destroy', ':id') }}".replace(':id',
+                        bankAccountId),
+                    type: 'DELETE',
+                    data: {
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        $('#deleteModal').modal('hide');
+                        if (response.success) {
+                            // Show success message
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Thành công!',
+                                text: 'Đã xóa tài khoản ngân hàng thành công',
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then(() => {
+                                // Reload page
+                                window.location.reload();
+                            });
+                        } else {
+                            // Show error message
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Lỗi!',
+                                text: response.message ||
+                                    'Có lỗi xảy ra khi xóa tài khoản ngân hàng',
+                            });
+                        }
+                    },
+                    error: function(xhr) {
+                        $('#deleteModal').modal('hide');
+                        // Show error message
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Lỗi!',
+                            text: xhr.responseJSON?.message ||
+                                'Có lỗi xảy ra khi xóa tài khoản ngân hàng',
+                        });
+                    }
+                });
             });
         });
     </script>

@@ -171,8 +171,9 @@
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label>SePay Access Token</label>
-                                    <input type="text" class="form-control @error('access_token') is-invalid @enderror" name="access_token"
-                                        placeholder="Nhập Access Token từ SePay.vn" value="{{ old('access_token', $bankAccount->access_token) }}">
+                                    <input type="text" class="form-control @error('access_token') is-invalid @enderror"
+                                        name="access_token" placeholder="Nhập Access Token từ SePay.vn"
+                                        value="{{ old('access_token', $bankAccount->access_token) }}">
                                     @error('access_token')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror

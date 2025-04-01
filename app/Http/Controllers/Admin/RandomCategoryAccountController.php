@@ -102,19 +102,43 @@ class RandomCategoryAccountController extends Controller
     {
         // Only allow deleting accounts that haven't been sold
         if ($account->status === 'sold') {
+            if (request()->ajax()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Không thể xóa tài khoản đã bán!'
+                ], 400); // Bad request status
+            }
             return redirect()->route('admin.random-accounts.index')
                 ->with('error', 'Không thể xóa tài khoản đã bán!');
         }
 
-        // Delete thumbnail if exists
-        if ($account->thumbnail) {
-            $path = str_replace('/storage', 'public', $account->thumbnail);
-            Storage::delete($path);
+        try {
+            // Delete thumbnail if exists
+            if ($account->thumbnail) {
+                $path = str_replace('/storage', 'public', $account->thumbnail);
+                Storage::delete($path);
+            }
+
+            $account->delete();
+
+            if (request()->ajax()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Tài khoản random đã được xóa thành công!'
+                ]);
+            }
+
+            return redirect()->route('admin.random-accounts.index')
+                ->with('success', 'Tài khoản random đã được xóa thành công!');
+        } catch (\Exception $e) {
+            if (request()->ajax()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Không thể xóa tài khoản random. Lỗi: ' . $e->getMessage()
+                ], 500); // Internal server error
+            }
+            return redirect()->route('admin.random-accounts.index')
+                ->with('error', 'Không thể xóa tài khoản random. Lỗi: ' . $e->getMessage());
         }
-
-        $account->delete();
-
-        return redirect()->route('admin.random-accounts.index')
-            ->with('success', 'Tài khoản random đã được xóa thành công!');
     }
 }
