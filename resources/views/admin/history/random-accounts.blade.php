@@ -44,18 +44,18 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($purchases as $purchase)
+                                @foreach ($purchases as $purchase)
                                     <tr>
                                         <td>{{ $purchase->id }}</td>
                                         <td>
                                             <a href="{{ route('admin.users.show', $purchase->user_id) }}">
-                                                {{ $purchase->user->name ?? 'N/A' }}
+                                                {{ $purchase->user->username ?? 'N/A' }}
                                             </a>
                                         </td>
                                         <td>
                                             @if ($purchase->account)
                                                 <a href="{{ route('admin.random-accounts.edit', $purchase->account_id) }}">
-                                                    {{ $purchase->account->username ?? 'ACC#' . $purchase->account_id }}
+                                                    {{ $purchase->account->account_name ?? 'ACC#' . $purchase->account_id }}
                                                 </a>
                                             @else
                                                 <span class="text-danger">Đã xóa</span>
@@ -86,11 +86,7 @@
                                         </td>
                                         <td>{{ $purchase->created_at->format('d/m/Y H:i:s') }}</td>
                                     </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="9" class="text-center">Không có dữ liệu</td>
-                                    </tr>
-                                @endforelse
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

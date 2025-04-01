@@ -44,13 +44,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($deposits as $deposit)
+                                @foreach ($deposits as $deposit)
                                     <tr>
                                         <td>{{ $deposit->id }}</td>
                                         <td>{{ $deposit->transaction_id }}</td>
                                         <td>
                                             <a href="{{ route('admin.users.show', $deposit->user_id) }}">
-                                                {{ $deposit->user->name ?? 'N/A' }}
+                                                {{ $deposit->user->username ?? 'N/A' }}
                                             </a>
                                         </td>
                                         <td>
@@ -82,11 +82,7 @@
                                         </td>
                                         <td>{{ $deposit->created_at->format('d/m/Y H:i:s') }}</td>
                                     </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="9" class="text-center">Không có dữ liệu</td>
-                                    </tr>
-                                @endforelse
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

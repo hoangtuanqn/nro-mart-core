@@ -40,7 +40,7 @@ class AccountPurchase extends Model
      */
     public function account()
     {
-        return $this->belongsTo(Account::class);
+        return $this->belongsTo(GameAccount::class, 'account_id');
     }
 
     /**

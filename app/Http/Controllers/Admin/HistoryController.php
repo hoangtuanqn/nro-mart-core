@@ -10,6 +10,9 @@ use App\Models\ServiceOrder;
 use App\Models\BankDeposit;
 use App\Models\CardDeposit;
 use App\Models\DiscountCodeUsage;
+use App\Models\MoneyTransaction;
+use App\Models\GameAccount;
+use App\Models\ServiceHistory;
 use Illuminate\Http\Request;
 
 class HistoryController extends Controller
@@ -19,8 +22,8 @@ class HistoryController extends Controller
      */
     public function transactions()
     {
-        $title = 'Lịch sử giao dịch';
-        $transactions = Transaction::with('user')->orderBy('created_at', 'desc')->paginate(20);
+        $title = 'Lịch sử giao dịch tiền';
+        $transactions = MoneyTransaction::with('user')->orderBy('created_at', 'desc')->paginate(20);
 
         return view('admin.history.transactions', compact('title', 'transactions'));
     }
@@ -31,9 +34,13 @@ class HistoryController extends Controller
     public function accounts()
     {
         $title = 'Lịch sử mua tài khoản';
-        $purchases = AccountPurchase::with(['user', 'account'])->orderBy('created_at', 'desc')->paginate(20);
+        $accounts = GameAccount::with(['buyer', 'category'])
+            ->where('status', 'sold')
+            ->whereNotNull('buyer_id')
+            ->orderBy('updated_at', 'desc')
+            ->paginate(20);
 
-        return view('admin.history.accounts', compact('title', 'purchases'));
+        return view('admin.history.accounts', compact('title', 'accounts'));
     }
 
     /**
@@ -53,9 +60,11 @@ class HistoryController extends Controller
     public function services()
     {
         $title = 'Lịch sử đặt dịch vụ';
-        $orders = ServiceOrder::with(['user', 'package.service'])->orderBy('created_at', 'desc')->paginate(20);
+        $services = ServiceHistory::with(['user', 'gameService', 'servicePackage'])
+            ->orderBy('created_at', 'desc')
+            ->paginate(20);
 
-        return view('admin.history.services', compact('title', 'orders'));
+        return view('admin.history.services', compact('title', 'services'));
     }
 
     /**

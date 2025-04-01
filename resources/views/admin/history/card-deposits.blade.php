@@ -44,31 +44,31 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($deposits as $deposit)
+                                @foreach ($deposits as $deposit)
                                     <tr>
                                         <td>{{ $deposit->id }}</td>
                                         <td>
                                             <a href="{{ route('admin.users.show', $deposit->user_id) }}">
-                                                {{ $deposit->user->name ?? 'N/A' }}
+                                                {{ $deposit->user->username ?? 'N/A' }}
                                             </a>
                                         </td>
                                         <td>
                                             <span class="text-uppercase">{{ $deposit->telco }}</span>
                                         </td>
                                         <td>{{ number_format($deposit->amount) }} đ</td>
-                                        <td>{{ number_format($deposit->real_amount) }} đ</td>
+                                        <td>{{ number_format($deposit->received_amount) }} đ</td>
                                         <td>
                                             <span
-                                                class="text-monospace">{{ substr($deposit->card_number, 0, 4) }}****{{ substr($deposit->card_number, -4) }}</span>
+                                                class="text-monospace">{{ substr($deposit->pin, 0, 4) }}****{{ substr($deposit->pin, -4) }}</span>
                                         </td>
                                         <td>
                                             <span
                                                 class="text-monospace">{{ substr($deposit->serial, 0, 4) }}****{{ substr($deposit->serial, -4) }}</span>
                                         </td>
                                         <td>
-                                            @if ($deposit->status === 'completed')
+                                            @if ($deposit->status === 'success')
                                                 <span class="badges bg-lightgreen">Thành công</span>
-                                            @elseif ($deposit->status === 'pending')
+                                            @elseif ($deposit->status === 'processing')
                                                 <span class="badges bg-lightyellow">Đang xử lý</span>
                                             @elseif ($deposit->status === 'error')
                                                 <span class="badges bg-lightred">Lỗi thẻ</span>
@@ -78,11 +78,7 @@
                                         </td>
                                         <td>{{ $deposit->created_at->format('d/m/Y H:i:s') }}</td>
                                     </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="9" class="text-center">Không có dữ liệu</td>
-                                    </tr>
-                                @endforelse
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

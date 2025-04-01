@@ -44,12 +44,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($usages as $usage)
+                                @foreach ($usages as $usage)
                                     <tr>
                                         <td>{{ $usage->id }}</td>
                                         <td>
                                             <a href="{{ route('admin.users.show', $usage->user_id) }}">
-                                                {{ $usage->user->name ?? 'N/A' }}
+                                                {{ $usage->user->username ?? 'N/A' }}
                                             </a>
                                         </td>
                                         <td>
@@ -89,11 +89,7 @@
                                         <td>{{ number_format($usage->discounted_price) }} đ</td>
                                         <td>{{ $usage->created_at->format('d/m/Y H:i:s') }}</td>
                                     </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="9" class="text-center">Không có dữ liệu</td>
-                                    </tr>
-                                @endforelse
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

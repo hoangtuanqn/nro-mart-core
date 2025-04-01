@@ -5,8 +5,8 @@
         <div class="content">
             <div class="page-header">
                 <div class="page-title">
-                    <h4>Lịch sử giao dịch</h4>
-                    <h6>Xem tất cả lịch sử giao dịch của hệ thống</h6>
+                    <h4>Lịch sử giao dịch tiền</h4>
+                    <h6>Xem tất cả lịch sử giao dịch tiền của hệ thống</h6>
                 </div>
             </div>
 
@@ -36,21 +36,35 @@
                                     <th>Người dùng</th>
                                     <th>Loại giao dịch</th>
                                     <th>Số tiền</th>
+                                    <th>Số dư trước</th>
+                                    <th>Số dư sau</th>
                                     <th>Mô tả</th>
-                                    <th>Trạng thái</th>
+                                    <th>ID tham chiếu</th>
                                     <th>Thời gian</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($transactions as $transaction)
+                                @foreach ($transactions as $transaction)
                                     <tr>
                                         <td>{{ $transaction->id }}</td>
                                         <td>
                                             <a href="{{ route('admin.users.show', $transaction->user_id) }}">
-                                                {{ $transaction->user->name ?? 'N/A' }}
+                                                {{ $transaction->user->username ?? 'N/A' }}
                                             </a>
                                         </td>
-                                        <td>{{ $transaction->type }}</td>
+                                        <td>
+                                            @if ($transaction->type === 'deposit')
+                                                <span class="badges bg-lightgreen">Nạp tiền</span>
+                                            @elseif ($transaction->type === 'withdraw')
+                                                <span class="badges bg-lightred">Rút tiền</span>
+                                            @elseif ($transaction->type === 'purchase')
+                                                <span class="badges bg-lightyellow">Mua hàng</span>
+                                            @elseif ($transaction->type === 'refund')
+                                                <span class="badges bg-lightblue">Hoàn tiền</span>
+                                            @else
+                                                <span class="badges">{{ $transaction->type }}</span>
+                                            @endif
+                                        </td>
                                         <td>
                                             @if ($transaction->amount > 0)
                                                 <span class="text-success">+{{ number_format($transaction->amount) }}
@@ -59,20 +73,13 @@
                                                 <span class="text-danger">{{ number_format($transaction->amount) }} đ</span>
                                             @endif
                                         </td>
+                                        <td>{{ number_format($transaction->balance_before) }} đ</td>
+                                        <td>{{ number_format($transaction->balance_after) }} đ</td>
                                         <td>{{ $transaction->description }}</td>
-                                        <td>
-                                            <span
-                                                class="badges {{ $transaction->status === 'completed' ? 'bg-lightgreen' : 'bg-lightred' }}">
-                                                {{ $transaction->status === 'completed' ? 'Hoàn thành' : 'Thất bại' }}
-                                            </span>
-                                        </td>
+                                        <td>{{ $transaction->reference_id ?? 'N/A' }}</td>
                                         <td>{{ $transaction->created_at->format('d/m/Y H:i:s') }}</td>
                                     </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="7" class="text-center">Không có dữ liệu</td>
-                                    </tr>
-                                @endforelse
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

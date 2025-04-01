@@ -36,59 +36,63 @@
                                     <th>Người mua</th>
                                     <th>Tài khoản</th>
                                     <th>Danh mục</th>
-                                    <th>Giá gốc</th>
-                                    <th>Giá đã giảm</th>
-                                    <th>Mã giảm giá</th>
-                                    <th>Thời gian</th>
+                                    <th>Máy chủ</th>
+                                    <th>Hành tinh</th>
+                                    <th>Kiểu đăng ký</th>
+                                    <th>Giá</th>
+                                    <th>Thời gian mua</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($purchases as $purchase)
+                                @foreach ($accounts as $account)
                                     <tr>
-                                        <td>{{ $purchase->id }}</td>
+                                        <td>{{ $account->id }}</td>
                                         <td>
-                                            <a href="{{ route('admin.users.show', $purchase->user_id) }}">
-                                                {{ $purchase->user->name ?? 'N/A' }}
+                                            <a href="{{ route('admin.users.show', $account->buyer_id) }}">
+                                                {{ $account->buyer->username ?? 'N/A' }}
                                             </a>
                                         </td>
                                         <td>
-                                            @if ($purchase->account)
-                                                <a href="{{ route('admin.accounts.edit', $purchase->account_id) }}">
-                                                    {{ $purchase->account->username }}
-                                                </a>
-                                            @else
-                                                <span class="text-danger">Đã xóa</span>
-                                            @endif
+                                            <a href="{{ route('admin.accounts.edit', $account->id) }}">
+                                                {{ $account->account_name }}
+                                            </a>
                                         </td>
                                         <td>
-                                            @if ($purchase->account && $purchase->account->category)
-                                                {{ $purchase->account->category->name }}
+                                            @if ($account->category)
+                                                {{ $account->category->name }}
                                             @else
                                                 <span class="text-danger">Không có</span>
                                             @endif
                                         </td>
-                                        <td>{{ number_format($purchase->original_price) }} đ</td>
-                                        <td>{{ number_format($purchase->final_price) }} đ</td>
+                                        <td>{{ $account->server }}</td>
                                         <td>
-                                            @if ($purchase->discount_code)
-                                                <span class="badges bg-lightgreen">{{ $purchase->discount_code }}</span>
+                                            @if ($account->planet === 'earth')
+                                                <span class="badges bg-lightgreen">Trái Đất</span>
+                                            @elseif ($account->planet === 'namek')
+                                                <span class="badges bg-lightblue">Namek</span>
+                                            @elseif ($account->planet === 'xayda')
+                                                <span class="badges bg-lightred">Xayda</span>
                                             @else
-                                                <span class="text-muted">Không có</span>
+                                                <span class="badges">{{ $account->planet }}</span>
                                             @endif
                                         </td>
-                                        <td>{{ $purchase->created_at->format('d/m/Y H:i:s') }}</td>
+                                        <td>
+                                            @if ($account->registration_type === 'real')
+                                                <span class="badges bg-lightgreen">Thật</span>
+                                            @else
+                                                <span class="badges bg-lightyellow">Ảo</span>
+                                            @endif
+                                        </td>
+                                        <td>{{ number_format($account->price) }} đ</td>
+                                        <td>{{ $account->updated_at->format('d/m/Y H:i:s') }}</td>
                                     </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="8" class="text-center">Không có dữ liệu</td>
-                                    </tr>
-                                @endforelse
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
 
                     <div class="pagination-area mt-3">
-                        {{ $purchases->links() }}
+                        {{ $accounts->links() }}
                     </div>
                 </div>
             </div>

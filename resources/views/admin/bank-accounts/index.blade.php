@@ -64,7 +64,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse ($bankAccounts as $key => $account)
+                                @foreach ($bankAccounts as $key => $account)
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
                                         <td>{{ $account->bank_name }}</td>
@@ -98,11 +98,7 @@
                                             </a>
                                         </td>
                                     </tr>
-                                @empty
-                                    <tr>
-                                        <td colspan="9" class="text-center">Không có dữ liệu</td>
-                                    </tr>
-                                @endforelse
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
