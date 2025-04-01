@@ -20,20 +20,24 @@
             @else
                 <!-- Statistics Cards Row -->
                 <div class="row">
-                    <!-- Game Accounts Stats -->
+                    <!-- Notication -->
                     <div class="card-body">
-                        <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                            <strong>Chào mừng bạn đến với hệ thống tuyệt vời của chúng tôi!</strong> Bạn đang trải nghiệm
+                        <div class="alert alert-notication-custom alert-dismissible fade show" role="alert">
+
+                            <strong>Chào mừng bạn đến với hệ thống tuyệt vời của chúng tôi!</strong> Bạn đang trải
+                            nghiệm
                             sản phẩm chất lượng từ <a href="https://tuanori.vn" target="_blank"
                                 class="a_link">tuanori.vn</a>. Nếu bạn mong muốn mở rộng
                             tính năng cho website của mình, đừng ngần ngại liên hệ với chúng tôi qua Zalo <a
                                 href="https://zalo.me/0812665001" class="a_link" target="_blank">0812665001</a> hoặc
                             Facebook <a href="https://www.facebook.com/phamhoangtuanqn/" class="a_link" target="_blank">Phạm
                                 Hoàng Tuấn</a>
-                            để nhận được sự hỗ trợ tận tình (Có tính phí). Chúc bạn có một ngày thật tuyệt vời và thành công
+                            để nhận được sự hỗ trợ tận tình (Có tính phí). Chúc bạn có một ngày thật tuyệt vời và thành
+                            công
                             rực rỡ! <br />
                             <b class="text-bold">Lưu ý: Tất cả các giao dịch liên quan đến mã nguồn
-                                này với bên thứ ba (ngoại trừ nhà cung cấp) đều có khả năng là lừa đảo. Hãy cẩn trọng!</b>
+                                này với bên thứ ba (ngoại trừ nhà cung cấp) đều có khả năng là lừa đảo. Hãy cẩn
+                                trọng!</b>
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     </div>
@@ -308,11 +312,12 @@
                                         <tr>
                                             <td>{{ $transaction->id }}</td>
                                             <td class="productimgname">
-                                                <a class="product-img">
+                                                {{-- <a class="product-img">
                                                     <img src="{{ asset('assets/img/customer/profile.jpg') }}"
                                                         alt="profile">
-                                                </a>
-                                                <a href="javascript:void(0);">{{ $transaction->user->name ?? 'N/A' }}</a>
+                                                </a> --}}
+                                                <a
+                                                    href="javascript:void(0);">{{ $transaction->user->username ?? 'N/A' }}</a>
                                             </td>
                                             <td>
                                                 @if ($transaction->type == 'deposit')

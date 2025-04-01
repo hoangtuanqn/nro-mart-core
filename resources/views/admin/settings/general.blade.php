@@ -48,7 +48,7 @@
                             <div class="col-lg-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Email liên hệ <span class="text-danger">*</span></label>
-                                    <input type="email" name="email"
+                                    <input type="text" name="email"
                                         class="form-control @error('email') is-invalid @enderror"
                                         value="{{ old('email', $configs['email']) }}" placeholder="Nhập email liên hệ">
                                     @error('email')

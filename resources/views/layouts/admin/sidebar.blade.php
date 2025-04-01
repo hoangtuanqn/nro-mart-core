@@ -70,7 +70,7 @@
                 </li>
 
                 <li class="submenu">
-                    <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/dollar.svg') }}"
+                    <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/dollar-square.svg') }}"
                             alt="img"><span>Ngân hàng</span><span class="menu-arrow"></span></a>
                     <ul>
                         <li><a href="{{ route('admin.bank-accounts.index') }}"
@@ -167,6 +167,28 @@
                         <li><a href="{{ route('admin.settings.login') }}"
                                 class="{{ request()->routeIs('admin.settings.login') ? 'active' : '' }}">Cài đặt
                                 đăng nhập</a></li>
+                        <li><a href="{{ route('admin.settings.reset') }}"
+                                class="{{ request()->routeIs('admin.settings.reset') ? 'active' : '' }}">Reset dữ liệu
+                                gốc</a></li>
+                    </ul>
+                </li>
+                <li>
+                    {{-- {{ route('admin.chatbot.training') }} --}}
+                    <a href="//" class=""><img src="{{ asset('assets/img/icons/chatbot.svg') }}"
+                            alt="img"><span>Cấu hình
+                            ChatBot</span></a>
+                </li>
+                <hr>
+                <li>
+
+                </li>
+                <li class="submenu">
+                    <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/support.svg') }}"
+                            alt="img"><span>Hỗ trợ sự cố</span><span class="menu-arrow"></span></a>
+                    <ul>
+                        <li><a href="{{ ENV('FACEBOOK_URL_AUTHOR') }}" target="_blank" class="">Facebook</a>
+                        </li>
+                        <li><a href="{{ ENV('ZALO_URL_AUTHOR') }}" target="_blank" class="">Zalo</a></li>
                     </ul>
                 </li>
 

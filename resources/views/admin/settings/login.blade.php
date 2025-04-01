@@ -11,7 +11,17 @@
                     <h6>Quản lý các cấu hình phương thức đăng nhập</h6>
                 </div>
             </div>
-
+            <div class="card-body">
+                <div class="alert alert-notication-custom alert-dismissible fade show" role="alert">
+                    <p class="text-noticate">Tính năng tự động đăng nhập nhanh qua Facebook và Google. Quý khách hàng vui
+                        lòng cài đặt đúng thông
+                        tin để có thể sử dụng. Xin cảm ơn quý khách.</p>
+                    <p class="text-noticate">Nếu có lỗi xảy ra hoặc quý khách hàng không biết cài đặt. Xin vui lòng liên hệ
+                        đến nhà phát triển để
+                        được hỗ trợ cài đặt (phí cài đặt 80k)</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
             <div class="card">
                 <div class="card-body">
                     @if (session('success'))
@@ -27,6 +37,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     @endif
+
 
                     <form method="POST" action="{{ route('admin.settings.login.update') }}">
                         @csrf
@@ -72,6 +83,7 @@
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="form-group">
+                                            <p class="mb-2">Kích hoạt</p>
                                             <div class="status-toggle">
                                                 <input type="checkbox" id="google_active" class="check"
                                                     name="google_active"
@@ -144,6 +156,7 @@
                                     </div>
                                     <div class="col-lg-12">
                                         <div class="form-group">
+                                            <p class="mb-2">Kích hoạt</p>
                                             <div class="status-toggle">
                                                 <input type="checkbox" id="facebook_active" class="check"
                                                     name="facebook_active"
