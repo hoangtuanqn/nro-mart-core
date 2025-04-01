@@ -27,7 +27,10 @@ class DatabaseSeeder extends Seeder
             ServicePackagesSeeder::class,
             ConfigSeeder::class,
             RandomCategoriesTableSeeder::class,
-            RandomCategoryAccountsTableSeeder::class
+            RandomCategoryAccountsTableSeeder::class,
+            LuckyWheelsTableSeeder::class,
+            LuckyWheelHistoriesTableSeeder::class,
+            WithdrawalHistoriesTableSeeder::class,
         ]);
         //php artisan migrate
         // php artisan db:seed
