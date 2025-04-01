@@ -43,11 +43,14 @@ Route::middleware('auth')->group(function () {
         Route::get('/transaction-history', [ProfileController::class, 'transactionHistory'])->name('transaction-history');
         Route::get('/purchased-accounts', [ProfileController::class, 'purchasedAccounts'])->name('purchased-accounts');
 
+        // Đổi lại thành random
+        // Route::get('/purchased-accounts', [ProfileController::class, 'purchasedAccounts'])->name('purchased-random-accounts');
+
         Route::get('/deposit/card', [CardDepositController::class, 'showCardDepositForm'])->name('deposit-card');
         Route::get('/deposit/atm', [AtmDepositController::class, 'index'])->name('deposit-atm');
         Route::post('/deposit/card', [CardDepositController::class, 'processCardDeposit']);
         Route::get('/service-history/{id}', [ProfileController::class, 'getServiceDetail'])
-            ->name('profile.service.detail');
+            ->name('service.detail');
     });
 });
 Route::prefix('category')->name('category.')->group(function () {

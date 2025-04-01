@@ -192,31 +192,15 @@
                     .then(response => response.json())
                     .then(data => {
                         if (data.success) {
-                            Swal.fire({
-                                title: 'Thành công!',
-                                text: data.message,
-                                icon: 'success',
-                                confirmButtonText: 'OK'
-                            }).then(() => {
-                                window.location.href = data.redirect_url;
-                            });
+                            alert('Thành công! ' + data.message);
+                            window.location.href = data.redirect_url;
                         } else {
-                            Swal.fire({
-                                title: 'Lỗi!',
-                                text: data.message,
-                                icon: 'error',
-                                confirmButtonText: 'OK'
-                            });
+                            alert('Lỗi! ' + data.message);
                         }
                     })
                     .catch(error => {
                         console.error('Error:', error);
-                        Swal.fire({
-                            title: 'Lỗi!',
-                            text: 'Đã xảy ra lỗi khi xử lý giao dịch',
-                            icon: 'error',
-                            confirmButtonText: 'OK'
-                        });
+                        alert('Lỗi! Đã xảy ra lỗi khi xử lý giao dịch');
                     });
             }
 

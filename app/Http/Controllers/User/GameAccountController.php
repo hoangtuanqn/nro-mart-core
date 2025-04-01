@@ -112,7 +112,7 @@ class GameAccountController extends Controller
                 ->update(['balance' => $balanceAfter]);
 
             // Update account status
-            DB::table('accounts')
+            DB::table('game_accounts')
                 ->where('id', $account->id)
                 ->update([
                     'status' => 'sold',
