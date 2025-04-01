@@ -22,6 +22,8 @@ return new class extends Migration {
             $table->string('username')->unique(); // Tài khoản
             $table->string('password'); // Mật khẩu (hashed)
             $table->string('email')->unique(); // Email
+            $table->string('google_id')->nullable(); // Lưu ID Google khi login bằng Google Social
+            $table->string('facebook_id')->nullable(); // Lưu ID Facebook khi login bằng Facebook Social
             $table->enum('role', ['member', 'admin'])->default('member'); // Cấp bậc
             $table->bigInteger('balance')->default(0); // Số tiền hiện có
             $table->bigInteger('total_deposited')->default(0); // Số tiền đã nạp

@@ -30,5 +30,15 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
+    'google' => [
+        'client_id' => config_get('login_social.google.client_id', ''),
+        'client_secret' => config_get('login_social.google.client_secret', ''),
+        'redirect' => config_get('login_social.google.redirect', ''),
+    ],
+    'facebook' => [
+        'client_id' => config_get('login_social.facebook.client_id', ''),
+        'client_secret' => config_get('login_social.facebook.client_secret', ''),
+        'redirect' => config_get('login_social.facebook.redirect', ''),
+    ],
 
 ];

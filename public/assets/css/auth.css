@@ -1,0 +1,72 @@
+/* Google Login Button Styles */
+.social-login {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.social-login-text {
+    color: #666;
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.social-login-text::before,
+.social-login-text::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 45%;
+    height: 1px;
+    background-color: #ddd;
+}
+
+.social-login-text::before {
+    left: 0;
+}
+
+.social-login-text::after {
+    right: 0;
+}
+
+.social-login-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.google-login-btn,
+.facebook-login-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    color: #fff;
+    font-weight: 500;
+    transition: opacity 0.3s;
+}
+
+.google-login-btn:hover,
+.facebook-login-btn:hover {
+    opacity: 0.9;
+}
+
+.google-login-btn {
+    background-color: #DB4437;
+}
+
+.facebook-login-btn {
+    background-color: #4267B2;
+}
+
+.google-login-btn i,
+.facebook-login-btn i {
+    margin-right: 8px;
+    font-size: 18px;
+}
+
+.google-login-btn span,
+.facebook-login-btn span {
+    font-size: 14px;
+}

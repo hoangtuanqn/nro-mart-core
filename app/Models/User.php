@@ -21,12 +21,15 @@ class User extends Authenticatable
         'username',
         'password',
         'email',
+        'google_id',
+        'facebook_id',
         'role',
         'balance',
         'total_deposited',
         'banned',
         'ip_address',
-        'email_verified_at'
+        'email_verified_at',
+        'avatar'
     ];
 
     /**

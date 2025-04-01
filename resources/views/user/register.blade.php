@@ -9,7 +9,9 @@
 @extends('layouts.user.app')
 
 @section('title', 'Đăng ký tài khoản')
-
+@push('css')
+    <link rel="stylesheet" href="{{ asset('assets/css/auth.css') }}">
+@endpush
 @section('content')
     <section class="register-section">
         <div class="container">
@@ -33,8 +35,8 @@
 
                     <div class="form-group">
                         <label for="email" class="form-label">Email</label>
-                        <input id="email" type="email" class="form-input @error('email') is-invalid @enderror" name="email"
-                            value="{{ old('email') }}" required autocomplete="email">
+                        <input id="email" type="email" class="form-input @error('email') is-invalid @enderror"
+                            name="email" value="{{ old('email') }}" required autocomplete="email">
                         @error('email')
                             <span class="form-error">{{ $message }}</span>
                         @enderror
@@ -58,6 +60,26 @@
                     <button type="submit" class="register-btn">
                         Đăng ký
                     </button>
+
+                    @if (config_get('login_social.google.active', false) || config_get('login_social.facebook.active', false))
+                        <div class="social-login">
+                            <p class="social-login-text">Hoặc đăng nhập bằng</p>
+                            <div class="social-login-buttons">
+                                @if (config_get('login_social.google.active', false))
+                                    <a href="{{ route('auth.google') }}" class="google-login-btn">
+                                        <i class="fab fa-google"></i>
+                                        <span>Google</span>
+                                    </a>
+                                @endif
+                                @if (config_get('login_social.facebook.active', false))
+                                    <a href="{{ route('auth.facebook') }}" class="facebook-login-btn">
+                                        <i class="fab fa-facebook-f"></i>
+                                        <span>Facebook</span>
+                                    </a>
+                                @endif
+                            </div>
+                        </div>
+                    @endif
 
                     <div class="login-link">
                         Đã có tài khoản? <a href="{{ route('login') }}">Đăng nhập ngay</a>

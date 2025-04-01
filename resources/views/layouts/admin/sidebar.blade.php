@@ -164,6 +164,9 @@
                         <li><a href="{{ route('admin.settings.payment') }}"
                                 class="{{ request()->routeIs('admin.settings.payment') ? 'active' : '' }}">Cài đặt
                                 thanh toán</a></li>
+                        <li><a href="{{ route('admin.settings.login') }}"
+                                class="{{ request()->routeIs('admin.settings.login') ? 'active' : '' }}">Cài đặt
+                                đăng nhập</a></li>
                     </ul>
                 </li>
 

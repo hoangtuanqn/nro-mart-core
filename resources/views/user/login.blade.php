@@ -9,7 +9,9 @@
 @extends('layouts.user.app')
 
 @section('title', 'Đăng nhập')
-
+@push('css')
+    <link rel="stylesheet" href="{{ asset('assets/css/auth.css') }}">
+@endpush
 @section('content')
     <section class="register-section">
         <div class="container">
@@ -42,7 +44,8 @@
 
                     <div class="form-group">
                         <div class="form-check">
-                            <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                            <input class="form-check-input" type="checkbox" name="remember" id="remember"
+                                {{ old('remember') ? 'checked' : '' }}>
                             <label class="form-check-label" for="remember">
                                 Ghi nhớ đăng nhập
                             </label>
@@ -52,6 +55,26 @@
                     <button type="submit" class="register-btn">
                         Đăng nhập
                     </button>
+
+                    @if (config_get('login_social.google.active', false) || config_get('login_social.facebook.active', false))
+                        <div class="social-login">
+                            <p class="social-login-text">Hoặc đăng nhập bằng</p>
+                            <div class="social-login-buttons">
+                                @if (config_get('login_social.google.active', false))
+                                    <a href="{{ route('auth.google') }}" class="google-login-btn">
+                                        <i class="fab fa-google"></i>
+                                        <span>Google</span>
+                                    </a>
+                                @endif
+                                @if (config_get('login_social.facebook.active', false))
+                                    <a href="{{ route('auth.facebook') }}" class="facebook-login-btn">
+                                        <i class="fab fa-facebook-f"></i>
+                                        <span>Facebook</span>
+                                    </a>
+                                @endif
+                            </div>
+                        </div>
+                    @endif
 
                     <div class="login-link">
                         Chưa có tài khoản? <a href="{{ route('register') }}">Đăng ký ngay</a>

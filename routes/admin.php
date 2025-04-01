@@ -97,20 +97,6 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
         Route::delete('/delete/{package}', [ServicePackageController::class, 'destroy'])->name('destroy');
     });
 
-    Route::prefix('settings')->name('settings.')->group(function () {
-        // Cài đặt chung
-        Route::get('/general', [ConfigController::class, 'general'])->name('general');
-        Route::post('/general', [ConfigController::class, 'updateGeneral'])->name('general.update');
-
-        // Cài đặt email
-        Route::get('/email', [ConfigController::class, 'email'])->name('email');
-        Route::post('/email', [ConfigController::class, 'updateEmail'])->name('email.update');
-
-        // Cài đặt thanh toán
-        Route::get('/payment', [ConfigController::class, 'payment'])->name('payment');
-        Route::post('/payment', [ConfigController::class, 'updatePayment'])->name('payment.update');
-    });
-
     // Quản lý tài khoản ngân hàng
     Route::prefix('bank-accounts')->name('bank-accounts.')->group(function () {
         Route::get('/', [BankAccountController::class, 'index'])->name('index');
@@ -131,4 +117,23 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
         Route::get('deposits/card', [HistoryController::class, 'cardDeposits'])->name('deposits.card');
         Route::get('discount-usages', [HistoryController::class, 'discountUsages'])->name('discount-usages');
     });
+
+    Route::prefix('settings')->name('settings.')->group(function () {
+        // Cài đặt chung
+        Route::get('/general', [ConfigController::class, 'general'])->name('general');
+        Route::post('/general', [ConfigController::class, 'updateGeneral'])->name('general.update');
+
+        // Cài đặt email
+        Route::get('/email', [ConfigController::class, 'email'])->name('email');
+        Route::post('/email', [ConfigController::class, 'updateEmail'])->name('email.update');
+
+        // Cài đặt thanh toán
+        Route::get('/payment', [ConfigController::class, 'payment'])->name('payment');
+        Route::post('/payment', [ConfigController::class, 'updatePayment'])->name('payment.update');
+
+        // Cài đặt đăng nhập
+        Route::get('/login', [ConfigController::class, 'login'])->name('login');
+        Route::post('/login', [ConfigController::class, 'updateLogin'])->name('login.update');
+    });
+
 });

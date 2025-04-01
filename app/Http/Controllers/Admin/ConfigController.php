@@ -13,6 +13,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Config;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class ConfigController extends Controller
 {
@@ -182,5 +184,89 @@ class ConfigController extends Controller
 
         return redirect()->route('admin.settings.payment')
             ->with('success', 'Cài đặt thanh toán đã được cập nhật thành công.');
+    }
+
+    /**
+     * Hiển thị trang cấu hình đăng nhập mạng xã hội
+     *
+     * @return \Illuminate\View\View
+     */
+    public function login()
+    {
+        $title = 'Cấu hình đăng nhập';
+
+        // Lấy các cấu hình đăng nhập
+        $configs = [
+            'google_client_id' => config_get('login_social.google.client_id', ''),
+            'google_client_secret' => config_get('login_social.google.client_secret', ''),
+            'google_redirect' => config_get('login_social.google.redirect', ''),
+            'google_active' => config_get('login_social.google.active', '0'),
+            'facebook_client_id' => config_get('login_social.facebook.client_id', ''),
+            'facebook_client_secret' => config_get('login_social.facebook.client_secret', ''),
+            'facebook_redirect' => config_get('login_social.facebook.redirect', ''),
+            'facebook_active' => config_get('login_social.facebook.active', '0'),
+        ];
+
+        return view('admin.settings.login', compact('title', 'configs'));
+    }
+
+    /**
+     * Cập nhật cấu hình đăng nhập mạng xã hội
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function updateLogin(Request $request)
+    {
+        $checkGoogle = 'nullable';
+        $checkFacebook = 'nullable';
+        if ($request->has('google_active')) {
+            $checkGoogle = 'required';
+        }
+        if ($request->has('facebook_active')) {
+            $checkFacebook = 'required';
+        }
+        $request->validate([
+            'google_client_id' => $checkGoogle . '|string',
+            'google_client_secret' => $checkGoogle . '|string',
+            'google_redirect' => $checkGoogle . '|string',
+            'google_active' => 'nullable|boolean',
+            'facebook_client_id' => $checkFacebook . '|string',
+            'facebook_client_secret' => $checkFacebook . '|string',
+            'facebook_redirect' => $checkFacebook . '|string',
+            'facebook_active' => 'nullable|boolean',
+        ]);
+
+        try {
+            DB::beginTransaction();
+
+            // Cập nhật cấu hình Google
+            config_set('login_social.google.client_id', $request->google_client_id);
+            config_set('login_social.google.client_secret', $request->google_client_secret);
+            config_set('login_social.google.redirect', $request->google_redirect);
+            config_set('login_social.google.active', $request->has('google_active') ? 1 : 0);
+
+            // Cập nhật cấu hình Facebook
+            config_set('login_social.facebook.client_id', $request->facebook_client_id);
+            config_set('login_social.facebook.client_secret', $request->facebook_client_secret);
+            config_set('login_social.facebook.redirect', $request->facebook_redirect);
+            config_set('login_social.facebook.active', $request->has('facebook_active') ? 1 : 0);
+
+
+            DB::commit();
+
+            // Xóa cache để cập nhật cài đặt
+            config_clear_cache();
+
+            return redirect()->route('admin.settings.login')
+                ->with('success', 'Cấu hình đăng nhập mạng xã hội đã được cập nhật thành công.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('Config update error: ' . $e->getMessage());
+
+            return redirect()->back()
+                ->with('error', 'Có lỗi xảy ra khi cập nhật cấu hình: ' . $e->getMessage())
+                ->withInput();
+        }
     }
 }

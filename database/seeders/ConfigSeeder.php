@@ -56,6 +56,20 @@ class ConfigSeeder extends Seeder
                     'partner_key' => '',
                 ],
             ],
+            'login_social' => [
+                'google' => [
+                    'active' => '1',
+                    'client_id' => '695655624016-tnn916t7g53oqulsiq0d9vvn7bof1568.apps.googleusercontent.com',
+                    'client_secret' => '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',
+                    'redirect' => 'http://localhost:8000/auth/google/callback',
+                ],
+                'facebook' => [
+                    'active' => '1',
+                    'client_id' => '713944317580357',
+                    'client_secret' => '481beed7538a8b7318c45e94401f4e3c',
+                    'redirect' => 'http://localhost:8000/auth/facebook/callback',
+                ],
+            ],
         ];
 
         // Process and save the configs
