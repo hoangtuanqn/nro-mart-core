@@ -167,17 +167,9 @@
                         <li><a href="{{ route('admin.settings.login') }}"
                                 class="{{ request()->routeIs('admin.settings.login') ? 'active' : '' }}">Cài đặt
                                 đăng nhập</a></li>
-                        <li><a href="{{ route('admin.settings.reset') }}"
-                                class="{{ request()->routeIs('admin.settings.reset') ? 'active' : '' }}">Reset dữ liệu
-                                gốc</a></li>
                     </ul>
                 </li>
-                <li>
-                    {{-- {{ route('admin.chatbot.training') }} --}}
-                    <a href="//" class=""><img src="{{ asset('assets/img/icons/chatbot.svg') }}"
-                            alt="img"><span>Cấu hình
-                            ChatBot</span></a>
-                </li>
+
                 <hr>
                 <li>
 

@@ -52,31 +52,22 @@
                             </div>
                             <div class="col-lg-6 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <label>Tên tài khoản</label>
-                                    <input type="text" name="account_name" value="{{ old('account_name') }}"
-                                        class="form-control @error('account_name') is-invalid @enderror">
-                                    <i>Nếu không trúng thưởng thì có thể điền: Chúc bạn may mắn lần sau</i>
-                                    @error('account_name')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label>Mật khẩu</label>
-                                    <input type="text" name="password" value="{{ old('password') }}"
-                                        class="form-control @error('password') is-invalid @enderror">
-                                    @error('password')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-lg-12 col-sm-6 col-12">
-                                <div class="form-group">
                                     <label>Giá <span class="text-danger">*</span></label>
                                     <input type="number" name="price" value="{{ old('price') }}"
                                         class="form-control @error('price') is-invalid @enderror">
                                     @error('price')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-12 col-sm-12 col-12">
+                                <div class="form-group">
+                                    <label>Danh sách tài khoản</label>
+                                    <textarea name="accounts" rows="5" class="form-control @error('accounts') is-invalid @enderror"
+                                        placeholder="account1|pass123&#10;account2|pass456">{{ old('accounts') }}</textarea>
+                                    <i>Mỗi tài khoản một dòng, định dạng: username|password. Nếu không trúng thưởng thì có
+                                        thể điền: Chúc bạn may mắn lần sau</i>
+                                    @error('accounts')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -94,8 +85,8 @@
                             <div class="col-lg-6">
                                 <div class="form-group">
                                     <label>Ghi chú cho người mua</label>
-                                    <textarea name="note" class="form-control @error('note') is-invalid @enderror">{{ old('note') }}</textarea>
-                                    @error('note')
+                                    <textarea name="note_buyer" class="form-control @error('note_buyer') is-invalid @enderror">{{ old('note_buyer') }}</textarea>
+                                    @error('note_buyer')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>

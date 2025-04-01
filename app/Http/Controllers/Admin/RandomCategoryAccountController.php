@@ -35,27 +35,92 @@ class RandomCategoryAccountController extends Controller
     {
         $request->validate([
             'random_category_id' => 'required|exists:random_categories,id',
-            'account_name' => 'nullable|string|max:100',
-            'password' => 'nullable|string|max:100',
-            'price' => 'required|numeric|min:0',
+            'accounts' => 'required|string',
             'server' => 'required|integer|min:1',
-            'note' => 'nullable|string',
+            'price' => 'required|numeric|min:0',
             'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'note' => 'nullable|string',
+            'note_buyer' => 'nullable|string',
         ]);
 
-        $data = $request->all();
+        try {
+            $data = $request->all();
+            $accounts = explode("\n", trim($data['accounts']));
+            $createdAccounts = [];
+            $thumbnailPath = null;
 
-        if ($request->hasFile('thumbnail')) {
-            $file = $request->file('thumbnail');
-            $filename = time() . '_' . md5($file->getClientOriginalName()) . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('public/random-accounts', $filename);
-            $data['thumbnail'] = Storage::url($path);
+            // Xử lý upload ảnh trước
+            if ($request->hasFile('thumbnail')) {
+                try {
+                    $file = $request->file('thumbnail');
+
+                    // Kiểm tra kích thước file
+                    if ($file->getSize() > 2048 * 1024) { // 2MB
+                        throw new \Exception('Kích thước ảnh không được vượt quá 2MB');
+                    }
+
+                    // Tạo tên file unique
+                    $filename = time() . '_' . md5($file->getClientOriginalName()) . '.' . $file->getClientOriginalExtension();
+
+                    // Đảm bảo thư mục tồn tại
+                    if (!Storage::disk('public')->exists('random-accounts')) {
+                        Storage::disk('public')->makeDirectory('random-accounts');
+                    }
+
+                    // Upload file
+                    $path = $file->storeAs('public/random-accounts', $filename);
+                    $thumbnailPath = Storage::url($path);
+                } catch (\Exception $e) {
+                    return redirect()->back()
+                        ->withInput()
+                        ->with('error', 'Lỗi khi upload ảnh: ' . $e->getMessage());
+                }
+            }
+
+            // Tạo các tài khoản
+            foreach ($accounts as $accountLine) {
+                $accountLine = trim($accountLine);
+                if (empty($accountLine))
+                    continue;
+
+                $parts = explode('|', $accountLine);
+                if (count($parts) !== 2)
+                    continue;
+
+                $accountData = [
+                    'random_category_id' => $data['random_category_id'],
+                    'account_name' => trim($parts[0]),
+                    'password' => trim($parts[1]),
+                    'server' => $data['server'],
+                    'price' => $data['price'],
+                    'status' => 'available',
+                    'note' => $data['note'],
+                    'note_buyer' => $data['note_buyer'],
+                    'thumbnail' => $thumbnailPath,
+                ];
+
+                $createdAccounts[] = RandomCategoryAccount::create($accountData);
+            }
+
+            if (empty($createdAccounts)) {
+                // Nếu không có tài khoản nào được tạo, xóa ảnh đã upload
+                if ($thumbnailPath) {
+                    $oldPath = str_replace('/storage', 'public', $thumbnailPath);
+                    Storage::delete($oldPath);
+                }
+                return redirect()->back()
+                    ->withInput()
+                    ->with('error', 'Không có tài khoản hợp lệ nào được tạo!');
+            }
+
+            return redirect()->route('admin.random-accounts.index')
+                ->with('success', count($createdAccounts) . ' tài khoản random đã được thêm thành công!');
+
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->withInput()
+                ->with('error', 'Có lỗi xảy ra: ' . $e->getMessage());
         }
-
-        RandomCategoryAccount::create($data);
-
-        return redirect()->route('admin.random-accounts.index')
-            ->with('success', 'Tài khoản random đã được thêm thành công!');
     }
 
     public function edit(RandomCategoryAccount $account)
