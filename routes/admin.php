@@ -18,6 +18,14 @@ use App\Http\Controllers\Admin\RandomCategoryController;
 use App\Http\Controllers\Admin\RandomCategoryAccountController;
 use App\Http\Controllers\Admin\DiscountCodeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\AccountController;
+use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\PackageController;
+use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\HistoryController;
+
 Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(function () {
     Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('index');
     Route::prefix('users')->name('users.')->group(function () {
@@ -118,4 +126,13 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
         Route::put('/update/{bankAccount}', [BankAccountController::class, 'update'])->name('update');
         Route::delete('/delete/{bankAccount}', [BankAccountController::class, 'destroy'])->name('destroy');
     });
+
+    // History section
+    Route::get('history/transactions', [HistoryController::class, 'transactions'])->name('history.transactions');
+    Route::get('history/accounts', [HistoryController::class, 'accounts'])->name('history.accounts');
+    Route::get('history/random-accounts', [HistoryController::class, 'randomAccounts'])->name('history.random-accounts');
+    Route::get('history/services', [HistoryController::class, 'services'])->name('history.services');
+    Route::get('history/deposits/bank', [HistoryController::class, 'bankDeposits'])->name('history.deposits.bank');
+    Route::get('history/deposits/card', [HistoryController::class, 'cardDeposits'])->name('history.deposits.card');
+    Route::get('history/discount-usages', [HistoryController::class, 'discountUsages'])->name('history.discount-usages');
 });

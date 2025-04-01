@@ -124,6 +124,34 @@
                 </li>
 
                 <li class="submenu">
+                    <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/time.svg') }}"
+                            alt="img"><span>Lịch sử</span><span class="menu-arrow"></span></a>
+                    <ul>
+                        <li><a href="{{ route('admin.history.transactions') }}"
+                                class="{{ request()->routeIs('admin.history.transactions') ? 'active' : '' }}">Lịch sử
+                                giao dịch</a></li>
+                        <li><a href="{{ route('admin.history.accounts') }}"
+                                class="{{ request()->routeIs('admin.history.accounts') ? 'active' : '' }}">Lịch sử mua
+                                tài khoản</a></li>
+                        <li><a href="{{ route('admin.history.random-accounts') }}"
+                                class="{{ request()->routeIs('admin.history.random-accounts') ? 'active' : '' }}">Lịch
+                                sử mua random</a></li>
+                        <li><a href="{{ route('admin.history.services') }}"
+                                class="{{ request()->routeIs('admin.history.services') ? 'active' : '' }}">Lịch sử đặt
+                                dịch vụ</a></li>
+                        <li><a href="{{ route('admin.history.deposits.bank') }}"
+                                class="{{ request()->routeIs('admin.history.deposits.bank') ? 'active' : '' }}">Lịch
+                                sử nạp tiền ngân hàng</a></li>
+                        <li><a href="{{ route('admin.history.deposits.card') }}"
+                                class="{{ request()->routeIs('admin.history.deposits.card') ? 'active' : '' }}">Lịch
+                                sử nạp thẻ cào</a></li>
+                        <li><a href="{{ route('admin.history.discount-usages') }}"
+                                class="{{ request()->routeIs('admin.history.discount-usages') ? 'active' : '' }}">Lịch
+                                sử dùng mã giảm giá</a></li>
+                    </ul>
+                </li>
+
+                <li class="submenu">
                     <a href="javascript:void(0);"><i data-feather="settings"></i><span>Cài đặt hệ thống</span><span
                             class="menu-arrow"></span></a>
                     <ul>
