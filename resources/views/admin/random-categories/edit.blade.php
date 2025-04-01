@@ -58,13 +58,12 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-lg-12">
+
+                            <div class="col-lg-12 text-center">
                                 <div class="form-group">
-                                    <label>Ảnh đại diện hiện tại</label>
-                                    <div class="image-upload">
-                                        <img src="{{ asset($category->thumbnail) }}" alt="{{ $category->name }}"
-                                            class="img-fluid img-thumbnail" style="max-width: 200px;">
-                                    </div>
+                                    <h5>Ảnh đại diện hiện tại</h5>
+                                    <img id="preview-thumb" src="{{ asset($category->thumbnail) }}"
+                                        alt="{{ $category->name }}" class="img-fluid mt-2 mb-2 preview-thumb">
                                 </div>
                             </div>
                             <div class="col-lg-12">

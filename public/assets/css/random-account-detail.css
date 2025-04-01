@@ -104,12 +104,6 @@
     border-radius: 3px;
 }
 
-.detail__info-value {
-    font-size: 1.7rem;
-    color: #333;
-    font-weight: 500;
-    flex-grow: 1;
-}
 
 /* Images Section */
 .detail__images {

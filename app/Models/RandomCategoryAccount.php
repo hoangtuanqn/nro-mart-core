@@ -24,6 +24,7 @@ class RandomCategoryAccount extends Model
         'server',
         'buyer_id',
         'note',
+        'note_buyer',
         'thumbnail',
     ];
 

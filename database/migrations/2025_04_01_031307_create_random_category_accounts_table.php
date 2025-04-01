@@ -24,6 +24,7 @@ return new class extends Migration {
             $table->integer('server'); // Máy chủ - Số hoặc mã máy chủ mà tài khoản thuộc về (VD: 1, 2, 3... hoặc tên server)
             $table->foreignId('buyer_id')->nullable()->constrained('users')->cascadeOnDelete(); // ID người mua - Khóa ngoại liên kết với bảng users, null nếu chưa có ai mua, xóa cấp liên
             $table->text('note')->nullable(); // Ghi chú - Thông tin bổ sung về tài khoản (VD: "Tài khoản có skin hiếm")
+            $table->text('note_buyer')->nullable(); // Ghi chú cho người mua
             $table->string('thumbnail')->nullable(); // Ảnh đại diện - Đường dẫn hoặc tên file ảnh minh họa tài khoản (có thể null)
             $table->timestamps(); // Thời gian tạo và cập nhật - Tự động thêm created_at và updated_at
         });

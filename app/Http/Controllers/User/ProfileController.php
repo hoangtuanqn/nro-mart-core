@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\GameAccount;
 use App\Models\MoneyTransaction;
+use App\Models\RandomCategoryAccount;
 use App\Models\ServiceHistory;  // Fix the import here
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -93,5 +94,12 @@ class ProfileController extends Controller
                 'message' => 'Không thể tải thông tin dịch vụ'
             ], 500);
         }
+    }
+
+    public function purchasedRandomAccounts()
+    {
+        $title = 'Tài khoản random đã mua';
+        $transactions = RandomCategoryAccount::where('buyer_id', Auth::id())->where('status', 'sold')->paginate(perPage: 10);
+        return view('user.profile.purchased-random-accounts', compact('transactions', 'title')); // Return the view for purchased accounts lis
     }
 }

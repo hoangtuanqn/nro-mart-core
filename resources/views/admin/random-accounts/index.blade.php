@@ -26,7 +26,7 @@
                                 </a>
                             </div>
                         </div>
-                       
+
                     </div>
 
                     <div class="table-responsive">
@@ -59,7 +59,14 @@
                                             </label>
                                         </td>
                                         <td>{{ $account->id }}</td>
-                                        <td>{{ $account->category->name }}</td>
+                                        <td>
+                                            <a href="{{ route('admin.random-categories.edit', ['category' => $account->category->id]) }}"
+                                                target="_blank">
+                                                {{ $account->category->name }}
+                                            </a>
+                                        </td>
+
+                                        </td>
                                         <td>{{ $account->server }}</td>
                                         <td>{{ number_format($account->price) }}</td>
                                         <td><span

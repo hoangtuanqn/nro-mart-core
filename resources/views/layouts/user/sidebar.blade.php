@@ -46,7 +46,12 @@
         </li>
         <li class="sidebar-item {{ request()->routeIs('profile.purchased-accounts') ? 'active' : '' }}">
             <a href="{{ route('profile.purchased-accounts') }}" class="sidebar-link">
-                <i class="fa-solid fa-shopping-cart"></i> Tài khoản đã mua
+                <i class="fa-solid fa-box"></i> Tài khoản đã mua
+            </a>
+        </li>
+        <li class="sidebar-item {{ request()->routeIs('profile.purchased-random-accounts') ? 'active' : '' }}">
+            <a href="{{ route('profile.purchased-random-accounts') }}" class="sidebar-link">
+                <i class="fa-solid fa-dice"></i> Random đã mua
             </a>
         </li>
         {{--
@@ -58,7 +63,7 @@
         </li> --}}
         <li class="sidebar-item {{ request()->routeIs('profile.services-history') ? 'active' : '' }}">
             <a href="{{ route('profile.services-history') }}" class="sidebar-link">
-                <i class="fa-solid fa-gear"></i> Dịch vụ đã thuê
+                <i class="fa-solid fa-clipboard-list"></i> Dịch vụ đã thuê
             </a>
         </li>
     </ul>
