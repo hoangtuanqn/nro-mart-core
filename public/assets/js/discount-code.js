@@ -67,7 +67,7 @@ class DiscountCodeHandler {
             });
 
             const data = await response.json();
-
+            console.log(data);
             if (data.success) {
                 this.discountCode = code;
                 this.discountedPrice = data.data.discounted_price;

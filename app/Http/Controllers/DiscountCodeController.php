@@ -30,7 +30,11 @@ class DiscountCodeController extends Controller
         $code = $request->input('code');
         $context = $request->input('context');
         $itemId = $request->input('item_id');
-
+        // return response()->json([
+        //     'code' => $code,
+        //     'context' => $context,
+        //     'itemId' => $itemId
+        // ]);
         // Find the discount code
         $discountCode = DiscountCode::where('code', $code)
             ->where('status', 'active')
@@ -94,6 +98,7 @@ class DiscountCodeController extends Controller
 
         // Get the original price based on context and item_id
         $originalPrice = $this->getOriginalPrice($context, $itemId);
+        // return response()->json(['status' => $originalPrice]);
         if ($originalPrice === 0) {
             return response()->json([
                 'success' => false,
@@ -101,6 +106,7 @@ class DiscountCodeController extends Controller
             ]);
         }
 
+        // return response()->json(['status' => 1]);
         // Calculate discount
         $discountedPrice = $this->calculateDiscountedPrice($originalPrice, $discountCode);
 
@@ -130,7 +136,7 @@ class DiscountCodeController extends Controller
         switch ($context) {
             case 'account':
                 // Get price from accounts table
-                $account = DB::table('accounts')->where('id', $itemId)->first();
+                $account = DB::table('game_accounts')->where('id', $itemId)->first();
                 return $account ? $account->price : 0;
 
             case 'random_account':
@@ -140,7 +146,7 @@ class DiscountCodeController extends Controller
 
             case 'service':
                 // Get price from services table
-                $service = DB::table('services')->where('id', $itemId)->first();
+                $service = DB::table('game_services')->where('id', $itemId)->first();
                 return $service ? $service->price : 0;
 
             default:
