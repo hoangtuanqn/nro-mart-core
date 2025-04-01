@@ -46,7 +46,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($categories as $category)
+                                @foreach ($categories as $key => $category)
                                     <tr>
                                         <td>
                                             <label class="checkboxs">
@@ -54,7 +54,7 @@
                                                 <span class="checkmarks"></span>
                                             </label>
                                         </td>
-                                        <td>{{ $category->id }}</td>
+                                        <td>{{ $key + 1 }}</td>
                                         <td class="text-bolds">{{ $category->name }}</td>
                                         <td>
                                             <img src="{{ asset($category->thumbnail) }}" alt="{{ $category->name }}"

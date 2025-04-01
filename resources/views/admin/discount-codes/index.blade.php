@@ -50,7 +50,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($discountCodes as $discountCode)
+                                @foreach ($discountCodes as $key => $discountCode)
                                     <tr>
                                         <td>
                                             <label class="checkboxs">
@@ -58,7 +58,7 @@
                                                 <span class="checkmarks"></span>
                                             </label>
                                         </td>
-                                        <td>{{ $discountCode->id }}</td>
+                                        <td>{{ $key + 1 }}</td>
                                         <td class="text-bolds">{{ $discountCode->code }}</td>
                                         <td>{{ $discountCode->discount_type === 'percentage' ? 'Phần trăm' : 'Số tiền cố định' }}
                                         </td>

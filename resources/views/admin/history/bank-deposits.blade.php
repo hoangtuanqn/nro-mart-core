@@ -44,9 +44,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($deposits as $deposit)
+                                @foreach ($deposits as $key => $deposit)
                                     <tr>
-                                        <td>{{ $deposit->id }}</td>
+                                        <td>{{ $key + 1 }}</td>
                                         <td>{{ $deposit->transaction_id }}</td>
                                         <td>
                                             <a href="{{ route('admin.users.show', $deposit->user_id) }}">

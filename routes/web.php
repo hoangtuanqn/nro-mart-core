@@ -8,6 +8,7 @@
  */
 
 use App\Http\Controllers\AtmDepositController;
+use App\Http\Controllers\DiscountCodeController;
 use App\Http\Controllers\User\CardDepositController;
 use App\Http\Controllers\User\GameAccountController;
 use App\Http\Controllers\User\GameCategoryController;
@@ -73,4 +74,4 @@ Route::get('/category-all', [GameCategoryController::class, 'showAll'])->name('c
 Route::get('/service-all', [GameServiceController::class, 'showAll'])->name('service.show-all');
 
 // Discount code routes
-Route::post('/discount-code/validate', [\App\Http\Controllers\DiscountCodeController::class, 'validateCode'])->name('discount.validate');
+Route::post('/discount-code/validate', [DiscountCodeController::class, 'validateCode'])->name('discount.validate');

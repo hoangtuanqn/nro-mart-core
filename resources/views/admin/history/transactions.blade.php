@@ -44,9 +44,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($transactions as $transaction)
+                                @foreach ($transactions as $key => $transaction)
                                     <tr>
-                                        <td>{{ $transaction->id }}</td>
+                                        <td>{{ $key + 1 }}</td>
                                         <td>
                                             <a href="{{ route('admin.users.show', $transaction->user_id) }}">
                                                 {{ $transaction->user->username ?? 'N/A' }}

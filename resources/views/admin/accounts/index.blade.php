@@ -49,7 +49,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($accounts as $account)
+                                @foreach ($accounts as $key => $account)
                                     <tr>
                                         <td>
                                             <label class="checkboxs">
@@ -57,7 +57,7 @@
                                                 <span class="checkmarks"></span>
                                             </label>
                                         </td>
-                                        <td>{{ $account->id }}</td>
+                                        <td>{{ $key + 1 }}</td>
                                         <td>
                                             <a
                                                 href="{{ route('admin.categories.edit', ['category' => $account->category->id]) }}">{{ $account->category->name }}</a>

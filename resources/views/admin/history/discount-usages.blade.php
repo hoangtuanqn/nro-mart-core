@@ -44,9 +44,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($usages as $usage)
+                                @foreach ($usages as $key => $usage)
                                     <tr>
-                                        <td>{{ $usage->id }}</td>
+                                        <td>{{ $key + 1 }}</td>
                                         <td>
                                             <a href="{{ route('admin.users.show', $usage->user_id) }}">
                                                 {{ $usage->user->username ?? 'N/A' }}
