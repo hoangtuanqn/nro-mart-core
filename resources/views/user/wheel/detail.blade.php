@@ -159,6 +159,7 @@
             from {
                 transform: rotate(0deg);
             }
+
             to {
                 transform: rotate(360deg);
             }
@@ -182,6 +183,7 @@
                 opacity: 0.4;
                 transform: scale(0.98);
             }
+
             100% {
                 opacity: 0.7;
                 transform: scale(1.02);
@@ -197,8 +199,8 @@
             z-index: 2;
             border: 5px solid white;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2),
-                        0 0 0 2px rgba(108, 99, 255, 0.2),
-                        0 0 0 8px rgba(255, 255, 255, 0.8);
+                0 0 0 2px rgba(108, 99, 255, 0.2),
+                0 0 0 8px rgba(255, 255, 255, 0.8);
         }
 
         .wheel-center {
@@ -268,7 +270,9 @@
             0% {
                 left: -50%;
             }
-            20%, 100% {
+
+            20%,
+            100% {
                 left: 100%;
             }
         }
@@ -754,7 +758,8 @@
                         confetti.style.backgroundColor = 'transparent';
                         confetti.style.borderLeft = (size / 2) + 'px solid transparent';
                         confetti.style.borderRight = (size / 2) + 'px solid transparent';
-                        confetti.style.borderBottom = size + 'px solid ' + colors[Math.floor(Math.random() * colors.length)];
+                        confetti.style.borderBottom = size + 'px solid ' + colors[Math.floor(Math.random() * colors
+                            .length)];
                     }
 
                     // Random animation duration
