@@ -24,6 +24,8 @@ class LuckyCategoryController extends Controller
     }
     public function index()
     {
-        view('user.wheel.detail');
+        // dd('cc');
+        $history = [];
+        return view('user.wheel.detail', compact('history'));
     }
 }
