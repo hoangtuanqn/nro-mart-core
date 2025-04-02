@@ -12,6 +12,7 @@
 }
 
 .profile-header {
+    border-radius: 10px 10px 0 0;
     background-color: var(--primary-color);
     padding: 20px 30px;
     border-bottom: 4px solid var(--accent-color);
@@ -237,4 +238,9 @@
     .profile-main {
         padding: 15px;
     }
+}
+
+.profile-balance-danger {
+    color: var(--danger);
+    animation: pulse 1.5s infinite;
 }

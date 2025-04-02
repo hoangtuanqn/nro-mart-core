@@ -1,11 +1,11 @@
-@if (!empty($title) && !empty($description))
-    <section class="hero hero--small">
-        <div class="container">
-            <div class="hero__content">
-                <h1 class="hero__title">{{ $title }}</h1>
+<!-- Hero Small Variant -->
+<section class="hero--small">
+    <div class="container">
+        <div class="hero__content">
+            <h1 class="hero__title">{{ $title }}</h1>
+            @if (isset($description) && $description)
                 <p class="hero__desc">{{ $description }}</p>
-            </div>
+            @endif
         </div>
-    </section>
-
-@endif
+    </div>
+</section>

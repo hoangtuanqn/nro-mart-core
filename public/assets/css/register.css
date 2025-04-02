@@ -69,15 +69,16 @@
 }
 
 .form-input:focus {
-    border-color: var(--accent-color);
+    border-color: var(--primary-color);
     outline: none;
-    box-shadow: 0 0 0 2px rgba(255, 0, 0, 0.1);
+    box-shadow: 0 0 0 2px rgba(66, 103, 233, 0.1);
 }
 
 .form-error {
-    color: var(--accent-color);
+    color: var(--danger);
     font-size: 1.3rem;
     margin-top: 5px;
+    display: block;
 }
 
 .register-btn {
@@ -97,6 +98,16 @@
 
 .register-btn:hover {
     background-color: #d40000;
+    transform: translateY(-2px);
+}
+
+.register-btn--google {
+    background-color: var(--danger);
+    color: white;
+}
+
+.register-btn--google:hover {
+    background-color: var(--danger-dark);
     transform: translateY(-2px);
 }
 

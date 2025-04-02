@@ -763,7 +763,7 @@ select.service__form-control {
 
 .service__history-item-price {
     font-weight: 700;
-    color: #e53935;
+    color: var(--accent-color);
     font-size: 1.6rem;
 }
 
@@ -822,10 +822,16 @@ select.service__form-control {
     }
 }
 
-
 .service__form-error {
-    color: #e53935;
+    color: var(--danger);
     font-size: 1.4rem;
+    margin-top: 5px;
+}
+
+.service__error {
+    color: var(--danger);
+    font-size: 1.4rem;
+    display: block;
     margin-top: 5px;
 }
 
@@ -892,14 +898,14 @@ select.service__form-control {
 }
 
 .service__status--cancelled {
-    background-color: #ffebee;
-    color: #e53935;
-    border: 1px solid #ffcdd2;
+    background-color: var(--danger-light);
+    color: var(--danger);
+    border: 1px solid var(--danger-light);
 }
 
 .service__price {
     font-weight: 600;
-    color: #e53935;
+    color: var(--accent-color);
 }
 
 .service__id {

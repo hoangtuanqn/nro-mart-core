@@ -20,11 +20,12 @@
                 <!-- Action Buttons -->
                 <div class="detail__actions">
                     @if ($account->status === 'available')
-                        <button class="detail__btn detail__btn--primary" onclick="buyAccount({{ $account->id }})">MUA
-                            NGAY</button>
-                        <a class="detail__btn detail__btn--card" href="{{ route('profile.deposit-card') }}">NẠP THẺ</a>
-                        <button class="detail__btn detail__btn--wallet" onclick="showRechargeModal('wallet')">NẠP
-                            ATM</button>
+                        <button class="detail__btn detail__btn--primary" onclick="buyAccount({{ $account->id }})"><i
+                                class="fas fa-shopping-cart"></i>MUA NGAY</button>
+                        <a class="detail__btn detail__btn--card" href="{{ route('profile.deposit-card') }}"><i
+                                class="fas fa-credit-card"></i>NẠP THẺ</a>
+                        <button class="detail__btn detail__btn--wallet" onclick="showRechargeModal('wallet')"><i
+                                class="fas fa-university"></i>NẠP ATM</button>
                     @else
                         <div class="detail__purchased">
                             <h2 class="detail__purchased-title">Tài khoản này đã được mua</h2>

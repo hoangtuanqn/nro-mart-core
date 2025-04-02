@@ -33,15 +33,15 @@
 }
 
 .detail__btn--primary {
-    background: linear-gradient(135deg, #ff4d4d, #f9333f);
+    background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
     color: white;
     border: none;
-    box-shadow: 0 5px 15px rgba(255, 77, 77, 0.3);
+    box-shadow: 0 5px 15px rgba(14, 62, 218, 0.3);
 }
 
 .detail__btn--primary:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(255, 77, 77, 0.4);
+    box-shadow: 0 10px 20px rgba(14, 62, 218, 0.4);
 }
 
 .detail__btn--card,
@@ -69,7 +69,7 @@
 .detail__purchased-title {
     font-size: 2.2rem;
     font-weight: 700;
-    color: #ff4d4d;
+    color: var(--second-color);
     margin: 0;
 }
 
@@ -100,7 +100,7 @@
     transform: translateX(-50%);
     width: 80px;
     height: 3px;
-    background: #ff4d4d;
+    background: linear-gradient(135deg, var(--primary-color), var(--second-color));
     border-radius: 3px;
 }
 
@@ -128,7 +128,7 @@
     transform: translateX(-50%);
     width: 80px;
     height: 3px;
-    background: #ff4d4d;
+    background: linear-gradient(135deg, var(--primary-color), var(--second-color));
     border-radius: 3px;
 }
 
@@ -233,7 +233,7 @@
 .modal__value--price {
     font-size: 2rem;
     font-weight: 700;
-    color: #ff4d4d;
+    color: var(--second-color);
 }
 
 .modal__discount {
@@ -267,7 +267,7 @@
 }
 
 .modal__discount-message--error {
-    color: #ff4d4d;
+    color: var(--second-color);
 }
 
 .modal__discount-message--success {
@@ -304,7 +304,7 @@
 }
 
 .modal__btn--card {
-    background: #ff4d4d;
+    background: var(--second-color);
     color: white;
     flex-grow: 1;
 }
@@ -333,7 +333,7 @@
 }
 
 .modal__btn--card:hover {
-    background: #f9333f;
+    background: var(--second-dark);
 }
 
 .modal__btn--wallet:hover {
@@ -416,4 +416,8 @@
     .modal__btn {
         width: 100%;
     }
+}
+
+.image-viewer__close:hover {
+    color: var(--second-color);
 }

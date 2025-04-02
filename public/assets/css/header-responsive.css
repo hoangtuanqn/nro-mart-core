@@ -45,11 +45,11 @@
 
 .menu__item:hover {
     background-color: #f8f9fa;
-    color: #ff4d4d;
+    color: rgba(--primary-color, 0.8);
 }
 
 .menu__item.active {
-    color: #ff4d4d;
+    color: var(--primary-color);
     font-weight: 600;
 }
 
@@ -76,21 +76,12 @@
     font-size: 1.4rem;
 }
 
-.action__link--primary {
-    background-color: #ff4d4d;
-    color: white;
-    border: none;
-    cursor: pointer;
-}
-
 .action__link:hover {
     opacity: 0.9;
     transform: translateY(-2px);
 }
 
-.action__link--primary:hover {
-    background-color: #f9333f;
-}
+
 
 /* Mobile Menu Toggle Button */
 .menu-toggle {

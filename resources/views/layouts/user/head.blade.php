@@ -10,9 +10,23 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>@yield('title', 'Shop của Hoàng Tuấn')</title>
+    <link rel="stylesheet" href="{{ asset('assets/fonts/stylesheet.css') }}" />
+
 
     <!-- CSS -->
-    @vite(['resources/assets/css/app.css'])
+    {{-- @vite(['resources/assets/css/app.css']) --}}
+
+
+    <link rel="stylesheet" href="{{ asset('assets/css/reset.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/global.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/home.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/register.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/profile.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/deposit.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/category.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/detail-account.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/service.css') }}" />
+    <link rel="stylesheet" href="{{ asset('assets/css/wheel.css') }}" />
     <!-- Random Accounts CSS -->
     <link rel="stylesheet" href="{{ asset('assets/css/random-accounts.css') }}" />
     <link rel="stylesheet" href="{{ asset('assets/css/random-account-detail.css') }}" />

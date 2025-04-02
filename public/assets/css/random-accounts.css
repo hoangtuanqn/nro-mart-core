@@ -69,14 +69,14 @@
 }
 
 .account-card__id {
-    background: linear-gradient(135deg, #ff4d4d, #f9333f);
+    background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
     color: white;
     padding: 5px 10px;
     border-radius: 20px;
     font-size: 1.4rem;
     font-weight: 700;
     display: inline-block;
-    box-shadow: 0 2px 5px rgba(255, 77, 77, 0.2);
+    box-shadow: 0 2px 5px rgba(14, 62, 218, 0.2);
 }
 
 .account-card__price {
@@ -87,7 +87,7 @@
 .highlight-price {
     font-size: 2.2rem;
     font-weight: 700;
-    color: #ff4d4d;
+    color: var(--second-color);
     display: block;
 }
 
@@ -116,7 +116,7 @@
 }
 
 .account-card:hover .account-card__link {
-    background: #ff4d4d;
+    background: var(--second-color);
     color: white;
 }
 
@@ -135,7 +135,7 @@
 
 .no-results__icon {
     font-size: 4rem;
-    color: #ff4d4d;
+    color: var(--second-color);
     margin-bottom: 20px;
 }
 
@@ -174,7 +174,7 @@
 }
 
 .pagination .page-item.active .page-link {
-    background: #ff4d4d;
+    background: var(--second-color);
     color: white;
 }
 
@@ -184,7 +184,7 @@
 }
 
 .pagination .page-item.active .page-link:hover {
-    background: #ff4d4d;
+    background: var(--second-color);
 }
 
 /* Responsive */
@@ -223,4 +223,16 @@
     .account-card__image {
         height: 200px;
     }
+}
+
+.action-btn--card {
+    background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
+    color: white;
+    border: none;
+    box-shadow: 0 3px 8px rgba(14, 62, 218, 0.2);
+}
+
+.action-btn--card:hover {
+    box-shadow: 0 5px 15px rgba(14, 62, 218, 0.3);
+    transform: translateY(-2px);
 }

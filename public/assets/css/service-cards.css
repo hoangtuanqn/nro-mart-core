@@ -22,7 +22,7 @@
     transform: translateX(-50%);
     width: 100px;
     height: 3px;
-    background: linear-gradient(135deg, #ff4d4d, #f9333f);
+    background: linear-gradient(135deg, var(--primary-color), var(--second-color));
     border-radius: 3px;
 }
 
@@ -56,16 +56,16 @@
 }
 
 .service-category:hover {
-    border-color: #ff4d4d;
-    color: #ff4d4d;
+    border-color: var(--second-color);
+    color: var(--second-color);
     transform: translateY(-2px);
 }
 
 .service-category.active {
-    background: linear-gradient(135deg, #ff4d4d, #f9333f);
+    background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
     color: white;
     border-color: transparent;
-    box-shadow: 0 5px 15px rgba(255, 77, 77, 0.2);
+    box-shadow: 0 5px 15px rgba(14, 62, 218, 0.2);
 }
 
 /* Service Grid */
@@ -118,14 +118,14 @@
     position: absolute;
     top: 15px;
     left: 15px;
-    background: linear-gradient(135deg, #ff4d4d, #f9333f);
+    background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
     color: white;
     padding: 5px 10px;
     border-radius: 20px;
     font-size: 1.2rem;
     font-weight: 700;
     display: inline-block;
-    box-shadow: 0 2px 5px rgba(255, 77, 77, 0.2);
+    box-shadow: 0 2px 5px rgba(14, 62, 218, 0.2);
     z-index: 1;
 }
 
@@ -145,7 +145,7 @@
 }
 
 .service-card:hover .service-card__title {
-    color: #ff4d4d;
+    color: var(--second-color);
 }
 
 .service-card__desc {
@@ -194,7 +194,7 @@
 .service-card__price-value {
     font-size: 2.2rem;
     font-weight: 700;
-    color: #ff4d4d;
+    color: var(--second-color);
     display: block;
 }
 
@@ -215,7 +215,7 @@
     justify-content: center;
     gap: 10px;
     padding: 12px 25px;
-    background: linear-gradient(135deg, #ff4d4d, #f9333f);
+    background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
     color: white;
     border-radius: 8px;
     font-size: 1.5rem;
@@ -224,7 +224,7 @@
     transition: all 0.3s ease;
     border: none;
     cursor: pointer;
-    box-shadow: 0 3px 8px rgba(255, 77, 77, 0.2);
+    box-shadow: 0 4px 10px rgba(14, 62, 218, 0.3);
 }
 
 .service-card__btn i {
@@ -232,8 +232,9 @@
 }
 
 .service-card__btn:hover {
-    box-shadow: 0 5px 15px rgba(255, 77, 77, 0.3);
-    transform: translateY(-2px);
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(14, 62, 218, 0.4);
 }
 
 .service-card__btn:hover i {
@@ -287,9 +288,9 @@
 
 .service-filter__input:focus {
     outline: none;
-    border-color: #ff4d4d;
+    border-color: var(--second-color);
     background-color: #fff;
-    box-shadow: 0 0 0 3px rgba(255, 77, 77, 0.1);
+    box-shadow: 0 0 0 3px rgba(244, 115, 185, 0.1);
 }
 
 .service-filter__input--select {
@@ -325,14 +326,14 @@
 }
 
 .service-filter__button--primary {
-    background: linear-gradient(135deg, #ff4d4d, #f9333f);
+    background: linear-gradient(135deg, var(--second-light), var(--second-color));
     color: white;
     border: none;
-    box-shadow: 0 3px 8px rgba(255, 77, 77, 0.2);
+    box-shadow: 0 3px 8px rgba(244, 115, 185, 0.2);
 }
 
 .service-filter__button--primary:hover {
-    box-shadow: 0 5px 15px rgba(255, 77, 77, 0.3);
+    box-shadow: 0 5px 15px rgba(244, 115, 185, 0.3);
     transform: translateY(-2px);
 }
 
@@ -372,14 +373,14 @@
 
 .service-search__input:focus {
     outline: none;
-    border-color: #ff4d4d;
-    box-shadow: 0 0 0 3px rgba(255, 77, 77, 0.1);
+    border-color: var(--second-color);
+    box-shadow: 0 0 0 3px rgba(244, 115, 185, 0.1);
 }
 
 .service-search__button {
     width: 120px;
     height: 50px;
-    background: linear-gradient(135deg, #ff4d4d, #f9333f);
+    background: linear-gradient(135deg, var(--second-light), var(--second-color));
     color: white;
     border: none;
     border-radius: 0 8px 8px 0;
@@ -394,7 +395,7 @@
 }
 
 .service-search__button:hover {
-    background: #f9333f;
+    background: var(--second-dark);
 }
 
 /* No Results */
@@ -410,7 +411,7 @@
 
 .no-results__icon {
     font-size: 4rem;
-    color: #ff4d4d;
+    color: var(--second-color);
     margin-bottom: 20px;
 }
 
@@ -449,7 +450,7 @@
 }
 
 .pagination .page-item.active .page-link {
-    background: #ff4d4d;
+    background: var(--second-color);
     color: white;
 }
 
@@ -459,7 +460,7 @@
 }
 
 .pagination .page-item.active .page-link:hover {
-    background: #ff4d4d;
+    background: var(--second-color);
 }
 
 /* Modal Styles for Services */
@@ -558,7 +559,7 @@
 .service-modal__value--price {
     font-size: 2rem;
     font-weight: 700;
-    color: #ff4d4d;
+    color: var(--second-color);
 }
 
 .service-modal__form-group {
@@ -585,8 +586,8 @@
 
 .service-modal__form-input:focus {
     outline: none;
-    border-color: #ff4d4d;
-    box-shadow: 0 0 0 3px rgba(255, 77, 77, 0.1);
+    border-color: var(--second-color);
+    box-shadow: 0 0 0 3px rgba(244, 115, 185, 0.1);
 }
 
 .service-modal__form-textarea {
@@ -602,8 +603,8 @@
 
 .service-modal__form-textarea:focus {
     outline: none;
-    border-color: #ff4d4d;
-    box-shadow: 0 0 0 3px rgba(255, 77, 77, 0.1);
+    border-color: var(--second-color);
+    box-shadow: 0 0 0 3px rgba(244, 115, 185, 0.1);
 }
 
 .service-modal__discount {
@@ -655,7 +656,7 @@
 }
 
 .service-modal__discount-message--error {
-    color: #ff4d4d;
+    color: var(--second-color);
 }
 
 .service-modal__discount-message--success {
@@ -692,15 +693,15 @@
 }
 
 .service-modal__btn--submit {
-    background: #ff4d4d;
+    background: var(--second-color);
     color: white;
     flex-grow: 1;
 }
 
 .service-modal__btn--submit:hover {
-    background: #f9333f;
+    background: var(--second-dark);
     transform: translateY(-3px);
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 5px 10px rgba(244, 115, 185, 0.2);
 }
 
 .service-modal__btn--close {

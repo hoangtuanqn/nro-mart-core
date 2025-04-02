@@ -12,10 +12,7 @@
 
 @section('content')
     <!-- Hero Section -->
-<x-hero-header 
-    title="{{ $category->name }}" 
-    description="{{ $category->description }}" 
-/>
+    <x-hero-header title="{{ $category->name }}" description="{{ $category->description }}" />
 
     <!-- Account List Section -->
     <section class="account-section">
@@ -142,7 +139,7 @@
                         <div class="account-actions">
                             <div class="card-price">TIỀN CARD: {{ number_format($account->card_price) }} VND</div>
                             <a href="{{ route('account.show', ['id' => $account->id]) }}"
-                                class="action-btn action-btn--detail">Chi tiết</a>
+                                class="action-btn action-btn--detail">XEM CHI TIẾT</a>
                         </div>
                     </div>
                 @empty

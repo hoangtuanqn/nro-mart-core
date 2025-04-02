@@ -63,6 +63,11 @@
     margin-bottom: 20px;
 }
 
+.deposit-form__input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(66, 103, 233, 0.1);
+}
 
 .form-select,
 .form-input {
@@ -175,13 +180,10 @@
 }
 
 .history-table-container {
-    overflow-x: auto;
+    overflow: hidden;
+    /* overflow-x: auto; */
 }
 
-.history-table {
-    width: 100%;
-    border-collapse: collapse;
-}
 
 .history-table th,
 .history-table td {
@@ -209,13 +211,6 @@
 
 .history-table tr:hover {
     background-color: #f0f0f0;
-}
-
-.no-data {
-    text-align: center;
-    padding: 20px;
-    font-style: italic;
-    color: var(--text-light);
 }
 
 
@@ -457,4 +452,22 @@
         border-left: none;
         border-top: 1px dashed #ddd;
     }
+}
+
+.btn--card {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.btn--google {
+    background-color: var(--danger);
+    color: white;
+}
+
+.btn--google:hover {
+    background-color: var(--danger-dark);
+}
+
+.btn--rejected {
+    background-color: var(--danger);
 }
