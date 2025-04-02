@@ -122,4 +122,25 @@
             </div>
         </div>
     </section>
+
+    <!-- Menu DANH MỤC VÒNG QUAY MAY MẮN -->
+    <section class="menu">
+        <div class="container">
+            <header class="menu__header">
+                <h2 class="menu__header__title">VÒNG QUAY MAY MẮN</h2>
+            </header>
+            <div class="category__list">
+                @foreach ($randomLuckWheel as $category)
+                    @if ($category->active)
+                        <a href="{{ route('random.index', ['slug' => $category->slug]) }}" class="category__item">
+                            <img src="{{ $category->thumbnail }}" alt="{{ $category->name }}" class="category__img" />
+                            <h2 class="category__title">{{ strtoupper($category->name) }}</h2>
+                            <p class="category__desc">Số lượt quay: {{ number_format($category->soldCount) }}</p>
+                            <p class="text category__action">Mua ngay</p>
+                        </a>
+                    @endif
+                @endforeach
+            </div>
+        </div>
+    </section>
 @endsection

@@ -14,6 +14,7 @@ use App\Http\Controllers\User\GameAccountController;
 use App\Http\Controllers\User\GameCategoryController;
 use App\Http\Controllers\User\GameServiceController;
 use App\Http\Controllers\User\HomeController;
+use App\Http\Controllers\User\LuckyCategoryController;
 use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\ServiceOrderController;
 use App\Http\Controllers\User\RandomCategoryController;
@@ -54,6 +55,7 @@ Route::middleware('auth')->group(function () {
     });
 });
 Route::prefix('category')->name('category.')->group(function () {
+    Route::get('/', [GameCategoryController::class, 'showAll'])->name('show-all');
     Route::get('/{slug}', [GameCategoryController::class, 'index'])->name('index');
 });
 Route::prefix('account')->name('account.')->group(function () {
@@ -61,6 +63,7 @@ Route::prefix('account')->name('account.')->group(function () {
     Route::post('/{id}/purchase', [GameAccountController::class, 'purchase'])->name('purchase');
 });
 Route::prefix('service')->name('service.')->group(function () {
+    Route::get('/', [GameServiceController::class, 'showAll'])->name('show-all');
     Route::get('/{slug}', [GameServiceController::class, 'show'])->name('show');
     Route::post('/{slug}/order', [ServiceOrderController::class, 'processOrder'])->name('order');
 });
@@ -73,8 +76,11 @@ Route::prefix('random')->name('random.')->group(function () {
     Route::get('/{slug}', [RandomCategoryController::class, 'index'])->name('index');
 });
 
-Route::get('/category-all', [GameCategoryController::class, 'showAll'])->name('category.show-all');
-Route::get('/service-all', [GameServiceController::class, 'showAll'])->name('service.show-all');
+// Routes for lucky wheel categories
+Route::prefix('lucky')->name('lucky.')->group(function () {
+    Route::get('/', [LuckyCategoryController::class, 'showAll'])->name('show-all');
+    Route::get('/{slug}', [LuckyCategoryController::class, 'index'])->name('index');
+});
 
 // Discount code routes
 Route::post('/discount-code/validate', [DiscountCodeController::class, 'validateCode'])->name('discount.validate');

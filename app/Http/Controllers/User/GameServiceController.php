@@ -24,7 +24,7 @@ class GameServiceController extends Controller
     public function showAll()
     {
         $title = 'Dịch vụ thuê';
-        $services = GameService::with('packages')->get();
+        $services = GameService::where('active', 1)->with('packages')->get();
         return view('user.service.show-all', compact('services', 'title'));
     }
 }

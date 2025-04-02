@@ -40,6 +40,6 @@ class RandomCategoryController extends Controller
             $category->allAccount = RandomCategoryAccount::where('random_category_id', $category->id)->count();
         }
 
-        return view('user.random.all', compact('categories'));
+        return view('user.random.show-all', compact('categories'));
     }
 }

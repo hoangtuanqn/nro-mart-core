@@ -13,6 +13,7 @@ class LuckyWheelsTableSeeder extends Seeder
             'name' => 'Vòng quay VIP',
             'slug' => 'vong-quay-vip',
             'thumbnail' => 'images/lucky_wheel_vip.jpg',
+            'wheel_image' => 'images/lucky_wheel_vip.jpg',
             'rules' => '<p>Quay để nhận vàng hoặc ngọc. Mỗi lần quay tốn 10,000 VNĐ.</p>',
             'active' => true,
             'price_per_spin' => 10000,

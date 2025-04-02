@@ -73,7 +73,7 @@ class GameCategoryController extends Controller
         $title = 'Danh mục bán nick game';
 
         // Get all categories with additional statistics
-        $categories = Category::all();
+        $categories = Category::where('active', 1)->get();
 
         foreach ($categories as $category) {
             // Total accounts in this category

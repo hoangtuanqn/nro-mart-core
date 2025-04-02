@@ -12,6 +12,7 @@ return new class extends Migration {
             $table->string('name'); // Tên vòng quay - Tên của vòng quay may mắn (VD: "Vòng quay VIP")
             $table->string('slug')->unique(); // Đường dẫn SEO - Chuỗi duy nhất dùng cho URL (VD: "vong-quay-vip")
             $table->string('thumbnail'); // Ảnh đại diện - Đường dẫn hoặc tên file ảnh minh họa vòng quay
+            $table->string('wheel_image'); // Hình ảnh vòng quay
             $table->text('rules'); // Thể lệ vòng quay - Nội dung thể lệ, có thể chứa mã HTML (VD: "<p>Quay để nhận vàng</p>")
             $table->boolean('active')->default(true); // Trạng thái - 1: Hiển thị, 0: Ẩn khỏi giao diện người dùng
             $table->bigInteger('price_per_spin'); // Giá tiền mỗi lần quay - Giá mỗi lần quay (VD: 10000 VNĐ)

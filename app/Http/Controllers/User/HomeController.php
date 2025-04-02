@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\GameAccount;
 use App\Models\GameService;
+use App\Models\LuckyWheel;
 use App\Models\ServiceHistory;
 use App\Models\RandomCategory;
 use App\Models\RandomCategoryAccount;
@@ -45,6 +46,11 @@ class HomeController extends Controller
             $category->allAccount = RandomCategoryAccount::where('random_category_id', $category->id)->count();
         }
 
-        return view('user.home', compact('categories', 'services', 'randomCategories'));
+        // Vòng quay may mắn
+        $randomLuckWheel = LuckyWheel::where('active', 1)->get();
+        foreach ($randomLuckWheel as $wheel) {
+            $wheel->soldCount = $wheel->histories->count();
+        }
+        return view('user.home', compact('categories', 'services', 'randomCategories', 'randomLuckWheel'));
     }
 }
