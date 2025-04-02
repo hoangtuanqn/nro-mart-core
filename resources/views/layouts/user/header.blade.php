@@ -20,8 +20,8 @@
 <!-- Nav -->
 <nav class="nav">
     <div class="container row">
-        <a href="/">
-            <img src="https://acc957.com/upload-usr/images/logo.png" alt="Logo Game" class="nav__logo" />
+        <a href="/" style="display: flex; align-items: center">
+            <img src="https://imgur.com/hIFVXRo.png" alt="Logo Game" class="nav__logo" />
         </a>
         <div class="nav__menu">
             <a href="/" class="text menu__item {{ request()->is('/') ? 'active' : '' }}">Trang chủ</a>

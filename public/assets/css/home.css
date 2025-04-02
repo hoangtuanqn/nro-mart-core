@@ -173,6 +173,7 @@
     background-color: var(--bg-light);
     border-radius: var(--border-radius-circle);
     transition: var(--transition);
+    overflow: hidden;
 }
 
 .transaction__item:hover .transaction__icon {
@@ -180,8 +181,7 @@
 }
 
 .transaction__img {
-    width: 40px;
-    height: 40px;
+
     object-fit: contain;
 }
 

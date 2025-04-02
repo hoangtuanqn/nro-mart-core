@@ -12,7 +12,7 @@
         <div class="footer__content">
             <div class="footer__column">
                 <a href="/" class="footer__logo">
-                    <img src="https://acc957.com/upload-usr/images/logo.png" alt="Logo" height="50">
+                    <img src="https://imgur.com/YAwjTGo.png" alt="Logo" height="40" width="200">
                 </a>
                 <p class="footer__desc">
                     Shop Ngọc Rồng Online cung cấp tài khoản game chính hãng, giá tốt nhất thị trường.
@@ -66,14 +66,10 @@
         </div>
         <div class="footer__bottom">
             <div class="footer__payment">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5e/Visa_Inc._logo.svg/1024px-Visa_Inc._logo.svg.png"
-                    alt="Visa" class="payment__img">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Mastercard-logo.svg/1280px-Mastercard-logo.svg.png"
-                    alt="MasterCard" class="payment__img">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal"
-                    class="payment__img">
-                <img src="https://cdn.haitrieu.com/wp-content/uploads/2022/02/Logo-MoMo-Square.png" alt="MoMo"
-                    class="payment__img">
+                <img src="{{ asset('assets/images/payment/amex.svg') }}" alt="American Express" class="payment__img">
+                <img src="{{ asset('assets/images/payment/mastercard.svg') }}" alt="MasterCard" class="payment__img">
+                <img src="{{ asset('assets/images/payment/paypal.svg') }}" alt="PayPal" class="payment__img">
+                <img src="{{ asset('assets/images/payment/visa.svg') }}" alt="Visa" class="payment__img">
             </div>
             <div class="footer__copyright">
                 &copy; {{ date('Y') }} - Bản quyền thuộc về <a href="https://tuanori.vn"
