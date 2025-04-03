@@ -128,9 +128,16 @@
                                 </form>
 
                                 <div class="deposit-notice">
-                                    <div class="notice-header">NẠP THẺ KHÔNG CHIẾT KHẤU</div>
-                                    <div class="notice-content">nạp 10k được 10k ...100k được 100k</div>
-                                    <div class="notice-warning">SAI MỆNH GIÁ -50% THẺ</div>
+                                    <div class="notice-header">
+                                        @if (config_get('payment.card.discount_percent') == 0)
+                                            NẠP THẺ KHÔNG CHIẾT KHẤU
+                                        @else
+                                            NẠP THẺ CHIẾT KHẤU {{ config_get('payment.card.discount_percent') }}%
+                                        @endif
+                                    </div>
+                                    <div class="notice-content">Ví dụ nạp 100K nhận
+                                        {{ 100 - (100 * config_get('payment.card.discount_percent')) / 100 }}K</div>
+                                    <div class="notice-warning">SAI MỆNH GIÁ -50% GIÁ TRỊ GỐC CỦA THẺ</div>
                                 </div>
 
                                 <div class="deposit-history">

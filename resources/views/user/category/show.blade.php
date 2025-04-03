@@ -137,7 +137,9 @@
                         </div>
 
                         <div class="account-actions">
-                            <div class="card-price">TIỀN CARD: {{ number_format($account->card_price) }} VND</div>
+                            <div class="card-price">CARD:
+                                {{ number_format($account->price / ((100 - config_get('payment.card.discount_percent')) / 100)) }}
+                                Đ</div>
                             <a href="{{ route('account.show', ['id' => $account->id]) }}"
                                 class="action-btn action-btn--detail">XEM CHI TIẾT</a>
                         </div>

@@ -168,6 +168,8 @@ class CardDepositController extends Controller
             $amount = $validated['card_value'];
             if ($validated['status'] == 2) {
                 $amount = $amount * 0.5; // Nhận 50% mệnh giá thực vì sai mệnh giá
+            } else if ($validated['status'] == 1) {
+                $amount = $amount - $amount * config_get('payment.card.discount_percent') / 100;
             }
             $cardDeposit->received_amount = $amount; // Mệnh giá thực của thẻ
             $cardDeposit->status = $status;

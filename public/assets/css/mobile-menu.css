@@ -49,11 +49,6 @@
     color: var(--primary-color);
 }
 
-.menu-mobile__link:hover,
-.menu-mobile__link:focus {
-    color: #ff4d4d;
-}
-
 /* Add padding to the bottom of the page to account for fixed mobile menu */
 
 

@@ -158,18 +158,9 @@
     transform: translateX(3px);
 }
 
-.action-btn--detail {
-    background: #f8f9fa;
-    color: #333;
-    border: 1px solid #e0e0e0;
-}
 
-.action-btn--detail:hover {
-    background: #333;
-    color: white;
-    border-color: #333;
-    transform: translateY(-2px);
-}
+
+
 
 .action-btn--detail:hover i {
     transform: translateX(3px);

@@ -54,6 +54,7 @@ class ConfigSeeder extends Seeder
                     'active' => '1',
                     'partner_id' => '',
                     'partner_key' => '',
+                    'discount_percent' => '20',
                 ],
             ],
             'login_social' => [

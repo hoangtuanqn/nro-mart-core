@@ -180,8 +180,7 @@
 }
 
 .history-table-container {
-    overflow: hidden;
-    /* overflow-x: auto; */
+    overflow-x: auto;
 }
 
 
@@ -242,10 +241,6 @@
         margin-bottom: 8px;
     }
 
-    .deposit-notice,
-    .deposit-history {
-        margin: 15px;
-    }
 
     .history-table th,
     .history-table td {
@@ -259,6 +254,7 @@
         padding: 30px 0;
     }
 
+
     .deposit-header {
         padding: 12px 15px;
     }
@@ -269,7 +265,7 @@
 
     .balance-label,
     .balance-value {
-        font-size: 1.6rem;
+        font-size: 1.4rem;
     }
 
     .deposit-form {
