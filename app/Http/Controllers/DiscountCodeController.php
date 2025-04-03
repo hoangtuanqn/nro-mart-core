@@ -1,11 +1,16 @@
 <?php
+/**
+ * Copyright (c) 2025 FPT University
+ *
+ * @author    Phạm Hoàng Tuấn
+ * @email     phamhoangtuanqn@gmail.com
+ * @facebook  fb.com/phamhoangtuanqn
+ */
 
 namespace App\Http\Controllers;
 
 use App\Models\Account;
 use App\Models\DiscountCode;
-use App\Models\RandomCategoryAccount;
-use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;

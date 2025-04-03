@@ -1,4 +1,11 @@
 <?php
+/**
+ * Copyright (c) 2025 FPT University
+ *
+ * @author    Phạm Hoàng Tuấn
+ * @email     phamhoangtuanqn@gmail.com
+ * @facebook  fb.com/phamhoangtuanqn
+ */
 
 namespace Database\Seeders;
 
@@ -11,12 +18,11 @@ class RandomCategoryAccountsTableSeeder extends Seeder
     public function run(): void
     {
         // Lấy ID của danh mục vừa tạo
-        $categoryId = RandomCategory::where('slug', 'danh-muc-vip')->first()->id;
 
         // Tạo 10 tài khoản cố định
         $accounts = [
             [
-                'random_category_id' => $categoryId,
+                'random_category_id' => 1,
                 'account_name' => 'player1',
                 'password' => 'pass123',
                 'price' => 500000,
@@ -27,7 +33,7 @@ class RandomCategoryAccountsTableSeeder extends Seeder
                 'thumbnail' => 'https://cdn3.upanh.info/upload/server-sw3/images/Valentine/Nick/Th%E1%BB%AD%20V%E1%BA%ADn%20May%20Ng%E1%BB%8Dc%20R%E1%BB%93ng%20Vip%203.jpg',
             ],
             [
-                'random_category_id' => $categoryId,
+                'random_category_id' => 1,
                 'account_name' => 'player2',
                 'password' => 'pass456',
                 'price' => 750000,
@@ -38,7 +44,7 @@ class RandomCategoryAccountsTableSeeder extends Seeder
                 'thumbnail' => 'https://cdn3.upanh.info/upload/server-sw3/images/Valentine/Nick/Th%E1%BB%AD%20V%E1%BA%ADn%20May%20Ng%E1%BB%8Dc%20R%E1%BB%93ng%20Vip%203.jpg',
             ],
             [
-                'random_category_id' => $categoryId,
+                'random_category_id' => 1,
                 'account_name' => 'player3',
                 'password' => 'pass789',
                 'price' => 300000,
@@ -49,7 +55,7 @@ class RandomCategoryAccountsTableSeeder extends Seeder
                 'thumbnail' => null,
             ],
             [
-                'random_category_id' => $categoryId,
+                'random_category_id' => 1,
                 'account_name' => null,
                 'password' => null,
                 'price' => 1000000,
@@ -60,7 +66,7 @@ class RandomCategoryAccountsTableSeeder extends Seeder
                 'thumbnail' => 'https://cdn3.upanh.info/upload/server-sw3/images/Valentine/Nick/Th%E1%BB%AD%20V%E1%BA%ADn%20May%20Ng%E1%BB%8Dc%20R%E1%BB%93ng%20Vip%203.jpg',
             ],
             [
-                'random_category_id' => $categoryId,
+                'random_category_id' => 1,
                 'account_name' => 'player5',
                 'password' => 'pass101',
                 'price' => 450000,
@@ -71,7 +77,7 @@ class RandomCategoryAccountsTableSeeder extends Seeder
                 'thumbnail' => null,
             ],
             [
-                'random_category_id' => $categoryId,
+                'random_category_id' => 1,
                 'account_name' => 'player6',
                 'password' => 'pass202',
                 'price' => 600000,
@@ -82,7 +88,7 @@ class RandomCategoryAccountsTableSeeder extends Seeder
                 'thumbnail' => 'https://cdn3.upanh.info/upload/server-sw3/images/Valentine/Nick/Th%E1%BB%AD%20V%E1%BA%ADn%20May%20Ng%E1%BB%8Dc%20R%E1%BB%93ng%20Vip%203.jpg',
             ],
             [
-                'random_category_id' => $categoryId,
+                'random_category_id' => 1,
                 'account_name' => 'player7',
                 'password' => 'pass303',
                 'price' => 800000,
@@ -93,7 +99,7 @@ class RandomCategoryAccountsTableSeeder extends Seeder
                 'thumbnail' => null,
             ],
             [
-                'random_category_id' => $categoryId,
+                'random_category_id' => 1,
                 'account_name' => 'player8',
                 'password' => 'pass404',
                 'price' => 250000,
@@ -104,7 +110,7 @@ class RandomCategoryAccountsTableSeeder extends Seeder
                 'thumbnail' => 'https://cdn3.upanh.info/upload/server-sw3/images/Valentine/Nick/Th%E1%BB%AD%20V%E1%BA%ADn%20May%20Ng%E1%BB%8Dc%20R%E1%BB%93ng%20Vip%203.jpg',
             ],
             [
-                'random_category_id' => $categoryId,
+                'random_category_id' => 1,
                 'account_name' => 'player9',
                 'password' => 'pass505',
                 'price' => 350000,
@@ -115,7 +121,7 @@ class RandomCategoryAccountsTableSeeder extends Seeder
                 'thumbnail' => null,
             ],
             [
-                'random_category_id' => $categoryId,
+                'random_category_id' => 1,
                 'account_name' => 'player10',
                 'password' => 'pass606',
                 'price' => 900000,

@@ -1,10 +1,15 @@
 <?php
+/**
+ * Copyright (c) 2025 FPT University
+ *
+ * @author    Phạm Hoàng Tuấn
+ * @email     phamhoangtuanqn@gmail.com
+ * @facebook  fb.com/phamhoangtuanqn
+ */
 
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Transaction;
-use App\Models\AccountPurchase;
 use App\Models\RandomAccountPurchase;
 use App\Models\ServiceOrder;
 use App\Models\BankDeposit;

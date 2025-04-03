@@ -21,8 +21,44 @@ class GameCategoriesTableSeeder extends Seeder
             [
                 'name' => 'NICK HỒI SINH NGỌC RỒNG',
                 'slug' => Str::slug('NICK HỒI SINH NGỌC RỒNG'), // Tạo slug tự động
-                'thumbnail' => 'http://img.acc957.com/20240215164859nickhsnr.jpg',
-                'description' => 'Đây là danh mục các tài khoản hồi sinh trong Ngọc Rồng Online.',
+                'thumbnail' => 'http://img.acc957.com//20240215164859nickhsnr.jpg',
+                'description' => 'Danh mục tài khoản hồi sinh trong Ngọc Rồng Online.',
+                'active' => true,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'SƠ SINH + WIN DOANH TRẠI + ZIN',
+                'slug' => Str::slug('SƠ SINH + WIN DOANH TRẠI + ZIN'), // Tạo slug tự động
+                'thumbnail' => 'http://img.acc957.com//20240215164859nickhsnr.jpg',
+                'description' => 'Danh mục tài khoản sơ sinh với khả năng chiến thắng trong doanh trại.',
+                'active' => true,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'NGỌC RỒNG NICK TẦM TRUNG',
+                'slug' => Str::slug('NGỌC RỒNG NICK TẦM TRUNG'), // Tạo slug tự động
+                'thumbnail' => 'http://img.acc957.com//20240215164859nickhsnr.jpg',
+                'description' => 'Danh mục tài khoản Ngọc Rồng tầm trung, phù hợp cho người chơi mới.',
+                'active' => true,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'SHOP VẬT PHẨM',
+                'slug' => Str::slug('SHOP VẬT PHẨM'), // Tạo slug tự động
+                'thumbnail' => 'https://acc957.com/Img/NRO_ITEM.png',
+                'description' => 'Danh mục cửa hàng vật phẩm trong Ngọc Rồng Online.',
+                'active' => true,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'NICK CÓ ĐỆ SKILL 2 + THOÁT SƠ SINH',
+                'slug' => Str::slug('NICK CÓ ĐỆ SKILL 2 + THOÁT SƠ SINH'), // Tạo slug tự động
+                'thumbnail' => 'https://acc957.com/Img/NRO_ITEM.png',
+                'description' => 'Danh mục tài khoản có đệ skill 2, phù hợp cho người chơi nâng cao.',
                 'active' => true,
                 'created_at' => now(),
                 'updated_at' => now(),

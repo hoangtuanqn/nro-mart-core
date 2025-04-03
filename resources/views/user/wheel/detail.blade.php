@@ -41,12 +41,13 @@
 
         <!-- History Section -->
         <section class="history-section">
-            <h2 class="history-title">Lịch Sử Quay</h2>
+            <h2 class="history-title">Các lượt quay gần đây</h2>
             @if (count($history) > 0)
                 <div class="history-table-container">
                     <table class="history-table">
                         <thead>
                             <tr>
+                                <th>Người quay</th>
                                 <th>Thời gian</th>
                                 <th>Số lượt</th>
                                 <th>Tổng tiền</th>
@@ -56,6 +57,7 @@
                         <tbody>
                             @foreach ($history as $item)
                                 <tr>
+                                    <td>{{ Str::limit($item->user->username, 4) }}</td>
                                     <td>{{ $item->created_at->format('d/m/Y H:i') }}</td>
                                     <td>{{ $item->spin_count }}</td>
                                     <td>{{ number_format($item->total_cost) }} VNĐ</td>

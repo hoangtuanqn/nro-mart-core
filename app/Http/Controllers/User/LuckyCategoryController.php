@@ -1,5 +1,13 @@
 <?php
 
+/**
+ * Copyright (c) 2025 FPT University
+ *
+ * @author    Phạm Hoàng Tuấn
+ * @email     phamhoangtuanqn@gmail.com
+ * @facebook  fb.com/phamhoangtuanqn
+ */
+
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
@@ -36,8 +44,7 @@ class LuckyCategoryController extends Controller
         $history = [];
 
         if (Auth::check()) {
-            $history = LuckyWheelHistory::where('user_id', Auth::id())
-                ->where('lucky_wheel_id', $wheel->id)
+            $history = LuckyWheelHistory::with('user')->where('lucky_wheel_id', $wheel->id)
                 ->orderBy('created_at', 'desc')
                 ->limit(10)
                 ->get();

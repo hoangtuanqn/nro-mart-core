@@ -1,4 +1,11 @@
 <?php
+/**
+ * Copyright (c) 2025 FPT University
+ *
+ * @author    Phạm Hoàng Tuấn
+ * @email     phamhoangtuanqn@gmail.com
+ * @facebook  fb.com/phamhoangtuanqn
+ */
 
 namespace Database\Seeders;
 
@@ -10,12 +17,11 @@ class LuckyWheelHistoriesTableSeeder extends Seeder
 {
     public function run(): void
     {
-        $luckyWheelId = LuckyWheel::where('slug', 'vong-quay-vip')->first()->id;
 
         $histories = [
             [
                 'user_id' => 1, // Giả sử user_id = 1 tồn tại
-                'lucky_wheel_id' => $luckyWheelId,
+                'lucky_wheel_id' => 1,
                 'spin_count' => 3,
                 'total_cost' => 30000,
                 'reward_type' => 'gold',
@@ -24,7 +30,7 @@ class LuckyWheelHistoriesTableSeeder extends Seeder
             ],
             [
                 'user_id' => 2, // Giả sử user_id = 2 tồn tại
-                'lucky_wheel_id' => $luckyWheelId,
+                'lucky_wheel_id' => 2,
                 'spin_count' => 1,
                 'total_cost' => 10000,
                 'reward_type' => 'gem',

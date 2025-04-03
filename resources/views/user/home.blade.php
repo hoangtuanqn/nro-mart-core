@@ -226,8 +226,7 @@
                             <img src="{{ $category->thumbnail }}" alt="{{ $category->name }}" class="category__img" />
                             <h2 class="category__title">{{ $category->name }}</h2>
                             <div class="category__stats">
-                                <span class="badge">{{ number_format($category->soldCount) }} lượt
-                                    quay</span>
+                                <span class="badge">{{ number_format($category->soldCount) }} lượt quay</span>
                             </div>
                             <p class="category__action">QUAY NGAY</p>
                         </a>
