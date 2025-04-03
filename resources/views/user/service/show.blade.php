@@ -4,10 +4,10 @@
 
 @section('content')
     <x-hero-header title="{{ $service->name }}" description="{{ $service->description }}" />
+
     <div class="service">
         <div class="container">
-
-            <!-- Thêm phần thông báo lỗi và thành công -->
+            <!-- Thông báo lỗi và thành công -->
             @if (session('error'))
                 <div class="service__alert service__alert--error">
                     <i class="fas fa-exclamation-circle"></i>
@@ -38,57 +38,89 @@
                     <button type="button" class="service__alert-close">&times;</button>
                 </div>
             @endif
-            <!-- Kết thúc phần thông báo -->
 
-            <div class="service__cards">
-                <div class="service__card service__card--rules">
-                    <div class="service__card-icon">
-                        <i class="fas fa-info-circle"></i>
+            <!-- Thông tin dịch vụ -->
+            <div class="service__info">
+                <div class="service__cards">
+                    <div class="service__card service__card--rules">
+                        <div class="service__card-icon">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <div class="service__card-content">
+                            <h3 class="service__card-title">Quy định nhiệm vụ</h3>
+                            <p>Giá nhiệm vụ cực rẻ...ae cứ thuê shop cần hết luôn...AE thuê xong cứ zo acc mà chơi ...nào
+                                mạt
+                                kết nối nhiều và liên tục thì đừng vào nữa ...thời gian làm tùy nhiệm vụ < từ 24 tiếng
+                                    48tiếng>
+                            </p>
+                        </div>
                     </div>
-                    <div class="service__card-content">
-                        <h3 class="service__card-title">Quy định nhiệm vụ</h3>
-                        <p>Giá nhiệm vụ cực rẻ...ae cứ thuê shop cần hết luôn...AE thuê xong cứ zo acc mà chơi ...nào mạt
-                            kết
-                            nối nhiều và liên tục thì đừng vào nữa ...thời gian làm tùy nhiệm vụ < từ 24 tiếng 48tiếng>
-                        </p>
-                    </div>
-                </div>
 
-                <div class="service__card service__card--server">
-                    <div class="service__card-icon">
-                        <i class="fas fa-server"></i>
+                    <div class="service__card service__card--server">
+                        <div class="service__card-icon">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <div class="service__card-content">
+                            <h3 class="service__card-title">Chọn Server</h3>
+                            <p>Chọn sever để xem chi tiết bảng giá nhiệm vụ. Chúng tôi cung cấp dịch vụ trên tất cả các máy
+                                chủ
+                                của game Ngọc Rồng Online. Mỗi máy chủ sẽ có bảng giá riêng tùy theo độ khó của nhiệm vụ và
+                                số
+                                lượng người chơi. Vui lòng chọn máy chủ phù hợp để xem bảng giá chi tiết và đặt dịch vụ.</p>
+                        </div>
                     </div>
-                    <div class="service__card-content">
-                        <h3 class="service__card-title">Chọn Server</h3>
-                        <p>Chọn sever để xem chi tiết bảng giá nhiệm vụ. Chúng tôi cung cấp dịch vụ trên tất cả các máy chủ
-                            của game Ngọc Rồng Online. Mỗi máy chủ sẽ có bảng giá riêng tùy theo độ khó của nhiệm vụ và số
-                            lượng người chơi. Vui lòng chọn máy chủ phù hợp để xem bảng giá chi tiết và đặt dịch vụ.</p>
-                    </div>
-                </div>
 
-                <div class="service__card service__card--contact">
-                    <div class="service__card-icon">
-                        <i class="fas fa-headset"></i>
-                    </div>
-                    <div class="service__card-content">
-                        <h3 class="service__card-title">Liên hệ thuê nhiệm vụ</h3>
-                        <div class="service__contact-info">
-                            <div class="service__contact-item">
-                                <i class="fab fa-facebook"></i>
-                                <a href="https://facebook.com/octiiu957.official/"
-                                    target="_blank">facebook.com/octiiu957.official/</a>
-                            </div>
-                            <div class="service__contact-item">
-                                <i class="fab fa-whatsapp"></i>
-                                <a href="tel:0396498015">ZALO: 0396498015</a>
+                    <div class="service__card service__card--contact">
+                        <div class="service__card-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <div class="service__card-content">
+                            <h3 class="service__card-title">Liên hệ thuê nhiệm vụ</h3>
+                            <div class="service__contact-info">
+                                <div class="service__contact-item">
+                                    <i class="fab fa-facebook"></i>
+                                    <a href="https://facebook.com/octiiu957.official/"
+                                        target="_blank">facebook.com/octiiu957.official/</a>
+                                </div>
+                                <div class="service__contact-item">
+                                    <i class="fab fa-whatsapp"></i>
+                                    <a href="tel:0396498015">ZALO: 0396498015</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <!-- Bảng giá dịch vụ -->
+            <div class="service__price-section">
+                <h2 class="service__price-title">BẢNG GIÁ DỊCH VỤ</h2>
+                <div class="service__price-container">
+                    <table class="service__price-table">
+                        <thead>
+                            <tr>
+                                <th class="service__price-col--id">#</th>
+                                <th class="service__price-col--package">Gói thanh toán</th>
+                                <th class="service__price-col--price">Giá tiền</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($service->packages as $index => $package)
+                                <tr class="service__price-row" data-id="{{ $package->id }}"
+                                    data-price="{{ $package->price }}">
+                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ $package->name }} ({{ $package->description }})</td>
+                                    <td>{{ number_format($package->price, 0, ',', ',') }} VNĐ</td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Form đặt dịch vụ -->
             <div class="service__form">
-                <h3 class="service__form-title">Thông tin</h3>
+                <h3 class="service__form-title">Thông tin đặt dịch vụ</h3>
 
                 <form action="{{ route('service.order', $service->slug) }}" method="POST">
                     @csrf
@@ -177,31 +209,6 @@
                     </div>
                 </form>
             </div>
-
-            <div class="service__price-section">
-                <h2 class="service__price-title">BẢNG GIÁ DỊCH VỤ</h2>
-                <div class="service__price-container">
-                    <table class="service__price-table">
-                        <thead>
-                            <tr>
-                                <th class="service__price-col--id">#</th>
-                                <th class="service__price-col--package">Gói thanh toán</th>
-                                <th class="service__price-col--price">Giá tiền</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($service->packages as $index => $package)
-                                <tr class="service__price-row" data-id="{{ $package->id }}"
-                                    data-price="{{ $package->price }}">
-                                    <td>{{ $index + 1 }}</td>
-                                    <td>{{ $package->name }} ({{ $package->description }})</td>
-                                    <td>{{ number_format($package->price, 0, ',', ',') }} VNĐ</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
         </div>
     </div>
 @endsection
@@ -271,12 +278,9 @@
             });
 
             // Initialize with selected values
-            document.addEventListener('DOMContentLoaded', function() {
-                // Trigger highlight for pre-selected package (from old input)
-                if (packageSelect.value) {
-                    updateSelectedPackage();
-                }
-            });
+            if (packageSelect.value) {
+                updateSelectedPackage();
+            }
         });
     </script>
 @endpush
