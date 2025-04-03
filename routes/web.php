@@ -39,6 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::prefix('profile')->name('profile.')->group(function () {
         Route::get('/', [ProfileController::class, 'index'])->name(name: 'index');
         Route::get('/change-password', [ProfileController::class, 'viewChangePassword'])->name('change-password');
+        Route::post('/change-password', [ProfileController::class, 'changePassword'])->name('change-password.update');
 
         Route::get('/services-history', [ProfileController::class, 'servicesHistory'])->name('services-history');
         Route::get('/transaction-history', [ProfileController::class, 'transactionHistory'])->name('transaction-history');

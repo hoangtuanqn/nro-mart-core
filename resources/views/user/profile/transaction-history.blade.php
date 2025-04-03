@@ -41,7 +41,6 @@
                                             <thead>
                                                 <tr>
                                                     <th>Thời gian</th>
-                                                    <th>Mã giao dịch</th>
                                                     <th>Mô tả</th>
                                                     <th>Số dư trước</th>
                                                     <th>Số dư sau</th>
@@ -52,9 +51,7 @@
                                                 @forelse($transactions as $transaction)
                                                     <tr>
                                                         <td>{{ $transaction->created_at->format('H:i d/m/Y') }}</td>
-                                                        <td><a target="_blank" class="text-danger"
-                                                                href="{{ route('transaction.show', ['id' => $transaction->id]) }}">#{{ $transaction->id }}</a>
-                                                        </td>
+
                                                         <td>{{ $transaction->description }}</td>
                                                         <td>{{ number_format($transaction->balance_before) }} VND</td>
                                                         <td>{{ number_format($transaction->balance_after) }} VND</td>

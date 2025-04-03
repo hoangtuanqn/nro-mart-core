@@ -21,6 +21,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -42,6 +43,36 @@ class ProfileController extends Controller
             'user' => $request->user(),
             'title' => $title
         ]);
+    }
+
+    /**
+     * Handle the password change form submission.
+     */
+    public function changePassword(Request $request)
+    {
+        $request->validate([
+            'current_password' => [
+                'required',
+                'string',
+                function ($attribute, $value, $fail) use ($request) {
+                    if (!Hash::check($value, $request->user()->password)) {
+                        $fail('Mật khẩu hiện tại không chính xác.');
+                    }
+                }
+            ],
+            'new_password' => ['required', 'string', 'min:8', 'confirmed'],
+        ], [
+            'current_password.required' => 'Vui lòng nhập mật khẩu hiện tại.',
+            'new_password.required' => 'Vui lòng nhập mật khẩu mới.',
+            'new_password.min' => 'Mật khẩu mới phải có ít nhất 8 ký tự.',
+            'new_password.confirmed' => 'Xác nhận mật khẩu mới không khớp.',
+        ]);
+
+        $user = $request->user();
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+
+        return redirect()->route('profile.change-password')->with('success', 'Mật khẩu đã được cập nhật thành công.');
     }
 
     public function transactionHistory(Request $request)

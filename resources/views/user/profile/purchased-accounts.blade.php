@@ -41,10 +41,9 @@
                                             <thead>
                                                 <tr>
                                                     <th>Thời gian</th>
-                                                    <th>Mã giao dịch</th>
-                                                    <th>Máy chủ</th>
-                                                    <th>Tài khoản</th>
-                                                    <th>Mật khẩu</th>
+                                                    <th>Server</th>
+                                                    <th>Username</th>
+                                                    <th>Password</th>
                                                     <th>Số tiền</th>
                                                     <th>Thao tác</th>
                                                 </tr>
@@ -53,9 +52,7 @@
                                                 @forelse($transactions as $transaction)
                                                     <tr>
                                                         <td>{{ $transaction->created_at->format('H:i d/m/Y') }}</td>
-                                                        <td><a target="_blank" class="text-danger"
-                                                                href="{{ route('transaction.show', ['id' => $transaction->id]) }}">#{{ $transaction->id }}</a>
-                                                        </td>
+                                                       
                                                         <td>Server {{ $transaction->server }}</td>
                                                         <td class="text-bold">{{ $transaction->account_name }}</td>
                                                         <td class="text-bold">{{ $transaction->password }}</td>

@@ -41,7 +41,6 @@
                                             <thead>
                                                 <tr>
                                                     <th>Thời gian</th>
-                                                    <th>Mã giao dịch</th>
                                                     <th>Máy chủ</th>
                                                     <th>Dịch vụ</th>
                                                     <th>Giá trị</th>
@@ -53,9 +52,7 @@
                                                 @forelse($serviceHistories as $service)
                                                     <tr>
                                                         <td>{{ $service->created_at->format('H:i d/m/Y') }}</td>
-                                                        <td><a target="_blank" class="text-danger"
-                                                                href="{{ route('transaction.show', ['id' => $service->id]) }}">#{{ $service->id }}</a>
-                                                        </td>
+
                                                         <td>Server {{ $service->server }}</td>
                                                         <td>{{ $service->gameService->name }}</td>
                                                         <td class="amount text-danger">
