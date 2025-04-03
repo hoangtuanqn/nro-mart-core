@@ -17,6 +17,10 @@ use App\Models\LuckyWheel;
 use App\Models\ServiceHistory;
 use App\Models\RandomCategory;
 use App\Models\RandomCategoryAccount;
+use App\Models\MoneyTransaction;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+
 class HomeController extends Controller
 {
     //
@@ -51,7 +55,38 @@ class HomeController extends Controller
         foreach ($randomLuckWheel as $wheel) {
             $wheel->soldCount = $wheel->histories->count();
         }
-        return view('user.home', compact('categories', 'services', 'randomCategories', 'randomLuckWheel'));
+
+        // Lấy 20 giao dịch gần đây
+        $recentTransactions = MoneyTransaction::with('user')
+            ->orderBy('created_at', 'desc')
+            ->limit(20)
+            ->get();
+
+        // Lấy top 3 người nạp tiền nhiều nhất trong tháng hiện tại
+        $currentMonth = Carbon::now()->month;
+        $currentYear = Carbon::now()->year;
+
+        $topDepositors = MoneyTransaction::select('user_id', DB::raw('SUM(amount) as total_amount'))
+            ->where('type', 'deposit')
+            ->whereMonth('created_at', $currentMonth)
+            ->whereYear('created_at', $currentYear)
+            ->groupBy('user_id')
+            ->orderBy('total_amount', 'desc')
+            ->limit(3)
+            ->get();
+
+        // Lấy thông tin người dùng cho top depositors
+        foreach ($topDepositors as $depositor) {
+            $depositor->user = \App\Models\User::find($depositor->user_id);
+        }
+
+        return view('user.home', compact(
+            'categories',
+            'services',
+            'randomCategories',
+            'randomLuckWheel',
+            'recentTransactions',
+            'topDepositors'
+        ));
     }
 }
-  

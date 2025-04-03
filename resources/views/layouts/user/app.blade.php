@@ -38,8 +38,9 @@
     <script src="{{ asset('assets/js/discount-code.js') }}"></script>
 
     @stack('scripts')
+    <script src="{{ asset('assets/js/menu.js') }}"></script>
+    <script src="{{ asset('assets/js/alert-notice.js') }}"></script>
 
-    @vite(['resources/assets/js/app.js'])
 
     <!-- Add before closing body tag -->
 </body>

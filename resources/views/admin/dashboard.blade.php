@@ -30,9 +30,9 @@
                                 class="a_link">tuanori.vn</a>. Nếu bạn mong muốn mở rộng
                             tính năng cho website của mình, đừng ngần ngại liên hệ với chúng tôi qua Zalo <a
                                 href="https://zalo.me/0812665001" class="a_link" target="_blank">0812665001</a> hoặc
-                            Facebook <a href="https://www.facebook.com/phamhoangtuanqn/" class="a_link" target="_blank">Phạm
-                                Hoàng Tuấn</a>
-                            để nhận được sự hỗ trợ tận tình (Có tính phí). Chúc bạn có một ngày thật tuyệt vời và thành
+                            Fanpage <a href="https://www.facebook.com/tuanori.vn" class="a_link" target="_blank">TUAN ORI -
+                                Web Designer MMO</a>
+                            để nhận được sự hỗ trợ. Chúc bạn có một ngày thật tuyệt vời và thành
                             công
                             rực rỡ! <br />
                             <b class="text-bold">Lưu ý: Tất cả các giao dịch liên quan đến mã nguồn

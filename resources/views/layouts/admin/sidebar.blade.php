@@ -180,6 +180,8 @@
                     <ul>
                         <li><a href="{{ ENV('FACEBOOK_URL_AUTHOR') }}" target="_blank" class="">Facebook</a>
                         </li>
+                        <li><a href="{{ ENV('FANPAGE_URL_AUTHOR') }}" target="_blank" class="">Fanpage</a>
+                        </li>
                         <li><a href="{{ ENV('ZALO_URL_AUTHOR') }}" target="_blank" class="">Zalo</a></li>
                     </ul>
                 </li>

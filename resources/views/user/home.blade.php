@@ -27,31 +27,21 @@
                 </div>
                 <div class="hero-sidebar__content">
                     <div class="hero-sidebar__list">
-                        <div class="hero-sidebar__item">
-                            <div class="hero-sidebar__user">
-                                <img src="https://i.pravatar.cc/40?img=1" alt="User" class="hero-sidebar__avatar">
-                                <span class="hero-sidebar__name">Nguyễn Văn A</span>
+                        @forelse($topDepositors as $depositor)
+                            <div class="hero-sidebar__item">
+                                <div class="hero-sidebar__user">
+                                    <img src="{{ $depositor->user->avatar ?? 'https://i.pravatar.cc/40?img=' . $depositor->user_id }}"
+                                        alt="User" class="hero-sidebar__avatar">
+                                    <span class="hero-sidebar__name">{{ $depositor->user->username }}</span>
+                                </div>
+                                <div class="hero-sidebar__amount">{{ number_format($depositor->total_amount) }}đ</div>
                             </div>
-                            <div class="hero-sidebar__amount">500.000đ</div>
-                        </div>
-                        <div class="hero-sidebar__item">
-                            <div class="hero-sidebar__user">
-                                <img src="https://i.pravatar.cc/40?img=2" alt="User" class="hero-sidebar__avatar">
-                                <span class="hero-sidebar__name">Trần Thị B</span>
+                        @empty
+                            <div class="hero-sidebar__empty">
+                                Chưa có dữ liệu
                             </div>
-                            <div class="hero-sidebar__amount">300.000đ</div>
-                        </div>
-                        <div class="hero-sidebar__item">
-                            <div class="hero-sidebar__user">
-                                <img src="https://i.pravatar.cc/40?img=3" alt="User" class="hero-sidebar__avatar">
-                                <span class="hero-sidebar__name">Lê Văn C</span>
-                            </div>
-                            <div class="hero-sidebar__amount">200.000đ</div>
-                        </div>
+                        @endforelse
                     </div>
-                    {{-- <div class="hero-sidebar__empty">
-                        Chưa có dữ liệu
-                    </div> --}}
                     <a href="{{ route('profile.deposit-card') }}" class="hero-sidebar__btn">
                         <i class="fas fa-wallet"></i> NẠP TIỀN NGAY
                     </a>
@@ -81,28 +71,27 @@
             </div>
             <div class="recent-transactions__marquee">
                 <div class="recent-transactions__list">
-                    <div class="recent-transactions__item">
-                        <span class="recent-transactions__username">user***</span>
-                        <span class="recent-transactions__time">cách đây 5 phút</span>
-                        đã mua tài khoản
-                        <span class="recent-transactions__amount">#12345</span>
-                        với giá
-                        <span class="recent-transactions__amount">50.000 ₫</span>
-                    </div>
-                    <div class="recent-transactions__item">
-                        <span class="recent-transactions__username">game***</span>
-                        <span class="recent-transactions__time">cách đây 10 phút</span>
-                        đã mua tài khoản
-                        <span class="recent-transactions__amount">#54321</span>
-                        với giá
-                        <span class="recent-transactions__amount">120.000 ₫</span>
-                    </div>
-                    <div class="recent-transactions__item">
-                        <span class="recent-transactions__username">nro***</span>
-                        <span class="recent-transactions__time">cách đây 15 phút</span>
-                        đã nạp thẻ
-                        <span class="recent-transactions__amount">200.000 ₫</span>
-                    </div>
+                    @forelse($recentTransactions as $transaction)
+                        <div class="recent-transactions__item">
+                            <span
+                                class="recent-transactions__username">{{ substr($transaction->user->username, 0, 3) }}***</span>
+                            <span class="recent-transactions__time">{{ $transaction->created_at->diffForHumans() }}</span>
+                            @if ($transaction->type == 'deposit')
+                                đã nạp
+                            @elseif($transaction->type == 'withdraw')
+                                đã rút
+                            @elseif($transaction->type == 'purchase')
+                                đã mua
+                            @elseif($transaction->type == 'refund')
+                                được hoàn
+                            @endif
+                            <span class="recent-transactions__amount">{{ number_format($transaction->amount) }} ₫</span>
+                        </div>
+                    @empty
+                        <div class="recent-transactions__item">
+                            <span class="recent-transactions__username">Chưa có giao dịch nào</span>
+                        </div>
+                    @endforelse
                 </div>
             </div>
         </div>
@@ -248,105 +237,50 @@
             margin: 10px 20px;
         }
 
-        .special-notice {
-            background: linear-gradient(135deg, #0E3EDA, #0A2E9F);
-            border-radius: var(--border-radius-lg);
+        .recent-transactions__marquee {
             overflow: hidden;
-            box-shadow: var(--shadow-md);
-        }
-
-        .special-notice__content {
-            padding: 35px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 30px;
             position: relative;
+            height: 150px;
         }
 
-        .special-notice__text {
-            flex: 1;
+        .recent-transactions__list {
+            animation: marquee 30s linear infinite;
         }
 
-        .special-notice__title {
-            color: white;
-            font-size: 2.4rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
-
-        .special-notice__desc {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 1.6rem;
-            margin-bottom: 25px;
-            line-height: 1.5;
-        }
-
-        .special-notice__btn {
-            background: var(--primary-color);
-            color: white;
-            padding: 12px 30px;
-            border-radius: var(--border-radius-pill);
-            font-weight: 700;
-            font-size: 1.6rem;
-            display: inline-block;
-            transition: var(--transition);
-            box-shadow: 0 4px 10px rgba(14, 62, 218, 0.4);
-        }
-
-        .special-notice__btn:hover {
-            background: var(--primary-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 15px rgba(14, 62, 218, 0.5);
-            color: white;
-        }
-
-        .special-notice__image {
-            width: 220px;
-            height: 220px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .special-notice__image img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-            filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.3));
-        }
-
-        @media screen and (max-width: 992px) {
-            .special-notice__content {
-                flex-direction: column;
-                padding: 30px 20px;
+        @keyframes marquee {
+            0% {
+                transform: translateY(0);
             }
 
-            .special-notice__text {
-                text-align: center;
-                margin-bottom: 20px;
-            }
-
-            .special-notice__image {
-                width: 180px;
-                height: 180px;
+            100% {
+                transform: translateY(-50%);
             }
         }
 
-        @media screen and (max-width: 576px) {
-            .special-notice__title {
-                font-size: 2rem;
-            }
+        .recent-transactions__list:hover {
+            animation-play-state: paused;
+        }
 
-            .special-notice__desc {
-                font-size: 1.4rem;
-            }
+        .recent-transactions__item {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
 
-            .special-notice__image {
-                width: 150px;
-                height: 150px;
-            }
+        .recent-transactions__username {
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        .recent-transactions__time {
+            color: #aaa;
+            font-size: 0.9em;
+            margin-left: 5px;
+        }
+
+        .recent-transactions__amount {
+            color: #4caf50;
+            font-weight: bold;
+            margin-left: 5px;
         }
     </style>
 @endpush
