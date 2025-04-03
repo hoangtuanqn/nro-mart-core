@@ -75,13 +75,7 @@
     text-align: center;
 }
 .detail__btn {
-    padding: 12px 30px;
-    border-radius: var(--border-radius-pill);
-    font-size: 1.5rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: var(--transition);
+  
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -95,11 +89,6 @@
     box-shadow: 0 4px 15px rgba(14, 62, 218, 0.3);
 }
 
-.detail__btn--primary:hover {
-    background: var(--primary-dark);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(14, 62, 218, 0.4);
-}
 
 .detail__btn--card,
 .detail__btn--wallet {
@@ -508,6 +497,7 @@
 }
 
 .modal__title {
+    color: #fff;
     font-size: 1.8rem;
     font-weight: 600;
     margin: 0;
@@ -534,12 +524,6 @@
     margin-bottom: 20px;
 }
 
-.modal__row {
-    display: flex;
-    align-items: center;
-    margin-bottom: 12px;
-    gap: 10px;
-}
 
 .modal__label {
     min-width: 120px;

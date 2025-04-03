@@ -22,6 +22,11 @@ return [
     'confirmed' => 'Trường :attribute xác nhận không khớp',
     'image' => 'Trường :attribute phải là định dạng hình ảnh',
     'in' => 'Giá trị đã chọn trong trường :attribute không hợp lệ',
+    'between' => [
+        'numeric' => 'Trường :attribute phải nằm giữa :min và :max',
+        'string' => 'Trường :attribute phải có độ dài giữa :min và :max ký tự',
+    ],
+
 
     // Custom cho từng field
     'password' => [

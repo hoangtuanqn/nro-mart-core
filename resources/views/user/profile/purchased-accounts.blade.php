@@ -52,7 +52,7 @@
                                                 @forelse($transactions as $transaction)
                                                     <tr>
                                                         <td>{{ $transaction->created_at->format('H:i d/m/Y') }}</td>
-                                                       
+
                                                         <td>Server {{ $transaction->server }}</td>
                                                         <td class="text-bold">{{ $transaction->account_name }}</td>
                                                         <td class="text-bold">{{ $transaction->password }}</td>

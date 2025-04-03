@@ -52,6 +52,7 @@ class ConfigSeeder extends Seeder
             'payment' => [
                 'card' => [
                     'active' => '1',
+                    'partner_website' => 'thesieure.com',
                     'partner_id' => '',
                     'partner_key' => '',
                     'discount_percent' => '20',

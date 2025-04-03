@@ -252,11 +252,6 @@
     position: relative;
 }
 
-.modal__title {
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin: 0;
-}
 
 .modal__close {
     position: absolute;
@@ -296,6 +291,7 @@
     display: flex;
     align-items: center;
     margin-bottom: 15px;
+    gap: 10px;
 }
 
 .modal__label {
@@ -305,17 +301,17 @@
     color: #666;
 }
 
-.modal__value {
+/* .modal__value {
     font-size: 1.6rem;
     color: #333;
     font-weight: 500;
-}
+} */
 
-.modal__value--price {
+/* .modal__value--price {
     font-size: 2rem;
     font-weight: 700;
     color: var(--second-color);
-}
+} */
 
 .modal__discount {
     margin-bottom: 25px;
@@ -373,22 +369,6 @@
     gap: 15px;
 }
 
-.modal__btn {
-    padding: 12px 25px;
-    border-radius: 8px;
-    font-size: 1.5rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-align: center;
-    border: none;
-}
-
-.modal__btn--card {
-    background: var(--second-color);
-    color: white;
-    flex-grow: 1;
-}
 
 .modal__btn--wallet {
     background: #333;
@@ -408,14 +388,6 @@
     padding: 15px 20px;
 }
 
-.modal__btn:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-}
-
-.modal__btn--card:hover {
-    background: var(--second-dark);
-}
 
 .modal__btn--wallet:hover {
     background: #222;

@@ -122,6 +122,7 @@ class ProfileController extends Controller
             return response()->json([
                 'status' => 'success',
                 'id' => $service->id,
+                'created_at' => $service->created_at,
                 'game_service' => [
                     'name' => $service->gameService->name
                 ],

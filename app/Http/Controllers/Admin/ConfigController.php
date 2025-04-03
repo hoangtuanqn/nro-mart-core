@@ -151,13 +151,14 @@ class ConfigController extends Controller
     public function payment()
     {
         $title = 'Cài đặt thanh toán';
-
         // Lấy tất cả cấu hình thanh toán
         $configs = [
             // Cài đặt nạp thẻ cào
             'card_active' => config_get('payment.card.active', true),
             'partner_id_card' => config_get('payment.card.partner_id', ''),
             'partner_key_card' => config_get('payment.card.partner_key', ''),
+            'discount_percent_card' => config_get('payment.card.discount_percent', '0'),
+            'partner_website_card' => config_get('payment.card.partner_website', 'thesieure.com')
         ];
 
         return view('admin.settings.payment', compact('title', 'configs'));
@@ -170,14 +171,20 @@ class ConfigController extends Controller
     {
         $request->validate([
             'card_active' => 'nullable|boolean',
+            'partner_website_card' => 'string|in:thesieure.com,cardvip.vn,doithe1s.vn',
             'partner_id_card' => 'nullable|string|max:100',
             'partner_key_card' => 'nullable|string|max:100',
+            'discount_percent_card' => 'nullable|integer|between:1,99',
+        ], [
+            'partner_website_card' => 'Chọn đối tác chưa hợp lệ. Bạn muốn thêm đối tác hãy liên hệ chúng tôi.'
         ]);
 
         // Nạp thẻ cào
         config_set('payment.card.active', $request->has('card_active') ? 1 : 0);
         config_set('payment.card.partner_id', $request->partner_id_card);
         config_set('payment.card.partner_key', $request->partner_key_card);
+        config_set('payment.card.discount_percent', $request->discount_percent_card);
+        config_set('payment.card.partner_website', $request->partner_website_card);
 
         // Xóa cache để cập nhật cài đặt
         config_clear_cache();

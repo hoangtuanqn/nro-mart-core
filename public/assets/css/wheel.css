@@ -229,11 +229,6 @@
     background-color: white;
 }
 
-.history-table th,
-.history-table td {
-    padding: 15px 20px;
-    text-align: left;
-}
 
 .history-table th {
     background-color: var(--primary-color);

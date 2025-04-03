@@ -9,6 +9,16 @@
                     <h6>Cấu hình các phương thức thanh toán</h6>
                 </div>
             </div>
+            <!-- Notication -->
+            <div class="card-body">
+                <div class="alert alert-notication-custom alert-dismissible fade show" role="alert">
+                    <strong>Chúng tôi hiện đang hỗ trợ 3 đối tác thanh toán:</strong> thesieure.com,
+                    doithe1s.vn, cardvip.vn.
+                    Nếu bạn có nhu cầu chọn đối tác khác, xin vui lòng liên hệ với chúng tôi (phí dịch vụ là
+                    80k).
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
 
             @if (session('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -18,6 +28,7 @@
             @endif
 
             <div class="card">
+
                 <div class="card-body">
                     <form action="{{ route('admin.settings.payment.update') }}" method="POST">
                         @csrf
@@ -40,6 +51,40 @@
                         </div>
 
                         <div class="row">
+
+                            <div class="col-lg-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label>Website đối tác <span class="text-danger">*</span></label>
+                                    <select name="partner_website_card"
+                                        class="select @error('partner_website_card') is-invalid @enderror">
+                                        <option value="">Chọn đối tác</option>
+                                        <option value="thesieure.com"
+                                            {{ $configs['partner_website_card'] === 'thesieure.com' ? 'selected' : '' }}>
+                                            THESIEURE.COM</option>
+                                        <option value="cardvip.vn"
+                                            {{ $configs['partner_website_card'] === 'cardvip.vn' ? 'selected' : '' }}>
+                                            CARDVIP.VN</option>
+                                        <option value="doithe1s.vn"
+                                            {{ $configs['partner_website_card'] === 'doithe1s.vn' ? 'selected' : '' }}>
+                                            DOITHE1S.VN</option>
+                                    </select>
+                                    @error('partner_website_card')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label>Chiết khấu nạp thẻ <span class="text-danger">*</span></label>
+                                    <input type="text" name="discount_percent_card"
+                                        value="{{ old('discount_percent_card', $configs['discount_percent_card']) }}"
+                                        class="form-control @error('discount_percent_card') is-invalid @enderror"
+                                        placeholder="Nhập chiết khấu nạp thẻ">
+                                    @error('discount_percent_card')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
                             <div class="col-lg-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Partner ID <span class="text-danger">*</span></label>
@@ -64,6 +109,7 @@
                                     @enderror
                                 </div>
                             </div>
+
                         </div>
 
                         <div class="row mt-4">

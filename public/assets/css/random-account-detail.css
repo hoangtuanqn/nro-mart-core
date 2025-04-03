@@ -20,29 +20,7 @@
     margin-bottom: 40px;
 }
 
-.detail__btn {
-    padding: 15px 30px;
-    border-radius: 8px;
-    font-size: 1.6rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    text-align: center;
-    min-width: 180px;
-}
 
-.detail__btn--primary {
-    background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
-    color: white;
-    border: none;
-    box-shadow: 0 5px 15px rgba(14, 62, 218, 0.3);
-}
-
-.detail__btn--primary:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(14, 62, 218, 0.4);
-}
 
 .detail__btn--card,
 .detail__btn--wallet {
@@ -167,11 +145,6 @@
     position: relative;
 }
 
-.modal__title {
-    font-size: 1.8rem;
-    font-weight: 700;
-    margin: 0;
-}
 
 .modal__close {
     position: absolute;
@@ -201,17 +174,12 @@
 }
 
 .modal__info {
-    background: #f8f9fa;
+background: #f8f9fa;
     border-radius: 8px;
     padding: 20px;
     margin-bottom: 25px;
 }
 
-.modal__row {
-    display: flex;
-    align-items: center;
-    margin-bottom: 15px;
-}
 
 .modal__row:last-child {
     margin-bottom: 0;
@@ -224,17 +192,17 @@
     color: #666;
 }
 
-.modal__value {
+/* .modal__value {
     font-size: 1.6rem;
     color: #333;
     font-weight: 500;
-}
-
+} */
+/* 
 .modal__value--price {
     font-size: 2rem;
     font-weight: 700;
     color: var(--second-color);
-}
+} */
 
 .modal__discount {
     margin-bottom: 25px;
@@ -303,11 +271,11 @@
     border: none;
 }
 
-.modal__btn--card {
+/* .modal__btn--card {
     background: var(--second-color);
     color: white;
     flex-grow: 1;
-}
+} */
 
 .modal__btn--wallet {
     background: #333;
@@ -330,10 +298,6 @@
 .modal__btn:hover {
     transform: translateY(-3px);
     box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-}
-
-.modal__btn--card:hover {
-    background: var(--second-dark);
 }
 
 .modal__btn--wallet:hover {
