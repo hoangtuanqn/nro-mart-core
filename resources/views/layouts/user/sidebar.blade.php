@@ -33,6 +33,11 @@
                 <i class="fa-solid fa-chart-line"></i> Biến động số dư
             </a>
         </li>
+        <li class="sidebar-item {{ request()->routeIs('profile.withdraw.*') ? 'active' : '' }}">
+            <a href="{{ route('profile.withdraw.create') }}" class="sidebar-link">
+                <i class="fa-solid fa-money-bill-wave"></i> Rút tiền
+            </a>
+        </li>
     </ul>
 
     <div class="sidebar-header mt-4">
@@ -64,6 +69,12 @@
         <li class="sidebar-item {{ request()->routeIs('profile.services-history') ? 'active' : '' }}">
             <a href="{{ route('profile.services-history') }}" class="sidebar-link">
                 <i class="fa-solid fa-clipboard-list"></i> Dịch vụ đã thuê
+            </a>
+        </li>
+
+        <li class="sidebar-item {{ request()->routeIs('profile.withdraw.history') ? 'active' : '' }}">
+            <a href="{{ route('profile.withdraw.history') }}" class="sidebar-link">
+                <i class="fa-solid fa-money-check-alt"></i> Lịch sử rút tiền
             </a>
         </li>
     </ul>

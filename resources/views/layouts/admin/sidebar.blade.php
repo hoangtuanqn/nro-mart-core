@@ -142,6 +142,9 @@
                         <li><a href="{{ route('admin.history.deposits.bank') }}"
                                 class="{{ request()->routeIs('admin.history.deposits.bank') ? 'active' : '' }}">Lịch
                                 sử nạp tiền ngân hàng</a></li>
+                        <li><a href="{{ route('admin.withdrawals.index') }}"
+                                class="{{ request()->routeIs('admin.withdrawals.index') ? 'active' : '' }}">Lịch
+                                sử rút tiền</a></li>
                         <li><a href="{{ route('admin.history.deposits.card') }}"
                                 class="{{ request()->routeIs('admin.history.deposits.card') ? 'active' : '' }}">Lịch
                                 sử nạp thẻ cào</a></li>

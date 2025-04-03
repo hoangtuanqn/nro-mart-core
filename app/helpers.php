@@ -2,7 +2,7 @@
 use App\Models\Config;
 use Illuminate\Support\Facades\Cache;
 
-function display_status_nap_tien($status)
+function display_status($status)
 {
     $statusClasses = [
         'success' => 'success',

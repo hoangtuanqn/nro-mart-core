@@ -158,7 +158,7 @@
                                                 @if (isset($transactions) && count($transactions) > 0)
                                                     @foreach ($transactions as $transaction)
                                                         <tr>
-                                                            <td>{!! display_status_nap_tien($transaction->status) !!}</td>
+                                                            <td>{!! display_status($transaction->status) !!}</td>
                                                             <td>{{ $transaction->created_at }}</td>
                                                             <td>{{ $transaction->telco }}</td>
                                                             <td>{{ number_format($transaction->amount) }} VND</td>

@@ -19,6 +19,8 @@ use App\Http\Controllers\User\ProfileController;
 use App\Http\Controllers\User\ServiceOrderController;
 use App\Http\Controllers\User\RandomCategoryController;
 use App\Http\Controllers\User\RandomAccountController;
+use App\Http\Controllers\User\WithdrawalController;
+use App\Http\Controllers\Admin\WithdrawalController as AdminWithdrawalController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -52,11 +54,19 @@ Route::middleware('auth')->group(function () {
         Route::get('/deposit/card', [ProfileController::class, 'depositCard'])->name('deposit-card');
         Route::get('/deposit/atm', [ProfileController::class, 'depositAtm'])->name('deposit-atm');
         Route::post('/deposit/card', [CardDepositController::class, 'processCardDeposit']);
+
         Route::get('/service-history/{id}', [ProfileController::class, 'getServiceDetail'])
             ->name('service.detail');
         Route::get('/wheels-history', [ProfileController::class, 'luckyWheelHistory'])->name('wheels-history');
         Route::get('/wheel-history/{id}', [ProfileController::class, 'getLuckyWheelDetail'])
             ->name('wheel.detail');
+
+        Route::prefix('withdraw')->name('withdraw.')->group(function () {
+            Route::get('/', [WithdrawalController::class, 'create'])->name('create');
+            Route::post('/', [WithdrawalController::class, 'store'])->name('store');
+            Route::get('/history', [WithdrawalController::class, 'history'])->name('history');
+        });
+
     });
 });
 Route::prefix('category')->name('category.')->group(function () {
