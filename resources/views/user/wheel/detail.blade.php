@@ -13,11 +13,10 @@
         <div class="lucky-wheel-container">
             <div class="wheel-page">
                 <div class="wheel-info">
-                    <h1 class="wheel-title">Vòng Quay Ngọc Rồng</h1>
-                    <p class="wheel-description">Hãy thử vận may của bạn với vòng quay Ngọc Rồng siêu đẳng cấp. Cơ hội nhận
-                        tài khoản VIP và nhiều phần thưởng hấp dẫn khác.</p>
+                    <h1 class="wheel-title">{{ $wheel->name }}</h1>
+                    <p class="wheel-description">{{ $wheel->description }}</p>
                     <div class="wheel-price">
-                        Giá: <span>30,000 VNĐ</span> / lượt quay
+                        Giá: <span>{{ number_format($wheel->price_per_spin) }} VNĐ</span> / lượt quay
                     </div>
                     <div class="wheel-controls">
                         <div class="spin-count">
@@ -60,7 +59,9 @@
                                     <td>{{ $item->created_at->format('d/m/Y H:i') }}</td>
                                     <td>{{ $item->spin_count }}</td>
                                     <td>{{ number_format($item->total_cost) }} VNĐ</td>
-                                    <td class="history-item-reward">{{ $item->description }}</td>
+                                    <td class="history-item-reward">
+                                        {{ $item->description }}{{ $item->spin_count > 1 ? ' x ' . $item->spin_count : '' }}
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
@@ -78,13 +79,7 @@
             <h2 class="rules-title">Thể lệ & Quy định</h2>
             <div class="rules-content">
                 <ul class="rules-list">
-                    <li>Mỗi lượt quay có giá 30,000 VNĐ.</li>
-                    <li>Bạn có thể quay tối đa 10 lượt một lần.</li>
-                    <li>Phần thưởng sẽ được cộng vào tài khoản của bạn ngay sau khi quay.</li>
-                    <li>Trường hợp phần thưởng là tài khoản VIP, thông tin sẽ được gửi qua mục tài khoản đã mua.</li>
-                    <li>Tỷ lệ trúng các phần thưởng được công bố rõ ràng trên vòng quay.</li>
-                    <li>Admin có quyền thay đổi cơ cấu phần thưởng mà không cần báo trước.</li>
-                    <li>Trong trường hợp gặp sự cố, vui lòng liên hệ Fanpage hoặc số điện thoại hỗ trợ.</li>
+                    {!! $wheel->rules !!}
                 </ul>
             </div>
         </section>
@@ -109,13 +104,13 @@
 @push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Get wheel config from PHP (already decoded in controller)
-            const wheelItems = @json($wheel->config);
-
             // Spin the wheel
             let isSpinning = false;
             const spinBtn = document.getElementById('spin-btn');
             const wheelElement = document.querySelector('.wheel-image');
+            const spinCount = document.getElementById('spin-count');
+            const totalItems = 8; // Fixed to 8 items on the wheel
+            const arcAngle = 360 / totalItems;
 
             spinBtn.addEventListener('click', spinWheel);
 
@@ -125,49 +120,90 @@
                 isSpinning = true;
                 spinBtn.disabled = true;
 
-                // Calculate random rotation
-                const totalItems = 8; // Fixed to 8 items
-                const arcAngle = 360 / totalItems;
-
-                // Weight-based selection
-                const weights = wheelItems.map(item => item.probability);
-                const totalWeight = weights.reduce((a, b) => a + b, 0);
-                let random = Math.random() * totalWeight;
-
-                let selectedIndex = 0;
-                for (let i = 0; i < weights.length; i++) {
-                    random -= weights[i];
-                    if (random <= 0) {
-                        selectedIndex = i;
-                        break;
-                    }
-                }
-
-                // Calculate the angle to stop at
-                // For upload type, we need to rotate counter-clockwise
-                const stopAngle = -(selectedIndex * arcAngle);
-                const extraRotations = 5; // Add extra rotations for effect
-                const totalRotation = stopAngle - (360 * extraRotations);
-
-                // Rotate wheel
-                wheelElement.style.transform = `rotate(${totalRotation}deg)`;
-
-                // Show result after animation ends
-                setTimeout(() => {
-                    showResult(wheelItems[selectedIndex].content);
+                // Get spin count
+                const spinCountValue = parseInt(spinCount.value);
+                if (spinCountValue > 10) {
+                    alert("Mỗi lần quay tối đa 10 lần")
                     isSpinning = false;
                     spinBtn.disabled = false;
+                } else {
+                    // Send AJAX request to the server
+                    fetch('{{ route('lucky.spin', $wheel->slug) }}', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                            },
+                            body: JSON.stringify({
+                                spin_count: spinCountValue
+                            })
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (!data.success) {
+                                alert(data.message);
+                                isSpinning = false;
+                                spinBtn.disabled = false;
+                                return;
+                            }
 
-                    // Reset wheel after a delay
-                    setTimeout(() => {
-                        wheelElement.style.transition = 'none';
-                        wheelElement.style.transform = 'rotate(0deg)';
-                        setTimeout(() => {
-                            wheelElement.style.transition =
-                                'transform 5s cubic-bezier(0.2, 0.8, 0.3, 1)';
-                        }, 50);
-                    }, 1000);
-                }, 5000);
+                            // Get the reward from server
+                            const reward = data.rewards[0]; // Lấy phần thưởng
+                            const selectedIndex = reward.index;
+
+                            // Calculate the angle to stop at
+                            const stopAngle = -(selectedIndex * arcAngle);
+                            const extraRotations = 5; // Add extra rotations for effect
+                            const totalRotation = stopAngle - (360 * extraRotations);
+
+                            // Rotate wheel
+                            wheelElement.style.transform = `rotate(${totalRotation}deg)`;
+
+                            // Show result after animation ends
+                            setTimeout(() => {
+                                // Hiển thị kết quả với số lượt quay
+                                const resultMessage = spinCountValue > 1 ?
+                                    `${reward.content} (${spinCountValue} lượt quay)` :
+                                    reward.content;
+
+                                showResult(resultMessage);
+                                isSpinning = false;
+                                spinBtn.disabled = false;
+
+                                // Update user balance if provided
+                                if (data.new_balance !== undefined) {
+                                    // Update balance display if you have one
+                                    const balanceElement = document.querySelector('.user-balance');
+                                    if (balanceElement) {
+                                        balanceElement.textContent = new Intl.NumberFormat('vi-VN')
+                                            .format(
+                                                data.new_balance);
+                                    }
+                                }
+
+                                // Reset wheel after a delay
+                                setTimeout(() => {
+                                    wheelElement.style.transition = 'none';
+                                    wheelElement.style.transform = 'rotate(0deg)';
+                                    setTimeout(() => {
+                                        wheelElement.style.transition =
+                                            'transform 5s cubic-bezier(0.2, 0.8, 0.3, 1)';
+                                    }, 50);
+                                }, 1000);
+
+                                // Reload history section
+                                setTimeout(() => {
+                                    location.reload();
+                                }, 3000);
+                            }, 5000);
+                        })
+                        .catch(error => {
+                            // console.error('Error:', error);
+                            alert('Có lỗi xảy ra. Vui lòng thử lại sau.');
+                            isSpinning = false;
+                            spinBtn.disabled = false;
+                        });
+                }
             }
 
             // Show result modal
@@ -180,7 +216,6 @@
             }
 
             // Handle spin count
-            const spinCount = document.getElementById('spin-count');
             const decreaseBtn = document.getElementById('decrease-btn');
             const increaseBtn = document.getElementById('increase-btn');
 

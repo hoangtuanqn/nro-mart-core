@@ -60,7 +60,7 @@
     background: rgba(255, 255, 255, 0.1);
     padding: 10px 25px;
     border-radius: var(--border-radius-pill);
-    margin-bottom: 30px;
+    margin-top: 30px;
     font-size: 1.8rem;
     font-weight: 600;
 }
@@ -152,7 +152,6 @@
     align-items: center;
     border-radius: 50%;
     overflow: hidden;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 
 }
 

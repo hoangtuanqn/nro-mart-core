@@ -27,6 +27,8 @@ return new class extends Migration {
             $table->enum('role', ['member', 'admin'])->default('member'); // Cấp bậc
             $table->bigInteger('balance')->default(0); // Số tiền hiện có
             $table->bigInteger('total_deposited')->default(0); // Số tiền đã nạp
+            $table->bigInteger('gold')->default(0); // Số vàng hiện có
+            $table->bigInteger('gem')->default(0); // Số gem hiện có
             $table->boolean('banned')->default(false); // Banned (1: đã ban, 0: chưa ban)
             $table->string('ip_address')->nullable(); // Địa chỉ IP
             $table->rememberToken(); // Token ghi nhớ đăng nhập

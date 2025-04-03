@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->bigInteger('total_cost'); // Tổng tiền - Tổng chi phí cho các lượt quay (VD: 50000 VNĐ)
             $table->enum('reward_type', ['gold', 'gem']); // Kiểu giá trị - Loại phần thưởng trúng được (vàng hoặc ngọc)
             $table->integer('reward_amount'); // Số lượng trúng - Số lượng vàng/ngọc trúng được (VD: 500 vàng)
-            $table->text('description'); // Mô tả - Nội dung hiển thị khi trúng thưởng (VD: "Trúng 500 vàng")
+            $table->text('description')->nullable(); // Mô tả - Nội dung hiển thị khi trúng thưởng (VD: "Trúng 500 vàng")
             $table->timestamps(); // Thời gian tạo và cập nhật - Tự động thêm created_at và updated_at
         });
     }

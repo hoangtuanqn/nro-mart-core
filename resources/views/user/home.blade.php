@@ -222,7 +222,7 @@
             <div class="category__list">
                 @foreach ($randomLuckWheel as $category)
                     @if ($category->active)
-                        <a href="{{ route('lucky.index', ['id' => $category->id]) }}" class="category__item">
+                        <a href="{{ route('lucky.index', ['slug' => $category->slug]) }}" class="category__item">
                             <img src="{{ $category->thumbnail }}" alt="{{ $category->name }}" class="category__img" />
                             <h2 class="category__title">{{ $category->name }}</h2>
                             <div class="category__stats">

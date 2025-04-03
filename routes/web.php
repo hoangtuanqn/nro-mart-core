@@ -79,8 +79,8 @@ Route::prefix('random')->name('random.')->group(function () {
 // Routes for lucky wheel categories
 Route::prefix('lucky')->name('lucky.')->group(function () {
     Route::get('/', [LuckyCategoryController::class, 'showAll'])->name('show-all');
-    Route::get('/wheel/{id}', [LuckyCategoryController::class, 'index'])->name('index');
-    Route::post('/wheel/{id}/spin', [LuckyCategoryController::class, 'spin'])->name('spin')->middleware('auth');
+    Route::get('/wheel/{slug}', [LuckyCategoryController::class, 'index'])->name('index');
+    Route::post('/wheel/{slug}/spin', [LuckyCategoryController::class, 'spin'])->name('spin')->middleware('auth');
 });
 
 // Discount code routes
