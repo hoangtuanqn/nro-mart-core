@@ -32,7 +32,7 @@ class LuckyCategoryController extends Controller
             $category->soldCount = $category->histories->count();
         }
 
-        return view('user.wheel.categories', compact('categories', 'title'));
+        return view('user.wheel.show-all', compact('categories', 'title'));
     }
 
     // Hiển thị chi tiết vòng quay
