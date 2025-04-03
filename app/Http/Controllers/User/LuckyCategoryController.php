@@ -66,20 +66,22 @@ class LuckyCategoryController extends Controller
             ]);
         }
 
-        // Xác định phần thưởng
-        $config = $wheel->config;
-        $rewards = $config['rewards'] ?? [];
-
-        // Danh sách phần thưởng nhận được
-        $earnedRewards = [];
+        // Lấy config từ wheel
+        $config = json_decode($wheel->config, true);
+        $rewards = [];
 
         // Xử lý quay và xác định phần thưởng
         for ($i = 0; $i < $spinCount; $i++) {
             // Tính toán phần thưởng dựa trên tỷ lệ
-            $rewardIndex = $this->calculateReward($rewards);
-            $reward = $rewards[$rewardIndex];
+            $rewardIndex = $this->calculateReward($config);
+            $reward = $config[$rewardIndex];
 
-            $earnedRewards[] = $reward;
+            $rewards[] = [
+                'type' => $reward['type'],
+                'content' => $reward['content'],
+                'amount' => $reward['amount'],
+                'index' => $rewardIndex // Thêm index để frontend biết vị trí trúng
+            ];
 
             // Lưu lịch sử
             LuckyWheelHistory::create([
@@ -88,13 +90,15 @@ class LuckyCategoryController extends Controller
                 'spin_count' => 1,
                 'total_cost' => $wheel->price_per_spin,
                 'reward_type' => $reward['type'],
-                'reward_amount' => $reward['value'],
-                'description' => $reward['label'],
+                'reward_amount' => $reward['amount'],
+                'description' => $reward['content'],
             ]);
 
-            // Cộng thưởng vào tài khoản nếu là tiền
-            if ($reward['type'] === 'money') {
-                $user->balance += $reward['value'];
+            // Cộng thưởng vào tài khoản
+            if ($reward['type'] === 'gold') {
+                $user->gold += $reward['amount'];
+            } else if ($reward['type'] === 'gem') {
+                $user->gem += $reward['amount'];
             }
         }
 
@@ -104,23 +108,25 @@ class LuckyCategoryController extends Controller
 
         return response()->json([
             'success' => true,
-            'rewards' => $earnedRewards,
-            'new_balance' => $user->balance
+            'rewards' => $rewards,
+            'new_balance' => $user->balance,
+            'new_gold' => $user->gold,
+            'new_gem' => $user->gem
         ]);
     }
 
     // Tính toán phần thưởng dựa trên tỷ lệ
-    private function calculateReward($rewards)
+    private function calculateReward($config)
     {
         $totalProbability = 0;
-        foreach ($rewards as $reward) {
+        foreach ($config as $reward) {
             $totalProbability += $reward['probability'];
         }
 
         $random = mt_rand(1, $totalProbability);
         $currentSum = 0;
 
-        foreach ($rewards as $index => $reward) {
+        foreach ($config as $index => $reward) {
             $currentSum += $reward['probability'];
             if ($random <= $currentSum) {
                 return $index;

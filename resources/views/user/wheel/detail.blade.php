@@ -32,7 +32,7 @@
                     </div>
                 </div>
                 <div class="wheel-canvas-container">
-                    <canvas id="wheel-canvas" class="wheel-canvas"></canvas>
+                    <img src="{{ $wheel->wheel_image }}" alt="Vòng quay" class="wheel-image">
                     <div class="wheel-pointer">
                         <i class="fas fa-location-arrow"></i>
                     </div>
@@ -105,98 +105,18 @@
     </div>
 @endsection
 
+
 @push('scripts')
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Canvas setup
-            const canvas = document.getElementById('wheel-canvas');
-            const ctx = canvas.getContext('2d');
-            const wheelItems = [{
-                    color: '#7F5AF0',
-                    label: 'Tài khoản VIP',
-                    probability: 5
-                },
-                {
-                    color: '#FF5277',
-                    label: '50,000 VNĐ',
-                    probability: 10
-                },
-                {
-                    color: '#16CFBC',
-                    label: '20,000 VNĐ',
-                    probability: 15
-                },
-                {
-                    color: '#FFD166',
-                    label: '10,000 VNĐ',
-                    probability: 20
-                },
-                {
-                    color: '#4F9BF4',
-                    label: '5,000 VNĐ',
-                    probability: 25
-                },
-                {
-                    color: '#B84F9E',
-                    label: 'Chúc may mắn',
-                    probability: 25
-                }
-            ];
-
-            // Set canvas dimensions
-            function setCanvasDimensions() {
-                const container = document.querySelector('.wheel-canvas-container');
-                const size = container.offsetWidth;
-                canvas.width = size;
-                canvas.height = size;
-                drawWheel();
-            }
-
-            // Draw the wheel
-            function drawWheel() {
-                const centerX = canvas.width / 2;
-                const centerY = canvas.height / 2;
-                const radius = Math.min(centerX, centerY) * 0.9;
-
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-                const totalItems = wheelItems.length;
-                const arcAngle = (2 * Math.PI) / totalItems;
-
-                for (let i = 0; i < totalItems; i++) {
-                    const startAngle = i * arcAngle;
-                    const endAngle = (i + 1) * arcAngle;
-
-                    // Draw segment
-                    ctx.beginPath();
-                    ctx.moveTo(centerX, centerY);
-                    ctx.arc(centerX, centerY, radius, startAngle, endAngle);
-                    ctx.closePath();
-                    ctx.fillStyle = wheelItems[i].color;
-                    ctx.fill();
-
-                    // Draw label
-                    ctx.save();
-                    ctx.translate(centerX, centerY);
-                    ctx.rotate(startAngle + arcAngle / 2);
-                    ctx.textAlign = 'right';
-                    ctx.fillStyle = '#fff';
-                    ctx.font = 'bold 14px Poppins';
-                    ctx.fillText(wheelItems[i].label, radius * 0.85, 5);
-                    ctx.restore();
-                }
-
-                // Draw center circle
-                ctx.beginPath();
-                ctx.arc(centerX, centerY, radius * 0.1, 0, 2 * Math.PI);
-                ctx.fillStyle = '#fff';
-                ctx.fill();
-            }
+            // Get wheel config from PHP (already decoded in controller)
+            const wheelItems = @json($wheel->config);
 
             // Spin the wheel
             let isSpinning = false;
-
             const spinBtn = document.getElementById('spin-btn');
+            const wheelElement = document.querySelector('.wheel-image');
+
             spinBtn.addEventListener('click', spinWheel);
 
             function spinWheel() {
@@ -206,7 +126,7 @@
                 spinBtn.disabled = true;
 
                 // Calculate random rotation
-                const totalItems = wheelItems.length;
+                const totalItems = 8; // Fixed to 8 items
                 const arcAngle = 360 / totalItems;
 
                 // Weight-based selection
@@ -224,25 +144,26 @@
                 }
 
                 // Calculate the angle to stop at
-                const stopAngle = 360 - (selectedIndex * arcAngle + arcAngle / 2);
+                // For upload type, we need to rotate counter-clockwise
+                const stopAngle = -(selectedIndex * arcAngle);
                 const extraRotations = 5; // Add extra rotations for effect
-                const totalRotation = stopAngle + 360 * extraRotations;
+                const totalRotation = stopAngle - (360 * extraRotations);
 
                 // Rotate wheel
-                canvas.style.transform = `rotate(${totalRotation}deg)`;
+                wheelElement.style.transform = `rotate(${totalRotation}deg)`;
 
                 // Show result after animation ends
                 setTimeout(() => {
-                    showResult(wheelItems[selectedIndex].label);
+                    showResult(wheelItems[selectedIndex].content);
                     isSpinning = false;
                     spinBtn.disabled = false;
 
                     // Reset wheel after a delay
                     setTimeout(() => {
-                        canvas.style.transition = 'none';
-                        canvas.style.transform = 'rotate(0deg)';
+                        wheelElement.style.transition = 'none';
+                        wheelElement.style.transform = 'rotate(0deg)';
                         setTimeout(() => {
-                            canvas.style.transition =
+                            wheelElement.style.transition =
                                 'transform 5s cubic-bezier(0.2, 0.8, 0.3, 1)';
                         }, 50);
                     }, 1000);
@@ -288,10 +209,6 @@
                 const modal = document.getElementById('result-modal');
                 modal.classList.remove('active');
             }
-
-            // Initial setup
-            setCanvasDimensions();
-            window.addEventListener('resize', setCanvasDimensions);
         });
     </script>
 @endpush

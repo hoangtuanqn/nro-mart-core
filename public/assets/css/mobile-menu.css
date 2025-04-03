@@ -46,7 +46,7 @@
 }
 
 .menu-mobile__link.active {
-    color: #ff4d4d;
+    color: var(--primary-color);
 }
 
 .menu-mobile__link:hover,
@@ -207,7 +207,6 @@
 .mobile-overlay-menu__link:hover,
 .mobile-overlay-menu__link:active {
     background-color: #f8f9fa;
-    color: #ff4d4d;
 }
 
 .mobile-overlay-menu__button {

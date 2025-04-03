@@ -1,13 +1,5 @@
 /* Random Categories Listing Styling */
-.menu {
-    /* background-color: #f8f9fa; */
-}
 
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 15px;
-}
 
 .category__list {
     display: grid;

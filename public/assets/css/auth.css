@@ -34,8 +34,8 @@
     justify-content: center;
 }
 
-.google-login-btn,
-.facebook-login-btn {
+a.google-login-btn,
+a.facebook-login-btn {
     display: flex;
     align-items: center;
     justify-content: center;

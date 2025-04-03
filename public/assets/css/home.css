@@ -14,6 +14,7 @@
     overflow: hidden;
     box-shadow: var(--shadow-md);
     position: relative;
+    height: 350px;
 }
 
 .hero-banner__img {
@@ -24,7 +25,6 @@
 
 .hero-sidebar {
     width: 350px;
-    /* background: #111; */
     border-radius: var(--border-radius-lg);
     overflow: hidden;
     box-shadow: var(--shadow-md);
@@ -404,4 +404,45 @@
     transform: translateY(-3px);
     box-shadow: 0 6px 15px rgba(14, 62, 218, 0.5);
     color: white;
+}
+
+.hero-sidebar__list {
+    margin-bottom: 20px;
+}
+
+.hero-sidebar__item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.hero-sidebar__item:last-child {
+    border-bottom: none;
+}
+
+.hero-sidebar__user {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.hero-sidebar__avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.hero-sidebar__name {
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+.hero-sidebar__amount {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary-color);
 }

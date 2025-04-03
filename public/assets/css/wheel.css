@@ -133,19 +133,33 @@
     font-size: 1.8rem;
     font-weight: 600;
     text-align: center;
+    -moz-appearance: textfield;
 }
-
+.spin-count-input::-webkit-inner-spin-button,
+    .spin-count-input::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
 .wheel-canvas-container {
     position: relative;
     width: 100%;
-    aspect-ratio: 1/1;
+    height: 400px;
     max-width: 500px;
     margin: 0 auto;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+
 }
 
 .wheel-canvas {
-    width: 100%;
-    height: 100%;
+    /* width: 120%; */
+    aspect-ratio: 1 / 1;
+    height: 120%;
     transform-origin: center;
     transition: transform 5s cubic-bezier(0.2, 0.8, 0.3, 1);
 }
@@ -164,6 +178,9 @@
     justify-content: center;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     z-index: 2;
+    color: #ff0000;
+    font-size: 32px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
 .wheel-pointer::before {
@@ -376,6 +393,46 @@
     border-radius: var(--border-radius-lg);
     background-color: var(--bg-light);
 }
+.wheel-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: transform 5s cubic-bezier(0.2, 0.8, 0.3, 1);
+}
+
+.wheel-spin-btn {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    color: white;
+    border: none;
+    border-radius: var(--border-radius-pill);
+    padding: 12px 30px;
+    font-size: 1.6rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 4px 15px rgba(14, 62, 218, 0.3);
+    transition: all 0.3s ease;
+}
+
+.wheel-spin-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(14, 62, 218, 0.4);
+}
+
+.wheel-spin-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.wheel-spin-btn i {
+    font-size: 1.8rem;
+}
+
 
 /* Media queries */
 @media screen and (max-width: 992px) {

@@ -9,6 +9,7 @@ return new class extends Migration {
     {
         Schema::create('lucky_wheels', function (Blueprint $table) {
             $table->id(); // ID tự động tăng, khóa chính
+            $table->enum('wheel_type', ['upload', 'canvas'])->default('upload'); // Hình ảnh vòng quay tự upload hoặc tạo tự động
             $table->string('name'); // Tên vòng quay - Tên của vòng quay may mắn (VD: "Vòng quay VIP")
             $table->string('slug')->unique(); // Đường dẫn SEO - Chuỗi duy nhất dùng cho URL (VD: "vong-quay-vip")
             $table->string('thumbnail'); // Ảnh đại diện - Đường dẫn hoặc tên file ảnh minh họa vòng quay

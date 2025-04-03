@@ -27,7 +27,7 @@
     --blue: #0E3EDA;          /* Xanh dương */
     
     /* Danger/Error colors */
-    --danger: #4A5CFF;        /* Xanh dương cho lỗi */
+    --danger: #ff0000;     
     --danger-light: #E6EAFF;  /* Xanh dương nhạt cho nền lỗi */
     --danger-dark: #2E43EB;   /* Xanh dương đậm cho lỗi */
 
@@ -91,8 +91,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Utilities */
 .container {
-    width: 1180px;
-    max-width: calc(100% - 48px);
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 15px;
 }
@@ -227,15 +226,9 @@ a:hover {
 }
 
 .action__link {
-    font-size: 1.4rem;
     text-align: center;
     padding: 10px 22px;
-    border-radius: var(--border-radius-pill);
     border: 2px solid var(--primary-color);
-    color: var(--primary-color);
-    font-weight: 600;
-    transition: var(--transition);
-    display: inline-block;
 }
 
 .action__link:hover {
@@ -245,7 +238,7 @@ a:hover {
     box-shadow: var(--shadow-md);
 }
 
-.action__link--primary {
+.action__link.action__link--primary {
     background-color: var(--primary-color);
     color: white;
     border-color: var(--primary-color);

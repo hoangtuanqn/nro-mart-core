@@ -23,12 +23,35 @@
             <!-- Top Nạp -->
             <div class="hero-sidebar">
                 <div class="hero-sidebar__header">
-                    <i class="fas fa-chart-line"></i> TOP Nạp Tháng 04
+                    <i class="fas fa-chart-line"></i> TOP Nạp Tháng {{ date('m') }}
                 </div>
                 <div class="hero-sidebar__content">
-                    <div class="hero-sidebar__empty">
-                        Chưa có dữ liệu
+                    <div class="hero-sidebar__list">
+                        <div class="hero-sidebar__item">
+                            <div class="hero-sidebar__user">
+                                <img src="https://i.pravatar.cc/40?img=1" alt="User" class="hero-sidebar__avatar">
+                                <span class="hero-sidebar__name">Nguyễn Văn A</span>
+                            </div>
+                            <div class="hero-sidebar__amount">500.000đ</div>
+                        </div>
+                        <div class="hero-sidebar__item">
+                            <div class="hero-sidebar__user">
+                                <img src="https://i.pravatar.cc/40?img=2" alt="User" class="hero-sidebar__avatar">
+                                <span class="hero-sidebar__name">Trần Thị B</span>
+                            </div>
+                            <div class="hero-sidebar__amount">300.000đ</div>
+                        </div>
+                        <div class="hero-sidebar__item">
+                            <div class="hero-sidebar__user">
+                                <img src="https://i.pravatar.cc/40?img=3" alt="User" class="hero-sidebar__avatar">
+                                <span class="hero-sidebar__name">Lê Văn C</span>
+                            </div>
+                            <div class="hero-sidebar__amount">200.000đ</div>
+                        </div>
                     </div>
+                    {{-- <div class="hero-sidebar__empty">
+                        Chưa có dữ liệu
+                    </div> --}}
                     <a href="{{ route('profile.deposit-card') }}" class="hero-sidebar__btn">
                         <i class="fas fa-wallet"></i> NẠP TIỀN NGAY
                     </a>
