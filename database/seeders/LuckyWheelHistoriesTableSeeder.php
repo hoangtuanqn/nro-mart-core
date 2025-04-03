@@ -11,7 +11,6 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\LuckyWheelHistory;
-use App\Models\LuckyWheel;
 
 class LuckyWheelHistoriesTableSeeder extends Seeder
 {
