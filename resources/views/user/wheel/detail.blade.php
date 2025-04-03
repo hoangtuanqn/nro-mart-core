@@ -165,7 +165,7 @@
                             setTimeout(() => {
                                 // Hiển thị kết quả với số lượt quay
                                 const resultMessage = spinCountValue > 1 ?
-                                    `${reward.content} (${spinCountValue} lượt quay)` :
+                                    `${reward.content} x ${spinCountValue} lượt quay)` :
                                     reward.content;
 
                                 showResult(resultMessage);

@@ -39,9 +39,9 @@
         <h2 class="sidebar-title">MENU GIAO DỊCH</h2>
     </div>
     <ul class="sidebar-menu">
-        <li class="sidebar-item">
-            <a href="#" class="sidebar-link">
-                <i class="fa-solid fa-clock-rotate-left"></i> Lịch sử vận may
+        <li class="sidebar-item {{ request()->routeIs('profile.wheels-history') ? 'active' : '' }}">
+            <a href="{{ route('profile.wheels-history') }}" class="sidebar-link">
+                <i class="fa-solid fa-clock-rotate-left"></i> Lịch sử vòng quay
             </a>
         </li>
         <li class="sidebar-item {{ request()->routeIs('profile.purchased-accounts') ? 'active' : '' }}">

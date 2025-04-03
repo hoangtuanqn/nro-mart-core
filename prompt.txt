@@ -1,0 +1,8 @@
+Bạn hãy đọc toàn bộ dự án của tôi để hiểu rõ bối cảnh. Đặc biệt, hãy xem kỹ các file trong thư mục migrations để nắm được cấu trúc cơ sở dữ liệu (tôi đã thêm ghi chú dễ hiểu bên cạnh mỗi phần). Ngoài ra, bạn cũng cần đọc dữ liệu trong thư mục seeders để hiểu cách tôi thiết lập dữ liệu demo.
+
+Tôi mong muốn bạn viết mã code tối ưu nhất có thể, đồng thời đảm bảo code rõ ràng và dễ hiểu. Khi xử lý từ 2 giao dịch cơ sở dữ liệu trở lên, hãy sử dụng transaction. Hãy dùng try-catch để xử lý lỗi một cách an toàn và chuyên nghiệp. Bạn cũng được phép chỉnh sửa các phần liên quan để đảm bảo code hoạt động đúng.
+
+Và bây giờ, tôi muốn bạn viết code để hiển thị giao diện người dùng cho lịch sử quay vòng quay may mắn. 
+Giao diện cần được thiết kế sao cho phù hợp, tránh làm vỡ bố cục người dùng và hiển thị dữ liệu một cách trực quan.
+
+Hãy dựa trên phong cách code hiện tại của tôi trong dự án để viết code nhất quán với cách tôi đã thực hiện.

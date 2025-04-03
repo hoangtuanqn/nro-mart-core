@@ -22,6 +22,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Hash;
+use App\Models\LuckyWheelHistory;
 
 class ProfileController extends Controller
 {
@@ -195,5 +196,54 @@ class ProfileController extends Controller
             'bankAccounts' => $bankAccounts,
             'title' => $title
         ]);
+    }
+
+    /**
+     * Display the user's lucky wheel history.
+     */
+    public function luckyWheelHistory(Request $request)
+    {
+        $title = 'Lịch sử vận may';
+        $wheelHistories = LuckyWheelHistory::with('luckyWheel')
+            ->where('user_id', Auth::id())
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
+        return view('user.profile.wheels-history', [
+            'user' => $request->user(),
+            'wheelHistories' => $wheelHistories,
+            'title' => $title
+        ]);
+    }
+
+    /**
+     * Get lucky wheel history detail.
+     */
+    public function getLuckyWheelDetail($id)
+    {
+        try {
+            $history = LuckyWheelHistory::with('luckyWheel')
+                ->where('user_id', Auth::id())
+                ->findOrFail($id);
+
+            return response()->json([
+                'status' => 'success',
+                'id' => $history->id,
+                'created_at' => $history->created_at,
+                'lucky_wheel' => [
+                    'name' => $history->luckyWheel->name
+                ],
+                'spin_count' => $history->spin_count,
+                'total_cost' => $history->total_cost,
+                'reward_type' => $history->reward_type,
+                'reward_amount' => $history->reward_amount,
+                'description' => $history->description
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Không thể tải thông tin vòng quay may mắn'
+            ], 500);
+        }
     }
 }

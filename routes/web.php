@@ -54,6 +54,9 @@ Route::middleware('auth')->group(function () {
         Route::post('/deposit/card', [CardDepositController::class, 'processCardDeposit']);
         Route::get('/service-history/{id}', [ProfileController::class, 'getServiceDetail'])
             ->name('service.detail');
+        Route::get('/wheels-history', [ProfileController::class, 'luckyWheelHistory'])->name('wheels-history');
+        Route::get('/wheel-history/{id}', [ProfileController::class, 'getLuckyWheelDetail'])
+            ->name('wheel.detail');
     });
 });
 Route::prefix('category')->name('category.')->group(function () {
