@@ -7,7 +7,7 @@
         <div class="container">
             <div class="profile-container">
                 <div class="profile-header">
-                    <h1 class="profile-title">TÀI KHOẢN ĐÃ MUA</h1>
+                    <h1 class="profile-title"><i class="fa-solid fa-box me-2"></i> TÀI KHOẢN ĐÃ MUA</h1>
                 </div>
 
                 <div class="profile-content">
@@ -17,22 +17,36 @@
                         <div class="profile-info-card">
                             <div class="info-header">
                                 <div class="balance-info">
-                                    <span class="balance-label">TÀI KHOẢN ĐÃ MUA</span>
+                                    <span class="balance-label"><i class="fa-solid fa-wallet me-2"></i> SỐ DƯ HIỆN TẠI:
+                                        {{ number_format($user->balance) }} VND</span>
                                 </div>
                             </div>
 
                             <div class="info-content">
+                                @if (session('error'))
+                                    <div class="alert alert-danger">
+                                        <i class="fa-solid fa-circle-exclamation me-2"></i> {{ session('error') }}
+                                    </div>
+                                @endif
+
+                                @if (session('success'))
+                                    <div class="alert alert-success">
+                                        <i class="fa-solid fa-circle-check me-2"></i> {{ session('success') }}
+                                    </div>
+                                @endif
+
                                 <div class="transaction-history">
                                     <div class="history-table-container">
                                         <table class="history-table">
                                             <thead>
                                                 <tr>
                                                     <th>Thời gian</th>
-                                                    <th>Mã</th>
+                                                    <th>Mã giao dịch</th>
                                                     <th>Máy chủ</th>
                                                     <th>Tài khoản</th>
                                                     <th>Mật khẩu</th>
                                                     <th>Số tiền</th>
+                                                    <th>Thao tác</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -40,18 +54,23 @@
                                                     <tr>
                                                         <td>{{ $transaction->created_at->format('H:i d/m/Y') }}</td>
                                                         <td><a target="_blank" class="text-danger"
-                                                                href="{{ route("account.show", ['id' => $transaction->id]) }}">#{{ $transaction->id }}</a>
+                                                                href="{{ route('transaction.show', ['id' => $transaction->id]) }}">#{{ $transaction->id }}</a>
                                                         </td>
                                                         <td>Server {{ $transaction->server }}</td>
                                                         <td class="text-bold">{{ $transaction->account_name }}</td>
                                                         <td class="text-bold">{{ $transaction->password }}</td>
                                                         <td class="amount text-danger">
-                                                            -{{ number_format($transaction->price) }} VND
+                                                            -{{ number_format($transaction->price) }} VND</td>
+                                                        <td>
+                                                            <a href="{{ route('account.show', ['id' => $transaction->id]) }}"
+                                                                class="btn btn-sm btn-info" target="_blank">
+                                                                <i class="fa-solid fa-eye"></i>
+                                                            </a>
                                                         </td>
                                                     </tr>
                                                 @empty
                                                     <tr>
-                                                        <td colspan="6" class="no-data">Không có dữ liệu</td>
+                                                        <td colspan="7" class="no-data">Không có dữ liệu</td>
                                                     </tr>
                                                 @endforelse
                                             </tbody>

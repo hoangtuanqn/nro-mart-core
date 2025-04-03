@@ -7,7 +7,7 @@
         <div class="container">
             <div class="profile-container">
                 <div class="profile-header">
-                    <h1 class="profile-title">NẠP TIỀN THẺ CÀO</h1>
+                    <h1 class="profile-title"><i class="fa-solid fa-credit-card me-2"></i> NẠP TIỀN THẺ CÀO</h1>
                 </div>
 
                 <div class="profile-content">
@@ -17,101 +17,114 @@
                         <div class="profile-info-card">
                             <div class="info-header">
                                 <div class="balance-info">
-                                    <span class="balance-label">SỐ DƯ:</span>
-                                    <span class="balance-value">{{ number_format(Auth::user()->balance ?? 0) }} VND</span>
+                                    <span class="balance-label"><i class="fa-solid fa-wallet me-2"></i> SỐ DƯ HIỆN TẠI:
+                                        {{ number_format($user->balance) }} VND</span>
                                 </div>
                             </div>
 
                             <div class="info-content">
-                                <!-- Thêm phần thông báo lỗi và thành công -->
-                                @if ($errors->any())
-                                    <div class="service__alert service__alert--error">
-                                        <i class="fas fa-exclamation-circle"></i>
-                                        <div>
-                                            <span>Đã có lỗi xảy ra:</span>
-                                            <ul>
-                                                @foreach ($errors->all() as $error)
-                                                    <li>{{ $error }}</li>
-                                                @endforeach
-                                            </ul>
-                                        </div>
-                                        <button type="button" class="service__alert-close">&times;</button>
+                                @if (session('error'))
+                                    <div class="alert alert-danger">
+                                        <i class="fa-solid fa-circle-exclamation me-2"></i> {{ session('error') }}
                                     </div>
                                 @endif
-                                @foreach (['error', 'success'] as $msg)
-                                    @if (session($msg))
-                                        <div
-                                            class="service__alert service__alert--{{ $msg === 'error' ? 'error' : 'success' }}">
-                                            <i
-                                                class="fas fa-{{ $msg === 'error' ? 'exclamation-circle' : 'check-circle' }}"></i>
-                                            <div>
-                                                <span>{{ session($msg) }}</span>
-                                            </div>
-                                            <button type="button" class="service__alert-close">&times;</button>
-                                        </div>
-                                    @endif
-                                @endforeach
-                                <!-- Kết thúc phần thông báo -->
 
-                                <form method="POST" action="{{ route('profile.deposit-card') }}" class="register-form">
+                                @if (session('success'))
+                                    <div class="alert alert-success">
+                                        <i class="fa-solid fa-circle-check me-2"></i> {{ session('success') }}
+                                    </div>
+                                @endif
+
+                                <form action="{{ route('profile.deposit-card') }}" method="POST">
                                     @csrf
-
                                     <div class="form-group">
-                                        <label for="telco" class="form-label">Nhà mạng:</label>
-                                        <select id="telco" name="telco"
-                                            class="form-input @error('telco') is-invalid @enderror">
-                                            <option value="VIETTEL">Viettel</option>
-                                            <option value="MOBIFONE">Mobifone</option>
-                                            <option value="VINAPHONE">Vinaphone</option>
-                                            <option value="VIETNAMOBILE">Vietnamobile</option>
+                                        <label for="telecom" class="form-label">
+                                            <i class="fa-solid fa-building me-2"></i> Nhà mạng
+                                        </label>
+                                        <select class="form-control @error('telecom') is-invalid @enderror" id="telecom"
+                                            name="telecom" required>
+                                            <option value="">Chọn nhà mạng</option>
+                                            <option value="VIETTEL" {{ old('telecom') == 'VIETTEL' ? 'selected' : '' }}>
+                                                Viettel
+                                            </option>
+                                            <option value="MOBIFONE" {{ old('telecom') == 'MOBIFONE' ? 'selected' : '' }}>
+                                                Mobifone
+                                            </option>
+                                            <option value="VINAPHONE" {{ old('telecom') == 'VINAPHONE' ? 'selected' : '' }}>
+                                                Vinaphone
+                                            </option>
                                         </select>
-                                        @error('telco')
-                                            <span class="form-error">{{ $message }}</span>
+                                        @error('telecom')
+                                            <div class="invalid-feedback">
+                                                <i class="fa-solid fa-circle-exclamation me-1"></i> {{ $message }}
+                                            </div>
                                         @enderror
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="amount" class="form-label">Mệnh giá:</label>
-                                        <select id="amount" name="amount"
-                                            class="form-input @error('amount') is-invalid @enderror">
-                                            <option value="10000">10,000 VND</option>
-                                            <option value="20000">20,000 VND</option>
-                                            <option value="50000">50,000 VND</option>
-                                            <option value="100000">100,000 VND</option>
-                                            <option value="200000">200,000 VND</option>
-                                            <option value="500000">500,000 VND</option>
+                                        <label for="amount" class="form-label">
+                                            <i class="fa-solid fa-money-bill me-2"></i> Mệnh giá
+                                        </label>
+                                        <select class="form-control @error('amount') is-invalid @enderror" id="amount"
+                                            name="amount" required>
+                                            <option value="">Chọn mệnh giá</option>
+                                            <option value="10000" {{ old('amount') == '10000' ? 'selected' : '' }}>
+                                                10.000 VND
+                                            </option>
+                                            <option value="20000" {{ old('amount') == '20000' ? 'selected' : '' }}>
+                                                20.000 VND
+                                            </option>
+                                            <option value="50000" {{ old('amount') == '50000' ? 'selected' : '' }}>
+                                                50.000 VND
+                                            </option>
+                                            <option value="100000" {{ old('amount') == '100000' ? 'selected' : '' }}>
+                                                100.000 VND
+                                            </option>
+                                            <option value="200000" {{ old('amount') == '200000' ? 'selected' : '' }}>
+                                                200.000 VND
+                                            </option>
+                                            <option value="500000" {{ old('amount') == '500000' ? 'selected' : '' }}>
+                                                500.000 VND
+                                            </option>
                                         </select>
                                         @error('amount')
-                                            <span class="form-error">{{ $message }}</span>
+                                            <div class="invalid-feedback">
+                                                <i class="fa-solid fa-circle-exclamation me-1"></i> {{ $message }}
+                                            </div>
                                         @enderror
                                     </div>
 
                                     <div class="form-group">
-                                        <label class="form-label">Nhận được:</label>
-                                        <div class="receive-amount form-input" id="receive-amount">10.000 VND</div>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="serial" class="form-label">Số seri:</label>
-                                        <input type="text" id="serial" name="serial" value="{{ old('serial') }}"
-                                            class="form-input @error('serial') is-invalid @enderror"
-                                            placeholder="Nhập mã serial nằm sau thẻ" required>
+                                        <label for="serial" class="form-label">
+                                            <i class="fa-solid fa-barcode me-2"></i> Mã thẻ
+                                        </label>
+                                        <input type="text" class="form-control @error('serial') is-invalid @enderror"
+                                            id="serial" name="serial" value="{{ old('serial') }}" required>
                                         @error('serial')
-                                            <span class="form-error">{{ $message }}</span>
+                                            <div class="invalid-feedback">
+                                                <i class="fa-solid fa-circle-exclamation me-1"></i> {{ $message }}
+                                            </div>
                                         @enderror
                                     </div>
 
                                     <div class="form-group">
-                                        <label for="pin" class="form-label">Mã thẻ:</label>
-                                        <input type="text" id="pin" name="pin" value="{{ old('pin') }}"
-                                            class="form-input @error('pin') is-invalid @enderror"
-                                            placeholder="Nhập mã số sau lớp bạc mỏng" required>
+                                        <label for="pin" class="form-label">
+                                            <i class="fa-solid fa-key me-2"></i> Mã PIN
+                                        </label>
+                                        <input type="text" class="form-control @error('pin') is-invalid @enderror"
+                                            id="pin" name="pin" value="{{ old('pin') }}" required>
                                         @error('pin')
-                                            <span class="form-error">{{ $message }}</span>
+                                            <div class="invalid-feedback">
+                                                <i class="fa-solid fa-circle-exclamation me-1"></i> {{ $message }}
+                                            </div>
                                         @enderror
                                     </div>
 
-                                    <button type="submit" class="register-btn">NẠP THẺ</button>
+                                    <div class="form-group mt-4">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fa-solid fa-check me-2"></i> Nạp tiền
+                                        </button>
+                                    </div>
                                 </form>
 
                                 <div class="deposit-notice">

@@ -7,7 +7,7 @@
         <div class="container">
             <div class="profile-container">
                 <div class="profile-header">
-                    <h1 class="profile-title">LỊCH SỬ GIAO DỊCH</h1>
+                    <h1 class="profile-title"><i class="fa-solid fa-chart-line me-2"></i> BIẾN ĐỘNG SỐ DƯ</h1>
                 </div>
 
                 <div class="profile-content">
@@ -17,39 +17,56 @@
                         <div class="profile-info-card">
                             <div class="info-header">
                                 <div class="balance-info">
-                                    <span class="balance-label">LỊCH SỬ GIAO DỊCH</span>
+                                    <span class="balance-label"><i class="fa-solid fa-wallet me-2"></i> SỐ DƯ HIỆN TẠI:
+                                        {{ number_format($user->balance) }} VND</span>
                                 </div>
                             </div>
 
                             <div class="info-content">
+                                @if (session('error'))
+                                    <div class="alert alert-danger">
+                                        <i class="fa-solid fa-circle-exclamation me-2"></i> {{ session('error') }}
+                                    </div>
+                                @endif
+
+                                @if (session('success'))
+                                    <div class="alert alert-success">
+                                        <i class="fa-solid fa-circle-check me-2"></i> {{ session('success') }}
+                                    </div>
+                                @endif
+
                                 <div class="transaction-history">
                                     <div class="history-table-container">
                                         <table class="history-table">
                                             <thead>
                                                 <tr>
                                                     <th>Thời gian</th>
-                                                    <th>Giao dịch</th>
-                                                    <th>Trước giao dịch</th>
+                                                    <th>Mã giao dịch</th>
+                                                    <th>Mô tả</th>
+                                                    <th>Số dư trước</th>
+                                                    <th>Số dư sau</th>
                                                     <th>Số tiền</th>
-                                                    <th>Sau giao dịch</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 @forelse($transactions as $transaction)
                                                     <tr>
                                                         <td>{{ $transaction->created_at->format('H:i d/m/Y') }}</td>
+                                                        <td><a target="_blank" class="text-danger"
+                                                                href="{{ route('transaction.show', ['id' => $transaction->id]) }}">#{{ $transaction->id }}</a>
+                                                        </td>
                                                         <td>{{ $transaction->description }}</td>
                                                         <td>{{ number_format($transaction->balance_before) }} VND</td>
-
-                                                        <td
-                                                            class="amount {{ $transaction->amount >= 0 ? 'text-success' : 'text-danger' }}">
-                                                            {{ number_format($transaction->amount) }} VND
-                                                        </td>
                                                         <td>{{ number_format($transaction->balance_after) }} VND</td>
+                                                        <td
+                                                            class="amount {{ $transaction->amount > 0 ? 'text-success' : 'text-danger' }}">
+                                                            {{ $transaction->amount > 0 ? '+' : '' }}{{ number_format($transaction->amount) }}
+                                                            VND
+                                                        </td>
                                                     </tr>
                                                 @empty
                                                     <tr>
-                                                        <td colspan="5" class="no-data">Không có dữ liệu</td>
+                                                        <td colspan="6" class="no-data">Không có dữ liệu</td>
                                                     </tr>
                                                 @endforelse
                                             </tbody>

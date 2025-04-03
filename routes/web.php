@@ -47,8 +47,9 @@ Route::middleware('auth')->group(function () {
         // Đổi lại thành random
         Route::get('/purchased-random-accounts', [ProfileController::class, 'purchasedRandomAccounts'])->name('purchased-random-accounts');
 
-        Route::get('/deposit/card', [CardDepositController::class, 'showCardDepositForm'])->name('deposit-card');
-        Route::get('/deposit/atm', [AtmDepositController::class, 'index'])->name('deposit-atm');
+        // Updated routes to use ProfileController methods
+        Route::get('/deposit/card', [ProfileController::class, 'depositCard'])->name('deposit-card');
+        Route::get('/deposit/atm', [ProfileController::class, 'depositAtm'])->name('deposit-atm');
         Route::post('/deposit/card', [CardDepositController::class, 'processCardDeposit']);
         Route::get('/service-history/{id}', [ProfileController::class, 'getServiceDetail'])
             ->name('service.detail');
