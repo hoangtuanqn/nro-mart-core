@@ -64,17 +64,6 @@
                                     </div>
                                 </div>
 
-                                <div class="info-row">
-                                    <div class="info-label">
-                                        <i class="fa-solid fa-phone me-2"></i> Số điện thoại
-                                    </div>
-                                    {{-- <div class="info-value">
-                                        {{ $user->phone ?? 'Chưa cập nhật' }}
-                                        <a href="{{ route('profile.update-phone') }}" class="update-phone-link">
-                                            <i class="fa-solid fa-pen-to-square me-1"></i> Cập nhật
-                                        </a>
-                                    </div> --}}
-                                </div>
 
                                 <div class="info-row">
                                     <div class="info-label">
@@ -91,6 +80,32 @@
                                     </div>
                                     <div class="info-value info-value--highlight">
                                         {{ number_format($user->total_deposit) }} VND
+                                    </div>
+                                </div>
+
+                                <div class="info-row">
+                                    <div class="info-label">
+                                        <i class="fa-solid fa-gem me-2"></i> Vàng
+                                    </div>
+                                    <div class="info-value">
+                                        {{ number_format($user->gold) }}
+                                        {{-- {{ route('profile.withdraw-gem') }} --}}
+                                        <a href="" class="change-password-link">
+                                            <i class="fa-solid fa-coins me-1"></i> Rút vàng
+                                        </a>
+                                    </div>
+                                </div>
+
+                                <div class="info-row">
+                                    <div class="info-label">
+                                        <i class="fa-solid fa-gem me-2"></i> Ngọc
+                                    </div>
+                                    <div class="info-value">
+                                        {{ number_format($user->gem) }}
+                                        {{-- {{ route('profile.withdraw-gold') }} --}}
+                                        <a href="" class="change-password-link">
+                                            <i class="fa-solid fa-coins me-1"></i> Rút ngọc
+                                        </a>
                                     </div>
                                 </div>
 
