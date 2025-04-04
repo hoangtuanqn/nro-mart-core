@@ -318,7 +318,7 @@
                                             </td>
                                             <td>
                                                 {!! display_status_transactions_admin($transaction->type) !!}
-                                              
+
                                             </td>
                                             <td>{{ number_format($transaction->amount) }} VNĐ</td>
                                             <td>{{ number_format($transaction->balance_before) }} VNĐ</td>

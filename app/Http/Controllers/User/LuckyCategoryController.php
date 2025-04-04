@@ -13,7 +13,6 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use App\Models\LuckyWheel;
 use App\Models\LuckyWheelHistory;
-use App\Models\User;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -56,9 +55,15 @@ class LuckyCategoryController extends Controller
     // Xử lý quay vòng quay
     public function spin(Request $request, $slug)
     {
+        if (!Auth::check()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Vui lòng đăng nhập để có thể quay'
+            ]);
+        }
         // Validate dữ liệu đầu vào
         try {
-            $validatedData = $request->validate([
+            $request->validate([
                 'spin_count' => 'required|integer|min:1|max:10',
             ]);
 

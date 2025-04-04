@@ -76,7 +76,7 @@ class FetchMBTransactions extends Command
                             continue;
                         }
 
-                        if (BankDeposit::where('transaction_id', $transaction['reference_number'])->exists()) {
+                        if (BankDeposit::where('transaction_id', $transaction['reference_number'])->exists() || !User::find($id)) {
                             $this->line('Bỏ qua giao dịch đã xử lý: ' . $transaction['reference_number']);
                             $skippedCount++;
                             continue;

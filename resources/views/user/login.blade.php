@@ -18,7 +18,7 @@
             <div class="register-container">
                 <div class="register-header">
                     <h1 class="register-title">Đăng nhập</h1>
-                    <p class="register-subtitle">Đăng nhập để tiếp tục mua game</p>
+                    <p class="register-subtitle">Đăng nhập để tiếp tục sử dụng dịch vụ</p>
                 </div>
                 @if (session('error'))
                     <div class="service__alert service__alert--error">
@@ -33,7 +33,7 @@
                     @csrf
 
                     <div class="form-group">
-                        <label for="username" class="form-label">Tên tài khoản</label>
+                        <label for="username" class="form-label">Tên tài khoản hoặc Email</label>
                         <input id="username" type="text" class="form-input @error('username') is-invalid @enderror"
                             name="username" value="{{ old('username') }}" required autofocus>
                         @error('username')

@@ -42,7 +42,7 @@
                     <form action="{{ route('admin.bank-accounts.store') }}" method="POST">
                         @csrf
                         <div class="row">
-                            <div class="col-lg-6 col-sm-6 col-12">
+                            <div class="col-lg-4 col-sm-4 col-12">
                                 <div class="form-group">
                                     <label>Tên ngân hàng <span class="text-danger">*</span></label>
                                     <select name="bank_name" class="form-control @error('bank_name') is-invalid @enderror">
@@ -114,13 +114,24 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-sm-6 col-12">
+                            <div class="col-lg-4 col-sm-4 col-12">
                                 <div class="form-group">
                                     <label>Số tài khoản <span class="text-danger">*</span></label>
                                     <input type="text" name="account_number" value="{{ old('account_number') }}"
                                         class="form-control @error('account_number') is-invalid @enderror"
                                         placeholder="Nhập số tài khoản">
                                     @error('account_number')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-sm-4 col-12">
+                                <div class="form-group">
+                                    <label>Tên tài khoản <span class="text-danger">*</span></label>
+                                    <input type="text" name="account_name" value="{{ old('account_name') }}"
+                                        class="form-control @error('account_name') is-invalid @enderror"
+                                        placeholder="Nhập tên tài khoản">
+                                    @error('account_name')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>

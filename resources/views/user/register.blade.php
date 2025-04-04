@@ -18,9 +18,9 @@
             <div class="register-container">
                 <div class="register-header">
                     <h1 class="register-title">Đăng ký tài khoản</h1>
-                    <p class="register-subtitle">Tạo tài khoản để mua game dễ dàng hơn</p>
+                    <p class="register-subtitle">Tạo tài khoản để sử dụng dịch vụ dễ dàng hơn</p>
                 </div>
-                <x-alert-error/>
+                <x-alert-error />
                 <form method="POST" action="{{ route('register') }}" class="register-form">
                     @csrf
 

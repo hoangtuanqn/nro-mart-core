@@ -225,6 +225,7 @@ class ConfigController extends Controller
      */
     public function updateLogin(Request $request)
     {
+
         $checkGoogle = 'nullable';
         $checkFacebook = 'nullable';
         if ($request->has('google_active')) {

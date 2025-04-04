@@ -74,6 +74,10 @@
                                                     <div class="bank-account-info">
                                                         <div class="bank-details">
                                                             <h3 class="bank-name">{{ $account->bank_name }}</h3>
+                                                            <div class="branch">
+                                                                <span class="label">Tên tài khoản:</span>
+                                                                <span class="value">{{ $account->account_name }}</span>
+                                                            </div>
                                                             <div class="account-number">
                                                                 <span class="label">Số tài khoản:</span>
                                                                 <span class="value">{{ $account->account_number }}</span>

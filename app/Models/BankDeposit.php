@@ -18,20 +18,17 @@ class BankDeposit extends Model
     protected $primaryKey = 'transaction_id'; // Đặt khóa chính là transaction_id
     public $incrementing = false; // Không tự động tăng
     protected $fillable = [
-        'user_id',
-        'bank_account_id',
         'transaction_id',
+        'user_id',
+        'account_number',
         'amount',
-        'transaction_content',
-        'proof_image',
-        'status',
-        'admin_note',
-        'metadata',
+        'content',
+        'bank'
     ];
 
     protected $casts = [
-        'metadata' => 'array',
         'amount' => 'decimal:0',
+        'bank' => 'string', // Added cast for 'bank'
     ];
 
     /**

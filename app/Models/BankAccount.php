@@ -17,6 +17,7 @@ class BankAccount extends Model
     protected $table = 'bank_accounts';
     protected $fillable = [
         'bank_name',        // Tên ngân hàng
+        'account_name',     // Tên chủ tài khoản
         'account_number',   // Số tài khoản
         'branch',           // Chi nhánh
         'note',             // Ghi chú

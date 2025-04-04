@@ -103,7 +103,7 @@ Route::prefix('random')->name('random.')->group(function () {
 Route::prefix('lucky')->name('lucky.')->group(function () {
     Route::get('/', [LuckyCategoryController::class, 'showAll'])->name('show-all');
     Route::get('/wheel/{slug}', [LuckyCategoryController::class, 'index'])->name('index');
-    Route::post('/wheel/{slug}/spin', [LuckyCategoryController::class, 'spin'])->name('spin')->middleware('auth');
+    Route::post('/wheel/{slug}/spin', [LuckyCategoryController::class, 'spin'])->name('spin');
 });
 
 // Discount code routes

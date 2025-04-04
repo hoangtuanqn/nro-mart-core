@@ -20,6 +20,8 @@ return new class extends Migration {
         Schema::create('bank_deposits', function (Blueprint $table) {
             $table->string('transaction_id')->primary(); // Mã giao dịch (khóa chính)
             $table->foreignId('user_id')->constrained()->onDelete('cascade'); // Khóa ngoại liên kết với users
+            $table->string('account_name'); // Tên chủ tài khoản
+            $table->string('account_number'); // Số tài khoản ngân hàng
             $table->integer('amount'); // Số tiền giao dịch
             $table->string('content'); // Nội dung chuyển tiền
             $table->enum('bank', [
