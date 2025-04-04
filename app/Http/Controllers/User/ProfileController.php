@@ -368,4 +368,44 @@ class ProfileController extends Controller
             return back()->with('error', 'Có lỗi xảy ra. Vui lòng thử lại sau.');
         }
     }
+
+    /**
+     * Get withdrawal detail for AJAX request
+     */
+    public function getWithdrawalDetail($id)
+    {
+        try {
+            $withdrawal = WithdrawalHistory::findOrFail($id);
+
+            // Check if withdrawal belongs to current user
+            if ($withdrawal->user_id !== auth()->id()) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Bạn không có quyền xem thông tin này'
+                ], 403);
+            }
+
+            // Get status HTML
+
+            return response()->json([
+                'status' => 'success',
+                'id' => $withdrawal->id,
+                'user_id' => $withdrawal->user_id,
+                'amount' => $withdrawal->amount,
+                'type' => $withdrawal->type,
+                'character_name' => $withdrawal->character_name,
+                'server' => $withdrawal->server,
+                'user_note' => $withdrawal->user_note,
+                'admin_note' => $withdrawal->admin_note,
+                'status_html' => display_status($withdrawal->status),
+                'created_at' => $withdrawal->created_at,
+                'updated_at' => $withdrawal->updated_at
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Không tìm thấy thông tin yêu cầu rút'
+            ], 404);
+        }
+    }
 }

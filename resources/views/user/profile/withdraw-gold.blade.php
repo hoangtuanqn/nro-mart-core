@@ -238,7 +238,6 @@
             viewButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     const withdrawalId = this.getAttribute('data-id');
-                    const withdrawalType = this.getAttribute('data-type');
                     document.getElementById('withdrawal-id').textContent = withdrawalId;
 
                     // Show loading, hide content and errors
@@ -249,38 +248,67 @@
                     // Show the modal
                     openWithdrawalModal();
 
-                    // Construct data for display
-                    // In a real app, you'd fetch this from a backend endpoint
-                    // Here, for demo we're using the data already in the table
-                    const row = this.closest('tr');
-                    const cells = row.querySelectorAll('td');
+                    // Fetch withdrawal details via AJAX
+                    fetch(`/profile/withdrawal-history/${withdrawalId}`)
+                        .then(response => response.json())
+                        .then(data => {
+                            document.getElementById('modal-loading').style.display = 'none';
 
-                    setTimeout(() => {
-                        document.getElementById('modal-loading').style.display = 'none';
+                            if (data.status === 'success') {
+                                // Format data and populate the modal
+                                document.getElementById('withdrawal-time').textContent =
+                                    new Date(
+                                        data.created_at).toLocaleString('vi-VN');
+                                document.getElementById('withdrawal-type').textContent = data
+                                    .type === 'gold' ? 'Vàng' : 'Ngọc';
+                                document.getElementById('withdrawal-amount').textContent =
+                                    new Intl.NumberFormat('vi-VN').format(data.amount);
+                                document.getElementById('character-name').textContent = data
+                                    .character_name;
+                                document.getElementById('withdrawal-server').textContent =
+                                    'Server ' + data.server;
+                                document.getElementById('withdrawal-status').innerHTML = data
+                                    .status_html;
 
-                        // Set the withdrawal details
-                        document.getElementById('withdrawal-time').textContent = cells[1]
-                            .textContent.trim();
-                        document.getElementById('withdrawal-type').textContent =
-                            withdrawalType === 'gold' ? 'Vàng' : 'Ngọc';
-                        document.getElementById('withdrawal-amount').textContent = cells[2]
-                            .textContent.trim();
-                        document.getElementById('character-name').textContent = cells[3]
-                            .textContent.trim();
-                        document.getElementById('withdrawal-server').textContent =
-                            'Server ' + cells[4].textContent.trim();
-                        document.getElementById('withdrawal-status').innerHTML = cells[0]
-                            .innerHTML.trim();
+                                // Display user note if exists
+                                if (data.user_note) {
+                                    document.getElementById('user-note').textContent = data
+                                        .user_note;
+                                    document.getElementById('user-note-container').style
+                                        .display = 'flex';
+                                } else {
+                                    document.getElementById('user-note').textContent =
+                                        "Không có ghi chú";
+                                }
 
-                        // These would come from API in a real app
-                        document.getElementById('user-note').textContent =
-                            "Được tải từ cơ sở dữ liệu";
-                        document.getElementById('admin-note').textContent =
-                            "Được tải từ cơ sở dữ liệu";
+                                // Display admin note if exists
+                                if (data.admin_note) {
+                                    document.getElementById('admin-note').textContent = data
+                                        .admin_note;
+                                    document.getElementById('admin-note-container').style
+                                        .display = 'flex';
+                                } else {
+                                    document.getElementById('admin-note').textContent =
+                                        "Không có ghi chú";
+                                }
 
-                        // Show the content
-                        document.getElementById('modal-content').style.display = 'block';
-                    }, 500); // Simulating API call delay
+                                // Show the content
+                                document.getElementById('modal-content').style.display =
+                                'block';
+                            } else {
+                                // Show error message
+                                document.getElementById('error-message').textContent = data
+                                    .message || 'Đã xảy ra lỗi khi tải dữ liệu';
+                                document.getElementById('modal-error').style.display = 'block';
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error fetching withdrawal details:', error);
+                            document.getElementById('modal-loading').style.display = 'none';
+                            document.getElementById('error-message').textContent =
+                                'Đã xảy ra lỗi kết nối, vui lòng thử lại sau';
+                            document.getElementById('modal-error').style.display = 'block';
+                        });
                 });
             });
         });

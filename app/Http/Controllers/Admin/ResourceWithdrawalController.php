@@ -35,7 +35,7 @@ class ResourceWithdrawalController extends Controller
             DB::beginTransaction();
 
             $withdrawal->update([
-                'status' => 'completed',
+                'status' => 'success',
                 'admin_note' => $request->admin_note,
             ]);
 
@@ -74,7 +74,7 @@ class ResourceWithdrawalController extends Controller
 
             // Update withdrawal status
             $withdrawal->update([
-                'status' => 'cancelled',
+                'status' => 'error',
                 'admin_note' => $request->admin_note,
             ]);
 

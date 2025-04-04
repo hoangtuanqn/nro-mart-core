@@ -12,7 +12,7 @@ function display_status($status)
 
     $statusText = [
         'success' => 'Thành công',
-        'error' => 'Lỗi',
+        'error' => 'Thất bại',
         'processing' => 'Đang xử lý',
     ];
 
@@ -46,17 +46,15 @@ function display_status_service($status)
 function display_status_admin($status)
 {
     $statusClasses = [
-        'pending' => 'bg-warning',
         'processing' => 'bg-info',
-        'completed' => 'bg-success',
-        'cancelled' => 'bg-error',
+        'success' => 'bg-success',
+        'error' => 'bg-error',
     ];
 
     $statusText = [
-        'pending' => 'Chờ xử lý',
-        'processing' => 'Đang xử lý',
-        'completed' => 'Hoàn thành',
-        'cancelled' => 'Đã hủy',
+        'processing' => 'Chờ xử lý',
+        'success' => 'Hoàn thành',
+        'error' => 'Đã hủy',
     ];
 
     $class = $statusClasses[$status] ?? 'secondary';

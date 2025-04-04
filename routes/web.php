@@ -60,6 +60,8 @@ Route::middleware('auth')->group(function () {
         Route::post('/withdraw-gold', [ProfileController::class, 'processWithdrawGold']);
         Route::get('/withdraw-gem', [ProfileController::class, 'withdrawGem'])->name('withdraw-gem');
         Route::post('/withdraw-gem', [ProfileController::class, 'processWithdrawGem']);
+        Route::get('/withdrawal-history/{id}', [ProfileController::class, 'getWithdrawalDetail'])
+            ->name('withdrawal.detail');
 
         Route::get('/service-history/{id}', [ProfileController::class, 'getServiceDetail'])
             ->name('service.detail');

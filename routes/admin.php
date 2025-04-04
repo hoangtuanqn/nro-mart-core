@@ -128,9 +128,11 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
         Route::post('/{withdrawal}/reject', [MoneyWithdrawalController::class, 'reject'])->name('reject');
 
         // Gold and Gem withdrawal routes
-        Route::get('/resources', [ResourceWithdrawalController::class, 'index'])->name('resources');
-        Route::post('/resources/{withdrawal}/approve', [ResourceWithdrawalController::class, 'approve'])->name('resources.approve');
-        Route::post('/resources/{withdrawal}/reject', [ResourceWithdrawalController::class, 'reject'])->name('resources.reject');
+        Route::prefix('resources')->name('resources.')->group(function () {
+            Route::get('/', [ResourceWithdrawalController::class, 'index'])->name('index');
+            Route::post('/{withdrawal}/approve', [ResourceWithdrawalController::class, 'approve'])->name('approve');
+            Route::post('/{withdrawal}/reject', [ResourceWithdrawalController::class, 'reject'])->name('reject');
+        });
     });
 
     Route::prefix('settings')->name('settings.')->group(function () {
