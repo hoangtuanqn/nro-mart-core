@@ -87,9 +87,9 @@
                         </table>
                     </div>
 
-                    <div class="pagination-area mt-3">
+                    {{-- <div class="pagination-area mt-3">
                         {{ $services->links() }}
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

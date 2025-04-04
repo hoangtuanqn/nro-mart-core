@@ -127,9 +127,9 @@
                         </table>
                     </div>
 
-                    <div class="pagination-area mt-3">
+                    {{-- <div class="pagination-area mt-3">
                         {{ $withdrawals->links() }}
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

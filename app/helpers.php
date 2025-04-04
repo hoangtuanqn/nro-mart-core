@@ -43,7 +43,27 @@ function display_status_service($status)
 
     return "<span class=\"status-badge {$class}\">{$text}</span>";
 }
+function display_status_admin($status)
+{
+    $statusClasses = [
+        'pending' => 'bg-warning',
+        'processing' => 'bg-info',
+        'completed' => 'bg-success',
+        'cancelled' => 'bg-error',
+    ];
 
+    $statusText = [
+        'pending' => 'Chờ xử lý',
+        'processing' => 'Đang xử lý',
+        'completed' => 'Hoàn thành',
+        'cancelled' => 'Đã hủy',
+    ];
+
+    $class = $statusClasses[$status] ?? 'secondary';
+    $text = $statusText[$status] ?? 'Không xác định';
+
+    return "<span class=\"badges {$class}\">{$text}</span>";
+}
 function display_hanh_tinh($planet)
 {
     switch ($planet) {

@@ -66,13 +66,14 @@
                                         <td>{{ $withdrawal->user_note ?? 'Không có' }}</td>
                                         <td>{{ $withdrawal->admin_note ?? 'Chưa có' }}</td>
                                         <td>
-                                            @if ($withdrawal->status === 'processing')
+                                            {!! display_status_admin($withdrawal->status) !!}
+                                            {{-- @if ($withdrawal->status === 'processing')
                                                 <span class="badges bg-warning">Đang xử lý</span>
                                             @elseif ($withdrawal->status === 'completed')
                                                 <span class="badges bg-success">Đã hoàn thành</span>
                                             @else
                                                 <span class="badges bg-danger">Đã hủy</span>
-                                            @endif
+                                            @endif --}}
                                         </td>
                                         <td>{{ $withdrawal->created_at->format('d/m/Y H:i:s') }}</td>
                                         <td>
@@ -171,9 +172,9 @@
                         </table>
                     </div>
 
-                    <div class="pagination-area mt-3">
+                    {{-- <div class="pagination-area mt-3">
                         {{ $withdrawals->links() }}
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>

@@ -94,9 +94,9 @@
                         </table>
                     </div>
 
-                    <div class="pagination-area mt-3">
+                    {{-- <div class="pagination-area mt-3">
                         {{ $usages->links() }}
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
