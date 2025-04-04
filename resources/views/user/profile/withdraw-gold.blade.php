@@ -41,9 +41,9 @@
                                         <label for="amount" class="form-label">
                                             <i class="fa-solid fa-coins me-2"></i> Số lượng vàng muốn rút
                                         </label>
-                                        <input type="number" class="form-control @error('amount') is-invalid @enderror"
-                                            id="amount" name="amount" value="{{ old('amount') }}" required
-                                            min="1000" max="1000000000">
+                                        <input type="number" value="0"
+                                            class="form-control @error('amount') is-invalid @enderror" id="amount"
+                                            name="amount" required min="1000" max="1000000000">
                                         <div class="form-text">Tối thiểu: 1,000 vàng - Tối đa: 1,000,000,000 vàng</div>
                                         @error('amount')
                                             <div class="invalid-feedback">
@@ -56,7 +56,7 @@
                                         <label for="character_name" class="form-label">
                                             <i class="fa-solid fa-user me-2"></i> Tên nhân vật
                                         </label>
-                                        <input type="text" value="0"
+                                        <input type="text"
                                             class="form-control @error('character_name') is-invalid @enderror"
                                             id="character_name" name="character_name" value="{{ old('character_name') }}"
                                             required>
@@ -294,7 +294,7 @@
 
                                 // Show the content
                                 document.getElementById('modal-content').style.display =
-                                'block';
+                                    'block';
                             } else {
                                 // Show error message
                                 document.getElementById('error-message').textContent = data
