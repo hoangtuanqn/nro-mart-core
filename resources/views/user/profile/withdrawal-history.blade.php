@@ -58,8 +58,13 @@
                                                             <td>{{ $withdrawal->user_note ?? 'Không có' }}</td>
                                                             <td>{{ $withdrawal->admin_note ?? 'Chưa có phản hồi' }}</td>
                                                             <td>
-                                                                {!! display_status($withdrawal->status) !!}
-
+                                                                @if ($withdrawal->status === 'processing')
+                                                                    <span class="badge bg-warning">Đang xử lý</span>
+                                                                @elseif ($withdrawal->status === 'success')
+                                                                    <span class="badge bg-success">Thành công</span>
+                                                                @else
+                                                                    <span class="badge bg-danger">Thất bại</span>
+                                                                @endif
                                                             </td>
                                                             <td>{{ $withdrawal->created_at->format('d/m/Y H:i:s') }}</td>
                                                         </tr>

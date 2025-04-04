@@ -43,7 +43,7 @@
                                         </label>
                                         <input type="number" class="form-control @error('amount') is-invalid @enderror"
                                             id="amount" name="amount" value="{{ old('amount') }}" required
-                                            min="100000" max="10000000" value="0">
+                                            min="100000" max="10000000">
                                         <div class="form-text">Tối thiểu: 100,000đ - Tối đa: 10,000,000đ</div>
                                         @error('amount')
                                             <div class="invalid-feedback">

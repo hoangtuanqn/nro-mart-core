@@ -63,7 +63,7 @@ class DashboardController extends Controller
             // Get recent transactions (last 15)
             $recentTransactions = MoneyTransaction::with('user')
                 ->orderBy('created_at', 'desc')
-                ->limit(15)
+                ->limit(10)
                 ->get();
 
             // Get transaction summary

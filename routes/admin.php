@@ -19,7 +19,7 @@ use App\Http\Controllers\Admin\RandomCategoryAccountController;
 use App\Http\Controllers\Admin\DiscountCodeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\HistoryController;
-use App\Http\Controllers\Admin\WithdrawalController;
+use App\Http\Controllers\Admin\MoneyWithdrawalController;
 
 Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(function () {
     Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('index');
@@ -121,9 +121,9 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
 
     // Withdrawal section
     Route::prefix('withdrawals')->name('withdrawals.')->group(function () {
-        Route::get('/', [WithdrawalController::class, 'index'])->name('index');
-        Route::post('/{withdrawal}/approve', [WithdrawalController::class, 'approve'])->name('approve');
-        Route::post('/{withdrawal}/reject', [WithdrawalController::class, 'reject'])->name('reject');
+        Route::get('/', [MoneyWithdrawalController::class, 'index'])->name('index');
+        Route::post('/{withdrawal}/approve', [MoneyWithdrawalController::class, 'approve'])->name('approve');
+        Route::post('/{withdrawal}/reject', [MoneyWithdrawalController::class, 'reject'])->name('reject');
     });
 
     Route::prefix('settings')->name('settings.')->group(function () {

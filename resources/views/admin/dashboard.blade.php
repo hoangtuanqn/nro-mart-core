@@ -308,9 +308,9 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($recentTransactions as $transaction)
+                                    @foreach ($recentTransactions as $key => $transaction)
                                         <tr>
-                                            <td>{{ $transaction->id }}</td>
+                                            <td>{{ $key + 1 }}</td>
                                             <td class="productimgname">
                                                 {{-- <a class="product-img">
                                                     <img src="{{ asset('assets/img/customer/profile.jpg') }}"
