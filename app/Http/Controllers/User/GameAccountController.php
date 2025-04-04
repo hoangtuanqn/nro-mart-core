@@ -49,7 +49,7 @@ class GameAccountController extends Controller
             // Check for discount code if provided
             if ($request->filled('discount_code')) {
                 $discountCode = DiscountCode::where('code', $request->discount_code)
-                    ->where('status', 'active')
+                    ->where('is_active', '1')
                     ->first();
 
                 if ($discountCode) {

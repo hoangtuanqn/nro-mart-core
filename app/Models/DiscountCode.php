@@ -27,7 +27,7 @@ class DiscountCode extends Model
         'discount_value',
         'max_discount_value',
         'min_purchase_amount',
-        'status',
+        'is_active',
         'usage_limit',
         'usage_count',
         'per_user_limit',
@@ -51,6 +51,7 @@ class DiscountCode extends Model
         'discount_value' => 'float',
         'max_discount_value' => 'float',
         'min_purchase_amount' => 'float',
+        'is_active' => 'string',
     ];
 
     /**
@@ -68,8 +69,8 @@ class DiscountCode extends Model
      */
     public function isValid(): bool
     {
-        return $this->status === 'active' &&
-            $this->usage_limit > 0 &&
+        return $this->is_active === '1' &&
+            ($this->usage_limit === null || $this->usage_count < $this->usage_limit) &&
             ($this->expire_date === null || $this->expire_date > now());
     }
 }

@@ -5,6 +5,32 @@
 @section('content')
     <x-hero-header title="{{ $service->name }}" description="{{ $service->description }}" />
 
+    <style>
+        .service__discount-feedback {
+            font-size: 14px;
+            padding: 8px 12px;
+            border-radius: var(--border-radius-sm);
+            margin-top: 5px;
+        }
+
+        .service__discount-feedback--loading {
+            background-color: rgba(0, 0, 0, 0.05);
+            color: #666;
+        }
+
+        .service__discount-feedback--success {
+            background-color: rgba(40, 167, 69, 0.1);
+            color: #28a745;
+            border-left: 3px solid #28a745;
+        }
+
+        .service__discount-feedback--error {
+            background-color: rgba(220, 53, 69, 0.1);
+            color: #dc3545;
+            border-left: 3px solid #dc3545;
+        }
+    </style>
+
     <div class="service">
         <div class="container">
             <!-- Thông báo lỗi và thành công -->
@@ -221,6 +247,18 @@
             const serverSelect = document.getElementById('server');
             const packageSelect = document.getElementById('package_id');
             const amountInput = document.getElementById('amount');
+            const giftcodeInput = document.getElementById('giftcode');
+
+            // Add UI elements for discount feedback
+            const amountContainer = amountInput.closest('.service__form-group');
+            const discountFeedback = document.createElement('div');
+            discountFeedback.className = 'service__discount-feedback';
+            discountFeedback.style.display = 'none';
+            amountContainer.appendChild(discountFeedback);
+
+            // Track original price
+            let originalPrice = 0;
+            let discountedPrice = 0;
 
             // Server Buttons
             serverBtns.forEach(btn => {
@@ -257,13 +295,91 @@
                         });
 
                         // Update amount
-                        const price = selectedRow.dataset.price;
-                        amountInput.value = parseInt(price).toLocaleString('vi-VN') + ' VNĐ';
+                        originalPrice = parseInt(selectedRow.dataset.price);
+                        discountedPrice = originalPrice;
+                        amountInput.value = originalPrice.toLocaleString('vi-VN') + ' VNĐ';
+
+                        // If giftcode has a value, validate it again
+                        if (giftcodeInput.value) {
+                            validateGiftcode();
+                        } else {
+                            // Hide discount feedback
+                            discountFeedback.style.display = 'none';
+                        }
                     }
                 } else {
+                    originalPrice = 0;
+                    discountedPrice = 0;
                     amountInput.value = '0';
+                    discountFeedback.style.display = 'none';
                 }
             }
+
+            // Function to validate giftcode and update price
+            function validateGiftcode() {
+                const giftcode = giftcodeInput.value.trim();
+
+                if (!giftcode || !originalPrice || !packageSelect.value) {
+                    discountFeedback.style.display = 'none';
+                    return;
+                }
+
+                // Show loading state
+                discountFeedback.textContent = 'Đang kiểm tra mã giảm giá...';
+                discountFeedback.className = 'service__discount-feedback service__discount-feedback--loading';
+                discountFeedback.style.display = 'block';
+
+                // Call the validateCode endpoint
+                fetch('/api/discount-codes/validate', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute(
+                                'content')
+                        },
+                        body: JSON.stringify({
+                            code: giftcode,
+                            context: 'service',
+                            item_id: packageSelect.value
+                        })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            // Update UI with discount info
+                            discountFeedback.className =
+                                'service__discount-feedback service__discount-feedback--success';
+                            discountFeedback.innerHTML =
+                                `Mã giảm giá hợp lệ! Tiết kiệm: ${data.data.savings.toLocaleString('vi-VN')} VNĐ`;
+
+                            // Update amount
+                            discountedPrice = data.data.discounted_price;
+                            amountInput.value = discountedPrice.toLocaleString('vi-VN') + ' VNĐ';
+                        } else {
+                            // Show error
+                            discountFeedback.className =
+                                'service__discount-feedback service__discount-feedback--error';
+                            discountFeedback.textContent = data.message || 'Mã giảm giá không hợp lệ';
+
+                            // Reset to original price
+                            discountedPrice = originalPrice;
+                            amountInput.value = originalPrice.toLocaleString('vi-VN') + ' VNĐ';
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error validating discount code:', error);
+                        discountFeedback.className =
+                            'service__discount-feedback service__discount-feedback--error';
+                        discountFeedback.textContent = 'Đã xảy ra lỗi khi kiểm tra mã giảm giá';
+
+                        // Reset to original price
+                        discountedPrice = originalPrice;
+                        amountInput.value = originalPrice.toLocaleString('vi-VN') + ' VNĐ';
+                    });
+            }
+
+            // Handle giftcode input
+            giftcodeInput.addEventListener('blur', validateGiftcode);
 
             // Highlight selected service in price table
             packageSelect.addEventListener('change', updateSelectedPackage);

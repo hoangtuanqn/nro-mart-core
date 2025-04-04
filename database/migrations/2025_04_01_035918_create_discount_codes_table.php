@@ -26,12 +26,12 @@ return new class extends Migration {
             $table->decimal('discount_value', 10, 2)->default(0); // Giá trị giảm giá
             $table->decimal('max_discount_value', 10, 2)->nullable(); // Giá trị giảm giá tối đa
             $table->decimal('min_purchase_amount', 10, 2)->default(0); // Số tiền mua tối thiểu để áp dụng mã
-            $table->enum('status', ['active', 'inactive'])->default('active'); // Trạng thái của mã: hoạt động hoặc không hoạt động
+            $table->enum('is_active', ['1', '0'])->default('1'); // Trạng thái của mã: hoạt động hoặc không hoạt động
             $table->integer('usage_limit')->nullable(); // Giới hạn số lần sử dụng mã
             $table->integer('usage_count')->default(0); // Số lần đã sử dụng mã
             $table->integer('per_user_limit')->nullable(); // Giới hạn sử dụng mã cho mỗi người dùng
             $table->enum('applicable_to', ['account', 'random_account', 'service'])->nullable(); // Đối tượng áp dụng mã
-            $table->json('item_ids')->nullable(); // Danh sách ID sản phẩm áp dụng mã
+            $table->json('item_ids')->nullable(); // Danh sách ID các item có thể áp dụng mã giảm giá
             $table->timestamp('expire_date')->nullable(); // Ngày hết hạn của mã
             $table->text('description')->nullable(); // Mô tả về mã giảm giá
             $table->timestamps(); // Thời gian tạo và cập nhật

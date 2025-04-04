@@ -33,7 +33,8 @@
                                         id="discountType">
                                         <option value="percentage" {{ old('type') == 'percentage' ? 'selected' : '' }}>Phần
                                             trăm (%)</option>
-                                        <option value="fixed" {{ old('type') == 'fixed' ? 'selected' : '' }}>Số tiền cố
+                                        <option value="fixed_amount" {{ old('type') == 'fixed_amount' ? 'selected' : '' }}>
+                                            Số tiền cố
                                             định (VNĐ)</option>
                                     </select>
                                     @error('type')
@@ -51,7 +52,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-sm-6 col-12">
+                            <div class="col-lg-6 col-sm-6 col-12" id="maxDiscountGroup">
                                 <div class="form-group">
                                     <label>Giảm tối đa (0 = không giới hạn)</label>
                                     <input type="number" name="max_discount" value="{{ old('max_discount', 0) }}"
@@ -63,10 +64,50 @@
                             </div>
                             <div class="col-lg-6 col-sm-6 col-12">
                                 <div class="form-group">
-                                    <label>Lượt sử dụng <span class="text-danger">*</span></label>
-                                    <input type="number" name="usage_limit" value="{{ old('usage_limit', 1) }}"
+                                    <label>Số tiền mua tối thiểu</label>
+                                    <input type="number" name="min_purchase_amount"
+                                        value="{{ old('min_purchase_amount', 0) }}"
+                                        class="form-control @error('min_purchase_amount') is-invalid @enderror">
+                                    @error('min_purchase_amount')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label>Lượt sử dụng tối đa (để trống = không giới hạn)</label>
+                                    <input type="number" name="usage_limit" value="{{ old('usage_limit') }}"
                                         class="form-control @error('usage_limit') is-invalid @enderror">
                                     @error('usage_limit')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label>Giới hạn lượt dùng mỗi người (để trống = không giới hạn)</label>
+                                    <input type="number" name="per_user_limit" value="{{ old('per_user_limit') }}"
+                                        class="form-control @error('per_user_limit') is-invalid @enderror">
+                                    @error('per_user_limit')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label>Áp dụng cho</label>
+                                    <select name="applicable_to"
+                                        class="form-select @error('applicable_to') is-invalid @enderror">
+                                        <option value="">Tất cả</option>
+                                        <option value="account" {{ old('applicable_to') == 'account' ? 'selected' : '' }}>
+                                            Tài khoản</option>
+                                        <option value="random_account"
+                                            {{ old('applicable_to') == 'random_account' ? 'selected' : '' }}>Random tài
+                                            khoản</option>
+                                        <option value="service" {{ old('applicable_to') == 'service' ? 'selected' : '' }}>
+                                            Dịch vụ</option>
+                                    </select>
+                                    @error('applicable_to')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -121,7 +162,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             const discountType = document.getElementById('discountType');
             const valueInput = document.querySelector('input[name="value"]');
-            const maxDiscountGroup = document.querySelector('input[name="max_discount"]').closest('.form-group');
+            const maxDiscountGroup = document.getElementById('maxDiscountGroup');
 
             // Initial state
             updateValueLabel();

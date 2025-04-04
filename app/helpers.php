@@ -48,7 +48,7 @@ function display_status_admin($status)
     $statusClasses = [
         'processing' => 'bg-info',
         'success' => 'bg-success',
-        'error' => 'bg-error',
+        'error' => 'bg-danger',
     ];
 
     $statusText = [

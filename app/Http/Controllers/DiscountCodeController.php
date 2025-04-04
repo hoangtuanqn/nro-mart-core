@@ -35,14 +35,10 @@ class DiscountCodeController extends Controller
         $code = $request->input('code');
         $context = $request->input('context');
         $itemId = $request->input('item_id');
-        // return response()->json([
-        //     'code' => $code,
-        //     'context' => $context,
-        //     'itemId' => $itemId
-        // ]);
+
         // Find the discount code
         $discountCode = DiscountCode::where('code', $code)
-            ->where('status', 'active')
+            ->where('is_active', '1')
             ->first();
 
         if (!$discountCode) {
@@ -103,7 +99,7 @@ class DiscountCodeController extends Controller
 
         // Get the original price based on context and item_id
         $originalPrice = $this->getOriginalPrice($context, $itemId);
-        // return response()->json(['status' => $originalPrice]);
+
         if ($originalPrice === 0) {
             return response()->json([
                 'success' => false,
@@ -111,7 +107,14 @@ class DiscountCodeController extends Controller
             ]);
         }
 
-        // return response()->json(['status' => 1]);
+        // Check minimum purchase amount
+        if ($discountCode->min_purchase_amount > 0 && $originalPrice < $discountCode->min_purchase_amount) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Giá trị đơn hàng không đủ để áp dụng mã giảm giá này'
+            ]);
+        }
+
         // Calculate discount
         $discountedPrice = $this->calculateDiscountedPrice($originalPrice, $discountCode);
 
@@ -150,9 +153,9 @@ class DiscountCodeController extends Controller
                 return $randomAccount ? $randomAccount->price : 0;
 
             case 'service':
-                // Get price from services table
-                $service = DB::table('game_services')->where('id', $itemId)->first();
-                return $service ? $service->price : 0;
+                // Get price from service_packages table
+                $servicePackage = DB::table('service_packages')->where('id', $itemId)->first();
+                return $servicePackage ? $servicePackage->price : 0;
 
             default:
                 return 0;
@@ -175,7 +178,7 @@ class DiscountCodeController extends Controller
                 $discount = $discountCode->max_discount_value;
             }
             return $originalPrice - $discount;
-        } else { // fixed amount
+        } else { // fixed_amount
             return max(0, $originalPrice - $discountCode->discount_value);
         }
     }

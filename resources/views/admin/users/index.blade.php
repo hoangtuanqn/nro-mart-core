@@ -72,7 +72,7 @@
                                         <td>{{ $user->ip_address }}</td>
                                         <td>{{ $user->created_at->format('d/m/Y') }}</td>
                                         <td>
-                                            <a class="me-3" href="{{ route('admin.users.edit', $user->id) }}">
+                                            <a class="me-3" href="{{ route('admin.users.show', $user->id) }}">
                                                 <img src="{{ asset('assets/img/icons/edit.svg') }}" alt="img">
                                             </a>
                                             <a class="me-3 confirm-text" href="javascript:void(0);" data-bs-toggle="modal"

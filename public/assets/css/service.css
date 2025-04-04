@@ -485,6 +485,7 @@ select.service__form-control {
     .service__price-table th,
     .service__price-table td {
         padding: 12px 10px;
+        font-size: 1.4rem;
     }
     
     .service__price-col--id {

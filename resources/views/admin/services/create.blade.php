@@ -29,12 +29,17 @@
                                 <div class="form-group">
                                     <label>Loại dịch vụ <span class="text-danger">*</span></label>
                                     <select name="type" class="select @error('type') is-invalid @enderror">
-                                        <option value="gold" {{ old('type') == 'gold' ? 'selected' : '' }}>Bán vàng
-                                        </option>
-                                        <option value="gem" {{ old('type') == 'gem' ? 'selected' : '' }}>Bán ngọc
-                                        </option>
                                         <option value="leveling" {{ old('type') == 'leveling' ? 'selected' : '' }}>Cày thuê
                                         </option>
+                                        <option value="gold" {{ old('type') == 'gold' ? 'selected' : '' }} disabled>Bán
+                                            vàng (Chưa
+                                            phát triển)
+                                        </option>
+                                        <option value="gem" {{ old('type') == 'gem' ? 'selected' : '' }} disabled>Bán
+                                            ngọc (Chưa
+                                            phát triển)
+                                        </option>
+
                                     </select>
                                     @error('type')
                                         <div class="invalid-feedback">{{ $message }}</div>
