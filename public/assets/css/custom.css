@@ -33,3 +33,8 @@
         line-height: 1.8;
     }
 }
+@media (max-width: 480px) {
+    .card-body {
+        padding: 0;
+    }
+}

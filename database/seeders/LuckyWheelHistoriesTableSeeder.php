@@ -26,6 +26,8 @@ class LuckyWheelHistoriesTableSeeder extends Seeder
                 'reward_type' => 'gold',
                 'reward_amount' => 500,
                 'description' => 'Trúng 500 vàng',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'user_id' => 2, // Giả sử user_id = 2 tồn tại
@@ -35,6 +37,8 @@ class LuckyWheelHistoriesTableSeeder extends Seeder
                 'reward_type' => 'gem',
                 'reward_amount' => 50,
                 'description' => 'Trúng 50 ngọc',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
         ];
 

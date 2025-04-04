@@ -23,6 +23,8 @@ class WithdrawalHistoriesTableSeeder extends Seeder
                 'type' => 'gold',
                 'character_name' => 'Hero123',
                 'server' => 1,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'user_id' => 2, // Giả sử user_id = 2 tồn tại
@@ -30,6 +32,8 @@ class WithdrawalHistoriesTableSeeder extends Seeder
                 'type' => 'gem',
                 'character_name' => 'MageXYZ',
                 'server' => 2,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
         ];
 

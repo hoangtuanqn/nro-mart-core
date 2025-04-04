@@ -10,6 +10,21 @@
                     <h6>Tạo tài khoản ngân hàng mới</h6>
                 </div>
             </div>
+            <div class="card-body">
+                <div class="alert alert-notication-custom alert-dismissible fade show" role="alert">
+
+                    <strong>Hệ thống hiện tại đang API qua SePay.</strong> Một doanh nghiệp đang hợp tác với các ngân hàng
+                    lớn.
+                    <br>Hiện nay họ đang cho miễn phí 50 giao dịch mỗi tháng và được quyền sử dụng các tính năng của họ. Đặc
+                    biệt, nếu bạn muốn nhiều giao dịch hơn, vui lòng xem bảng giá chi tiết tại <a href="https://sepay.vn"
+                        target="_blank" class="a_link">sepay.vn</a>.
+                    <br />Nếu bạn muốn tích hợp qua website khác mà không phải
+                    SePay, hãy liên hệ với nhà cung cấp qua Zalo <a href="https://zalo.me/0812665001" class="a_link"
+                        target="_blank">0812665001</a> hoặc Fanpage <a href="https://www.facebook.com/tuanori.vn"
+                        class="a_link" target="_blank">TUAN ORI - Web Designer MMO</a> để nhận được sự hỗ trợ.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
 
             @if ($errors->any())
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">

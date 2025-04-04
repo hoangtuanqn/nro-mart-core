@@ -31,6 +31,8 @@ class RandomCategoryAccountsTableSeeder extends Seeder
                 'buyer_id' => null,
                 'note' => 'Tài khoản cấp 50.',
                 'thumbnail' => 'https://cdn3.upanh.info/upload/server-sw3/images/Valentine/Nick/Th%E1%BB%AD%20V%E1%BA%ADn%20May%20Ng%E1%BB%8Dc%20R%E1%BB%93ng%20Vip%203.jpg',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'random_category_id' => 1,
@@ -42,6 +44,8 @@ class RandomCategoryAccountsTableSeeder extends Seeder
                 'buyer_id' => 1, // Giả sử đã có user_id = 1
                 'note' => 'Tài khoản có skin hiếm.',
                 'thumbnail' => 'https://cdn3.upanh.info/upload/server-sw3/images/Valentine/Nick/Th%E1%BB%AD%20V%E1%BA%ADn%20May%20Ng%E1%BB%8Dc%20R%E1%BB%93ng%20Vip%203.jpg',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'random_category_id' => 1,
@@ -53,6 +57,8 @@ class RandomCategoryAccountsTableSeeder extends Seeder
                 'buyer_id' => null,
                 'note' => null,
                 'thumbnail' => null,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'random_category_id' => 1,
@@ -64,6 +70,8 @@ class RandomCategoryAccountsTableSeeder extends Seeder
                 'buyer_id' => null,
                 'note' => 'Tài khoản đặc biệt.',
                 'thumbnail' => 'https://cdn3.upanh.info/upload/server-sw3/images/Valentine/Nick/Th%E1%BB%AD%20V%E1%BA%ADn%20May%20Ng%E1%BB%8Dc%20R%E1%BB%93ng%20Vip%203.jpg',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'random_category_id' => 1,
@@ -75,6 +83,8 @@ class RandomCategoryAccountsTableSeeder extends Seeder
                 'buyer_id' => 2, // Giả sử đã có user_id = 2
                 'note' => null,
                 'thumbnail' => null,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'random_category_id' => 1,
@@ -86,6 +96,8 @@ class RandomCategoryAccountsTableSeeder extends Seeder
                 'buyer_id' => null,
                 'note' => 'Tài khoản VIP.',
                 'thumbnail' => 'https://cdn3.upanh.info/upload/server-sw3/images/Valentine/Nick/Th%E1%BB%AD%20V%E1%BA%ADn%20May%20Ng%E1%BB%8Dc%20R%E1%BB%93ng%20Vip%203.jpg',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'random_category_id' => 1,
@@ -97,6 +109,8 @@ class RandomCategoryAccountsTableSeeder extends Seeder
                 'buyer_id' => null,
                 'note' => null,
                 'thumbnail' => null,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'random_category_id' => 1,
@@ -108,6 +122,8 @@ class RandomCategoryAccountsTableSeeder extends Seeder
                 'buyer_id' => 3, // Giả sử đã có user_id = 3
                 'note' => 'Tài khoản đã qua sử dụng.',
                 'thumbnail' => 'https://cdn3.upanh.info/upload/server-sw3/images/Valentine/Nick/Th%E1%BB%AD%20V%E1%BA%ADn%20May%20Ng%E1%BB%8Dc%20R%E1%BB%93ng%20Vip%203.jpg',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'random_category_id' => 1,
@@ -119,6 +135,8 @@ class RandomCategoryAccountsTableSeeder extends Seeder
                 'buyer_id' => null,
                 'note' => null,
                 'thumbnail' => null,
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'random_category_id' => 1,
@@ -130,6 +148,8 @@ class RandomCategoryAccountsTableSeeder extends Seeder
                 'buyer_id' => null,
                 'note' => 'Tài khoản cao cấp nhất.',
                 'thumbnail' => 'https://cdn3.upanh.info/upload/server-sw3/images/Valentine/Nick/Th%E1%BB%AD%20V%E1%BA%ADn%20May%20Ng%E1%BB%8Dc%20R%E1%BB%93ng%20Vip%203.jpgg',
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
         ];
 

@@ -74,8 +74,7 @@
                             alt="img"><span>Ngân hàng</span><span class="menu-arrow"></span></a>
                     <ul>
                         <li><a href="{{ route('admin.bank-accounts.index') }}"
-                                class="{{ request()->routeIs('admin.bank-accounts.index') ? 'active' : '' }}">Danh
-                                sách
+                                class="{{ request()->routeIs('admin.bank-accounts.index') ? 'active' : '' }}">Danh sách
                                 tài khoản</a></li>
                         <li><a href="{{ route('admin.bank-accounts.create') }}"
                                 class="{{ request()->routeIs('admin.bank-accounts.create') ? 'active' : '' }}">Thêm tài

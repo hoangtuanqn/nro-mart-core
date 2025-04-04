@@ -37,6 +37,8 @@ class LuckyWheelsTableSeeder extends Seeder
                     ['type' => 'gold', 'content' => 'Trúng 250 triệu vàng', 'amount' => 250000000, 'probability' => 5],
                     ['type' => 'gold', 'content' => 'Trúng 500 triệu vàng', 'amount' => 500000000, 'probability' => 10],
                 ]),
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'name' => 'Vòng Quay Ngọc',
@@ -58,6 +60,8 @@ class LuckyWheelsTableSeeder extends Seeder
                     ['type' => 'gem', 'content' => 'Trúng 500 ngọc', 'amount' => 500, 'probability' => 5],
                     ['type' => 'gem', 'content' => 'Trúng 1000 ngọc', 'amount' => 1000, 'probability' => 5],
                 ]),
+                'created_at' => now(),
+                'updated_at' => now(),
             ]
         ]);
     }
