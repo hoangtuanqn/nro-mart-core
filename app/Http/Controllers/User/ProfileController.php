@@ -12,6 +12,7 @@ use App\Http\Controllers\Controller;
 
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\BankAccount;
+use App\Models\BankDeposit;
 use App\Models\GameAccount;
 use App\Models\MoneyTransaction;
 use App\Models\RandomCategoryAccount;
@@ -175,8 +176,7 @@ class ProfileController extends Controller
     public function depositAtm(Request $request)
     {
         $title = 'Nạp tiền ATM';
-        $transactions = MoneyTransaction::where('user_id', Auth::id())
-            ->where('type', 'atm')
+        $transactions = BankDeposit::where('user_id', Auth::id())
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
