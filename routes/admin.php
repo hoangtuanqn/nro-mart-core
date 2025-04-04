@@ -20,12 +20,14 @@ use App\Http\Controllers\Admin\DiscountCodeController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\HistoryController;
 use App\Http\Controllers\Admin\MoneyWithdrawalController;
+use App\Http\Controllers\Admin\ResourceWithdrawalController;
 
 Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(function () {
     Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('index');
     Route::prefix('users')->name('users.')->group(function () {
         Route::get('/', [UserController::class, 'index'])->name('index');
         Route::get('/edit/{id}', [UserController::class, 'edit'])->name('edit')->where('id', '[0-9]+');
+        Route::get('/edit/{id}', [UserController::class, 'edit'])->name('show')->where('id', '[0-9]+');
         Route::put('/update/{id}', [UserController::class, 'update'])->name('update')->where('id', '[0-9]+');
         Route::delete('/delete/{id}', [UserController::class, 'destroy'])->name('destroy')->where('id', '[0-9]+');
     });
@@ -124,6 +126,11 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
         Route::get('/', [MoneyWithdrawalController::class, 'index'])->name('index');
         Route::post('/{withdrawal}/approve', [MoneyWithdrawalController::class, 'approve'])->name('approve');
         Route::post('/{withdrawal}/reject', [MoneyWithdrawalController::class, 'reject'])->name('reject');
+
+        // Gold and Gem withdrawal routes
+        Route::get('/resources', [ResourceWithdrawalController::class, 'index'])->name('resources');
+        Route::post('/resources/{withdrawal}/approve', [ResourceWithdrawalController::class, 'approve'])->name('resources.approve');
+        Route::post('/resources/{withdrawal}/reject', [ResourceWithdrawalController::class, 'reject'])->name('resources.reject');
     });
 
     Route::prefix('settings')->name('settings.')->group(function () {

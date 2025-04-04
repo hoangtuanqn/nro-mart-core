@@ -39,7 +39,6 @@
                                     <th>Số dư trước</th>
                                     <th>Số dư sau</th>
                                     <th>Mô tả</th>
-                                    <th>ID tham chiếu</th>
                                     <th>Thời gian</th>
                                 </tr>
                             </thead>
@@ -53,17 +52,8 @@
                                             </a>
                                         </td>
                                         <td>
-                                            @if ($transaction->type === 'deposit')
-                                                <span class="badges bg-lightgreen">Nạp tiền</span>
-                                            @elseif ($transaction->type === 'withdraw')
-                                                <span class="badges bg-lightred">Rút tiền</span>
-                                            @elseif ($transaction->type === 'purchase')
-                                                <span class="badges bg-lightyellow">Mua hàng</span>
-                                            @elseif ($transaction->type === 'refund')
-                                                <span class="badges bg-lightblue">Hoàn tiền</span>
-                                            @else
-                                                <span class="badges">{{ $transaction->type }}</span>
-                                            @endif
+                                            {!! display_status_transactions_admin($transaction->type) !!}
+
                                         </td>
                                         <td>
                                             @if ($transaction->amount > 0)
@@ -76,7 +66,7 @@
                                         <td>{{ number_format($transaction->balance_before) }} đ</td>
                                         <td>{{ number_format($transaction->balance_after) }} đ</td>
                                         <td>{{ $transaction->description }}</td>
-                                        <td>{{ $transaction->reference_id ?? 'N/A' }}</td>
+
                                         <td>{{ $transaction->created_at->format('d/m/Y H:i:s') }}</td>
                                     </tr>
                                 @endforeach

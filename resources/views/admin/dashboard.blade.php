@@ -312,25 +312,13 @@
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
                                             <td class="productimgname">
-                                                {{-- <a class="product-img">
-                                                    <img src="{{ asset('assets/img/customer/profile.jpg') }}"
-                                                        alt="profile">
-                                                </a> --}}
+
                                                 <a
-                                                    href="javascript:void(0);">{{ $transaction->user->username ?? 'N/A' }}</a>
+                                                    href="{{ route('admin.users.show', ['id' => $transaction->user->id]) }}">{{ $transaction->user->username ?? 'N/A' }}</a>
                                             </td>
                                             <td>
-                                                @if ($transaction->type == 'deposit')
-                                                    <span class="badge bg-success">Nạp tiền</span>
-                                                @elseif($transaction->type == 'withdraw')
-                                                    <span class="badge bg-danger">Rút tiền</span>
-                                                @elseif($transaction->type == 'purchase')
-                                                    <span class="badge bg-info">Mua hàng</span>
-                                                @elseif($transaction->type == 'refund')
-                                                    <span class="badge bg-warning">Hoàn tiền</span>
-                                                @else
-                                                    <span class="badge bg-secondary">Khác</span>
-                                                @endif
+                                                {!! display_status_transactions_admin($transaction->type) !!}
+                                              
                                             </td>
                                             <td>{{ number_format($transaction->amount) }} VNĐ</td>
                                             <td>{{ number_format($transaction->balance_before) }} VNĐ</td>

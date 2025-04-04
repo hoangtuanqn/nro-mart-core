@@ -23,6 +23,8 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Hash;
 use App\Models\LuckyWheelHistory;
+use App\Models\WithdrawalHistory;
+use Illuminate\Support\Facades\DB;
 
 class ProfileController extends Controller
 {
@@ -244,6 +246,126 @@ class ProfileController extends Controller
                 'status' => 'error',
                 'message' => 'Không thể tải thông tin vòng quay may mắn'
             ], 500);
+        }
+    }
+
+    /**
+     * Show the gold withdrawal page.
+     */
+    public function withdrawGold()
+    {
+        $title = "Rút vàng";
+        $user = auth()->user();
+        $withdrawals = WithdrawalHistory::where('user_id', $user->id)
+            ->where('type', 'gold')
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
+        return view('user.profile.withdraw-gold', compact('title', 'withdrawals'));
+    }
+
+    /**
+     * Process a gold withdrawal request.
+     */
+    public function processWithdrawGold(Request $request)
+    {
+        $request->validate([
+            'amount' => 'required|integer|min:1000|max:1000000000',
+            'character_name' => 'required|string|max:50',
+            'server' => 'required|integer|min:1|max:13',
+            'user_note' => 'nullable|string|max:255',
+        ]);
+
+        $user = auth()->user();
+
+        if ($user->gold < $request->amount) {
+            return back()->with('error', 'Số vàng không đủ để thực hiện giao dịch.')->withInput();
+        }
+
+        try {
+            DB::beginTransaction();
+
+            // Tạo yêu cầu rút vàng
+            WithdrawalHistory::create([
+                'user_id' => $user->id,
+                'amount' => $request->amount,
+                'type' => 'gold',
+                'character_name' => $request->character_name,
+                'server' => $request->server,
+                'user_note' => $request->user_note,
+                'status' => 'processing',
+            ]);
+
+            // Trừ vàng từ tài khoản người dùng
+            $user->gold -= $request->amount;
+            $user->save();
+
+            DB::commit();
+
+            return back()->with('success', 'Yêu cầu rút vàng đã được gửi thành công.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with('error', 'Có lỗi xảy ra. Vui lòng thử lại sau.');
+        }
+    }
+
+    /**
+     * Show the gem withdrawal page.
+     */
+    public function withdrawGem()
+    {
+        $title = "Rút ngọc";
+        $user = auth()->user();
+        $withdrawals = WithdrawalHistory::where('user_id', $user->id)
+            ->where('type', 'gem')
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
+
+        return view('user.profile.withdraw-gem', compact('title', 'withdrawals'));
+    }
+
+    /**
+     * Process a gem withdrawal request.
+     */
+    public function processWithdrawGem(Request $request)
+    {
+        $request->validate([
+            'amount' => 'required|integer|min:10|max:10000',
+            'character_name' => 'required|string|max:50',
+            'server' => 'required|integer|min:1|max:13',
+            'user_note' => 'nullable|string|max:255',
+        ]);
+
+        $user = auth()->user();
+
+        if ($user->gem < $request->amount) {
+            return back()->with('error', 'Số ngọc không đủ để thực hiện giao dịch.')->withInput();
+        }
+
+        try {
+            DB::beginTransaction();
+
+            // Tạo yêu cầu rút ngọc
+            WithdrawalHistory::create([
+                'user_id' => $user->id,
+                'amount' => $request->amount,
+                'type' => 'gem',
+                'character_name' => $request->character_name,
+                'server' => $request->server,
+                'user_note' => $request->user_note,
+                'status' => 'processing',
+            ]);
+
+            // Trừ ngọc từ tài khoản người dùng
+            $user->gem -= $request->amount;
+            $user->save();
+
+            DB::commit();
+
+            return back()->with('success', 'Yêu cầu rút ngọc đã được gửi thành công.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return back()->with('error', 'Có lỗi xảy ra. Vui lòng thử lại sau.');
         }
     }
 }

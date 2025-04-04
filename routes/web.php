@@ -55,6 +55,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/deposit/atm', [ProfileController::class, 'depositAtm'])->name('deposit-atm');
         Route::post('/deposit/card', [CardDepositController::class, 'processCardDeposit']);
 
+        // Add routes for gold and gem withdrawal
+        Route::get('/withdraw-gold', [ProfileController::class, 'withdrawGold'])->name('withdraw-gold');
+        Route::post('/withdraw-gold', [ProfileController::class, 'processWithdrawGold']);
+        Route::get('/withdraw-gem', [ProfileController::class, 'withdrawGem'])->name('withdraw-gem');
+        Route::post('/withdraw-gem', [ProfileController::class, 'processWithdrawGem']);
+
         Route::get('/service-history/{id}', [ProfileController::class, 'getServiceDetail'])
             ->name('service.detail');
         Route::get('/wheels-history', [ProfileController::class, 'luckyWheelHistory'])->name('wheels-history');

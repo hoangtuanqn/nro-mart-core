@@ -145,6 +145,9 @@
                         <li><a href="{{ route('admin.withdrawals.index') }}"
                                 class="{{ request()->routeIs('admin.withdrawals.index') ? 'active' : '' }}">Lịch
                                 sử rút tiền</a></li>
+                        <li><a href="{{ route('admin.withdrawals.resources') }}"
+                                class="{{ request()->routeIs('admin.withdrawals.resources') ? 'active' : '' }}">Lịch
+                                sử rút vàng/ngọc</a></li>
                         <li><a href="{{ route('admin.history.deposits.card') }}"
                                 class="{{ request()->routeIs('admin.history.deposits.card') ? 'active' : '' }}">Lịch
                                 sử nạp thẻ cào</a></li>

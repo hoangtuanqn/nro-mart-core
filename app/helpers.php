@@ -182,3 +182,26 @@ function get_id_bank($prefix, $comment)
 
     return 0;
 }
+
+
+function display_status_transactions_admin($status)
+{
+    $statusClasses = [
+        'deposit' => 'bg-lightgreen',
+        'withdraw' => 'bg-lightred',
+        'purchase' => 'bg-lightyellow',
+        'refund' => 'bg-lightpurple',
+    ];
+
+    $statusText = [
+        'deposit' => 'Nạp tiền',
+        'withdraw' => 'Rút tiền',
+        'purchase' => 'Mua hàng',
+        'refund' => 'Hoàn tiền',
+    ];
+
+    $class = $statusClasses[$status] ?? 'bg-secondary';
+    $text = $statusText[$status] ?? 'Khác';
+
+    return "<span class=\"badges {$class}\">{$text}</span>";
+}

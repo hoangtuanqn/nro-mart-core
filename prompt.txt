@@ -2,7 +2,8 @@ Bạn hãy đọc toàn bộ dự án của tôi để hiểu rõ bối cảnh. 
 
 Tôi mong muốn bạn viết mã code tối ưu nhất có thể, đồng thời đảm bảo code rõ ràng và dễ hiểu. Khi xử lý từ 2 giao dịch cơ sở dữ liệu trở lên, hãy sử dụng transaction. Hãy dùng try-catch để xử lý lỗi một cách an toàn và chuyên nghiệp. Bạn cũng được phép chỉnh sửa các phần liên quan để đảm bảo code hoạt động đúng.
 
-Và bây giờ, tôi muốn bạn viết code để hiển thị giao diện người dùng cho category show all vòng quay này. 
+Và bây giờ, tôi muốn bạn viết code để hiển thị giao diện rút vàng, ngọc và chức năng bên controller cho nó. Giao diện đơn giản như file deposit-atm.blade.php không màu mè
+Table lưu dữ liệu là withdrawal_histories, và hãy thêm phần lịch sử rút vàng + ngọc bên trong admin luôn (nhớ gắn link vào phần sidebar)
 Giao diện cần được thiết kế sao cho phù hợp, tránh làm vỡ bố cục người dùng và hiển thị dữ liệu một cách trực quan.
 
 Hãy dựa trên phong cách code hiện tại của tôi trong dự án (đặc biệt là các file liên quan để có thể hiểu rõ hơn) để viết code nhất quán với cách tôi đã thực hiện.

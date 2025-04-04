@@ -22,6 +22,9 @@ return new class extends Migration {
             $table->enum('type', ['gold', 'gem']); // Kiểu giá trị - Loại tài nguyên rút (vàng hoặc ngọc)
             $table->string('character_name'); // Tên nhân vật game - Tên nhân vật trong game nhận tài nguyên
             $table->integer('server'); // Máy chủ - Số hoặc mã máy chủ mà tài nguyên được rút về (VD: 1, 2, 3...)
+            $table->string('user_note')->nullable(); // Ghi chú của người dùng - Nội dung ghi chú mà người dùng để lại khi yêu cầu rút
+            $table->string('admin_note')->nullable(); // Ghi chú của admin - Nội dung ghi chú mà admin để lại khi xử lý yêu cầu rút
+            $table->enum('status', ['success', 'error', 'processing'])->default('processing'); // Trạng thái rút
             $table->timestamps(); // Thời gian tạo và cập nhật - Tự động thêm created_at và updated_at
         });
     }

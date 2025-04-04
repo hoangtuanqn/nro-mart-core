@@ -85,12 +85,11 @@
 
                                 <div class="info-row">
                                     <div class="info-label">
-                                        <i class="fa-solid fa-gem me-2"></i> Vàng
+                                        <i class="fa-solid fa-coins me-2"></i> Vàng
                                     </div>
                                     <div class="info-value">
                                         {{ number_format($user->gold) }}
-                                        {{-- {{ route('profile.withdraw-gem') }} --}}
-                                        <a href="" class="change-password-link">
+                                        <a href="{{ route('profile.withdraw-gold') }}" class="change-password-link">
                                             <i class="fa-solid fa-coins me-1"></i> Rút vàng
                                         </a>
                                     </div>
@@ -102,9 +101,8 @@
                                     </div>
                                     <div class="info-value">
                                         {{ number_format($user->gem) }}
-                                        {{-- {{ route('profile.withdraw-gold') }} --}}
-                                        <a href="" class="change-password-link">
-                                            <i class="fa-solid fa-coins me-1"></i> Rút ngọc
+                                        <a href="{{ route('profile.withdraw-gem') }}" class="change-password-link">
+                                            <i class="fa-solid fa-gem me-1"></i> Rút ngọc
                                         </a>
                                     </div>
                                 </div>

@@ -38,6 +38,16 @@
                 <i class="fa-solid fa-money-bill-wave"></i> Rút tiền
             </a>
         </li>
+        <li class="sidebar-item {{ request()->routeIs('profile.withdraw-gold') ? 'active' : '' }}">
+            <a href="{{ route('profile.withdraw-gold') }}" class="sidebar-link">
+                <i class="fa-solid fa-coins"></i> Rút vàng
+            </a>
+        </li>
+        <li class="sidebar-item {{ request()->routeIs('profile.withdraw-gem') ? 'active' : '' }}">
+            <a href="{{ route('profile.withdraw-gem') }}" class="sidebar-link">
+                <i class="fa-solid fa-gem"></i> Rút ngọc
+            </a>
+        </li>
     </ul>
 
     <div class="sidebar-header mt-4">

@@ -117,22 +117,8 @@
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
                                         <td>
-                                            <span
-                                                class="badges {{ $transaction->type == 'deposit'
-                                                    ? 'bg-lightgreen'
-                                                    : ($transaction->type == 'withdraw'
-                                                        ? 'bg-lightred'
-                                                        : ($transaction->type == 'purchase'
-                                                            ? 'bg-lightyellow'
-                                                            : 'bg-lightblue')) }}">
-                                                {{ $transaction->type == 'deposit'
-                                                    ? 'Nạp tiền'
-                                                    : ($transaction->type == 'withdraw'
-                                                        ? 'Rút tiền'
-                                                        : ($transaction->type == 'purchase'
-                                                            ? 'Mua hàng'
-                                                            : 'Hoàn tiền')) }}
-                                            </span>
+                                            {!! display_status_transactions_admin($transaction->type) !!}
+
                                         </td>
                                         <td
                                             class="{{ $transaction->type == 'deposit' || $transaction->type == 'refund' ? 'text-success' : 'text-danger' }}">
