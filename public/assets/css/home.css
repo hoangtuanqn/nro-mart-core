@@ -425,7 +425,7 @@
 .hero-sidebar__user {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
 }
 
 .hero-sidebar__avatar {
@@ -437,12 +437,64 @@
 
 .hero-sidebar__name {
     font-size: 1.4rem;
-    font-weight: 500;
+    font-weight: 700;
     color: var(--text-color);
+    max-width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .hero-sidebar__amount {
     font-size: 1.5rem;
     font-weight: 700;
     color: var(--primary-color);
+}
+
+/* Badge Top 1-2-3 */
+.hero-sidebar__rank {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-weight: 700;
+    font-size: 1.4rem;
+    color: white;
+    background-color: #777;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid transparent;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+
+}
+
+.hero-sidebar__rank::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50%;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 50% 50% 0 0;
+}
+
+.hero-sidebar__rank--gold {
+    background: linear-gradient(135deg, #FFD700, #FFA500);
+    box-shadow: 0 2px 5px rgba(255, 215, 0, 0.5);
+    border-color: #FFD700;
+}
+
+.hero-sidebar__rank--silver {
+    background: linear-gradient(135deg, #E0E0E0, #A9A9A9);
+    box-shadow: 0 2px 5px rgba(192, 192, 192, 0.5);
+    border-color: #C0C0C0;
+}
+
+.hero-sidebar__rank--bronze {
+    background: linear-gradient(135deg, #CD7F32, #A0522D);
+    box-shadow: 0 2px 5px rgba(205, 127, 50, 0.5);
+    border-color: #CD7F32;
 }
