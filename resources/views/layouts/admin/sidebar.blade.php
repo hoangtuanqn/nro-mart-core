@@ -163,6 +163,9 @@
                         <li><a href="{{ route('admin.settings.general') }}"
                                 class="{{ request()->routeIs('admin.settings.general') ? 'active' : '' }}">Cài đặt
                                 chung</a></li>
+                        <li><a href="{{ route('admin.settings.social') }}"
+                                class="{{ request()->routeIs('admin.settings.social') ? 'active' : '' }}">Mạng xã hội
+                                & Thông báo</a></li>
                         <li><a href="{{ route('admin.settings.email') }}"
                                 class="{{ request()->routeIs('admin.settings.email') ? 'active' : '' }}">Cài đặt
                                 email</a></li>

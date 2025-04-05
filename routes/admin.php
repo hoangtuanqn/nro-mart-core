@@ -139,9 +139,14 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
         Route::get('/general', [ConfigController::class, 'general'])->name('general');
         Route::post('/general', [ConfigController::class, 'updateGeneral'])->name('general.update');
 
+        // Cài đặt mạng xã hội
+        Route::get('/social', [ConfigController::class, 'social'])->name('social');
+        Route::post('/social', [ConfigController::class, 'updateSocial'])->name('social.update');
+
         // Cài đặt email
         Route::get('/email', [ConfigController::class, 'email'])->name('email');
         Route::post('/email', [ConfigController::class, 'updateEmail'])->name('email.update');
+        Route::post('/email/test', [ConfigController::class, 'testEmail'])->name('email.test');
 
         // Cài đặt thanh toán
         Route::get('/payment', [ConfigController::class, 'payment'])->name('payment');
