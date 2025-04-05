@@ -90,7 +90,7 @@
                                             <a class="me-3" href="{{ route('admin.accounts.edit', $account->id) }}">
                                                 <img src="{{ asset('assets/img/icons/edit.svg') }}" alt="img">
                                             </a>
-                                            <a class="me-3 confirm-text" href="javascript:void(0);" data-bs-toggle="modal"
+                                            <a class="me-3 confirm-delete" href="javascript:void(0);" data-bs-toggle="modal"
                                                 data-bs-target="#deleteModal" data-id="{{ $account->id }}">
                                                 <img src="{{ asset('assets/img/icons/delete.svg') }}" alt="img">
                                             </a>
@@ -131,7 +131,7 @@
             let accountId;
 
             // Lưu ID tài khoản khi click nút xóa
-            $('.confirm-text').on('click', function() {
+            $('.confirm-delete').on('click', function() {
                 accountId = $(this).data('id');
             });
 

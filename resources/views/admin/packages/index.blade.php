@@ -84,7 +84,7 @@
                                             <a class="me-3" href="{{ route('admin.packages.edit', $package->id) }}">
                                                 <img src="{{ asset('assets/img/icons/edit.svg') }}" alt="img">
                                             </a>
-                                            <a class="me-3 confirm-text" href="javascript:void(0);" data-bs-toggle="modal"
+                                            <a class="me-3 confirm-delete" href="javascript:void(0);" data-bs-toggle="modal"
                                                 data-bs-target="#deleteModal" data-id="{{ $package->id }}">
                                                 <img src="{{ asset('assets/img/icons/delete.svg') }}" alt="img">
                                             </a>
@@ -127,7 +127,7 @@
             let currentServiceId = @json($serviceId ?? null);
 
             // Lưu ID gói dịch vụ khi click nút xóa
-            $('.confirm-text').on('click', function() {
+            $('.confirm-delete').on('click', function() {
                 packageId = $(this).data('id');
             });
 

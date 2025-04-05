@@ -10,6 +10,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Admin\NotificationController;
 use App\Mail\TestMail;
 use App\Models\Config;
 use Illuminate\Http\Request;
@@ -438,5 +439,16 @@ class ConfigController extends Controller
             return redirect()->back()
                 ->with('error', 'Không thể gửi email kiểm tra: ' . $e->getMessage());
         }
+    }
+
+    /**
+     * Hiển thị trang quản lý thông báo
+     */
+    public function notifications()
+    {
+        $title = 'Quản lý thông báo';
+
+        // Chuyển hướng đến controller NotificationController
+        return app(NotificationController::class)->index();
     }
 }

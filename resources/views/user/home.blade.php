@@ -227,7 +227,6 @@
         </div>
     </section>
 
-    {{-- @if (config('app.env') === 'production') --}}
     <!-- Welcome Modal HTML -->
     @if (config_get('welcome_modal', false))
         <div id="welcomeModal" class="welcome-modal-overlay" style="display: none;">
@@ -242,40 +241,18 @@
 
                     <p>Chào mừng bạn đến với <b>{{ config_get('site_name') }}</b>!</p>
                     <p>{{ config_get('site_description') }}</p>
-
                     <div class="welcome-modal__feature-list">
-                        <div class="welcome-modal__feature-item">
-                            <div class="welcome-modal__feature-icon">
-                                <i class="fas fa-user-circle"></i>
+                        @foreach ($notifications as $notification)
+                            <div class="welcome-modal__feature-item">
+                                <div class="welcome-modal__feature-icon">
+                                    <i class="fas {{ $notification->class_favicon }}"></i>
+                                </div>
+                                <div class="welcome-modal__feature-text">
+                                    {{ $notification->content }}
+                                </div>
                             </div>
-                            <div class="welcome-modal__feature-text">
-                                Tài khoản Ngọc Rồng chất lượng, đa dạng mức giá
-                            </div>
-                        </div>
-                        <div class="welcome-modal__feature-item">
-                            <div class="welcome-modal__feature-icon">
-                                <i class="fas fa-credit-card"></i>
-                            </div>
-                            <div class="welcome-modal__feature-text">
-                                Nạp thẻ tỷ lệ 1:1 (nhận 100% giá trị thẻ)
-                            </div>
-                        </div>
-                        <div class="welcome-modal__feature-item">
-                            <div class="welcome-modal__feature-icon">
-                                <i class="fas fa-money-bill-wave"></i>
-                            </div>
-                            <div class="welcome-modal__feature-text">
-                                Nạp ATM/Momo khuyến mãi 10%
-                            </div>
-                        </div>
-                        <div class="welcome-modal__feature-item">
-                            <div class="welcome-modal__feature-icon">
-                                <i class="fas fa-headset"></i>
-                            </div>
-                            <div class="welcome-modal__feature-text">
-                                Hỗ trợ 24/7, giải quyết mọi vấn đề nhanh chóng
-                            </div>
-                        </div>
+                        @endforeach
+
                     </div>
                 </div>
                 <div class="welcome-modal__footer">
@@ -286,7 +263,6 @@
             </div>
         </div>
     @endif
-    {{-- @endif --}}
 
 @endsection
 

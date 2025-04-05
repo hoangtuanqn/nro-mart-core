@@ -12,7 +12,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class AccountPurchase extends Model
+class PurchaseHistory extends Model
 {
     use HasFactory;
 
@@ -21,7 +21,7 @@ class AccountPurchase extends Model
      *
      * @var string
      */
-    protected $table = 'account_purchases';
+    protected $table = 'purchase_history';
 
     /**
      * The attributes that are mass assignable.
@@ -36,7 +36,7 @@ class AccountPurchase extends Model
     ];
 
     /**
-     * Get the user that owns the purchase.
+     * Get the user that purchased the account.
      */
     public function user()
     {
@@ -44,10 +44,10 @@ class AccountPurchase extends Model
     }
 
     /**
-     * Get the account that was purchased.
+     * Get the game account that was purchased.
      */
-    public function account()
+    public function gameAccount()
     {
-        return $this->belongsTo(GameAccount::class, 'game_account_id');
+        return $this->belongsTo(GameAccount::class);
     }
 }

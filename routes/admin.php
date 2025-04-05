@@ -155,6 +155,14 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
         // Cài đặt đăng nhập
         Route::get('/login', [ConfigController::class, 'login'])->name('login');
         Route::post('/login', [ConfigController::class, 'updateLogin'])->name('login.update');
+
+        // Quản lý thông báo
+        Route::get('/notifications', [ConfigController::class, 'notifications'])->name('notifications');
+        Route::get('/notifications/create', [App\Http\Controllers\Admin\NotificationController::class, 'create'])->name('notifications.create');
+        Route::post('/notifications', [App\Http\Controllers\Admin\NotificationController::class, 'store'])->name('notifications.store');
+        Route::get('/notifications/{notification}/edit', [App\Http\Controllers\Admin\NotificationController::class, 'edit'])->name('notifications.edit');
+        Route::put('/notifications/{notification}', [App\Http\Controllers\Admin\NotificationController::class, 'update'])->name('notifications.update');
+        Route::delete('/notifications/{notification}', [App\Http\Controllers\Admin\NotificationController::class, 'destroy'])->name('notifications.destroy');
     });
 
 });

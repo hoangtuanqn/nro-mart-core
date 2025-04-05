@@ -175,6 +175,9 @@
                         <li><a href="{{ route('admin.settings.login') }}"
                                 class="{{ request()->routeIs('admin.settings.login') ? 'active' : '' }}">Cài đặt
                                 đăng nhập</a></li>
+                        <li><a href="{{ route('admin.settings.notifications') }}"
+                                class="{{ request()->routeIs('admin.settings.notifications') ? 'active' : '' }}">Quản
+                                lý thông báo</a></li>
                     </ul>
                 </li>
 

@@ -18,6 +18,7 @@ use App\Models\ServiceHistory;
 use App\Models\RandomCategory;
 use App\Models\RandomCategoryAccount;
 use App\Models\MoneyTransaction;
+use App\Models\Notification;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 
@@ -80,13 +81,16 @@ class HomeController extends Controller
             $depositor->user = \App\Models\User::find($depositor->user_id);
         }
 
+        $notifications = Notification::all();
+
         return view('user.home', compact(
             'categories',
             'services',
             'randomCategories',
             'randomLuckWheel',
             'recentTransactions',
-            'topDepositors'
+            'topDepositors',
+            'notifications'
         ));
     }
 }
