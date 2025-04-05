@@ -41,7 +41,6 @@
     <script src="{{ asset('assets/js/menu.js') }}"></script>
     <script src="{{ asset('assets/js/alert-notice.js') }}"></script>
 
-
     <!-- Add before closing body tag -->
 </body>
 

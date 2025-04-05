@@ -1,9 +1,16 @@
 Bạn hãy đọc toàn bộ dự án của tôi để hiểu rõ bối cảnh. Đặc biệt, hãy xem kỹ các file trong thư mục migrations để nắm được cấu trúc cơ sở dữ liệu (tôi đã thêm ghi chú dễ hiểu bên cạnh mỗi phần). Ngoài ra, bạn cũng cần đọc dữ liệu trong thư mục seeders để hiểu cách tôi thiết lập dữ liệu demo.
 
 Tôi mong muốn bạn viết mã code tối ưu nhất có thể, đồng thời đảm bảo code rõ ràng và dễ hiểu. Khi xử lý từ 2 giao dịch cơ sở dữ liệu trở lên, hãy sử dụng transaction. Hãy dùng try-catch để xử lý lỗi một cách an toàn và chuyên nghiệp. Bạn cũng được phép chỉnh sửa các phần liên quan để đảm bảo code hoạt động đúng.
-
-Và bây giờ, tôi muốn bạn viết code để hiển thị giao diện rút vàng, ngọc và chức năng bên controller cho nó. Giao diện đơn giản như file deposit-atm.blade.php không màu mè
-Table lưu dữ liệu là withdrawal_histories, và hãy thêm phần lịch sử rút vàng + ngọc bên trong admin luôn (nhớ gắn link vào phần sidebar)
+Và bây giờ, tôi muốn bạn viết code hiển thị modal thông báo khi vào website sao cho phù hợp với phong cách website hiện đại (hãy đọc các file có đuôi .css để hiểu rõ)
 Giao diện cần được thiết kế sao cho phù hợp, tránh làm vỡ bố cục người dùng và hiển thị dữ liệu một cách trực quan.
+Hãy dựa trên phong cách code hiện tại của tôi trong dự án (đặc biệt là các file liên quan để có thể hiểu rõ hơn) để viết code nhất quán với cách tôi đã thực hiện.
 
+
+
+
+Bạn hãy đọc toàn bộ dự án của tôi để hiểu rõ bối cảnh. Đặc biệt là các file .css và .js (Vì nhu cầu của tôi làm front end)
+Tôi mong muốn bạn viết mã code tối ưu nhất có thể, đồng thời đảm bảo code rõ ràng và dễ hiểu.
+Lưu ý các tên class phải đặt theo quy chuẩn BEM, riêng thành phần nào có thể tái sử dụng được thì nên linh hoạt.
+Và bây giờ tôi muốn bạn code cho tôi modal hiển thị thông báo người người dùng vào website
+Giao diện cần được thiết kế sao cho phù hợp, tránh làm vỡ bố cục người dùng và hiển thị dữ liệu một cách trực quan.
 Hãy dựa trên phong cách code hiện tại của tôi trong dự án (đặc biệt là các file liên quan để có thể hiểu rõ hơn) để viết code nhất quán với cách tôi đã thực hiện.
