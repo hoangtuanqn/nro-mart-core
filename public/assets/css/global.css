@@ -917,6 +917,9 @@ body.no-scroll {
     .announcement__hotline {
         font-size: 1.4rem;
     }
+    .hotline_working_hours {
+        display: none;
+    }
 
     /* Make sure mobile menu toggle is visible and nav actions are hidden */
     .mobile-menu-toggle {

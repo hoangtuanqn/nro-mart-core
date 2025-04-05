@@ -14,7 +14,8 @@
             <a class="media__youtube" href="#"><i class="fa-brands fa-youtube"></i></a>
         </div>
         <div class="announcement__hotline">Hotline: <a href="tel:{{ config_get('phone') }}">{{ config_get('phone') }}</a>
-            ({{ config_get('working_hours') }})</div>
+            <span class="hotline_working_hours">({{ config_get('working_hours') }})</span>
+        </div>
     </div>
 </header>
 
