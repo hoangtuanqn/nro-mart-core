@@ -31,8 +31,9 @@ class ConfigController extends Controller
 
         // Lấy tất cả cấu hình chung
         $configs = [
-            'site_name' => config_get('site_name', 'Shop Game Ngọc Rồng'),
+            'site_name' => config_get('site_name', 'Shop Game Ngọc Rồng - THIẾT KẾ BỞI TUANORI.VN'),
             'site_description' => config_get('site_description', 'Mua bán tài khoản game Ngọc Rồng'),
+            'site_keywords' => config_get('site_keywords', 'Mua bán tài khoản game Ngọc Rồng'),
             'site_logo' => config_get('site_logo'),
             'site_logo_footer' => config_get('site_logo_footer'),
             'site_banner' => config_get('site_banner'),
@@ -53,6 +54,7 @@ class ConfigController extends Controller
         $request->validate([
             'site_name' => 'required|string|max:255',
             'site_description' => 'nullable|string',
+            'site_keywords' => 'nullable|string',
             'address' => 'nullable|string|max:255',
             'phone' => 'nullable|string|max:20',
             'email' => 'nullable|email|max:255',
@@ -99,6 +101,7 @@ class ConfigController extends Controller
 
             // Cập nhật các cài đặt khác
             config_set('site_name', $request->site_name);
+            config_set('site_keywords', $request->site_keywords);
             config_set('site_description', $request->site_description);
             config_set('address', $request->address);
             config_set('phone', $request->phone);

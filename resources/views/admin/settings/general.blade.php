@@ -35,6 +35,18 @@
                                     @enderror
                                 </div>
                             </div>
+                            <div class="col-lg-6 col-sm-6 col-12">
+                                <div class="form-group">
+                                    <label>Từ khóa website</label>
+                                    <input type="text" name="site_keywords"
+                                        class="form-control @error('site_keywords') is-invalid @enderror"
+                                        value="{{ old('site_keywords', $configs['site_keywords']) }}"
+                                        placeholder="Nhập từ khóa website: shopacc, lienquan, accgame, ...">
+                                    @error('site_keywords')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label>Mô tả trang web</label>
@@ -132,8 +144,8 @@
                                     <div class="form-group mt-3">
                                         <label>Favicon hiện tại:</label>
                                         <div>
-                                            <img id="preview-favicon" src="{{ $configs['site_favicon'] }}" alt="Favicon"
-                                                class="img-fluid mt-2" style="max-height: 50px;">
+                                            <img id="preview-favicon" src="{{ $configs['site_favicon'] }}"
+                                                alt="Favicon" class="img-fluid mt-2" style="max-height: 50px;">
                                         </div>
                                     </div>
                                 @else

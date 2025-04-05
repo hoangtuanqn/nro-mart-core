@@ -30,6 +30,7 @@ class ConfigSeeder extends Seeder
             // General settings
             'site_name' => $siteName,
             'site_description' => $siteDescription,
+            'site_keywords' => 'shop game, ngọc rồng, tài khoản game, game online, mua bán tài khoản game',
             'site_logo' => 'https://imgur.com/hIFVXRo.png',
             'site_logo_footer' => 'https://imgur.com/YAwjTGo.png',
             'site_banner' => 'https://123nick.vn/upload-usr/images/8jElw7OK4i_1629517832.gif',
@@ -46,7 +47,7 @@ class ConfigSeeder extends Seeder
             'telegram' => 'https://t.me/example',
             'tiktok' => 'https://tiktok.com/@example',
             'working_hours' => '8:00 - 22:00',
-            'home_notification' => 'Chào mừng bạn đến với Shop Ngọc Rồng Online. Nạp ATM/Momo khuyến mãi 10%, Nạp thẻ cào nhận 100% giá trị thẻ nạp !!!',
+            'home_notification' => 'Chào mừng bạn đến với Shop Bán Acc Game của chúng tôi. Nạp ATM/Momo khuyến mãi 10%, Nạp thẻ cào nhận 100% giá trị thẻ nạp !!',
             'welcome_modal' => true, // Enable welcome modal by default
 
             // Email settings

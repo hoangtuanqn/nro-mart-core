@@ -10,8 +10,34 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>@yield('title', 'Website được thiết kế bởi TUANORI.VN') - {{ config_get('site_name') }}</title>
-    <link rel="stylesheet" href="{{ asset('assets/fonts/stylesheet.css') }}" />
 
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="{{ config_get('site_description') }}" />
+    <meta name="keywords" content="{{ config_get('site_keywords') }}" />
+    <meta name="author" content="{{ config_get('site_name') }}" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ url()->current() }}" />
+    <meta property="og:title" content="@yield('title', 'Website được thiết kế bởi TUANORI.VN') - {{ config_get('site_name') }}" />
+    <meta property="og:description" content="{{ config_get('site_description') }}" />
+    <meta property="og:image" content="{{ config_get('site_logo') }}" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="{{ url()->current() }}" />
+    <meta property="twitter:title" content="@yield('title', 'Website được thiết kế bởi TUANORI.VN') - {{ config_get('site_name') }}" />
+    <meta property="twitter:description" content="{{ config_get('site_description') }}" />
+    <meta property="twitter:image" content="{{ config_get('site_logo') }}" />
+
+    <!-- Favicon -->
+    <link rel="icon" href="{{ config_get('site_favicon') }}" type="image/png" />
+    <link rel="shortcut icon" href="{{ config_get('site_favicon') }}" type="image/png" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{{ url()->current() }}" />
+
+    <link rel="stylesheet" href="{{ asset('assets/fonts/stylesheet.css') }}" />
 
     <!-- CSS -->
     {{-- @vite(['resources/assets/css/app.css']) --}}
@@ -53,15 +79,5 @@
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-    <!-- Embed font -->
-    {{-- <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet" /> --}}
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Signika:wght@300..700&display=swap" rel="stylesheet">
     @stack('css')
 </head>
