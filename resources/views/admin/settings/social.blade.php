@@ -125,6 +125,19 @@
                                 </div>
                             </div>
                             <div class="col-lg-12">
+                                <div class="form-group">
+                                    <div class="custom-control custom-switch">
+                                        <input type="checkbox" class="custom-control-input" id="welcome_modal"
+                                            name="welcome_modal" value="1"
+                                            {{ $configs['welcome_modal'] ? 'checked' : '' }}>
+                                        <label class="custom-control-label" for="welcome_modal">Hiển thị thông báo khi vào
+                                            website</label>
+                                    </div>
+                                    <small class="form-text text-muted">Khi được bật, cửa sổ thông báo chào mừng sẽ hiển thị
+                                        khi người dùng truy cập trang chủ</small>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
                                 <button type="submit" class="btn btn-submit me-2">Lưu thay đổi</button>
                                 <a href="{{ route('admin.index') }}" class="btn btn-cancel">Hủy bỏ</a>
                             </div>

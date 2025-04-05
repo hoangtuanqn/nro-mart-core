@@ -67,29 +67,6 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label>Facebook</label>
-                                    <input type="text" name="facebook"
-                                        class="form-control @error('facebook') is-invalid @enderror"
-                                        value="{{ old('facebook', $configs['facebook']) }}"
-                                        placeholder="Nhập link Facebook">
-                                    @error('facebook')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label>Zalo</label>
-                                    <input type="text" name="zalo"
-                                        class="form-control @error('zalo') is-invalid @enderror"
-                                        value="{{ old('zalo', $configs['zalo']) }}" placeholder="Nhập số điện thoại Zalo">
-                                    @error('zalo')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                            </div>
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label>Địa chỉ</label>
@@ -155,8 +132,8 @@
                                     <div class="form-group mt-3">
                                         <label>Favicon hiện tại:</label>
                                         <div>
-                                            <img id="preview-favicon" src="{{ $configs['site_favicon'] }}"
-                                                alt="Favicon" class="img-fluid mt-2" style="max-height: 50px;">
+                                            <img id="preview-favicon" src="{{ $configs['site_favicon'] }}" alt="Favicon"
+                                                class="img-fluid mt-2" style="max-height: 50px;">
                                         </div>
                                     </div>
                                 @else

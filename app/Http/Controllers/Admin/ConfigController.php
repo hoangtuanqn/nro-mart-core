@@ -135,6 +135,7 @@ class ConfigController extends Controller
             'tiktok' => config_get('tiktok', ''),
             'working_hours' => config_get('working_hours', '8:00 - 22:00'),
             'home_notification' => config_get('home_notification', ''),
+            'welcome_modal' => config_get('welcome_modal', true),
         ];
 
         return view('admin.settings.social', compact('title', 'configs'));
@@ -154,6 +155,7 @@ class ConfigController extends Controller
             'tiktok' => 'nullable|string|max:255',
             'working_hours' => 'nullable|string|max:100',
             'home_notification' => 'nullable|string',
+            'welcome_modal' => 'nullable|boolean',
         ]);
 
         try {
@@ -168,6 +170,7 @@ class ConfigController extends Controller
             config_set('tiktok', $request->tiktok);
             config_set('working_hours', $request->working_hours);
             config_set('home_notification', $request->home_notification);
+            config_set('welcome_modal', $request->has('welcome_modal') ? true : false);
 
             // Xóa cache để cập nhật cài đặt
             config_clear_cache();

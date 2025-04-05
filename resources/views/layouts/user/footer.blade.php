@@ -19,9 +19,22 @@
                     {{ config_get('site_description') }}
                 </p>
                 <div class="footer__social">
-                    <a href="#" class="social__link"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="social__link"><i class="fab fa-youtube"></i></a>
-                    <a href="#" class="social__link"><i class="fab fa-telegram"></i></a>
+                    <a href="{{ config_get('facebook', '#') }}" class="social__link" target="_blank"><i
+                            class="fab fa-facebook-f"></i></a>
+                    <a href="{{ config_get('youtube', '#') }}" class="social__link" target="_blank"><i
+                            class="fab fa-youtube"></i></a>
+                    @if (config_get('telegram'))
+                        <a href="{{ config_get('telegram', '#') }}" class="social__link" target="_blank"><i
+                                class="fab fa-telegram"></i></a>
+                    @endif
+                    @if (config_get('discord'))
+                        <a href="{{ config_get('discord') }}" class="social__link" target="_blank"><i
+                                class="fab fa-discord"></i></a>
+                    @endif
+                    @if (config_get('tiktok'))
+                        <a href="{{ config_get('tiktok') }}" class="social__link" target="_blank"><i
+                                class="fab fa-tiktok"></i></a>
+                    @endif
                 </div>
             </div>
             <div class="footer__column">
@@ -54,6 +67,13 @@
                         <i class="fas fa-envelope"></i>
                         <span>Email: {{ config_get('email') }}</span>
                     </li>
+                    @if (config_get('zalo'))
+                        <li class="contact__item">
+                            <i class="fas fa-comment-dots"></i>
+                            <span>Zalo: <a href="https://zalo.me/{{ config_get('zalo') }}"
+                                    target="_blank">{{ preg_replace('/(\d{4})(\d{3})(\d{3})/', '$1.$2.$3', config_get('zalo')) }}</a></span>
+                        </li>
+                    @endif
                     <li class="contact__item">
                         <i class="fas fa-map-marker-alt"></i>
                         <span>Địa chỉ: {{ config_get('address') }}</span>

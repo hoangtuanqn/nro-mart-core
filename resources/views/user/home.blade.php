@@ -229,61 +229,63 @@
 
     {{-- @if (config('app.env') === 'production') --}}
     <!-- Welcome Modal HTML -->
-    <div id="welcomeModal" class="welcome-modal-overlay" style="display: none;">
-        <div class="welcome-modal">
-            <div class="welcome-modal__header">
-                <h3 class="welcome-modal__title">Thông báo</h3>
-                <button class="welcome-modal__close">&times;</button>
-            </div>
-            <div class="welcome-modal__body">
-                <img src="{{ config_get('site_logo') }}" alt="{{ config_get('site_description') }}"
-                    class="welcome-modal__icon">
+    @if (config_get('welcome_modal', false))
+        <div id="welcomeModal" class="welcome-modal-overlay" style="display: none;">
+            <div class="welcome-modal">
+                <div class="welcome-modal__header">
+                    <h3 class="welcome-modal__title">Thông báo</h3>
+                    <button class="welcome-modal__close">&times;</button>
+                </div>
+                <div class="welcome-modal__body">
+                    <img src="{{ config_get('site_logo') }}" alt="{{ config_get('site_description') }}"
+                        class="welcome-modal__icon">
 
-                <p>Chào mừng bạn đến với <b>{{ config_get('site_name') }}</b>!</p>
-                <p>{{ config_get('site_description') }}</p>
+                    <p>Chào mừng bạn đến với <b>{{ config_get('site_name') }}</b>!</p>
+                    <p>{{ config_get('site_description') }}</p>
 
-                <div class="welcome-modal__feature-list">
-                    <div class="welcome-modal__feature-item">
-                        <div class="welcome-modal__feature-icon">
-                            <i class="fas fa-user-circle"></i>
+                    <div class="welcome-modal__feature-list">
+                        <div class="welcome-modal__feature-item">
+                            <div class="welcome-modal__feature-icon">
+                                <i class="fas fa-user-circle"></i>
+                            </div>
+                            <div class="welcome-modal__feature-text">
+                                Tài khoản Ngọc Rồng chất lượng, đa dạng mức giá
+                            </div>
                         </div>
-                        <div class="welcome-modal__feature-text">
-                            Tài khoản Ngọc Rồng chất lượng, đa dạng mức giá
+                        <div class="welcome-modal__feature-item">
+                            <div class="welcome-modal__feature-icon">
+                                <i class="fas fa-credit-card"></i>
+                            </div>
+                            <div class="welcome-modal__feature-text">
+                                Nạp thẻ tỷ lệ 1:1 (nhận 100% giá trị thẻ)
+                            </div>
                         </div>
-                    </div>
-                    <div class="welcome-modal__feature-item">
-                        <div class="welcome-modal__feature-icon">
-                            <i class="fas fa-credit-card"></i>
+                        <div class="welcome-modal__feature-item">
+                            <div class="welcome-modal__feature-icon">
+                                <i class="fas fa-money-bill-wave"></i>
+                            </div>
+                            <div class="welcome-modal__feature-text">
+                                Nạp ATM/Momo khuyến mãi 10%
+                            </div>
                         </div>
-                        <div class="welcome-modal__feature-text">
-                            Nạp thẻ tỷ lệ 1:1 (nhận 100% giá trị thẻ)
-                        </div>
-                    </div>
-                    <div class="welcome-modal__feature-item">
-                        <div class="welcome-modal__feature-icon">
-                            <i class="fas fa-money-bill-wave"></i>
-                        </div>
-                        <div class="welcome-modal__feature-text">
-                            Nạp ATM/Momo khuyến mãi 10%
-                        </div>
-                    </div>
-                    <div class="welcome-modal__feature-item">
-                        <div class="welcome-modal__feature-icon">
-                            <i class="fas fa-headset"></i>
-                        </div>
-                        <div class="welcome-modal__feature-text">
-                            Hỗ trợ 24/7, giải quyết mọi vấn đề nhanh chóng
+                        <div class="welcome-modal__feature-item">
+                            <div class="welcome-modal__feature-icon">
+                                <i class="fas fa-headset"></i>
+                            </div>
+                            <div class="welcome-modal__feature-text">
+                                Hỗ trợ 24/7, giải quyết mọi vấn đề nhanh chóng
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="welcome-modal__footer">
-                <button class="welcome-modal__btn" id="welcomeModalBtn">
-                    <i class="fas fa-rocket"></i> Bắt đầu ngay
-                </button>
+                <div class="welcome-modal__footer">
+                    <button class="welcome-modal__btn" id="welcomeModalBtn">
+                        <i class="fas fa-rocket"></i> Bắt đầu ngay
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
+    @endif
     {{-- @endif --}}
 
 @endsection
@@ -361,45 +363,48 @@
 
             // Welcome Modal functionality
             const welcomeModal = document.getElementById('welcomeModal');
-            const welcomeModalClose = document.querySelector('.welcome-modal__close');
-            const welcomeModalBtn = document.getElementById('welcomeModalBtn');
 
-            // Luôn hiển thị modal khi trang được tải
-            setTimeout(() => {
-                welcomeModal.style.display = 'flex';
-                document.body.style.overflow = 'hidden';
-            }, 500);
+            if (welcomeModal) {
+                const welcomeModalClose = document.querySelector('.welcome-modal__close');
+                const welcomeModalBtn = document.getElementById('welcomeModalBtn');
 
-            // Close modal event handlers
-            if (welcomeModalClose) {
-                welcomeModalClose.addEventListener('click', closeWelcomeModal);
-            }
-
-            if (welcomeModalBtn) {
-                welcomeModalBtn.addEventListener('click', closeWelcomeModal);
-            }
-
-            // Close when clicking outside modal
-            welcomeModal.addEventListener('click', function(e) {
-                if (e.target === welcomeModal) {
-                    closeWelcomeModal();
-                }
-            });
-
-            // Close with ESC key
-            document.addEventListener('keydown', function(e) {
-                if (e.key === 'Escape' && welcomeModal.style.display === 'flex') {
-                    closeWelcomeModal();
-                }
-            });
-
-            function closeWelcomeModal() {
-                welcomeModal.style.opacity = '0';
+                // Luôn hiển thị modal khi trang được tải
                 setTimeout(() => {
-                    welcomeModal.style.display = 'none';
-                    welcomeModal.style.opacity = '1';
-                    document.body.style.overflow = '';
-                }, 300);
+                    welcomeModal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                }, 500);
+
+                // Close modal event handlers
+                if (welcomeModalClose) {
+                    welcomeModalClose.addEventListener('click', closeWelcomeModal);
+                }
+
+                if (welcomeModalBtn) {
+                    welcomeModalBtn.addEventListener('click', closeWelcomeModal);
+                }
+
+                // Close when clicking outside modal
+                welcomeModal.addEventListener('click', function(e) {
+                    if (e.target === welcomeModal) {
+                        closeWelcomeModal();
+                    }
+                });
+
+                // Close with ESC key
+                document.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape' && welcomeModal.style.display === 'flex') {
+                        closeWelcomeModal();
+                    }
+                });
+
+                function closeWelcomeModal() {
+                    welcomeModal.style.opacity = '0';
+                    setTimeout(() => {
+                        welcomeModal.style.display = 'none';
+                        welcomeModal.style.opacity = '1';
+                        document.body.style.overflow = '';
+                    }, 300);
+                }
             }
         });
     </script>

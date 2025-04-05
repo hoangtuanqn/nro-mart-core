@@ -37,11 +37,17 @@ class ConfigSeeder extends Seeder
             'address' => 'TPHCM, Việt Nam', // Cập nhật địa chỉ mới
             'phone' => $contactPhone,
             'email' => $contactEmail,
+
+            // Social media settings
             'facebook' => 'https://facebook.com/example',
             'zalo' => $contactPhone, // Reusing phone number for Zalo
-            'youtube' => 'https://www.youtube.com/@htuanqn', // Thêm link YouTube
-            'working_hours' => '8:00 - 22:00', // Thêm giờ làm việc
-            'home_notification' => 'Chào mừng bạn đến với Shop Ngọc Rồng Online. Nạp ATM/Momo khuyến mãi 10%, Nạp thẻ cào nhận 100% giá trị thẻ nạp !!!', // Thêm thông báo nhanh
+            'youtube' => 'https://www.youtube.com/@htuanqn',
+            'discord' => 'https://discord.gg/example',
+            'telegram' => 'https://t.me/example',
+            'tiktok' => 'https://tiktok.com/@example',
+            'working_hours' => '8:00 - 22:00',
+            'home_notification' => 'Chào mừng bạn đến với Shop Ngọc Rồng Online. Nạp ATM/Momo khuyến mãi 10%, Nạp thẻ cào nhận 100% giá trị thẻ nạp !!!',
+            'welcome_modal' => true, // Enable welcome modal by default
 
             // Email settings
             'mail_mailer' => 'smtp',
