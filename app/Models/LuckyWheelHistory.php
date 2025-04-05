@@ -16,7 +16,6 @@ use Illuminate\Database\Eloquent\Model;
 class LuckyWheelHistory extends Model
 {
     use HasFactory;
-    protected $table = 'lucky_wheel_histories';
 
     protected $fillable = [
         'user_id',
@@ -29,18 +28,24 @@ class LuckyWheelHistory extends Model
     ];
 
     protected $casts = [
-        'reward_type' => 'string',
+        'spin_count' => 'integer',
+        'total_cost' => 'integer',
+        'reward_amount' => 'integer',
     ];
 
-    // Mối quan hệ belongsTo với LuckyWheel
-    public function luckyWheel()
-    {
-        return $this->belongsTo(LuckyWheel::class, 'lucky_wheel_id');
-    }
-
-    // Mối quan hệ belongsTo với User
+    /**
+     * Get the user that owns the history
+     */
     public function user()
     {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Get the lucky wheel that owns the history
+     */
+    public function luckyWheel()
+    {
+        return $this->belongsTo(LuckyWheel::class);
     }
 }

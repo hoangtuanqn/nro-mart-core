@@ -110,6 +110,23 @@
                 </li>
 
                 <li class="submenu">
+                    <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/product.svg') }}"
+                            alt="img"><span>Vòng quay may mắn</span><span class="menu-arrow"></span></a>
+                    <ul>
+                        <li><a href="{{ route('admin.lucky-wheels.index') }}"
+                                class="{{ request()->routeIs('admin.lucky-wheels.index') ? 'active' : '' }}">Danh
+                                sách VQMM</a></li>
+                        <li><a href="{{ route('admin.lucky-wheels.create') }}"
+                                class="{{ request()->routeIs('admin.lucky-wheels.create') ? 'active' : '' }}">Thêm
+                                VQMM</a>
+                        </li>
+                        <li><a href="{{ route('admin.lucky-wheels.history') }}"
+                                class="{{ request()->routeIs('admin.lucky-wheels.history') ? 'active' : '' }}">Lịch sử
+                                quay</a></li>
+                    </ul>
+                </li>
+
+                <li class="submenu">
                     <a href="javascript:void(0);"><img src="{{ asset('assets/img/icons/sales1.svg') }}"
                             alt="img"><span>Mã giảm giá</span><span class="menu-arrow"></span></a>
                     <ul>
@@ -196,7 +213,6 @@
                         <li><a href="{{ ENV('ZALO_URL_AUTHOR') }}" target="_blank" class="">Zalo</a></li>
                     </ul>
                 </li>
-
 
             </ul>
         </div>

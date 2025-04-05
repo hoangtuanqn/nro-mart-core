@@ -16,13 +16,13 @@ use Illuminate\Database\Eloquent\Model;
 class LuckyWheel extends Model
 {
     use HasFactory;
-    protected $table = 'lucky_wheels';
 
     protected $fillable = [
         'name',
         'slug',
         'thumbnail',
         'wheel_image',
+        'description',
         'rules',
         'active',
         'price_per_spin',
@@ -31,12 +31,14 @@ class LuckyWheel extends Model
 
     protected $casts = [
         'active' => 'boolean',
-        'config' => 'array', // Chuyển JSON thành mảng khi truy vấn
+        'config' => 'array',
     ];
 
-    // Mối quan hệ one-to-many với LuckyWheelHistory
+    /**
+     * Get the histories for the lucky wheel
+     */
     public function histories()
     {
-        return $this->hasMany(LuckyWheelHistory::class, 'lucky_wheel_id');
+        return $this->hasMany(LuckyWheelHistory::class);
     }
 }

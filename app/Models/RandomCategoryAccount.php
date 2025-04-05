@@ -37,6 +37,11 @@ class RandomCategoryAccount extends Model
         return $this->belongsTo(RandomCategory::class, 'random_category_id');
     }
 
+    public function randomCategory()
+    {
+        return $this->belongsTo(RandomCategory::class, 'random_category_id');
+    }
+
     public function buyer()
     {
         return $this->belongsTo(User::class, 'buyer_id');

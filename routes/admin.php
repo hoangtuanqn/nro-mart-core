@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\HistoryController;
 use App\Http\Controllers\Admin\MoneyWithdrawalController;
 use App\Http\Controllers\Admin\ResourceWithdrawalController;
+use App\Http\Controllers\Admin\LuckyWheelController;
 
 Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(function () {
     Route::get('/', [App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('index');
@@ -122,9 +123,9 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
 
     // Withdrawal section
     Route::prefix('withdrawals')->name('withdrawals.')->group(function () {
-        Route::get('/', [MoneyWithdrawalController::class, 'index'])->name('index');
-        Route::post('/{withdrawal}/approve', [MoneyWithdrawalController::class, 'approve'])->name('approve');
-        Route::post('/{withdrawal}/reject', [MoneyWithdrawalController::class, 'reject'])->name('reject');
+        Route::get('/money', [MoneyWithdrawalController::class, 'index'])->name('index');
+        Route::post('/money/{withdrawal}/approve', [MoneyWithdrawalController::class, 'approve'])->name('approve');
+        Route::post('/money/{withdrawal}/reject', [MoneyWithdrawalController::class, 'reject'])->name('reject');
 
         // Gold and Gem withdrawal routes
         Route::prefix('resources')->name('resources.')->group(function () {
@@ -132,6 +133,17 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
             Route::post('/{withdrawal}/approve', [ResourceWithdrawalController::class, 'approve'])->name('approve');
             Route::post('/{withdrawal}/reject', [ResourceWithdrawalController::class, 'reject'])->name('reject');
         });
+    });
+
+    // Routes for Lucky Wheels management
+    Route::prefix('lucky-wheels')->name('lucky-wheels.')->group(function () {
+        Route::get('/', [LuckyWheelController::class, 'index'])->name('index');
+        Route::get('/create', [LuckyWheelController::class, 'create'])->name('create');
+        Route::post('/store', [LuckyWheelController::class, 'store'])->name('store');
+        Route::get('/edit/{luckyWheel}', [LuckyWheelController::class, 'edit'])->name('edit');
+        Route::put('/update/{luckyWheel}', [LuckyWheelController::class, 'update'])->name('update');
+        Route::delete('/delete/{luckyWheel}', [LuckyWheelController::class, 'destroy'])->name('destroy');
+        Route::get('/history', [LuckyWheelController::class, 'history'])->name('history');
     });
 
     Route::prefix('settings')->name('settings.')->group(function () {
