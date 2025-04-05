@@ -26,6 +26,7 @@ class RandomCategoriesTableSeeder extends Seeder
                 'description' => 'Danh mục chứa tài khoản thử vận may Ngọc Rồng VIP 1.',
                 'active' => true,
                 'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'name' => 'THỬ VẬN MAY NGỌC RỒNG VIP 2',
@@ -34,6 +35,7 @@ class RandomCategoriesTableSeeder extends Seeder
                 'description' => 'Danh mục chứa tài khoản thử vận may Ngọc Rồng VIP 2.',
                 'active' => true,
                 'created_at' => now(),
+                'updated_at' => now(),
             ],
             [
                 'name' => 'THỬ VẬN MAY NGỌC RỒNG VIP 3',
@@ -42,6 +44,7 @@ class RandomCategoriesTableSeeder extends Seeder
                 'description' => 'Danh mục chứa tài khoản thử vận may Ngọc Rồng VIP 3.',
                 'active' => true,
                 'created_at' => now(),
+                'updated_at' => now(),
             ],
         ]);
     }

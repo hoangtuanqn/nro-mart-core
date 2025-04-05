@@ -31,7 +31,8 @@ class DatabaseSeeder extends Seeder
             LuckyWheelsTableSeeder::class,
             LuckyWheelHistoriesTableSeeder::class,
             WithdrawalHistoriesTableSeeder::class,
-            MoneyWithdrawalHistoriesTableSeeder::class
+            MoneyWithdrawalHistoriesTableSeeder::class,
+            BankAccountSeeder::class,
         ]);
         //php artisan migrate
         // php artisan db:seed

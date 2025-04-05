@@ -21,22 +21,25 @@ class ConfigSeeder extends Seeder
     public function run(): void
     {
         // Define base values to avoid duplication
-        $siteName = 'Shop Game Ngọc Rồng';
-        $siteDescription = 'Mua bán tài khoản game Ngọc Rồng';
-        $contactEmail = 'contact@example.com';
-        $contactPhone = '0123456789';
+        $siteName = 'TUANORI.VN - Shop Game Ngọc Rồng';
+        $siteDescription = 'Shop Ngọc Rồng Online cung cấp tài khoản game chính hãng, giá tốt nhất thị trường. Giao dịch an toàn, nhanh chóng và bảo mật';
+        $contactEmail = 'support@tuanori.vn';
+        $contactPhone = '0812665001';
 
         $configs = [
             // General settings
             'site_name' => $siteName,
             'site_description' => $siteDescription,
-            'site_logo' => '',
-            'site_favicon' => '',
-            'address' => 'Hà Nội, Việt Nam',
+            'site_logo' => 'https://imgur.com/hIFVXRo.png',
+            'site_favicon' => 'https://i.postimg.cc/sg1tCBGL/favicon.png',
+            'address' => 'TPHCM, Việt Nam', // Cập nhật địa chỉ mới
             'phone' => $contactPhone,
             'email' => $contactEmail,
             'facebook' => 'https://facebook.com/example',
             'zalo' => $contactPhone, // Reusing phone number for Zalo
+            'youtube' => 'https://www.youtube.com/@htuanqn', // Thêm link YouTube
+            'working_hours' => '8:00 - 22:00', // Thêm giờ làm việc
+            'home_notification' => 'Chào mừng bạn đến với Shop Ngọc Rồng Online. Nạp ATM/Momo khuyến mãi 10%, Nạp thẻ cào nhận 100% giá trị thẻ nạp !!!', // Thêm thông báo nhanh
 
             // Email settings
             'mail_mailer' => 'smtp',
@@ -48,8 +51,8 @@ class ConfigSeeder extends Seeder
             'mail_from_address' => $contactEmail, // Reusing contact email
             'mail_from_name' => $siteName, // Reusing site name
 
-            // Payment settings
-            'payment' => [
+            // Payment settings (stored as JSON)
+            'payment' => json_encode([
                 'card' => [
                     'active' => '1',
                     'partner_website' => 'thesieure.com',
@@ -57,8 +60,9 @@ class ConfigSeeder extends Seeder
                     'partner_key' => '',
                     'discount_percent' => '20',
                 ],
-            ],
-            'login_social' => [
+            ]),
+            // Login social settings (stored as JSON)
+            'login_social' => json_encode([
                 'google' => [
                     'active' => '1',
                     'client_id' => '695655624016-tnn916t7g53oqulsiq0d9vvn7bof1568.apps.googleusercontent.com',
@@ -71,11 +75,11 @@ class ConfigSeeder extends Seeder
                     'client_secret' => '481beed7538a8b7318c45e94401f4e3c',
                     'redirect' => 'http://localhost:8000/auth/facebook/callback',
                 ],
-            ],
+            ]),
         ];
 
         // Process and save the configs
-        $this->saveConfigs($configs);
+        $this->saveConfigs(configs: $configs);
     }
 
     /**
