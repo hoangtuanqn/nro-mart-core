@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
             WithdrawalHistoriesTableSeeder::class,
             MoneyWithdrawalHistoriesTableSeeder::class,
             BankAccountSeeder::class,
+            NotificationsTableSeeder::class,
         ]);
         //php artisan migrate
         // php artisan db:seed
