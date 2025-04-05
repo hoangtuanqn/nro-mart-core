@@ -21,7 +21,7 @@ class GameServicesSeeder extends Seeder
             [
                 'name' => 'ÚP BÍ KIẾP',
                 'slug' => Str::slug('ÚP BÍ KIẾP'),
-                'thumbnail' => 'https://acc957.com/Img/NRO_UBK.png',
+                'thumbnail' => 'https://i.postimg.cc/g0WLJcxH/NRO-UBK.png',
                 'description' => 'Dịch vụ up bí kiếp chuyên nghiệp, hỗ trợ mọi loại tài khoản',
                 'type' => 'leveling',
                 'active' => true,
@@ -31,7 +31,7 @@ class GameServicesSeeder extends Seeder
             [
                 'name' => 'SĂN ĐỆ TỬ',
                 'slug' => Str::slug('SĂN ĐỆ TỬ'),
-                'thumbnail' => 'https://acc957.com/Img/NRO_SDT.png',
+                'thumbnail' => 'https://i.postimg.cc/prpp7pSR/NRO-SDT.png',
                 'description' => 'Dịch vụ săn đệ tử, giúp người chơi tìm kiếm và thu phục đệ tử mạnh mẽ.',
                 'type' => 'leveling',
                 'active' => true,
@@ -41,7 +41,7 @@ class GameServicesSeeder extends Seeder
             [
                 'name' => 'UP SỨC MẠNH ĐỆ TỬ',
                 'slug' => Str::slug('UP SỨC MẠNH ĐỆ TỬ'),
-                'thumbnail' => 'https://acc957.com/Img/NRO_USMDT.png',
+                'thumbnail' => 'https://i.postimg.cc/sXnMwpwT/NRO-USMDT.png',
                 'description' => 'Dịch vụ nâng cấp sức mạnh cho đệ tử, giúp họ trở nên mạnh mẽ hơn.',
                 'type' => 'leveling',
                 'active' => true,
@@ -51,7 +51,7 @@ class GameServicesSeeder extends Seeder
             [
                 'name' => 'LÀM NHIỆM VỤ',
                 'slug' => Str::slug('LÀM NHIỆM VỤ'),
-                'thumbnail' => 'https://acc957.com/Img/NRO_LNV.png',
+                'thumbnail' => 'https://i.postimg.cc/nzVs4dYs/NRO-LNV.png',
                 'description' => 'Dịch vụ hỗ trợ hoàn thành nhiệm vụ trong game, giúp người chơi nhanh chóng đạt được mục tiêu.',
                 'type' => 'leveling',
                 'active' => true,
