@@ -60,6 +60,19 @@
                     </a>
                 </div>
             </div>
+
+            @if ($errors->any())
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Lỗi!</strong> Đã xảy ra lỗi khi cập nhật vòng quay may mắn. Vui lòng kiểm tra lại thông tin.
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
             <div class="card">
                 <div class="card-body">
                     <form action="{{ route('admin.lucky-wheels.update', $luckyWheel->id) }}" method="POST"
@@ -97,6 +110,7 @@
                                     <input type="file" class="form-control @error('thumbnail') is-invalid @enderror"
                                         id="thumbnail" name="thumbnail" accept="image/*">
                                     <small class="form-text text-muted">Để trống nếu không muốn thay đổi ảnh</small>
+                                    <input type="hidden" name="current_thumbnail" value="{{ $luckyWheel->thumbnail }}">
                                     @error('thumbnail')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -108,6 +122,7 @@
                                     <input type="file" class="form-control @error('wheel_image') is-invalid @enderror"
                                         id="wheel_image" name="wheel_image" accept="image/*">
                                     <small class="form-text text-muted">Để trống nếu không muốn thay đổi ảnh</small>
+                                    <input type="hidden" name="current_wheel_image" value="{{ $luckyWheel->wheel_image }}">
                                     @error('wheel_image')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -132,13 +147,24 @@
 
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label for="description">Thể lệ vòng quay</label>
+                                    <label for="description">Mô tả vòng quay</label>
                                     <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description">{{ old('description', $luckyWheel->description) }}</textarea>
                                     @error('description')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
                             </div>
+
+                            <div class="col-lg-12 mt-3">
+                                <div class="form-group">
+                                    <label for="rules">Thể lệ vòng quay <span class="text-danger">*</span></label>
+                                    <textarea class="form-control @error('rules') is-invalid @enderror" id="rules" name="rules" required>{{ old('rules', $luckyWheel->rules) }}</textarea>
+                                    @error('rules')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="active">Trạng thái</label>
@@ -235,8 +261,8 @@
                                                                         name="config[{{ $i }}][probability]"
                                                                         value="{{ isset($oldConfig[$i]) ? $oldConfig[$i]['probability'] : 0 }}"
                                                                         class="form-control form-control-sm probability-input"
-                                                                        min="0" max="100" required
-                                                                        step="0.1">
+                                                                        min="0" max="100" step="0.1"
+                                                                        required>
                                                                     <span class="input-group-text">%</span>
                                                                 </div>
                                                             </td>
@@ -286,13 +312,34 @@
     <script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/classic/ckeditor.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Khởi tạo CKEditor
+            // Khởi tạo CKEditor cho mô tả
+            let descriptionEditor;
             if (document.querySelector('#description')) {
                 ClassicEditor
                     .create(document.querySelector('#description'), {
                         toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', '|',
                             'outdent', 'indent', '|', 'blockQuote', 'insertTable', 'undo', 'redo'
                         ]
+                    })
+                    .then(editor => {
+                        descriptionEditor = editor;
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            }
+
+            // Khởi tạo CKEditor cho thể lệ
+            let rulesEditor;
+            if (document.querySelector('#rules')) {
+                ClassicEditor
+                    .create(document.querySelector('#rules'), {
+                        toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', '|',
+                            'outdent', 'indent', '|', 'blockQuote', 'insertTable', 'undo', 'redo'
+                        ]
+                    })
+                    .then(editor => {
+                        rulesEditor = editor;
                     })
                     .catch(error => {
                         console.error(error);
@@ -377,6 +424,23 @@
 
             // Tính tổng xác suất khi trang tải xong
             calculateTotalProbability();
+
+            // Xử lý form submit - cần đảm bảo dữ liệu từ CKEditor được cập nhật trước khi submit
+            const form = document.querySelector('form');
+            form.addEventListener('submit', function(e) {
+                // Cập nhật dữ liệu từ CKEditor vào textarea trước khi submit
+                if (descriptionEditor) {
+                    const descriptionInput = document.querySelector('#description');
+                    descriptionInput.value = descriptionEditor.getData();
+                }
+
+                if (rulesEditor) {
+                    const rulesInput = document.querySelector('#rules');
+                    rulesInput.value = rulesEditor.getData();
+                }
+
+                // Không cần ngăn chặn form submit - để form tự submit bình thường
+            });
         });
     </script>
 @endpush

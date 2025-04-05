@@ -60,6 +60,19 @@
                     </a>
                 </div>
             </div>
+
+            @if ($errors->any())
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Lỗi!</strong> Đã xảy ra lỗi khi thêm vòng quay may mắn. Vui lòng kiểm tra lại thông tin.
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
             <div class="card">
                 <div class="card-body">
                     <form action="{{ route('admin.lucky-wheels.store') }}" method="POST" enctype="multipart/form-data">
@@ -92,7 +105,7 @@
                                 <div class="form-group">
                                     <label for="thumbnail">Ảnh đại diện <span class="text-danger">*</span></label>
                                     <input type="file" class="form-control @error('thumbnail') is-invalid @enderror"
-                                        id="thumbnail" name="thumbnail" accept="image/*">
+                                        id="thumbnail" name="thumbnail" accept="image/*" required>
                                     @error('thumbnail')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -102,7 +115,7 @@
                                 <div class="form-group">
                                     <label for="wheel_image">Ảnh vòng quay <span class="text-danger">*</span></label>
                                     <input type="file" class="form-control @error('wheel_image') is-invalid @enderror"
-                                        id="wheel_image" name="wheel_image" accept="image/*">
+                                        id="wheel_image" name="wheel_image" accept="image/*" required>
                                     @error('wheel_image')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -128,9 +141,35 @@
 
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label for="description">Thể lệ vòng quay</label>
+                                    <label for="description">Mô tả vòng quay</label>
                                     <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description">{{ old('description') }}</textarea>
                                     @error('description')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12 mt-3">
+                                <div class="form-group">
+                                    <label for="rules">Thể lệ vòng quay <span class="text-danger">*</span></label>
+                                    <textarea class="form-control @error('rules') is-invalid @enderror" id="rules" name="rules" required>{{ old('rules') }}</textarea>
+                                    @error('rules')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label for="active">Trạng thái</label>
+                                    <select name="active" id="active"
+                                        class="form-select @error('active') is-invalid @enderror">
+                                        <option value="1" {{ old('active', 1) == 1 ? 'selected' : '' }}>Hoạt động
+                                        </option>
+                                        <option value="0" {{ old('active', 1) == 0 ? 'selected' : '' }}>Không hoạt
+                                            động</option>
+                                    </select>
+                                    @error('active')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
@@ -153,7 +192,8 @@
                                         @enderror
 
                                         <div class="table-responsive">
-                                            <table class="table table-striped table-bordered config-table" id="configTable">
+                                            <table class="table table-striped table-bordered config-table"
+                                                id="configTable">
                                                 <thead class="thead-light">
                                                     <tr>
                                                         <th class="text-center" style="width: 5%">STT</th>
@@ -172,8 +212,12 @@
                                                                     <select name="config[{{ $i }}][type]"
                                                                         class="form-select form-select-sm reward-type"
                                                                         data-index="{{ $i }}">
-                                                                        <option value="gold">Vàng</option>
-                                                                        <option value="gem">Ngọc</option>
+                                                                        <option value="gold"
+                                                                            {{ old("config.$i.type", $defaultConfig[$i]['type'] ?? 'gold') == 'gold' ? 'selected' : '' }}>
+                                                                            Vàng</option>
+                                                                        <option value="gem"
+                                                                            {{ old("config.$i.type", $defaultConfig[$i]['type'] ?? 'gold') == 'gem' ? 'selected' : '' }}>
+                                                                            Ngọc</option>
                                                                     </select>
                                                                 </div>
                                                             </td>
@@ -181,6 +225,7 @@
                                                                 <div class="form-group mb-0">
                                                                     <input type="text"
                                                                         name="config[{{ $i }}][content]"
+                                                                        value="{{ old("config.$i.content", $defaultConfig[$i]['content'] ?? '') }}"
                                                                         class="form-control form-control-sm content-input"
                                                                         required data-index="{{ $i }}"
                                                                         placeholder="Nội dung phần thưởng">
@@ -190,19 +235,21 @@
                                                                 <div class="input-group input-group-sm">
                                                                     <input type="number"
                                                                         name="config[{{ $i }}][amount]"
-                                                                        value="0"
+                                                                        value="{{ old("config.$i.amount", $defaultConfig[$i]['amount'] ?? 0) }}"
                                                                         class="form-control form-control-sm amount-input"
                                                                         min="0" data-index="{{ $i }}"
                                                                         required>
                                                                     <span
-                                                                        class="input-group-text reward-symbol-{{ $i }}">Vàng</span>
+                                                                        class="input-group-text reward-symbol-{{ $i }}">
+                                                                        {{ old("config.$i.type", $defaultConfig[$i]['type'] ?? 'gold') == 'gem' ? 'Ngọc' : 'Vàng' }}
+                                                                    </span>
                                                                 </div>
                                                             </td>
                                                             <td>
                                                                 <div class="input-group input-group-sm">
                                                                     <input type="number"
                                                                         name="config[{{ $i }}][probability]"
-                                                                        value="0"
+                                                                        value="{{ old("config.$i.probability", $defaultConfig[$i]['probability'] ?? 0) }}"
                                                                         class="form-control form-control-sm probability-input"
                                                                         min="0" max="100" step="0.1"
                                                                         required>
@@ -255,13 +302,34 @@
     <script src="https://cdn.ckeditor.com/ckeditor5/41.1.0/classic/ckeditor.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Khởi tạo CKEditor
+            // Khởi tạo CKEditor cho mô tả
+            let descriptionEditor;
             if (document.querySelector('#description')) {
                 ClassicEditor
                     .create(document.querySelector('#description'), {
                         toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', '|',
                             'outdent', 'indent', '|', 'blockQuote', 'insertTable', 'undo', 'redo'
                         ]
+                    })
+                    .then(editor => {
+                        descriptionEditor = editor;
+                    })
+                    .catch(error => {
+                        console.error(error);
+                    });
+            }
+
+            // Khởi tạo CKEditor cho thể lệ
+            let rulesEditor;
+            if (document.querySelector('#rules')) {
+                ClassicEditor
+                    .create(document.querySelector('#rules'), {
+                        toolbar: ['heading', '|', 'bold', 'italic', 'link', 'bulletedList', 'numberedList', '|',
+                            'outdent', 'indent', '|', 'blockQuote', 'insertTable', 'undo', 'redo'
+                        ]
+                    })
+                    .then(editor => {
+                        rulesEditor = editor;
                     })
                     .catch(error => {
                         console.error(error);
@@ -277,17 +345,6 @@
                     }
                     reader.readAsDataURL(input.files[0]);
                 }
-            }
-
-            // Thiết lập defaultConfig
-            const defaultConfig = [];
-            for (let i = 0; i < 8; i++) {
-                defaultConfig.push({
-                    type: 'gold',
-                    content: '',
-                    amount: 0,
-                    probability: 0
-                });
             }
 
             // Bắt sự kiện thay đổi ảnh đại diện
@@ -357,6 +414,23 @@
 
             // Tính tổng xác suất khi trang tải xong
             calculateTotalProbability();
+
+            // Xử lý form submit - cần đảm bảo dữ liệu từ CKEditor được cập nhật trước khi submit
+            const form = document.querySelector('form');
+            form.addEventListener('submit', function(e) {
+                // Cập nhật dữ liệu từ CKEditor vào textarea trước khi submit
+                if (descriptionEditor) {
+                    const descriptionInput = document.querySelector('#description');
+                    descriptionInput.value = descriptionEditor.getData();
+                }
+
+                if (rulesEditor) {
+                    const rulesInput = document.querySelector('#rules');
+                    rulesInput.value = rulesEditor.getData();
+                }
+
+                // Không cần ngăn chặn form submit - để form tự submit bình thường
+            });
         });
     </script>
 @endpush
