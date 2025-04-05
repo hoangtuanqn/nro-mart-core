@@ -113,7 +113,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="bank-qr-code">
-                                                        <img src="https://img.vietqr.io/image/{{ $account->bank_name }}-{{ $account->account_number }}-qr_only.jpg"
+                                                        <img src="https://qr.sepay.vn/img?bank={{ $account->bank_name }}&acc={{ $account->account_number }}&template=&amount=&des={{ $account->prefix . Auth::user()->id }}"
                                                             alt="QR Code">
 
                                                     </div>

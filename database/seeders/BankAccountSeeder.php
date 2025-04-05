@@ -23,34 +23,16 @@ class BankAccountSeeder extends Seeder
         BankAccount::insert([
             [
                 'bank_name' => 'MBBank',
+                'account_name' => 'Phạm Hoàng Tuấn',
                 'account_number' => '259876543210',
                 'branch' => 'Mộ Đức, Quảng Ngãi',
-                'note' => 'Nạp nhanh',
+                'note' => 'Nạp tự động, cộng tiền trong 1p',
                 'is_active' => true,
                 'auto_confirm' => true,
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
-            // [
-            //     'bank_name' => 'Techcombank',
-            //     'account_number' => '0987654321',
-            //     'branch' => 'TP. Hồ Chí Minh',
-            //     'note' => 'Tài khoản phụ',
-            //     'is_active' => true,
-            //     'auto_confirm' => true,
-            //     'created_at' => now(),
-            //     'updated_at' => now(),
-            // ],
-            // [
-            //     'bank_name' => 'BIDV',
-            //     'account_number' => '1122334455',
-            //     'branch' => 'Đà Nẵng',
-            //     'note' => 'Tài khoản tiết kiệm',
-            //     'is_active' => false,
-            //     'auto_confirm' => false,
-            //     'created_at' => now(),
-            //     'updated_at' => now(),
-            // ],
+
         ]);
     }
 }

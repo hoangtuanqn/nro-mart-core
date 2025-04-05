@@ -21,6 +21,7 @@ return new class extends Migration {
         Schema::create('bank_accounts', function (Blueprint $table) {
             $table->id(); // ID tự động tăng
             $table->string('bank_name'); // Tên ngân hàng
+            $table->string('account_name'); // Tên ngân hàng
             $table->string('account_number')->unique(); // Số tài khoản (đảm bảo duy nhất)
             $table->string('branch')->nullable(); // Chi nhánh (có thể null)
             $table->text('note')->nullable(); // Ghi chú

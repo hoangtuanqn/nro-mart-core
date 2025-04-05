@@ -15,10 +15,17 @@
 
                     <strong>Hệ thống hiện tại đang API qua SePay.</strong> Một doanh nghiệp đang hợp tác với các ngân hàng
                     lớn.
-                    <br>Hiện nay họ đang cho miễn phí 50 giao dịch mỗi tháng và được quyền sử dụng các tính năng của họ. Đặc
-                    biệt, nếu bạn muốn nhiều giao dịch hơn, vui lòng xem bảng giá chi tiết tại <a href="https://sepay.vn"
-                        target="_blank" class="a_link">sepay.vn</a>.
-                    <br />Nếu bạn muốn tích hợp qua website khác mà không phải
+                    <br>Hiện nay họ đang cho <b class="fw-bold text-primary">miễn phí 50 giao dịch mỗi tháng</b> và được
+                    quyền <b class="fw-bold text-success">sử dụng tất cả tính năng</b> của họ. Đặc
+                    biệt, nếu bạn muốn nhiều giao dịch hơn, vui lòng xem bảng giá chi tiết tại <a
+                        href="https://sepay.vn/?utm_source=INV&utm_medium=RFTRA&utm_campaign=1B420439" target="_blank"
+                        class="a_link">sepay.vn</a>.
+
+                    <br><b class="fw-bold text-danger">Yêu cầu quý khách đăng ký tài khoản SePay nếu chưa có tại <a
+                            href="https://sepay.vn/?utm_source=INV&utm_medium=RFTRA&utm_campaign=1B420439"
+                            target="_blank">SePay.VN</a></b>
+                    <hr>
+                    Nếu bạn muốn tích hợp qua website khác mà không phải
                     SePay, hãy liên hệ với nhà cung cấp qua Zalo <a href="https://zalo.me/0812665001" class="a_link"
                         target="_blank">0812665001</a> hoặc Fanpage <a href="https://www.facebook.com/tuanori.vn"
                         class="a_link" target="_blank">TUAN ORI - Web Designer MMO</a> để nhận được sự hỗ trợ.
@@ -109,6 +116,7 @@
                                         <option value="WOORIVN" {{ old('bank_name') == 'WOORIVN' ? 'selected' : '' }}>Woori
                                             Bank Vietnam</option>
                                     </select>
+
                                     @error('bank_name')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
@@ -165,7 +173,9 @@
                             </div>
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label>SePay Access Token</label>
+                                    <label>SePay Access Token (<a
+                                            href="https://sepay.vn/?utm_source=INV&utm_medium=RFTRA&utm_campaign=1B420439s">Đăng
+                                            ký tài khoản</a>)</label>
                                     <input type="text" class="form-control @error('access_token') is-invalid @enderror"
                                         name="access_token" placeholder="Nhập Access Token từ SePay.vn"
                                         value="{{ old('access_token') }}">

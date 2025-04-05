@@ -12,8 +12,10 @@
             <!-- Notication -->
             <div class="card-body">
                 <div class="alert alert-notication-custom alert-dismissible fade show" role="alert">
-                    <strong>Chúng tôi hiện đang hỗ trợ 3 đối tác thanh toán:</strong> thesieure.com,
-                    doithe1s.vn, cardvip.vn.
+                    <strong>Chúng tôi hiện đang hỗ trợ 3 đối tác thanh toán:</strong>
+                    <a href="https://thesieure.com" target="_blank">THESIEURE.COM</a>,
+                    <a href="https://doithe1s.vn" target="_blank">DOITHE1S.VN</a>,
+                    <a href="https://cardvip.vn" target="_blank">CARDVIP.VN</a>.
                     Nếu bạn có nhu cầu chọn đối tác khác, xin vui lòng liên hệ với chúng tôi (phí dịch vụ là
                     80k).
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
