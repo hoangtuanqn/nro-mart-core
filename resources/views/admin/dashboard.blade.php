@@ -21,7 +21,7 @@
                 <!-- Alert thông báo -->
                 <div class="row">
                     <!-- Notification -->
-                    <div class="card-body">
+                    <div class="card-body p-2">
                         <div class="alert alert-notication-custom alert-dismissible fade show" role="alert">
                             <strong>Chào mừng bạn đến với hệ thống quản lý shop game!</strong> Phiên làm việc hiện tại:
                             {{ now()->format('d/m/Y H:i') }}.
