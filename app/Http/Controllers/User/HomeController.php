@@ -28,7 +28,7 @@ class HomeController extends Controller
     public function index()
     {
         // Dang mục bán acc game
-        $categories = Category::where('active', 1)->get();
+        $categories = Category::where('active', 1)->orderBy('updated_at', 'desc')->get();
         foreach ($categories as $category) {
             $category->soldCount = GameAccount::where('game_category_id', $category->id)
                 ->where('status', 'sold')
@@ -37,13 +37,13 @@ class HomeController extends Controller
         }
 
         // Dịch vụ cày thuê
-        $services = GameService::where('active', '1')->get();
+        $services = GameService::where('active', '1')->orderBy('updated_at', 'desc')->get();
         foreach ($services as $service) {
             $service->orderCount = ServiceHistory::where('game_service_id', $service->id)->count();
         }
 
         // Random categories
-        $randomCategories = RandomCategory::where('active', 1)->get();
+        $randomCategories = RandomCategory::where('active', 1)->orderBy('updated_at', 'desc')->get();
         foreach ($randomCategories as $category) {
             $category->soldCount = RandomCategoryAccount::where('random_category_id', $category->id)
                 ->where('status', 'sold')
@@ -52,7 +52,7 @@ class HomeController extends Controller
         }
 
         // Vòng quay may mắn
-        $LuckWheel = LuckyWheel::where('active', 1)->orderBy('created_at', 'desc')->get();
+        $LuckWheel = LuckyWheel::where('active', 1)->orderBy('updated_at', 'desc')->get();
         foreach ($LuckWheel as $wheel) {
             $wheel->soldCount = $wheel->histories->count();
         }
@@ -81,7 +81,7 @@ class HomeController extends Controller
             $depositor->user = \App\Models\User::find($depositor->user_id);
         }
 
-        $notifications = Notification::all();
+        $notifications = Notification::orderBy('created_at', 'desc')->get();
 
         return view('user.home', compact(
             'categories',

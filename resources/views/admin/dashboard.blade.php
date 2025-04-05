@@ -23,9 +23,20 @@
                     <!-- Notification -->
                     <div class="card-body p-2">
                         <div class="alert alert-notication-custom alert-dismissible fade show" role="alert">
-                            <strong>Chào mừng bạn đến với hệ thống quản lý shop game!</strong> Phiên làm việc hiện tại:
-                            {{ now()->format('d/m/Y H:i') }}.
+                            <strong>Mã nguồn được phát triển bởi TUANORI.VN!</strong> Chúng tôi chuyên cung cấp các giải
+                            pháp website chuyên nghiệp.
+                            <br>
+                            Liên hệ mua source code tại Fanpage: <a href="https://www.facebook.com/tuanori.vn"
+                                target="_blank">TUAN ORI - Web Designer MMO </a>
+                            <br><br>
+                            <em>Lưu ý: Source code có thể còn tồn tại lỗi chưa được phát hiện. Chúng tôi rất cảm ơn nếu bạn
+                                báo cáo lỗi cho chúng tôi.
+                                Để cảm ơn sự đóng góp của bạn, chúng tôi sẽ xem xét miễn phí source code trong dự án tiếp
+                                theo cho bạn!</em>
+                            <br>
+                            Phiên làm việc hiện tại: {{ now()->format('d/m/Y H:i') }}
                             @if (count($pendingServices) > 0 || count($pendingWithdrawals) > 0 || count($pendingResourceWithdrawals) > 0)
+                                <br>
                                 <span class="text-danger">Bạn có
                                     {{ count($pendingServices) + count($pendingWithdrawals) + count($pendingResourceWithdrawals) }}
                                     yêu cầu đang chờ xử lý.</span>

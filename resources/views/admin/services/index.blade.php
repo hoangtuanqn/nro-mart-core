@@ -14,6 +14,10 @@
                     </a>
                 </div>
             </div>
+            @if (session('success'))
+                <x-alert-admin type="success" :message="session('success')" />
+            @endif
+           
 
             <div class="card">
                 <div class="card-body">

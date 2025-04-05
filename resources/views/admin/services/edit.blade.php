@@ -171,13 +171,14 @@
                                     </tbody>
                                 </table>
                             </div>
-                            <div class="mt-3">
+                            <div class="mt-3 d-flex flex-column flex-md-row justify-content-between">
                                 <a href="{{ route('admin.packages.createForService', $service->id) }}"
-                                    class="btn btn-primary">
+                                    class="btn btn-primary d-flex align-items-center mb-2 mb-md-0">
                                     <img src="{{ asset('assets/img/icons/plus.svg') }}" alt="img" class="me-1">
                                     Thêm gói dịch vụ mới
                                 </a>
-                                <a href="{{ route('admin.packages.service', $service->id) }}" class="btn btn-secondary">
+                                <a href="{{ route('admin.packages.service', $service->id) }}"
+                                    class="btn btn-secondary d-flex align-items-center">
                                     <img src="{{ asset('assets/img/icons/eye.svg') }}" alt="img" class="me-1">
                                     Xem tất cả gói dịch vụ
                                 </a>
