@@ -199,14 +199,23 @@ class DashboardController extends Controller
             }
 
             // Lấy thông tin những tài khoản được mua gần đây
-            $recentPurchases = GameAccount::with([
-                'buyer',
-                'category'
-            ])
+            $recentPurchases = GameAccount::with(['buyer', 'category'])
                 ->where('status', 'sold')
+                ->whereNotNull('buyer_id')
                 ->orderBy('created_at', 'desc')
-                ->limit(5)
+                ->limit(3)
                 ->get();
+
+            // Lấy thông tin những tài khoản random được mua gần đây
+            $recentRandomPurchases = RandomCategoryAccount::with(['buyer', 'randomCategory'])
+                ->where('status', 'sold')
+                ->whereNotNull('buyer_id')
+                ->orderBy('created_at', 'desc')
+                ->limit(2)
+                ->get();
+
+            // Kết hợp hai collection
+            $recentPurchases = $recentPurchases->merge($recentRandomPurchases)->sortByDesc('created_at')->take(5);
 
             // Lấy danh sách thông báo để hiển thị trong modal
             $notifications = Notification::orderBy('created_at', 'desc')->get();
