@@ -31,6 +31,11 @@
                         class="a_link" target="_blank">TUAN ORI - Web Designer MMO</a> để nhận được sự hỗ trợ.
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
+                <div class="alert alert-notication-custom alert-dismissible fade show" role="alert">
+                    <strong>Hướng dẫn lấy Access Token:</strong> Vui lòng xem video hướng dẫn chi tiết tại <a
+                        href="https://youtu.be/QgURAxXgE40" target="_blank" class="a_link">đây</a>.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
             </div>
 
             @if ($errors->any())
@@ -147,8 +152,8 @@
                             <div class="col-lg-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Chi nhánh</label>
-                                    <input type="text" name="branch" value="{{ old('branch') }}" class="form-control"
-                                        placeholder="Nhập chi nhánh ngân hàng">
+                                    <input type="text" name="branch" value="{{ old('branch') }}"
+                                        class="form-control" placeholder="Nhập chi nhánh ngân hàng">
                                 </div>
                             </div>
                             <div class="col-lg-6 col-sm-6 col-12">

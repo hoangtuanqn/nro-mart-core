@@ -205,7 +205,10 @@
                                         target="_blank">tạo mật khẩu ứng dụng</a> trong cài đặt bảo mật Google và sử dụng
                                     mật khẩu đó thay vì mật khẩu chính.</li>
                                 <li>Sử dụng <code>smtp.gmail.com</code> làm Mail Host, <code>587</code> làm Mail Port và
-                                    <code>tls</code> làm Mail Encryption.</li>
+                                    <code>tls</code> làm Mail Encryption.
+                                </li>
+                                <li>Xem video hướng dẫn chi tiết tại <a href="https://youtu.be/3Daci3bR4pM"
+                                        target="_blank">đây</a>.</li>
                             </ol>
                         </div>
                     </div>
