@@ -425,21 +425,19 @@
             // Tính tổng xác suất khi trang tải xong
             calculateTotalProbability();
 
-            // Xử lý form submit - cần đảm bảo dữ liệu từ CKEditor được cập nhật trước khi submit
+            // Xử lý form submit - cập nhật dữ liệu từ CKEditor vào textarea
             const form = document.querySelector('form');
-            form.addEventListener('submit', function(e) {
+            form.addEventListener('submit', function() {
                 // Cập nhật dữ liệu từ CKEditor vào textarea trước khi submit
                 if (descriptionEditor) {
-                    const descriptionInput = document.querySelector('#description');
-                    descriptionInput.value = descriptionEditor.getData();
+                    document.querySelector('#description').value = descriptionEditor.getData();
                 }
 
                 if (rulesEditor) {
-                    const rulesInput = document.querySelector('#rules');
-                    rulesInput.value = rulesEditor.getData();
+                    document.querySelector('#rules').value = rulesEditor.getData();
                 }
 
-                // Không cần ngăn chặn form submit - để form tự submit bình thường
+                // Form tự submit bình thường
             });
         });
     </script>

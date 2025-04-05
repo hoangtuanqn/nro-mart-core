@@ -72,8 +72,8 @@
                                         <td>{{ $wheel->id }}</td>
                                         <td>{{ $wheel->name }}</td>
                                         <td>
-                                            <img src="{{ $wheel->thumbnail }}" alt="{{ $wheel->name }}" width="60"
-                                                height="60" class="rounded">
+                                            <img src="{{ $wheel->thumbnail }}" alt="{{ $wheel->name }}" width="300"
+                                                height="300" class="rounded">
                                         </td>
                                         <td>{{ number_format($wheel->price_per_spin) }} VNĐ</td>
                                         <td>

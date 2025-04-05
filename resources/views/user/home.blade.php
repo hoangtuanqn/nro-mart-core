@@ -211,7 +211,7 @@
                 <h2 class="menu__header__title">Vòng Quay May Mắn</h2>
             </header>
             <div class="category__list">
-                @foreach ($randomLuckWheel as $category)
+                @foreach ($LuckWheel as $category)
                     @if ($category->active)
                         <a href="{{ route('lucky.index', ['slug' => $category->slug]) }}" class="category__item">
                             <img src="{{ $category->thumbnail }}" alt="{{ $category->name }}" class="category__img" />

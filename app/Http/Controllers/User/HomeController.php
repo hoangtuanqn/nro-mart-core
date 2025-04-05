@@ -52,8 +52,8 @@ class HomeController extends Controller
         }
 
         // Vòng quay may mắn
-        $randomLuckWheel = LuckyWheel::where('active', 1)->get();
-        foreach ($randomLuckWheel as $wheel) {
+        $LuckWheel = LuckyWheel::where('active', 1)->orderBy('created_at', 'desc')->get();
+        foreach ($LuckWheel as $wheel) {
             $wheel->soldCount = $wheel->histories->count();
         }
 
@@ -87,7 +87,7 @@ class HomeController extends Controller
             'categories',
             'services',
             'randomCategories',
-            'randomLuckWheel',
+            'LuckWheel',
             'recentTransactions',
             'topDepositors',
             'notifications'

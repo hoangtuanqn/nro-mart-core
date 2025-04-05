@@ -2,7 +2,7 @@
 /**
  * Copyright (c) 2025 FPT University
  *
- * @author    Phạm Hoàng Tuấn
+ * @autor    Phạm Hoàng Tuấn
  * @email     phamhoangtuanqn@gmail.com
  * @facebook  fb.com/phamhoangtuanqn
  */
@@ -26,7 +26,7 @@ class LuckyWheelController extends Controller
     public function index()
     {
         $title = 'Quản lý vòng quay may mắn';
-        $luckyWheels = LuckyWheel::orderBy('id', 'desc')->get();
+        $luckyWheels = LuckyWheel::orderBy('created_at', 'desc')->get();
 
         return view('admin.lucky-wheels.index', compact('luckyWheels', 'title'));
     }
