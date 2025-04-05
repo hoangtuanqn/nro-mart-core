@@ -417,21 +417,57 @@ class ConfigController extends Controller
         ]);
 
         try {
-            // Gửi email test
-            $mailConfig = [
-                'transport' => config_get('mail_mailer'),
-                'host' => config_get('mail_host'),
-                'port' => config_get('mail_port'),
-                'username' => config_get('mail_username'),
-                'password' => config_get('mail_password'),
-                'encryption' => config_get('mail_encryption'),
-                'from' => [
-                    'address' => config_get('mail_from_address'),
-                    'name' => config_get('mail_from_name'),
-                ],
-            ];
+            // Lấy cấu hình email từ database
+            $mailDriver = config_get('mail_mailer');
+            $mailHost = config_get('mail_host');
+            $mailPort = config_get('mail_port');
+            $mailUsername = config_get('mail_username');
+            $mailPassword = config_get('mail_password');
+            $mailEncryption = config_get('mail_encryption');
+            $mailFromAddress = config_get('mail_from_address');
+            $mailFromName = config_get('mail_from_name');
 
-            ConfigFacade::set('mail', $mailConfig);
+            // Kiểm tra và sử dụng giá trị mặc định nếu không có cấu hình
+            if (empty($mailHost) || $mailHost === 'mailpit') {
+                $mailHost = 'smtp.gmail.com'; // Hoặc SMTP server khác
+            }
+
+            if (empty($mailPort)) {
+                $mailPort = 587; // Port tiêu chuẩn cho SMTP với TLS
+            }
+
+            if (empty($mailEncryption) || $mailEncryption === 'null') {
+                $mailEncryption = 'tls';
+            }
+
+            if (empty($mailFromAddress) || $mailFromAddress === 'hello@example.com') {
+                $mailFromAddress = config_get('email', 'admin@example.com');
+            }
+
+            if (empty($mailFromName)) {
+                $mailFromName = config_get('site_name', 'Shop Game Ngọc Rồng');
+            }
+
+            // Thiết lập cấu hình mail động
+            config([
+                'mail.default' => $mailDriver,
+                'mail.mailers.smtp.host' => $mailHost,
+                'mail.mailers.smtp.port' => $mailPort,
+                'mail.mailers.smtp.username' => $mailUsername,
+                'mail.mailers.smtp.password' => $mailPassword,
+                'mail.mailers.smtp.encryption' => $mailEncryption,
+                'mail.from.address' => $mailFromAddress,
+                'mail.from.name' => $mailFromName,
+            ]);
+
+            // Log cấu hình để debug
+            Log::info('Test email config:', [
+                'host' => config('mail.mailers.smtp.host'),
+                'port' => config('mail.mailers.smtp.port'),
+                'encryption' => config('mail.mailers.smtp.encryption'),
+                'username' => config('mail.mailers.smtp.username') ? 'set' : 'not-set',
+                'from_address' => config('mail.from.address'),
+            ]);
 
             Mail::to($request->test_email)->send(new TestMail());
 
@@ -439,8 +475,30 @@ class ConfigController extends Controller
                 ->with('success', 'Email kiểm tra đã được gửi thành công!');
         } catch (\Exception $e) {
             Log::error('Lỗi gửi email test: ' . $e->getMessage());
+
+            // Kiểm tra lỗi kết nối host
+            if (
+                strpos($e->getMessage(), 'getaddrinfo') !== false ||
+                strpos($e->getMessage(), 'Connection could not be established') !== false
+            ) {
+                return redirect()->back()
+                    ->with('error', 'Không thể kết nối đến máy chủ email. Hãy kiểm tra lại cấu hình SMTP (host, port) hoặc kết nối internet.')
+                    ->withInput();
+            }
+
+            // Kiểm tra lỗi xác thực
+            if (
+                strpos($e->getMessage(), 'Authentication failed') !== false ||
+                strpos($e->getMessage(), '5.7.0 Authentication') !== false
+            ) {
+                return redirect()->back()
+                    ->with('error', 'Xác thực SMTP thất bại. Hãy kiểm tra lại tên người dùng và mật khẩu SMTP.')
+                    ->withInput();
+            }
+
             return redirect()->back()
-                ->with('error', 'Không thể gửi email kiểm tra: ' . $e->getMessage());
+                ->with('error', 'Không thể gửi email kiểm tra: ' . $e->getMessage())
+                ->withInput();
         }
     }
 

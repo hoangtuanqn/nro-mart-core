@@ -9,7 +9,16 @@
                     <h6>Cấu hình email server và thông báo</h6>
                 </div>
             </div>
-
+            <div class="row">
+                <!-- Notification -->
+                <div class="card-body p-2">
+                    <div class="alert alert-notication-custom alert-dismissible fade show" role="alert">
+                        <strong>Xem video hướng dẫn cấu hình khi sử dụng gmail.com để gửi mail tại <a
+                                href="https://youtu.be/3Daci3bR4pM">ĐÂY</a></strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                </div>
+            </div>
             @if (session('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     {{ session('success') }}
@@ -198,18 +207,32 @@
                         </div>
                         <div class="card-body">
                             <p>Nếu bạn sử dụng Gmail để gửi email:</p>
-                            <ol class="mb-0">
-                                <li>Đảm bảo bạn đã <a href="https://myaccount.google.com/security" target="_blank">bật
-                                        "Truy cập ứng dụng kém an toàn"</a> trong tài khoản Google.</li>
-                                <li>Hoặc tốt hơn, <a href="https://security.google.com/settings/security/apppasswords"
-                                        target="_blank">tạo mật khẩu ứng dụng</a> trong cài đặt bảo mật Google và sử dụng
-                                    mật khẩu đó thay vì mật khẩu chính.</li>
-                                <li>Sử dụng <code>smtp.gmail.com</code> làm Mail Host, <code>587</code> làm Mail Port và
-                                    <code>tls</code> làm Mail Encryption.
+                            <ol class="mt-2">
+                                <li class="mb-2">Đảm bảo sử dụng các cấu hình sau:
+                                    <ul class="mt-1">
+                                        <li><strong>Mail Host:</strong> smtp.gmail.com</li>
+                                        <li><strong>Mail Port:</strong> 587</li>
+                                        <li><strong>Mail Encryption:</strong> tls</li>
+                                        <li><strong>Mail Username:</strong> email gmail của bạn</li>
+                                        <li><strong>Mail Password:</strong> mật khẩu ứng dụng (không phải mật khẩu Gmail)
+                                        </li>
+                                    </ul>
                                 </li>
-                                <li>Xem video hướng dẫn chi tiết tại <a href="https://youtu.be/3Daci3bR4pM"
-                                        target="_blank">đây</a>.</li>
+                                <li class="mb-2">Bạn cần <a href="https://myaccount.google.com/security"
+                                        target="_blank">tạo mật khẩu ứng dụng</a> cho Gmail:
+                                    <ul class="mt-1">
+                                        <li>Bật xác minh 2 bước trong tài khoản Google</li>
+                                        <li>Vào "Bảo mật" > "Đăng nhập vào Google" > "Mật khẩu ứng dụng"</li>
+                                        <li>Tạo mật khẩu mới với tên "Laravel Mail"</li>
+                                        <li>Sử dụng mật khẩu được tạo làm Mail Password</li>
+                                    </ul>
+                                </li>
+
                             </ol>
+                            <div class="alert alert-info mt-3">
+                                <i class="fas fa-info-circle me-2"></i> Lỗi "Connection could not be established" thường do
+                                cấu hình host/port không chính xác hoặc bị chặn bởi tường lửa.
+                            </div>
                         </div>
                     </div>
                 </div>
