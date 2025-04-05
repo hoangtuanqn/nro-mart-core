@@ -43,7 +43,7 @@
                             </div>
                         @endforelse
                     </div>
-                    <a href="{{ route('profile.deposit-card') }}" class="hero-sidebar__btn">
+                    <a href="{{ route('profile.deposit-atm') }}" class="hero-sidebar__btn">
                         <i class="fas fa-wallet"></i> NẠP TIỀN NGAY
                     </a>
                 </div>
@@ -53,15 +53,16 @@
 
     <!-- Thông báo và Giao dịch gần đây -->
     <div class="container">
-        <!-- Thông báo -->
-        <div class="service__alert service__alert--success">
-            <i class="fas fa-info-circle"></i>
-            <div class="service__alert-content">
-                <p>Chào mừng bạn đến với Shop Ngọc Rồng Online. Nạp ATM/Momo khuyến mãi 10%, Nạp thẻ cào nhận 100% giá trị
-                    thẻ nạp !!!</p>
+        @if (!empty(config_get('home_notification')))
+            <!-- Thông báo -->
+            <div class="service__alert service__alert--success">
+                <i class="fas fa-info-circle"></i>
+                <div class="service__alert-content">
+                    <p>{{ config_get('home_notification') }}</p>
+                </div>
+                <button class="service__alert-close">&times;</button>
             </div>
-            <button class="service__alert-close">&times;</button>
-        </div>
+        @endif
 
         <!-- Giao dịch gần đây -->
         <div class="recent-transactions">
@@ -97,19 +98,6 @@
             </div>
         </div>
     </div>
-
-    {{-- <!-- Demo Notification Links (hidden in production) -->
-    @if (config('app.env') === 'local' || config('app.debug'))
-        <div class="container">
-            <div
-                style="margin-bottom: 20px; padding: 15px; background-color: var(--bg-light); border-radius: var(--border-radius-md); border: 1px dashed #ddd;">
-                <h3 style="font-size: 1.6rem; margin-bottom: 10px;">Thông tin Modal</h3>
-                <div style="font-size: 1.4rem; color: var(--text-light);">
-                    Modal thông báo chào mừng hiện đang được cấu hình để luôn hiển thị khi trang chủ được tải.
-                </div>
-            </div>
-        </div>
-    @endif --}}
 
     <!-- Menu Transaction -->
     <section class="menu special-menu">
@@ -239,64 +227,64 @@
         </div>
     </section>
 
-    @if (config('app.env') === 'production')
-        <!-- Welcome Modal HTML -->
-        <div id="welcomeModal" class="welcome-modal-overlay" style="display: none;">
-            <div class="welcome-modal">
-                <div class="welcome-modal__header">
-                    <h3 class="welcome-modal__title">Chào mừng đến với Shop Ngọc Rồng</h3>
-                    <button class="welcome-modal__close">&times;</button>
-                </div>
-                <div class="welcome-modal__body">
-                    <img src="https://imgur.com/hIFVXRo.png" alt="Ngọc Rồng Online" class="welcome-modal__icon">
+    {{-- @if (config('app.env') === 'production') --}}
+    <!-- Welcome Modal HTML -->
+    <div id="welcomeModal" class="welcome-modal-overlay" style="display: none;">
+        <div class="welcome-modal">
+            <div class="welcome-modal__header">
+                <h3 class="welcome-modal__title">Thông báo</h3>
+                <button class="welcome-modal__close">&times;</button>
+            </div>
+            <div class="welcome-modal__body">
+                <img src="{{ config_get('site_logo') }}" alt="{{ config_get('site_description') }}"
+                    class="welcome-modal__icon">
 
-                    <p>Chào mừng bạn đến với Shop Ngọc Rồng Online!</p>
-                    <p>Chúng tôi cung cấp nhiều dịch vụ hấp dẫn cho game thủ Ngọc Rồng với giá cả tốt nhất và dịch vụ chất
-                        lượng.</p>
+                <p>Chào mừng bạn đến với <b>{{ config_get('site_name') }}</b>!</p>
+                <p>{{ config_get('site_description') }}</p>
 
-                    <div class="welcome-modal__feature-list">
-                        <div class="welcome-modal__feature-item">
-                            <div class="welcome-modal__feature-icon">
-                                <i class="fas fa-user-circle"></i>
-                            </div>
-                            <div class="welcome-modal__feature-text">
-                                Tài khoản Ngọc Rồng chất lượng, đa dạng mức giá
-                            </div>
+                <div class="welcome-modal__feature-list">
+                    <div class="welcome-modal__feature-item">
+                        <div class="welcome-modal__feature-icon">
+                            <i class="fas fa-user-circle"></i>
                         </div>
-                        <div class="welcome-modal__feature-item">
-                            <div class="welcome-modal__feature-icon">
-                                <i class="fas fa-credit-card"></i>
-                            </div>
-                            <div class="welcome-modal__feature-text">
-                                Nạp thẻ tỷ lệ 1:1 (nhận 100% giá trị thẻ)
-                            </div>
+                        <div class="welcome-modal__feature-text">
+                            Tài khoản Ngọc Rồng chất lượng, đa dạng mức giá
                         </div>
-                        <div class="welcome-modal__feature-item">
-                            <div class="welcome-modal__feature-icon">
-                                <i class="fas fa-money-bill-wave"></i>
-                            </div>
-                            <div class="welcome-modal__feature-text">
-                                Nạp ATM/Momo khuyến mãi 10%
-                            </div>
+                    </div>
+                    <div class="welcome-modal__feature-item">
+                        <div class="welcome-modal__feature-icon">
+                            <i class="fas fa-credit-card"></i>
                         </div>
-                        <div class="welcome-modal__feature-item">
-                            <div class="welcome-modal__feature-icon">
-                                <i class="fas fa-headset"></i>
-                            </div>
-                            <div class="welcome-modal__feature-text">
-                                Hỗ trợ 24/7, giải quyết mọi vấn đề nhanh chóng
-                            </div>
+                        <div class="welcome-modal__feature-text">
+                            Nạp thẻ tỷ lệ 1:1 (nhận 100% giá trị thẻ)
+                        </div>
+                    </div>
+                    <div class="welcome-modal__feature-item">
+                        <div class="welcome-modal__feature-icon">
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+                        <div class="welcome-modal__feature-text">
+                            Nạp ATM/Momo khuyến mãi 10%
+                        </div>
+                    </div>
+                    <div class="welcome-modal__feature-item">
+                        <div class="welcome-modal__feature-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <div class="welcome-modal__feature-text">
+                            Hỗ trợ 24/7, giải quyết mọi vấn đề nhanh chóng
                         </div>
                     </div>
                 </div>
-                <div class="welcome-modal__footer">
-                    <button class="welcome-modal__btn" id="welcomeModalBtn">
-                        <i class="fas fa-rocket"></i> Bắt đầu ngay
-                    </button>
-                </div>
+            </div>
+            <div class="welcome-modal__footer">
+                <button class="welcome-modal__btn" id="welcomeModalBtn">
+                    <i class="fas fa-rocket"></i> Bắt đầu ngay
+                </button>
             </div>
         </div>
-    @endif
+    </div>
+    {{-- @endif --}}
 
 @endsection
 

@@ -12,11 +12,11 @@
         <div class="footer__content">
             <div class="footer__column">
                 <a href="/" class="footer__logo">
-                    <img src="https://imgur.com/YAwjTGo.png" alt="Logo" height="40" width="200">
+                    <img src="{{ config_get('site_logo_footer') }}" alt="{{ config_get('site_name') }}" height="40"
+                        width="200">
                 </a>
                 <p class="footer__desc">
-                    Shop Ngọc Rồng Online cung cấp tài khoản game chính hãng, giá tốt nhất thị trường.
-                    Giao dịch an toàn, nhanh chóng và bảo mật.
+                    {{ config_get('site_description') }}
                 </p>
                 <div class="footer__social">
                     <a href="#" class="social__link"><i class="fab fa-facebook-f"></i></a>
@@ -47,19 +47,20 @@
                 <ul class="footer__contact">
                     <li class="contact__item">
                         <i class="fas fa-phone-alt"></i>
-                        <span>Hotline: 0123.456.789</span>
+                        <span>Hotline:
+                            {{ preg_replace('/(\d{4})(\d{3})(\d{3})/', '$1.$2.$3', config_get('phone')) }}</span>
                     </li>
                     <li class="contact__item">
                         <i class="fas fa-envelope"></i>
-                        <span>Email: support@tuanori.vn</span>
+                        <span>Email: {{ config_get('email') }}</span>
                     </li>
                     <li class="contact__item">
                         <i class="fas fa-map-marker-alt"></i>
-                        <span>Địa chỉ: TPHCM, Việt Nam</span>
+                        <span>Địa chỉ: {{ config_get('address') }}</span>
                     </li>
                     <li class="contact__item">
                         <i class="fas fa-clock"></i>
-                        <span>Giờ làm việc: 8:00 - 22:00</span>
+                        <span>Giờ làm việc: {{ config_get('working_hours') }}</span>
                     </li>
                 </ul>
             </div>
@@ -72,9 +73,9 @@
                 <img src="{{ asset('assets/images/payment/visa.svg') }}" alt="Visa" class="payment__img">
             </div>
             <div class="footer__copyright">
-                &copy; {{ date('Y') }} - Bản quyền thuộc về <a href="https://tuanori.vn"
-                    target="_blank">TUANORI.VN</a> - Thiết kế bởi <a href="https://tuanori.vn"
-                    target="_blank">TUANORI.VN</a>
+                &copy; {{ date('Y') }} - Bản quyền thuộc về <a href="/"
+                    target="_blank">{{ strtoupper(request()->getHost()) }}</a> - Thiết kế bởi <a
+                    href="https://tuanori.vn" target="_blank">TUANORI.VN</a>
             </div>
         </div>
     </div>

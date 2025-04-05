@@ -9,7 +9,7 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>@yield('title', 'Shop của Hoàng Tuấn')</title>
+    <title>@yield('title', 'Website được thiết kế bởi TUANORI.VN') - {{ config_get('site_name') }}</title>
     <link rel="stylesheet" href="{{ asset('assets/fonts/stylesheet.css') }}" />
 
 

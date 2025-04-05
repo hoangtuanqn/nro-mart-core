@@ -13,7 +13,8 @@
             <a class="media__facebook" href="#"><i class="fa-brands fa-facebook"></i></a>
             <a class="media__youtube" href="#"><i class="fa-brands fa-youtube"></i></a>
         </div>
-        <div class="announcement__hotline">Hotline: <a href="tel:0396498015">0396498015</a> (8h - 22h)</div>
+        <div class="announcement__hotline">Hotline: <a href="tel:{{ config_get('phone') }}">{{ config_get('phone') }}</a>
+            ({{ config_get('working_hours') }})</div>
     </div>
 </header>
 
@@ -21,7 +22,7 @@
 <nav class="nav">
     <div class="container row">
         <a href="/" style="display: flex; align-items: center">
-            <img src="https://imgur.com/hIFVXRo.png" alt="Logo Game" class="nav__logo" />
+            <img src="{{ config_get('site_logo') }}" alt="{{ config_get('site_name') }}" class="nav__logo" />
         </a>
         <div class="nav__menu">
             <a href="/" class="text menu__item {{ request()->is('/') ? 'active' : '' }}">Trang chủ</a>
