@@ -14,7 +14,7 @@
             <div class="wheel-page">
                 <div class="wheel-info">
                     <h1 class="wheel-title">{{ $wheel->name }}</h1>
-                    <p class="wheel-description">{{ $wheel->description }}</p>
+                    <p class="wheel-description">{!! $wheel->description !!}</p>
                     <div class="wheel-price">
                         Giá: <span>{{ number_format($wheel->price_per_spin) }} VNĐ</span> / lượt quay
                     </div>
