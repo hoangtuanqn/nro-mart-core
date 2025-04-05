@@ -59,7 +59,7 @@ class FetchMBTransactions extends Command
                     $skippedCount = 0;
 
                     $this->info('Tìm thấy ' . count($transactions['transactions'] ?? []) . ' giao dịch.');
-
+                    // print_r($transactions['transactions']); debug
                     foreach ($transactions['transactions'] ?? [] as $transaction) {
                         // Sử dụng prefix từ cấu hình tài khoản ngân hàng
                         $prefix = $bankAccount->prefix ?? 'naptien';

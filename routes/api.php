@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\User\CardDepositController;
 use App\Http\Controllers\DiscountCodeController;
-
+use Illuminate\Support\Facades\Artisan;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +24,7 @@ Route::get('/callback/card', [CardDepositController::class, 'handleCallback'])->
 
 // Discount code validation
 Route::post('/discount-codes/validate', [DiscountCodeController::class, 'validateCode']);
+
+Route::get('/auto-bank-deposit', function () {
+    Artisan::call('fetch:mb-transactions');
+}); // Bảo vệ route bằng middleware auth
