@@ -375,7 +375,7 @@ select.service__form-control {
 /* Alerts */
 .service__alert {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     padding: 15px 20px;
     border-radius: var(--border-radius-sm);
     margin-bottom: 20px;

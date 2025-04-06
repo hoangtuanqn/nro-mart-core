@@ -379,9 +379,6 @@
 }
 
 /* Tăng margin dưới cho thông báo và giao dịch gần đây */
-.service__alert {
-    margin-bottom: 35px;
-}
 
 .special-menu {
     margin-top: 20px;

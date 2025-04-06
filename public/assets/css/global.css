@@ -944,15 +944,8 @@ body.no-scroll {
 
 /* Service Alerts */
 .service__alert {
-    padding: 15px 20px;
-    border-radius: 8px;
-    margin-bottom: 25px;
-    display: flex;
-    align-items: flex-start;
     gap: 15px;
-    position: relative;
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
-    animation: fadeIn 0.3s ease-in-out;
 }
 
 .service__alert i {
@@ -975,11 +968,7 @@ body.no-scroll {
     color: var(--primary-color);
 }
 
-.service__alert--error {
-    background-color: var(--danger-light);
-    border-left: 5px solid var(--danger);
-    color: var(--danger-dark);
-}
+
 
 .service__alert--error i {
     color: var(--danger);

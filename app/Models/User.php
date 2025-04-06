@@ -11,9 +11,11 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Notifications\ResetPasswordNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Log;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
@@ -59,4 +61,27 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    /**
+     * Gửi thông báo đặt lại mật khẩu với token
+     *
+     * @param string $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        try {
+            $this->notify(new ResetPasswordNotification($token));
+            Log::info('Đã gửi email đặt lại mật khẩu thành công', ['user_id' => $this->id, 'email' => $this->email]);
+        } catch (\Exception $e) {
+            Log::error('Lỗi khi gửi email đặt lại mật khẩu', [
+                'user_id' => $this->id,
+                'email' => $this->email,
+                'error' => $e->getMessage()
+            ]);
+
+            // Không ném ngoại lệ để không làm gián đoạn luồng người dùng
+            // Người dùng vẫn có thể nhận được token thông qua URL trong trường hợp email không gửi được
+        }
+    }
 }
