@@ -12,6 +12,11 @@ use Illuminate\Validation\ValidationException;
 class LoginRequest extends FormRequest
 {
     /**
+     * The field to use for authentication (email or username)
+     */
+    protected string $fieldInput = 'username';
+
+    /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
@@ -27,7 +32,7 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'username' => ['required', 'string'],
+            $this->fieldInput => ['required', 'string'],
             'password' => ['required', 'string'],
         ];
     }
@@ -39,13 +44,24 @@ class LoginRequest extends FormRequest
      */
     public function authenticate(): void
     {
+        $username = $this->input('username');
+
+        if (filter_var($username, FILTER_VALIDATE_EMAIL)) {
+            $this->fieldInput = 'email';
+        }
+
+        $credentials = [
+            $this->fieldInput => $username,
+            'password' => $this->input('password'),
+        ];
+
         $this->ensureIsNotRateLimited();
 
-        if (!Auth::attempt($this->only('username', 'password'), $this->boolean('remember'))) {
+        if (!Auth::attempt($credentials, $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
-                'username' => trans('auth.failed'),
+                $this->fieldInput => trans('auth.failed'),
             ]);
         }
 
@@ -68,7 +84,7 @@ class LoginRequest extends FormRequest
         $seconds = RateLimiter::availableIn($this->throttleKey());
 
         throw ValidationException::withMessages([
-            'username' => trans('auth.throttle', [
+            $this->fieldInput => trans('auth.throttle', [
                 'seconds' => $seconds,
                 'minutes' => ceil($seconds / 60),
             ]),
@@ -80,6 +96,6 @@ class LoginRequest extends FormRequest
      */
     public function throttleKey(): string
     {
-        return Str::transliterate(Str::lower($this->string('username')) . '|' . $this->ip());
+        return Str::transliterate(Str::lower($this->input($this->fieldInput)) . '|' . $this->ip());
     }
 }
