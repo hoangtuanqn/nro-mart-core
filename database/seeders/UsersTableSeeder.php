@@ -32,6 +32,33 @@ class UsersTableSeeder extends Seeder
                 'email_verified_at' => now(),
                 'created_at' => now(),
                 'updated_at' => now(),
+            ],
+            [
+                'username' => 'moderator',
+                'password' => Hash::make('admin123456'), // Mật khẩu đã mã hóa
+                'email' => 'moderator@example.com',
+                'role' => 'admin',
+                'balance' => 1000000,
+                'total_deposited' => 5000000,
+                'banned' => false,
+                'ip_address' => '192.168.1.1',
+                'remember_token' => Str::random(10),
+                'email_verified_at' => now(),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],[
+                'username' => 'staff',
+                'password' => Hash::make('admin123456'), // Mật khẩu đã mã hóa
+                'email' => 'staff@example.com', 
+                'role' => 'admin',
+                'balance' => 1000000,
+                'total_deposited' => 5000000,
+                'banned' => false,
+                'ip_address' => '192.168.1.1',
+                'remember_token' => Str::random(10),
+                'email_verified_at' => now(),
+                'created_at' => now(),
+                'updated_at' => now(),
             ]
         ]);
     }

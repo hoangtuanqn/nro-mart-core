@@ -15,6 +15,7 @@
                     </a>
                 </div>
             </div>
+            
 
             @if (session('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
@@ -29,6 +30,33 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
+            <div class="card-body">
+                <div class="alert alert-notication-custom alert-dismissible fade show" role="alert">
+
+                    <strong>Hệ thống hiện tại đang API qua SePay.</strong> Một doanh nghiệp đang hợp tác với các ngân hàng
+                    lớn.
+                    <br>Hiện nay họ đang cho <b class="fw-bold text-primary">miễn phí 50 giao dịch mỗi tháng</b> và được
+                    quyền <b class="fw-bold text-success">sử dụng tất cả tính năng</b> của họ. Đặc
+                    biệt, nếu bạn muốn nhiều giao dịch hơn, vui lòng xem bảng giá chi tiết tại <a
+                        href="https://sepay.vn/?utm_source=INV&utm_medium=RFTRA&utm_campaign=1B420439" target="_blank"
+                        class="a_link">sepay.vn</a>.
+
+                    <br><b class="fw-bold text-danger">Yêu cầu quý khách đăng ký tài khoản SePay nếu chưa có tại <a
+                            href="https://sepay.vn/?utm_source=INV&utm_medium=RFTRA&utm_campaign=1B420439"
+                            target="_blank">SePay.VN</a></b>
+                    <hr>
+                    Nếu bạn muốn tích hợp qua website khác mà không phải
+                    SePay, hãy liên hệ với nhà cung cấp qua Zalo <a href="https://zalo.me/0812665001" class="a_link"
+                        target="_blank">0812665001</a> hoặc Fanpage <a href="https://www.facebook.com/tuanori.vn"
+                        class="a_link" target="_blank">TUAN ORI - Web Designer MMO</a> để nhận được sự hỗ trợ.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <div class="alert alert-notication-custom alert-dismissible fade show" role="alert">
+                    <strong>Hướng dẫn lấy Access Token:</strong> Vui lòng xem video hướng dẫn chi tiết tại <a
+                        href="https://youtu.be/QgURAxXgE40" target="_blank" class="a_link">đây</a>.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
 
             <div class="card">
                 <div class="card-body">

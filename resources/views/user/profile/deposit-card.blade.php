@@ -18,7 +18,7 @@
                             <div class="info-header">
                                 <div class="balance-info">
                                     <span class="balance-label"><i class="fa-solid fa-wallet me-2"></i> SỐ DƯ HIỆN TẠI:
-                                        {{ number_format($user->balance) }} VND</span>
+                                        {{ number_format(Auth::user()->balance) }} VND</span>
                                 </div>
                             </div>
 
@@ -42,7 +42,7 @@
                                             <i class="fa-solid fa-building me-2"></i> Nhà mạng
                                         </label>
                                         <select class="form-control @error('telecom') is-invalid @enderror" id="telecom"
-                                            name="telecom" required>
+                                            name="telco" required>
                                             <option value="">Chọn nhà mạng</option>
                                             <option value="VIETTEL" {{ old('telecom') == 'VIETTEL' ? 'selected' : '' }}>
                                                 Viettel
@@ -155,22 +155,20 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @if (isset($transactions) && count($transactions) > 0)
-                                                    @foreach ($transactions as $transaction)
-                                                        <tr>
-                                                            <td>{!! display_status($transaction->status) !!}</td>
-                                                            <td>{{ $transaction->created_at }}</td>
-                                                            <td>{{ $transaction->telco }}</td>
-                                                            <td>{{ number_format($transaction->amount) }} VND</td>
-                                                            <td>{{ number_format($transaction->received_amount) }} VND</td>
-                                                            <td>{{ substr($transaction->pin, 0, 3) . '******' }}</td>
-                                                        </tr>
-                                                    @endforeach
-                                                @else
+                                                @forelse ($transactions as $transaction)
+                                                    <tr>
+                                                        <td>{!! display_status($transaction->status) !!}</td>
+                                                        <td>{{ $transaction->created_at }}</td>
+                                                        <td>{{ $transaction->telco }}</td>
+                                                        <td>{{ number_format($transaction->amount) }} VND</td>
+                                                        <td>{{ number_format($transaction->received_amount) }} VND</td>
+                                                        <td>{{ substr($transaction->pin, 0, 3) . '******' }}</td>
+                                                    </tr>
+                                                @empty
                                                     <tr>
                                                         <td colspan="7" class="no-data">Không có dữ liệu</td>
                                                     </tr>
-                                                @endif
+                                                @endforelse
                                             </tbody>
                                         </table>
                                     </div>
@@ -196,7 +194,6 @@
                 amountSelect.addEventListener('change', function() {
                     receiveAmount.textContent = new Intl.NumberFormat('vi-VN').format(this.value) + ' VND';
                 });
-
 
             });
         </script>

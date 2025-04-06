@@ -20,7 +20,6 @@ use App\Http\Controllers\User\ServiceOrderController;
 use App\Http\Controllers\User\RandomCategoryController;
 use App\Http\Controllers\User\RandomAccountController;
 use App\Http\Controllers\User\WithdrawalController;
-use App\Http\Controllers\Admin\WithdrawalController as AdminWithdrawalController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -50,12 +49,12 @@ Route::middleware('auth')->group(function () {
         // Đổi lại thành random
         Route::get('/purchased-random-accounts', [ProfileController::class, 'purchasedRandomAccounts'])->name('purchased-random-accounts');
 
-        // Updated routes to use ProfileController methods
+       
         Route::get('/deposit/card', [ProfileController::class, 'depositCard'])->name('deposit-card');
         Route::get('/deposit/atm', [ProfileController::class, 'depositAtm'])->name('deposit-atm');
         Route::post('/deposit/card', [CardDepositController::class, 'processCardDeposit']);
 
-        // Add routes for gold and gem withdrawal
+
         Route::get('/withdraw-gold', [ProfileController::class, 'withdrawGold'])->name('withdraw-gold');
         Route::post('/withdraw-gold', [ProfileController::class, 'processWithdrawGold']);
         Route::get('/withdraw-gem', [ProfileController::class, 'withdrawGem'])->name('withdraw-gem');

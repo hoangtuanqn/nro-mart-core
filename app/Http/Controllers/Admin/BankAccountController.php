@@ -43,7 +43,7 @@ class BankAccountController extends Controller
         $validated = $request->validate([
             'bank_name' => 'required|string|max:255',
             'account_name' => 'required|string|max:255',
-            'account_number' => 'required|string|max:50|unique:bank_accounts',
+            'account_number' => 'required|string|max:50|unique:bank_accounts,account_number,NULL,id,bank_name,' . $request->bank_name,
             'branch' => 'nullable|string|max:255',
             'note' => 'nullable|string',
             'prefix' => 'required|string|max:50',
@@ -84,7 +84,7 @@ class BankAccountController extends Controller
     {
         $validated = $request->validate([
             'bank_name' => 'required|string|max:255',
-            'account_number' => 'required|string|max:50|unique:bank_accounts,account_number,' . $bankAccount->id,
+            'account_number' => 'required|string|max:50|unique:bank_accounts,account_number,' . $bankAccount->id . ',id,bank_name,' . $request->bank_name,
             'branch' => 'nullable|string|max:255',
             'note' => 'nullable|string',
             'prefix' => 'required|string|max:50',

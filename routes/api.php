@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Artisan;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-Route::get('/callback/card', [CardDepositController::class, 'handleCallback'])->name('callback.card');
+Route::match(['GET', 'POST'],'/callback/card', [CardDepositController::class, 'handleCallback'])->name('callback.card');
 
 // Discount code validation
 Route::post('/discount-codes/validate', [DiscountCodeController::class, 'validateCode']);

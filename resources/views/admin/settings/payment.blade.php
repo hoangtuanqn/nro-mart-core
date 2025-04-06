@@ -17,7 +17,11 @@
                     <a href="https://doithe1s.vn" target="_blank">DOITHE1S.VN</a>,
                     <a href="https://cardvip.vn" target="_blank">CARDVIP.VN</a>.
                     Nếu bạn có nhu cầu chọn đối tác khác, xin vui lòng liên hệ với chúng tôi (phí dịch vụ là
-                    80k).
+                    100K).
+                    <br>
+                    Địa chỉ nhận Callback theo phương thức GET hoặc POST đều được:
+                    <b><strong>{{ url(route('callback.card', [], '')) }}</strong></b>
+
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             </div>

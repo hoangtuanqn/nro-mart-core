@@ -25,22 +25,6 @@ class CardDepositController extends Controller
             abort(403, 'Truy cập không hợp lệ!');
         }
     }
-    /**
-     * Display the card deposit form.
-     */
-    public function showCardDepositForm()
-    {
-        $title = 'Nạp thẻ cào';
-        // Get user's card deposit transactions if authenticated
-        $transactions = [];
-        if (Auth::check()) {
-            $transactions = CardDeposit::where('user_id', Auth::id())
-                ->orderBy('created_at', 'desc')
-                ->paginate(10);
-        }
-
-        return view('user.profile.deposit-card', compact('transactions', 'title'));
-    }
 
     /**
      * Process a card deposit request.
@@ -54,10 +38,23 @@ class CardDepositController extends Controller
             'serial' => 'required|string|min:5|max:20',
             'pin' => 'required|string|min:5|max:20'
         ]);
+        // dd(123);
+
 
         if (CardDeposit::where('status', 'processing')->where('user_id', Auth::id())->count() >= 5) {
             return redirect()->route('profile.deposit-card')
                 ->with('error', 'Bạn có quá nhiều thẻ đang chờ xử lý. Vui lòng đợi!')->withInput();
+        }
+        $partnerWeb = config_get('payment.card.partner_website');
+        if (
+            !in_array($partnerWeb, [
+                'thesieure.com',
+                'cardvip.vn',
+                'doithe1s.vn'
+            ])
+        ) {
+            return redirect()->route('profile.deposit-card')
+                ->with('error', 'Website đối tác không hợp lệ!')->withInput();
         }
         try {
             $partner_id = config_get('payment.card.partner_id', '');
@@ -65,7 +62,7 @@ class CardDepositController extends Controller
             $request_id = rand(111111111111, 9999999999999);
             $response = Http::withHeaders([
                 'Content-Type' => 'application/json'
-            ])->post('https://thesieure.com/chargingws/v2', [
+            ])->post("https://$partnerWeb/chargingws/v2", [
                         'telco' => $request->telco,
                         'code' => $request->pin,
                         'serial' => $request->serial,

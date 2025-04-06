@@ -24,6 +24,9 @@
     font-size: 0.9rem !important;
     box-shadow: -6px 4px 10px #cccccc87;
 }
+.card-body {
+    padding: 0;
+}
 .alert-notication-custom .text-noticate {
     margin-bottom: 0px;
 }

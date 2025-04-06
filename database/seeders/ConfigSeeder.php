@@ -33,8 +33,10 @@ class ConfigSeeder extends Seeder
             'site_keywords' => 'shop game, ngọc rồng, tài khoản game, game online, mua bán tài khoản game',
             'site_logo' => 'https://imgur.com/hIFVXRo.png',
             'site_logo_footer' => 'https://imgur.com/YAwjTGo.png',
+            'site_share_image' => 'https://i.imgur.com/example.jpg', // Ảnh hiển thị khi chia sẻ trên mạng xã hội
             'site_banner' => 'https://123nick.vn/upload-usr/images/8jElw7OK4i_1629517832.gif',
             'site_favicon' => 'https://i.postimg.cc/sg1tCBGL/favicon.png',
+
             'address' => 'TPHCM, Việt Nam', // Cập nhật địa chỉ mới
             'phone' => $contactPhone,
             'email' => $contactEmail,

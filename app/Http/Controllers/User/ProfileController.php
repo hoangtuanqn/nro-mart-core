@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\BankAccount;
 use App\Models\BankDeposit;
+use App\Models\CardDeposit;
 use App\Models\GameAccount;
 use App\Models\MoneyTransaction;
 use App\Models\RandomCategoryAccount;
@@ -161,13 +162,11 @@ class ProfileController extends Controller
     public function depositCard(Request $request)
     {
         $title = 'Nạp tiền thẻ cào';
-        $transactions = MoneyTransaction::where('user_id', Auth::id())
-            ->where('type', 'card')
+        $transactions = CardDeposit::where('user_id', Auth::id())
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
         return view('user.profile.deposit-card', [
-            'user' => $request->user(),
             'transactions' => $transactions,
             'title' => $title
         ]);

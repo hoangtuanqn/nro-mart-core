@@ -14,8 +14,7 @@ use App\Http\Controllers\Admin\NotificationController;
 use App\Mail\TestMail;
 use App\Models\Config;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Config as ConfigFacade;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
@@ -36,6 +35,7 @@ class ConfigController extends Controller
             'site_keywords' => config_get('site_keywords', 'Mua bán tài khoản game Ngọc Rồng'),
             'site_logo' => config_get('site_logo'),
             'site_logo_footer' => config_get('site_logo_footer'),
+            'site_share_image' => config_get('site_share_image'),
             'site_banner' => config_get('site_banner'),
             'site_favicon' => config_get('site_favicon'),
             'address' => config_get('address', ''),
@@ -60,52 +60,43 @@ class ConfigController extends Controller
             'email' => 'nullable|email|max:255',
             'site_logo' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'site_logo_footer' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'site_share_image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'site_banner' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'site_favicon' => 'nullable|image|mimes:ico,png|max:1024',
         ]);
 
         try {
             DB::beginTransaction();
-
-            // Xử lý upload logo nếu có
-            if ($request->hasFile('site_logo')) {
-                $logo = $request->file('site_logo');
-                $logoName = 'logo.' . $logo->getClientOriginalExtension();
-                $logo->move(public_path('assets/img'), $logoName);
-                config_set('site_logo', asset('assets/img/' . $logoName));
-            }
-
-            // Xử lý upload logo footer nếu có
-            if ($request->hasFile('site_logo_footer')) {
-                $logoFooter = $request->file('site_logo_footer');
-                $logoFooterName = 'logo_footer.' . $logoFooter->getClientOriginalExtension();
-                $logoFooter->move(public_path('assets/img'), $logoFooterName);
-                config_set('site_logo_footer', asset('assets/img/' . $logoFooterName));
-            }
-
-            // Xử lý upload banner nếu có
-            if ($request->hasFile('site_banner')) {
-                $banner = $request->file('site_banner');
-                $bannerName = 'banner.' . $banner->getClientOriginalExtension();
-                $banner->move(public_path('assets/img'), $bannerName);
-                config_set('site_banner', asset('assets/img/' . $bannerName));
-            }
-
-            // Xử lý upload favicon nếu có
-            if ($request->hasFile('site_favicon')) {
-                $favicon = $request->file('site_favicon');
-                $faviconName = 'favicon.' . $favicon->getClientOriginalExtension();
-                $favicon->move(public_path('assets/img'), $faviconName);
-                config_set('site_favicon', asset('assets/img/' . $faviconName));
+            $fieldImages = [
+                'logo',
+                'logo_footer',
+                'banner',
+                'favicon',
+                'share_image',
+            ];
+            foreach ($fieldImages as $key) {
+                if ($request->hasFile('site_' . $key)) {
+                    $logo = $request->file('site_' . $key);
+                    $logoName = $key . '.' . $logo->getClientOriginalExtension();
+                    $logo->move(public_path('assets/img'), $logoName);
+                    config_set('site_' . $key, asset('assets/img/' . $logoName));
+                }
             }
 
             // Cập nhật các cài đặt khác
-            config_set('site_name', $request->site_name);
-            config_set('site_keywords', $request->site_keywords);
-            config_set('site_description', $request->site_description);
-            config_set('address', $request->address);
-            config_set('phone', $request->phone);
-            config_set('email', $request->email);
+            $listConfig = [
+                'site_name',
+                'site_keywords',
+                'site_description',
+                'address',
+                'phone',
+                'email'
+            ];
+            foreach ($listConfig as $key) {
+                config_set($key, $request->$key);
+
+            }
+
 
             // Xóa cache để cập nhật cài đặt
             config_clear_cache();

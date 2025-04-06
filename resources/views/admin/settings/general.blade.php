@@ -90,9 +90,9 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-lg-6">
+                            <div class="col-lg-3">
                                 <div class="form-group">
-                                    <label>Logo trang web</label>
+                                    <label>Logo chính trang web</label>
                                     <div class="image-upload">
                                         <input type="file" name="site_logo"
                                             class="form-control @error('site_logo') is-invalid @enderror" accept="image/*"
@@ -122,13 +122,49 @@
                                     </div>
                                 @endif
                             </div>
-                            <div class="col-lg-6">
+
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Logo chân trang</label>
+                                    <div class="image-upload">
+                                        <input type="file" name="site_logo_footer"
+                                            class="form-control @error('site_logo_footer') is-invalid @enderror"
+                                            accept="image/jpeg,image/png,image/jpg,image/gif"
+                                            onchange="previewImage(this, 'preview-logo-footer')">
+                                        @error('site_logo_footer')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                        <div class="image-uploads">
+                                            <img src="{{ asset('assets/img/icons/upload.svg') }}" alt="img">
+                                            <h4>Kéo thả hoặc click để tải logo lên</h4>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @if (!empty($configs['site_logo_footer']))
+                                    <div class="form-group mt-3">
+                                        <label>Logo chân trang hiện tại:</label>
+                                        <div>
+                                            <img id="preview-logo-footer" src="{{ $configs['site_logo_footer'] }}"
+                                                alt="Logo Footer" class="img-fluid mt-2" style="max-height: 50px;">
+                                        </div>
+                                    </div>
+                                @else
+                                    <div class="form-group mt-3">
+                                        <img id="preview-logo-footer" src="" alt="Logo Footer Preview"
+                                            class="img-fluid mt-2" style="max-height: 50px; display: none;">
+                                    </div>
+                                @endif
+                            </div>
+
+
+                            <div class="col-lg-3">
                                 <div class="form-group">
                                     <label>Favicon trang web</label>
                                     <div class="image-upload">
                                         <input type="file" name="site_favicon"
                                             class="form-control @error('site_favicon') is-invalid @enderror"
-                                            accept="image/x-icon,image/png"
+                                            accept="image/jpeg,image/png,image/jpg,image/gif"
                                             onchange="previewImage(this, 'preview-favicon')">
                                         @error('site_favicon')
                                             <div class="invalid-feedback">{{ $message }}</div>
@@ -155,6 +191,73 @@
                                     </div>
                                 @endif
                             </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Banner trang web</label>
+                                    <div class="image-upload">
+                                        <input type="file" name="site_banner"
+                                            class="form-control @error('site_banner') is-invalid @enderror"
+                                            accept="image/jpeg,image/png,image/jpg,image/gif"
+                                            onchange="previewImage(this, 'preview-banner')">
+                                        @error('site_banner')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                        <div class="image-uploads">
+                                            <img src="{{ asset('assets/img/icons/upload.svg') }}" alt="img">
+                                            <h4>Kéo thả hoặc click để tải ảnh banner lên</h4>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @if (!empty($configs['site_banner']))
+                                    <div class="form-group mt-3">
+                                        <label>Ảnh banner hiện tại:</label>
+                                        <div>
+                                            <img id="preview-banner" src="{{ $configs['site_banner'] }}" alt="Banner"
+                                                class="img-fluid mt-2" style="max-height: 200px;">
+                                        </div>
+                                    </div>
+                                @else
+                                    <div class="form-group mt-3">
+                                        <img id="preview-banner" src="" alt="Banner Preview"
+                                            class="img-fluid mt-2" style="max-height: 200px; display: none;">
+                                    </div>
+                                @endif
+                            </div>
+                            <div class="col-lg-3">
+                                <div class="form-group">
+                                    <label>Ảnh bìa trang web</label>
+                                    <div class="image-upload">
+                                        <input type="file" name="site_share_image"
+                                            class="form-control @error('site_share_image') is-invalid @enderror"
+                                            accept="image/jpeg,image/png,image/jpg,image/gif"
+                                            onchange="previewImage(this, 'preview-share-image')">
+                                        @error('site_share_image')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                        <div class="image-uploads">
+                                            <img src="{{ asset('assets/img/icons/upload.svg') }}" alt="img">
+                                            <h4>Kéo thả hoặc click để tải ảnh bìa lên</h4>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                @if (!empty($configs['site_share_image']))
+                                    <div class="form-group mt-3">
+                                        <label>Ảnh bìa hiện tại:</label>
+                                        <div>
+                                            <img id="preview-share-image" src="{{ $configs['site_share_image'] }}"
+                                                alt="Image Share" class="img-fluid mt-2" style="max-height: 200px;">
+                                        </div>
+                                    </div>
+                                @else
+                                    <div class="form-group mt-3">
+                                        <img id="preview-share-image" src="" alt="Image Share Preview"
+                                            class="img-fluid mt-2" style="max-height: 200px; display: none;">
+                                    </div>
+                                @endif
+                            </div>
+
                             <div class="col-lg-12">
                                 <button type="submit" class="btn btn-submit me-2">Lưu thay đổi</button>
                                 <a href="{{ route('admin.index') }}" class="btn btn-cancel">Hủy bỏ</a>
