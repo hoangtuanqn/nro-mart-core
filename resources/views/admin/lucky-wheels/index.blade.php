@@ -42,7 +42,7 @@
                         <div class="wordset">
                             <ul>
                                 <li>
-                                    <a href="{{ route('admin.lucky-wheels.history') }}" class="btn btn-info">
+                                    <a href="{{ route('admin.lucky-wheels.history') }}" class="btn btn-info text-light">
                                         <i class="fa fa-history"></i> Xem lịch sử quay
                                     </a>
                                 </li>
@@ -101,24 +101,9 @@
         </div>
     </div>
 
-    <!-- Modal xác nhận xóa -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteModalLabel">Xác nhận xóa</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Bạn có chắc chắn muốn xóa vòng quay may mắn này không?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                    <button type="button" class="btn btn-danger" id="confirmDelete">Xóa</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <x-modal-confirm-delete
+    message="Bạn có chắc chắn muốn xóa vòng quay may mắn này không? Tất cả dữ liệu có liên quan đến nó sẽ
+                biến mất khỏi hệ thống!" />
 @endsection
 
 @push('scripts')
@@ -144,14 +129,15 @@
                     data: {
                         _token: '{{ csrf_token() }}'
                     },
+                    dataType: 'json',
                     success: function(response) {
                         $('#deleteModal').modal('hide');
-                        if (response.success) {
+                        if (response.status === true) {
                             // Show success message
                             Swal.fire({
                                 icon: 'success',
-                                title: 'Thành công!',
-                                text: 'Đã xóa vòng quay may mắn thành công',
+                                title: 'Thành công!', 
+                                text: response.message,
                                 showConfirmButton: false,
                                 timer: 1500
                             }).then(() => {
@@ -163,8 +149,7 @@
                             Swal.fire({
                                 icon: 'error',
                                 title: 'Lỗi!',
-                                text: response.message ||
-                                    'Có lỗi xảy ra khi xóa vòng quay may mắn',
+                                text: response.message
                             });
                         }
                     },
@@ -172,10 +157,9 @@
                         $('#deleteModal').modal('hide');
                         // Show error message
                         Swal.fire({
-                            icon: 'error',
+                            icon: 'error', 
                             title: 'Lỗi!',
-                            text: xhr.responseJSON?.message ||
-                                'Có lỗi xảy ra khi xóa vòng quay may mắn',
+                            text: xhr.responseJSON?.message || 'Có lỗi xảy ra khi xóa vòng quay may mắn'
                         });
                     }
                 });

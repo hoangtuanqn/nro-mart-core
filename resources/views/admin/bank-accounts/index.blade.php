@@ -130,85 +130,10 @@
         </div>
     </div>
 
-    <!-- Modal xác nhận xóa -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteModalLabel">Xác nhận xóa</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Bạn có chắc chắn muốn xóa tài khoản ngân hàng này không?
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                    <button type="button" class="btn btn-danger" id="confirmDelete">Xóa</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <x-modal-confirm-delete
+        message=" Bạn có chắc chắn muốn xóa tài khoản ngân hàng này không? Tất cả dữ liệu có liên quan đến nó sẽ
+                    biến mất khỏi hệ thống!" />
 @endsection
-
 @push('scripts')
-    <script>
-        $(document).ready(function() {
-            let bankAccountId;
-
-            // Store ID when delete button is clicked
-            function showDeleteModal(id) {
-                bankAccountId = id;
-                $('#deleteModal').modal('show');
-            }
-
-            // Make showDeleteModal function globally available
-            window.showDeleteModal = showDeleteModal;
-
-            // Handle confirm delete button click
-            $('#confirmDelete').on('click', function() {
-                $.ajax({
-                    url: "{{ route('admin.bank-accounts.destroy', ':id') }}".replace(':id',
-                        bankAccountId),
-                    type: 'DELETE',
-                    data: {
-                        _token: '{{ csrf_token() }}'
-                    },
-                    success: function(response) {
-                        $('#deleteModal').modal('hide');
-                        if (response.success) {
-                            // Show success message
-                            Swal.fire({
-                                icon: 'success',
-                                title: 'Thành công!',
-                                text: 'Đã xóa tài khoản ngân hàng thành công',
-                                showConfirmButton: false,
-                                timer: 1500
-                            }).then(() => {
-                                // Reload page
-                                window.location.reload();
-                            });
-                        } else {
-                            // Show error message
-                            Swal.fire({
-                                icon: 'error',
-                                title: 'Lỗi!',
-                                text: response.message ||
-                                    'Có lỗi xảy ra khi xóa tài khoản ngân hàng',
-                            });
-                        }
-                    },
-                    error: function(xhr) {
-                        $('#deleteModal').modal('hide');
-                        // Show error message
-                        Swal.fire({
-                            icon: 'error',
-                            title: 'Lỗi!',
-                            text: xhr.responseJSON?.message ||
-                                'Có lỗi xảy ra khi xóa tài khoản ngân hàng',
-                        });
-                    }
-                });
-            });
-        });
-    </script>
+    <x-js-delete-data url="{{ route('admin.bank-accounts.destroy') }}" />
 @endpush

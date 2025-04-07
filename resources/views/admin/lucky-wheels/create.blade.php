@@ -69,18 +69,58 @@
                                         value="{{ old('price_per_spin', 10000) }}" required min="0" step="1000">
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-sm-6 col-12">
+                            {{-- <div class="col-lg-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="thumbnail">Ảnh đại diện <span class="text-danger">*</span></label>
                                     <input type="file" class="form-control" id="thumbnail" name="thumbnail"
-                                        accept="image/*" required>
+                                        accept="image/*" required onchange="previewImage(this, 'preview-thumbnail')">
                                 </div>
                             </div>
                             <div class="col-lg-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label for="wheel_image">Ảnh vòng quay <span class="text-danger">*</span></label>
                                     <input type="file" class="form-control" id="wheel_image" name="wheel_image"
-                                        accept="image/*" required>
+                                        accept="image/*" required onchange="previewImage(this, 'preview-wheel')">
+                                </div>
+                            </div> --}}
+
+
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Ảnh đại diện <span class="text-danger">*</span></label>
+                                    <div class="image-upload">
+                                        <input type="file" name="thumbnail"
+                                            class="form-control @error('thumbnail') is-invalid @enderror" accept="image/*"
+                                            onchange="previewImage(this, 'preview-thumbnail')">
+                                        @error('thumbnail')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                        <div class="image-uploads">
+                                            <img src="{{ asset('assets/img/icons/upload.svg') }}" alt="Upload Image"
+                                                style="max-width: 200px; max-height: 200px;">
+                                            <h4>Kéo thả hoặc chọn ảnh để tải lên</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>Ảnh vòng quay <span class="text-danger">*</span></label>
+                                    <div class="image-upload">
+                                        <input type="file" name="wheel_image"
+                                            class="form-control @error('wheel_image') is-invalid @enderror" accept="image/*"
+                                            onchange="previewImage(this, 'preview-wheel')">
+                                        @error('wheel_image')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                        <div class="image-uploads">
+                                            <img src="{{ asset('assets/img/icons/upload.svg') }}" alt="Upload Image"
+                                                style="max-width: 200px; max-height: 200px;">
+                                            <h4>Kéo thả hoặc chọn ảnh để tải lên</h4>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -88,15 +128,13 @@
                                 <div class="d-flex flex-wrap justify-content-center gap-3">
                                     <div class="mb-3">
                                         <p class="mb-2">Ảnh đại diện:</p>
-                                        <img id="preview-thumbnail" src="{{ asset('assets/img/img-02.jpg') }}"
-                                            alt="Thumbnail Preview" class="img-fluid rounded"
-                                            style="max-width: 200px; max-height: 150px;">
+                                        <img id="preview-thumbnail" src="https://i.imgur.com/NpL6V6y.png"
+                                            alt="Thumbnail Preview" class="preview-thumb">
                                     </div>
                                     <div class="mb-3">
                                         <p class="mb-2">Ảnh vòng quay:</p>
-                                        <img id="preview-wheel" src="{{ asset('assets/img/img-05.jpg') }}"
-                                            alt="Wheel Preview" class="img-fluid rounded"
-                                            style="max-width: 200px; max-height: 150px;">
+                                        <img id="preview-wheel" src="https://i.imgur.com/NpL6V6y.png" alt="Wheel Preview"
+                                            class="preview-thumb">
                                     </div>
                                 </div>
                             </div>
@@ -118,7 +156,7 @@
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label for="active">Trạng thái</label>
-                                    <select name="active" id="active" class="form-select">
+                                    <select name="active" id="active" class="select">
                                         <option value="1" {{ old('active', 1) ? 'selected' : '' }}>Hoạt động</option>
                                         <option value="0" {{ old('active', 1) ? '' : 'selected' }}>Không hoạt động
                                         </option>
@@ -156,7 +194,7 @@
                                                             <td class="text-center align-middle">{{ $i + 1 }}</td>
                                                             <td>
                                                                 <select name="config[{{ $i }}][type]"
-                                                                    class="form-select form-select-sm reward-type"
+                                                                    class="select form-select-sm reward-type"
                                                                     data-index="{{ $i }}">
                                                                     <option value="gold"
                                                                         {{ isset($oldConfig[$i]) && $oldConfig[$i]['type'] == 'gold' ? 'selected' : '' }}>
@@ -170,16 +208,15 @@
                                                                 <input type="text"
                                                                     name="config[{{ $i }}][content]"
                                                                     value="{{ isset($oldConfig[$i]) ? $oldConfig[$i]['content'] : '' }}"
-                                                                    class="form-control form-control-sm content-input"
-                                                                    required placeholder="Nội dung phần thưởng">
+                                                                    class="form-control" required
+                                                                    placeholder="Nội dung phần thưởng">
                                                             </td>
                                                             <td>
                                                                 <div class="input-group input-group-sm">
                                                                     <input type="number"
                                                                         name="config[{{ $i }}][amount]"
                                                                         value="{{ isset($oldConfig[$i]) ? $oldConfig[$i]['amount'] : 0 }}"
-                                                                        class="form-control form-control-sm amount-input"
-                                                                        min="0" required>
+                                                                        class="form-control" min="0" required>
                                                                     <span
                                                                         class="input-group-text reward-symbol-{{ $i }}">
                                                                         {{ isset($oldConfig[$i]) && $oldConfig[$i]['type'] == 'gem' ? 'Ngọc' : 'Vàng' }}
@@ -191,9 +228,8 @@
                                                                     <input type="number"
                                                                         name="config[{{ $i }}][probability]"
                                                                         value="{{ isset($oldConfig[$i]) ? $oldConfig[$i]['probability'] : 0 }}"
-                                                                        class="form-control form-control-sm probability-input"
-                                                                        min="0" max="100" step="0.1"
-                                                                        required>
+                                                                        class="form-control" min="0"
+                                                                        max="100" step="0.1" required>
                                                                     <span class="input-group-text">%</span>
                                                                 </div>
                                                             </td>
@@ -273,25 +309,6 @@
                     });
             }
 
-            // Xử lý xem trước hình ảnh
-            function previewImage(input, previewId) {
-                if (input.files && input.files[0]) {
-                    const reader = new FileReader();
-                    reader.onload = function(e) {
-                        document.getElementById(previewId).src = e.target.result;
-                    }
-                    reader.readAsDataURL(input.files[0]);
-                }
-            }
-
-            // Bắt sự kiện thay đổi ảnh
-            document.getElementById('thumbnail').addEventListener('change', function() {
-                previewImage(this, 'preview-thumbnail');
-            });
-
-            document.getElementById('wheel_image').addEventListener('change', function() {
-                previewImage(this, 'preview-wheel');
-            });
 
             // Xử lý loại phần thưởng
             const rewardTypes = document.querySelectorAll('.reward-type');

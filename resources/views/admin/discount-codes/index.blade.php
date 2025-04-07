@@ -52,7 +52,7 @@
                                     <th>Lượt sử dụng còn lại</th>
                                     <th>Hết hạn</th>
                                     <th>Trạng thái</th>
-                                    <th class="text-center">Thao tác</th>
+                                    <th class="text-end">Thao tác</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -84,30 +84,18 @@
                                                 {{ $discountCode->is_active === '1' ? 'Hoạt động' : 'Không hoạt động' }}
                                             </span>
                                         </td>
-                                        <td class="text-center">
-                                            <a class="action-set" href="javascript:void(0);" data-bs-toggle="dropdown"
-                                                aria-expanded="false">
-                                                <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                        <td class="text-end">
+                                            <a class="me-3"
+                                                href="{{ route('admin.discount-codes.edit', $discountCode->id) }}"
+                                                title="Chỉnh sửa">
+                                                <img src="{{ asset('assets/img/icons/edit.svg') }}" alt="img">
                                             </a>
-                                            <ul class="dropdown-menu">
-                                                <li>
-                                                    <a href="{{ route('admin.discount-codes.edit', $discountCode->id) }}"
-                                                        class="dropdown-item">
-                                                        <img src="{{ asset('assets/img/icons/edit.svg') }}" class="me-2"
-                                                            alt="img">
-                                                        Sửa mã
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:void(0);" class="dropdown-item"
-                                                        onclick="showDeleteModal({{ $discountCode->id }})">
-                                                        <img src="{{ asset('assets/img/icons/delete.svg') }}"
-                                                            class="me-2" alt="img">
-                                                        Xóa mã
-                                                    </a>
-                                                </li>
-                                            </ul>
+                                            <a class="me-3 delete-item" href="javascript:void(0);"
+                                                onclick="showDeleteModal({{ $discountCode->id }})" title="Xóa">
+                                                <img src="{{ asset('assets/img/icons/delete.svg') }}" alt="img">
+                                            </a>
                                         </td>
+
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -118,25 +106,9 @@
         </div>
     </div>
 
-    <!-- Modal xác nhận xóa -->
-    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteModalLabel">Xác nhận xóa</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    Bạn có chắc chắn muốn xóa mã giảm giá này không? Tất cả dữ liệu có liên quan đến mã giảm giá này sẽ
-                    biến mất khỏi hệ thống!
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                    <button type="button" class="btn btn-danger" id="confirmDelete">Xóa</button>
-                </div>
-            </div>
-        </div>
-    </div>
+    <x-modal-confirm-delete
+        message="Bạn có chắc chắn muốn xóa mã giảm giá này không? Tất cả dữ liệu có liên quan đến mã giảm giá này sẽ
+                    biến mất khỏi hệ thống!" />
 @endsection
 
 @push('scripts')

@@ -27,7 +27,6 @@ class LuckyWheelController extends Controller
     {
         $title = 'Quản lý vòng quay may mắn';
         $luckyWheels = LuckyWheel::orderBy('created_at', 'desc')->get();
-
         return view('admin.lucky-wheels.index', compact('luckyWheels', 'title'));
     }
 
@@ -226,8 +225,10 @@ class LuckyWheelController extends Controller
             // Commit transaction
             DB::commit();
 
-            return redirect()->route('admin.lucky-wheels.index')
-                ->with('success', 'Xóa vòng quay may mắn thành công');
+            return response()->json([
+                'status' => true,
+                'message' => 'Xóa vòng quay may mắn thành công'
+            ]);
 
         } catch (\Exception $e) {
             // Rollback transaction
@@ -236,8 +237,10 @@ class LuckyWheelController extends Controller
             // Log error
             Log::error('Error deleting lucky wheel: ' . $e->getMessage());
 
-            return redirect()->back()
-                ->with('error', 'Đã xảy ra lỗi: ' . $e->getMessage());
+            return response()->json([
+                'status' => false,
+                'message' => 'Đã xảy ra lỗi ' . $e->getMessage()
+            ]);
         }
     }
 
