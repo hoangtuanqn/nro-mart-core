@@ -22,7 +22,7 @@ return new class extends Migration {
             $table->id(); // ID tự động tăng
             $table->string('bank_name'); // Tên ngân hàng
             $table->string('account_name'); // Tên ngân hàng
-            $table->string('account_number')->unique(); // Số tài khoản (đảm bảo duy nhất)
+            $table->string('account_number'); // Số tài khoản (đảm bảo duy nhất)
             $table->string('branch')->nullable(); // Chi nhánh (có thể null)
             $table->text('note')->nullable(); // Ghi chú
             $table->boolean('is_active')->default(true); // Trạng thái hiển thị (true: hiển thị, false: ẩn)

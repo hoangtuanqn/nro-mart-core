@@ -44,7 +44,7 @@
                                     <div class="image-upload">
                                         <input type="file" name="thumbnail"
                                             class="form-control @error('thumbnail') is-invalid @enderror" accept="image/*"
-                                            onchange="previewImage(this)">
+                                            onchange="previewImage(this, 'preview-thumb')">
                                         @error('thumbnail')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -56,13 +56,10 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-12 text-center hidden">
-                                <img id="preview" src="https://i.imgur.com/NpL6V6y.png" style="display: none;"
-                                    class="mx-auto d-block preview-thumb" alt="preview">
-                            </div>
+                            <x-preview-image/>
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label>Mô tả</label>
+                                    <label>Mô tả <span class="text-danger">*</span></label>
                                     <textarea name="description" class="form-control @error('description') is-invalid @enderror" rows="4">{{ old('description') }}</textarea>
                                     @error('description')
                                         <div class="invalid-feedback">{{ $message }}</div>
@@ -82,21 +79,3 @@
     </div>
     </div>
 @endsection
-@push('scripts')
-    <script>
-        function previewImage(input) {
-            var preview = document.getElementById('preview');
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    preview.src = e.target.result;
-                    preview.style.display = 'block';
-                }
-                reader.readAsDataURL(input.files[0]);
-            } else {
-                preview.src = '';
-                preview.style.display = 'none';
-            }
-        }
-    </script>
-@endpush

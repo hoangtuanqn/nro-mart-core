@@ -93,11 +93,12 @@
                                     @enderror
                                 </div>
                             </div>
+
                             <div class="col-lg-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Áp dụng cho</label>
                                     <select name="applicable_to"
-                                        class="form-select @error('applicable_to') is-invalid @enderror">
+                                        class="select @error('applicable_to') is-invalid @enderror">
                                         <option value="">Tất cả</option>
                                         <option value="account" {{ old('applicable_to') == 'account' ? 'selected' : '' }}>
                                             Tài khoản</option>
@@ -125,7 +126,7 @@
                             <div class="col-lg-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Trạng thái <span class="text-danger">*</span></label>
-                                    <select name="is_active" class="form-select @error('is_active') is-invalid @enderror">
+                                    <select name="is_active" class="select @error('is_active') is-invalid @enderror">
                                         <option value="1" {{ old('is_active', '1') == '1' ? 'selected' : '' }}>Hoạt
                                             động</option>
                                         <option value="0" {{ old('is_active') == '0' ? 'selected' : '' }}>Không hoạt

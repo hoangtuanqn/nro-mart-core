@@ -40,7 +40,7 @@
                                     <div class="image-upload">
                                         <input type="file" name="thumbnail"
                                             class="form-control @error('thumbnail') is-invalid @enderror" accept="image/*"
-                                            onchange="previewImage(this)">
+                                            onchange="previewImage(this, 'preview-thumb')">
                                         @error('thumbnail')
                                             <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
@@ -70,10 +70,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-lg-12 text-center">
-                                <img id="preview" src="{{ $category->thumbnail }}" alt="preview"
-                                    class="mx-auto d-block preview-thumb">
-                            </div>
+                            <x-preview-image />
                             <div class="col-lg-12 ">
                                 <div class="form-group">
                                     <label>Mô tả</label>
@@ -95,16 +92,3 @@
     </div>
 
 @endsection
-@push('scripts')
-    <script>
-        function previewImage(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('preview').src = e.target.result;
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-    </script>
-@endpush

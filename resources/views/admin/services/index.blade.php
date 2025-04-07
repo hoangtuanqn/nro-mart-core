@@ -17,7 +17,11 @@
             @if (session('success'))
                 <x-alert-admin type="success" :message="session('success')" />
             @endif
-           
+
+            @if (session('error'))
+                <x-alert-admin type="danger" :message="session('error')" />
+            @endif
+
 
             <div class="card">
                 <div class="card-body">

@@ -37,7 +37,7 @@ class GameServiceController extends Controller
             'description' => 'required|string',
             'type' => 'required|in:gold,gem,leveling',
             'active' => 'required|boolean',
-            'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif',
         ]);
 
         $data = $request->except(['thumbnail']);
@@ -73,7 +73,7 @@ class GameServiceController extends Controller
             'description' => 'required|string',
             'type' => 'required|in:gold,gem,leveling',
             'active' => 'required|boolean',
-            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif',
         ]);
 
         $data = $request->except(['thumbnail']);

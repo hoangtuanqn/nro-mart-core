@@ -22,7 +22,7 @@ return new class extends Migration {
             $table->string('name'); // Tên danh mục
             $table->string('slug'); // URL friendly version of name
             $table->string('thumbnail'); // Ảnh đại diện
-            $table->text('description')->nullable(); // Mô tả (chứa HTML/JS)
+            $table->text('description'); // Mô tả (chứa HTML/JS)
             $table->boolean('active')->default(true); // Trạng thái (1: Hoạt động, 0: Ẩn)
             $table->timestamps();
         });

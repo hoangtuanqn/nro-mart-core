@@ -4,7 +4,7 @@
     <meta name="robots" content="noindex, nofollow">
     <title>@yield('title', 'Trang quản trị bởi Phạm Hoàng Tuấn')</title>
 
-    <link rel="icon" type="image/png" href="{{ asset('assets/img/favicon.png') }}">
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/sg1tCBGL/favicon.png">
     <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/plugins/select2/css/select2.min.css') }}">

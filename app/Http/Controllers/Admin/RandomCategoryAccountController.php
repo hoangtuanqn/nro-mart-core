@@ -38,7 +38,7 @@ class RandomCategoryAccountController extends Controller
             'accounts' => 'required|string',
             'server' => 'required|integer|min:1',
             'price' => 'required|numeric|min:0',
-            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             'note' => 'nullable|string',
             'note_buyer' => 'nullable|string',
         ]);
@@ -139,7 +139,7 @@ class RandomCategoryAccountController extends Controller
             'price' => 'required|numeric|min:0',
             'server' => 'required|integer|min:1',
             'note' => 'nullable|string',
-            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif',
         ]);
 
         $data = $request->all();

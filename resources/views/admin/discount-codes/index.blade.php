@@ -15,7 +15,13 @@
                     </a>
                 </div>
             </div>
+            @if (session('success'))
+                <x-alert-admin type="success" :message="session('success')" />
+            @endif
 
+            @if (session('error'))
+                <x-alert-admin type="danger" :message="session('error')" />
+            @endif
             <div class="card">
                 <div class="card-body">
                     <div class="table-top">
@@ -74,8 +80,8 @@
                                         </td>
                                         <td>
                                             <span
-                                                class="badges {{ $discountCode->status === 'active' ? 'bg-lightgreen' : 'bg-lightred' }}">
-                                                {{ $discountCode->status === 'active' ? 'Hoạt động' : 'Không hoạt động' }}
+                                                class="badges {{ $discountCode->is_active === '1' ? 'bg-lightgreen' : 'bg-lightred' }}">
+                                                {{ $discountCode->is_active === '1' ? 'Hoạt động' : 'Không hoạt động' }}
                                             </span>
                                         </td>
                                         <td class="text-center">

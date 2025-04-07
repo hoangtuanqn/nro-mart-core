@@ -190,35 +190,3 @@
         </div>
     </div>
 @endsection
-
-@push('scripts')
-    <script>
-        function previewImage(input, previewId) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById(previewId).src = e.target.result;
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        function previewMultipleImages(input, previewId) {
-            var preview = document.getElementById(previewId);
-            preview.innerHTML = '';
-            if (input.files) {
-                Array.from(input.files).forEach(file => {
-                    var reader = new FileReader();
-                    reader.onload = function(e) {
-                        var img = document.createElement('img');
-                        img.src = e.target.result;
-                        img.style.maxWidth = '200px';
-                        img.style.maxHeight = '200px';
-                        preview.appendChild(img);
-                    }
-                    reader.readAsDataURL(file);
-                });
-            }
-        }
-    </script>
-@endpush

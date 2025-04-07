@@ -86,14 +86,9 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-12 text-center">
-                                <div class="form-group">
-                                    <img id="preview-thumb" src="#" alt="preview" class="img-fluid mt-2 mb-2"
-                                        style="max-width: 400px; max-height: 300px; display: none;">
-                                </div>
-                            </div>
+                            <x-preview-image />
                             <div class="col-lg-12">
-                                <button type="submit" class="btn btn-submit me-2">Tạo mới</button>
+                                <button type="submit" class="btn btn-submit me-2">Thêm mới</button>
                                 <a href="{{ route('admin.services.index') }}" class="btn btn-cancel">Hủy bỏ</a>
                             </div>
                         </div>
@@ -103,19 +98,3 @@
         </div>
     </div>
 @endsection
-
-@push('scripts')
-    <script>
-        function previewImage(input, previewId) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    var preview = document.getElementById(previewId);
-                    preview.src = e.target.result;
-                    preview.style.display = 'block';
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-    </script>
-@endpush

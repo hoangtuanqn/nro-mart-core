@@ -34,8 +34,8 @@ class GameCategoryController extends Controller
     {
         $request->validate([
             'name' => 'required|string|unique:game_categories,name',
-            'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'description' => 'nullable|string',
+            'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif',
+            'description' => 'required|string',
             'active' => 'boolean'
         ]);
 
@@ -67,7 +67,7 @@ class GameCategoryController extends Controller
             // Validate request data
             $request->validate([
                 'name' => 'required|string|unique:game_categories,name,' . $category->id,
-                'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+                'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif',
                 'description' => 'nullable|string',
                 'active' => 'boolean'
             ]);

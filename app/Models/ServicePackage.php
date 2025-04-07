@@ -20,7 +20,6 @@ class ServicePackage extends Model
     protected $fillable = [
         'game_service_id',
         'name',
-        'amount',
         'price',
         'estimated_time',
         'description',

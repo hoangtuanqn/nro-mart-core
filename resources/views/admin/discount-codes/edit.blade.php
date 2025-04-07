@@ -29,7 +29,7 @@
                             <div class="col-lg-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Kiểu <span class="text-danger">*</span></label>
-                                    <select name="type" class="form-select @error('type') is-invalid @enderror"
+                                    <select name="type" class="select @error('type') is-invalid @enderror"
                                         id="discountType">
                                         <option value="percentage"
                                             {{ old('type', $discountCode->discount_type) == 'percentage' ? 'selected' : '' }}>
@@ -104,7 +104,7 @@
                                 <div class="form-group">
                                     <label>Áp dụng cho</label>
                                     <select name="applicable_to"
-                                        class="form-select @error('applicable_to') is-invalid @enderror">
+                                        class="select @error('applicable_to') is-invalid @enderror">
                                         <option value="">Tất cả</option>
                                         <option value="account"
                                             {{ old('applicable_to', $discountCode->applicable_to) == 'account' ? 'selected' : '' }}>
@@ -135,7 +135,7 @@
                             <div class="col-lg-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Trạng thái <span class="text-danger">*</span></label>
-                                    <select name="is_active" class="form-select @error('is_active') is-invalid @enderror">
+                                    <select name="is_active" class="select @error('is_active') is-invalid @enderror">
                                         <option value="1"
                                             {{ old('is_active', $discountCode->is_active) === '1' ? 'selected' : '' }}>Hoạt
                                             động
