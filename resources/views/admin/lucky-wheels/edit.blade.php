@@ -104,28 +104,43 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-sm-6 col-12">
+
+                            <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label for="thumbnail">Ảnh đại diện</label>
-                                    <input type="file" class="form-control @error('thumbnail') is-invalid @enderror"
-                                        id="thumbnail" name="thumbnail" accept="image/*">
-                                    <small class="form-text text-muted">Để trống nếu không muốn thay đổi ảnh</small>
-                                    <input type="hidden" name="current_thumbnail" value="{{ $luckyWheel->thumbnail }}">
-                                    @error('thumbnail')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                                    <label>Ảnh đại diện <span class="text-danger">*</span></label>
+                                    <div class="image-upload">
+                                        <input type="file" name="thumbnail"
+                                            class="form-control @error('thumbnail') is-invalid @enderror" accept="image/*"
+                                            onchange="previewImage(this, 'preview-thumbnail')">
+                                        @error('thumbnail')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                        <div class="image-uploads">
+                                            <img src="{{ asset('assets/img/icons/upload.svg') }}" alt="Upload Image"
+                                                style="max-width: 200px; max-height: 200px;">
+                                            <h4>Kéo thả hoặc chọn ảnh để tải lên</h4>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-sm-6 col-12">
+
+
+                            <div class="col-lg-6">
                                 <div class="form-group">
-                                    <label for="wheel_image">Ảnh vòng quay</label>
-                                    <input type="file" class="form-control @error('wheel_image') is-invalid @enderror"
-                                        id="wheel_image" name="wheel_image" accept="image/*">
-                                    <small class="form-text text-muted">Để trống nếu không muốn thay đổi ảnh</small>
-                                    <input type="hidden" name="current_wheel_image" value="{{ $luckyWheel->wheel_image }}">
-                                    @error('wheel_image')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                                    <label>Ảnh vòng quay <span class="text-danger">*</span></label>
+                                    <div class="image-upload">
+                                        <input type="file" name="wheel_image"
+                                            class="form-control @error('wheel_image') is-invalid @enderror" accept="image/*"
+                                            onchange="previewImage(this, 'preview-wheel')">
+                                        @error('wheel_image')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                        <div class="image-uploads">
+                                            <img src="{{ asset('assets/img/icons/upload.svg') }}" alt="Upload Image"
+                                                style="max-width: 200px; max-height: 200px;">
+                                            <h4>Kéo thả hoặc chọn ảnh để tải lên</h4>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -134,16 +149,17 @@
                                     <div class="mb-3">
                                         <p class="mb-2">Ảnh đại diện:</p>
                                         <img id="preview-thumbnail" src="{{ $luckyWheel->thumbnail }}"
-                                            alt="Thumbnail Preview" class="img-fluid rounded"
-                                            style="max-width: 200px; max-height: 150px;">
+                                            alt="Thumbnail Preview" class="preview-thumb">
                                     </div>
                                     <div class="mb-3">
                                         <p class="mb-2">Ảnh vòng quay:</p>
                                         <img id="preview-wheel" src="{{ $luckyWheel->wheel_image }}" alt="Wheel Preview"
-                                            class="img-fluid rounded" style="max-width: 200px; max-height: 150px;">
+                                            class="preview-thumb">
                                     </div>
                                 </div>
                             </div>
+
+
 
                             <div class="col-lg-12">
                                 <div class="form-group">
@@ -169,7 +185,7 @@
                                 <div class="form-group">
                                     <label for="active">Trạng thái</label>
                                     <select name="active" id="active"
-                                        class="form-select @error('active') is-invalid @enderror">
+                                        class="select @error('active') is-invalid @enderror">
                                         <option value="1" {{ old('active', $luckyWheel->active) ? 'selected' : '' }}>
                                             Hoạt động</option>
                                         <option value="0" {{ old('active', $luckyWheel->active) ? '' : 'selected' }}>
@@ -186,7 +202,6 @@
                                 <div class="card">
                                     <div class="card-header">
                                         <h5 class="card-title">Cấu hình phần thưởng (8 ô)</h5>
-                                        <p class="card-text">Tổng xác suất các ô phải bằng đúng 100%</p>
                                     </div>
                                     <div class="card-body">
                                         @error('config')
@@ -206,7 +221,7 @@
                                                         <th class="text-center" style="width: 10%">Loại</th>
                                                         <th class="text-center">Nội dung</th>
                                                         <th class="text-center">Số lượng</th>
-                                                        <th class="text-center" style="width: 12%">Xác suất</th>
+                                                        <th class="text-center" style="width: 12%">Xác suất (Tổng 100%)</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -220,7 +235,7 @@
                                                             <td>
                                                                 <div class="form-group mb-0">
                                                                     <select name="config[{{ $i }}][type]"
-                                                                        class="form-select form-select-sm reward-type"
+                                                                        class="select select-sm reward-type"
                                                                         data-index="{{ $i }}">
                                                                         <option value="gold"
                                                                             {{ isset($oldConfig[$i]) && $oldConfig[$i]['type'] == 'gold' ? 'selected' : '' }}>
@@ -269,27 +284,8 @@
                                                         </tr>
                                                     @endfor
                                                 </tbody>
-                                                <tfoot>
-                                                    <tr>
-                                                        <td colspan="3" class="text-end fw-bold">Tổng xác suất:</td>
-                                                        <td colspan="2">
-                                                            <div class="progress">
-                                                                <div id="probabilityProgressBar" class="progress-bar"
-                                                                    role="progressbar" style="width: 0%;"
-                                                                    aria-valuenow="0" aria-valuemin="0"
-                                                                    aria-valuemax="100">0%</div>
-                                                            </div>
-                                                            <span id="totalProbability"
-                                                                class="fw-bold mt-2 d-inline-block">0</span>%
-                                                            <span id="probabilityStatus" class="ms-2"></span>
-                                                        </td>
-                                                    </tr>
-                                                </tfoot>
+
                                             </table>
-                                        </div>
-                                        <div class="alert alert-info mt-3">
-                                            <i class="fa fa-info-circle me-2"></i> Lưu ý: Xác suất có thể sử dụng số thập
-                                            phân (VD: 12.5%) và tổng xác suất phải đúng bằng 100%.
                                         </div>
                                     </div>
                                 </div>
@@ -383,62 +379,25 @@
                 });
             });
 
-            // Xử lý tính tổng xác suất
-            const probabilityInputs = document.querySelectorAll('.probability-input');
-            const totalProbabilityElement = document.getElementById('totalProbability');
-            const probabilityProgressBar = document.getElementById('probabilityProgressBar');
-            const probabilityStatus = document.getElementById('probabilityStatus');
+            // Xử lý form submit
+            const submitButton = document.querySelector('button[type="submit"]');
+            if (submitButton) {
+                submitButton.addEventListener('click', function(e) {
+                    e.preventDefault(); // Ngăn chặn hành vi mặc định của button submit
 
-            function calculateTotalProbability() {
-                let total = 0;
-                probabilityInputs.forEach(input => {
-                    total += parseFloat(input.value) || 0;
+                    // Cập nhật dữ liệu từ CKEditor vào textarea
+                    if (descriptionEditor) {
+                        document.querySelector('#description').value = descriptionEditor.getData();
+                    }
+
+                    if (rulesEditor) {
+                        document.querySelector('#rules').value = rulesEditor.getData();
+                    }
+
+                    // Submit form sau khi đã cập nhật dữ liệu
+                    document.querySelector('form').submit();
                 });
-
-                totalProbabilityElement.textContent = total.toFixed(1);
-                probabilityProgressBar.style.width = `${total}%`;
-                probabilityProgressBar.setAttribute('aria-valuenow', total);
-                probabilityProgressBar.textContent = `${total.toFixed(1)}%`;
-
-                if (total < 100) {
-                    probabilityProgressBar.classList.remove('bg-success', 'bg-danger');
-                    probabilityProgressBar.classList.add('bg-warning');
-                    probabilityStatus.textContent = 'Chưa đủ 100%';
-                    probabilityStatus.className = 'ms-2 text-warning';
-                } else if (total > 100) {
-                    probabilityProgressBar.classList.remove('bg-success', 'bg-warning');
-                    probabilityProgressBar.classList.add('bg-danger');
-                    probabilityStatus.textContent = 'Vượt quá 100%';
-                    probabilityStatus.className = 'ms-2 text-danger';
-                } else {
-                    probabilityProgressBar.classList.remove('bg-warning', 'bg-danger');
-                    probabilityProgressBar.classList.add('bg-success');
-                    probabilityStatus.textContent = 'Đúng 100%';
-                    probabilityStatus.className = 'ms-2 text-success';
-                }
             }
-
-            probabilityInputs.forEach(input => {
-                input.addEventListener('input', calculateTotalProbability);
-            });
-
-            // Tính tổng xác suất khi trang tải xong
-            calculateTotalProbability();
-
-            // Xử lý form submit - cập nhật dữ liệu từ CKEditor vào textarea
-            const form = document.querySelector('form');
-            form.addEventListener('submit', function() {
-                // Cập nhật dữ liệu từ CKEditor vào textarea trước khi submit
-                if (descriptionEditor) {
-                    document.querySelector('#description').value = descriptionEditor.getData();
-                }
-
-                if (rulesEditor) {
-                    document.querySelector('#rules').value = rulesEditor.getData();
-                }
-
-                // Form tự submit bình thường
-            });
         });
     </script>
 @endpush

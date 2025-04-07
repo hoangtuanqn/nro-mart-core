@@ -165,11 +165,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-12 text-center">
-                                <img id="preview-thumb" alt="preview" src="https://i.imgur.com/NpL6V6y.png"
-                                    class="mx-auto d-block mb-3 preview-thumb">
-                                <div id="preview-images" class="d-flex flex-wrap justify-content-center gap-3 mb-3"></div>
-                            </div>
+                            <x-preview-image />
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label>Ghi chú</label>

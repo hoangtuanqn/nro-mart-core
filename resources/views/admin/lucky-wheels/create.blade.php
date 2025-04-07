@@ -69,20 +69,6 @@
                                         value="{{ old('price_per_spin', 10000) }}" required min="0" step="1000">
                                 </div>
                             </div>
-                            {{-- <div class="col-lg-6 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label for="thumbnail">Ảnh đại diện <span class="text-danger">*</span></label>
-                                    <input type="file" class="form-control" id="thumbnail" name="thumbnail"
-                                        accept="image/*" required onchange="previewImage(this, 'preview-thumbnail')">
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-sm-6 col-12">
-                                <div class="form-group">
-                                    <label for="wheel_image">Ảnh vòng quay <span class="text-danger">*</span></label>
-                                    <input type="file" class="form-control" id="wheel_image" name="wheel_image"
-                                        accept="image/*" required onchange="previewImage(this, 'preview-wheel')">
-                                </div>
-                            </div> --}}
 
 
                             <div class="col-lg-6">
@@ -169,7 +155,6 @@
                                 <div class="card">
                                     <div class="card-header">
                                         <h5 class="card-title">Cấu hình phần thưởng (8 ô)</h5>
-                                        <p class="card-text">Tổng xác suất các ô phải bằng đúng 100%</p>
                                     </div>
                                     <div class="card-body">
                                         <div class="table-responsive">
@@ -181,7 +166,8 @@
                                                         <th class="text-center" style="width: 10%">Loại</th>
                                                         <th class="text-center">Nội dung</th>
                                                         <th class="text-center">Số lượng</th>
-                                                        <th class="text-center" style="width: 12%">Xác suất</th>
+                                                        <th class="text-center" style="width: 12%">Xác suất (Tổng 100%)
+                                                        </th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -236,27 +222,7 @@
                                                         </tr>
                                                     @endfor
                                                 </tbody>
-                                                <tfoot>
-                                                    <tr>
-                                                        <td colspan="3" class="text-end fw-bold">Tổng xác suất:</td>
-                                                        <td colspan="2">
-                                                            <div class="progress">
-                                                                <div id="probabilityProgressBar" class="progress-bar"
-                                                                    role="progressbar" style="width: 0%;"
-                                                                    aria-valuenow="0" aria-valuemin="0"
-                                                                    aria-valuemax="100">0%</div>
-                                                            </div>
-                                                            <span id="totalProbability"
-                                                                class="fw-bold mt-2 d-inline-block">0</span>%
-                                                            <span id="probabilityStatus" class="ms-2"></span>
-                                                        </td>
-                                                    </tr>
-                                                </tfoot>
                                             </table>
-                                        </div>
-                                        <div class="alert alert-info mt-3">
-                                            <i class="fa fa-info-circle me-2"></i> Lưu ý: Tổng xác suất phải đúng bằng
-                                            100%.
                                         </div>
                                     </div>
                                 </div>
@@ -309,7 +275,6 @@
                     });
             }
 
-
             // Xử lý loại phần thưởng
             const rewardTypes = document.querySelectorAll('.reward-type');
             rewardTypes.forEach(select => {
@@ -325,48 +290,6 @@
                     }
                 });
             });
-
-            // Tính tổng xác suất
-            const probabilityInputs = document.querySelectorAll('.probability-input');
-            const totalProbabilityElement = document.getElementById('totalProbability');
-            const probabilityProgressBar = document.getElementById('probabilityProgressBar');
-            const probabilityStatus = document.getElementById('probabilityStatus');
-
-            function calculateTotalProbability() {
-                let total = 0;
-                probabilityInputs.forEach(input => {
-                    total += parseFloat(input.value) || 0;
-                });
-
-                totalProbabilityElement.textContent = total.toFixed(1);
-                probabilityProgressBar.style.width = `${total}%`;
-                probabilityProgressBar.setAttribute('aria-valuenow', total);
-                probabilityProgressBar.textContent = `${total.toFixed(1)}%`;
-
-                if (total < 100) {
-                    probabilityProgressBar.classList.remove('bg-success', 'bg-danger');
-                    probabilityProgressBar.classList.add('bg-warning');
-                    probabilityStatus.textContent = 'Chưa đủ 100%';
-                    probabilityStatus.className = 'ms-2 text-warning';
-                } else if (total > 100) {
-                    probabilityProgressBar.classList.remove('bg-success', 'bg-warning');
-                    probabilityProgressBar.classList.add('bg-danger');
-                    probabilityStatus.textContent = 'Vượt quá 100%';
-                    probabilityStatus.className = 'ms-2 text-danger';
-                } else {
-                    probabilityProgressBar.classList.remove('bg-warning', 'bg-danger');
-                    probabilityProgressBar.classList.add('bg-success');
-                    probabilityStatus.textContent = 'Đúng 100%';
-                    probabilityStatus.className = 'ms-2 text-success';
-                }
-            }
-
-            probabilityInputs.forEach(input => {
-                input.addEventListener('input', calculateTotalProbability);
-            });
-
-            // Tính tổng xác suất khi trang tải xong
-            calculateTotalProbability();
 
             // Xử lý nút submit
             document.getElementById('submitButton').addEventListener('click', function(e) {

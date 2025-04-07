@@ -61,8 +61,8 @@ class LuckyWheelController extends Controller
             $request->validate([
                 'name' => 'required|string|max:255',
                 'price_per_spin' => 'required|numeric|min:1000',
-                'thumbnail' => 'required|image',
-                'wheel_image' => 'required|image',
+                'thumbnail' => 'nullable|image',
+                'wheel_image' => 'nullable|image',
                 'description' => 'nullable|string',
                 'rules' => 'required|string',
                 'active' => 'required|boolean',
@@ -83,7 +83,7 @@ class LuckyWheelController extends Controller
             }
 
             // Xử lý upload ảnh đại diện
-            $thumbnailPath = $request->file('thumbnail')->store('lucky-wheels/thumbnails', 'public');
+            $thumbnailPath = $request->file(key: 'thumbnail')->store('lucky-wheels/thumbnails', 'public');
             $wheelImagePath = $request->file('wheel_image')->store('lucky-wheels/wheel-images', 'public');
 
             DB::beginTransaction();
@@ -157,8 +157,6 @@ class LuckyWheelController extends Controller
                 'config.*.content' => 'required|string|max:255',
                 'config.*.amount' => 'required|numeric|min:0',
                 'config.*.probability' => 'required|numeric|min:0|max:100',
-                'current_thumbnail' => 'required|string',
-                'current_wheel_image' => 'required|string',
             ]);
 
             $totalProbability = 0;
@@ -181,16 +179,12 @@ class LuckyWheelController extends Controller
             if ($request->hasFile('thumbnail')) {
                 $thumbnailPath = $request->file('thumbnail')->store('lucky-wheels/thumbnails', 'public');
                 $luckyWheel->thumbnail = asset('storage/' . $thumbnailPath);
-            } else {
-                $luckyWheel->thumbnail = $request->current_thumbnail;
             }
 
             // Xử lý upload ảnh vòng quay nếu có
             if ($request->hasFile('wheel_image')) {
                 $wheelImagePath = $request->file('wheel_image')->store('lucky-wheels/wheel-images', 'public');
                 $luckyWheel->wheel_image = asset('storage/' . $wheelImagePath);
-            } else {
-                $luckyWheel->wheel_image = $request->current_wheel_image;
             }
 
             $luckyWheel->description = $request->description;

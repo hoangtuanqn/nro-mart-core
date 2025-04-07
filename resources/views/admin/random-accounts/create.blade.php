@@ -91,16 +91,26 @@
                                     @enderror
                                 </div>
                             </div>
+
                             <div class="col-lg-12">
                                 <div class="form-group">
                                     <label>Ảnh đại diện</label>
-                                    <input type="file" name="thumbnail"
-                                        class="form-control @error('thumbnail') is-invalid @enderror">
-                                    @error('thumbnail')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                                    <div class="image-upload">
+                                        <input type="file" name="thumbnail"
+                                            class="form-control @error('thumbnail') is-invalid @enderror" accept="image/*"
+                                            onchange="previewImage(this, 'preview-thumb')">
+                                        @error('thumbnail')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                        <div class="image-uploads">
+                                            <img src="{{ asset('assets/img/icons/upload.svg') }}" alt="Upload Image"
+                                                style="max-width: 200px; max-height: 200px;">
+                                            <h4>Kéo thả hoặc chọn ảnh để tải lên</h4>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                            <x-preview-image />
                             <div class="col-lg-12">
                                 <button type="submit" class="btn btn-submit me-2">Tạo tài khoản</button>
                                 <a href="{{ route('admin.random-accounts.index') }}" class="btn btn-cancel">Hủy</a>

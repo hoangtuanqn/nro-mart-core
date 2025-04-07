@@ -110,27 +110,25 @@
                                     @enderror
                                 </div>
                             </div>
-                            @if ($account->thumbnail)
-                                <div class="col-lg-12">
-                                    <div class="form-group">
-                                        <label>Ảnh đại diện hiện tại</label>
-                                        <div>
-                                            <img src="{{ asset($account->thumbnail) }}" alt="Thumbnail"
-                                                class="img-thumbnail" style="max-width: 200px">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label>Ảnh đại diện</label>
+                                    <div class="image-upload">
+                                        <input type="file" name="thumbnail"
+                                            class="form-control @error('thumbnail') is-invalid @enderror" accept="image/*"
+                                            onchange="previewImage(this, 'preview-thumb')">
+                                        @error('thumbnail')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                        <div class="image-uploads">
+                                            <img src="{{ asset('assets/img/icons/upload.svg') }}" alt="Upload Image"
+                                                style="max-width: 200px; max-height: 200px;">
+                                            <h4>Kéo thả hoặc chọn ảnh để tải lên</h4>
                                         </div>
                                     </div>
                                 </div>
-                            @endif
-                            <div class="col-lg-12">
-                                <div class="form-group">
-                                    <label>Cập nhật ảnh đại diện mới</label>
-                                    <input type="file" name="thumbnail"
-                                        class="form-control @error('thumbnail') is-invalid @enderror">
-                                    @error('thumbnail')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
                             </div>
+                            <x-preview-image title="Ảnh đại diện hiện tại" :image="$account->thumbnail" />
                             <div class="col-lg-12">
                                 <button type="submit" class="btn btn-submit me-2">Cập nhật</button>
                                 <a href="{{ route('admin.random-accounts.index') }}" class="btn btn-cancel">Hủy</a>
