@@ -27,6 +27,7 @@ class ClearAllCaches extends Command
     {
         $this->call('config:clear');
         $this->call('cache:clear');
+        $this->call('route:clear');
         $this->call('view:clear');
         $this->info('Đã xóa toàn bộ cache!');
     }

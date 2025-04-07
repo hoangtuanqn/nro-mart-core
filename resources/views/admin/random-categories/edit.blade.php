@@ -59,23 +59,25 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-12 text-center">
-                                <div class="form-group">
-                                    <h5>Ảnh đại diện hiện tại</h5>
-                                    <img id="preview-thumb" src="{{ asset($category->thumbnail) }}"
-                                        alt="{{ $category->name }}" class="img-fluid mt-2 mb-2 preview-thumb">
-                                </div>
-                            </div>
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label>Cập nhật ảnh đại diện mới</label>
-                                    <input type="file" name="thumbnail"
-                                        class="form-control @error('thumbnail') is-invalid @enderror">
-                                    @error('thumbnail')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
+                                    <label>Ảnh đại diện <span class="text-danger">*</span></label>
+                                    <div class="image-upload">
+                                        <input type="file" name="thumbnail"
+                                            class="form-control @error('thumbnail') is-invalid @enderror" accept="image/*"
+                                            onchange="previewImage(this, 'preview-thumb')">
+                                        @error('thumbnail')
+                                            <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                        <div class="image-uploads">
+                                            <img src="{{ asset('assets/img/icons/upload.svg') }}" alt="Upload Image"
+                                                style="max-width: 200px; max-height: 200px;">
+                                            <h4>Kéo thả hoặc chọn ảnh để tải lên</h4>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
+                            <x-preview-image title="Ảnh đại diện hiện tại" :image="$category->thumbnail" />
                             <div class="col-lg-12">
                                 <button type="submit" class="btn btn-submit me-2">Cập nhật</button>
                                 <a href="{{ route('admin.random-categories.index') }}" class="btn btn-cancel">Hủy</a>
