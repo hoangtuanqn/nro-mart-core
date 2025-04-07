@@ -358,47 +358,67 @@ class ConfigController extends Controller
      */
     public function updateLogin(Request $request)
     {
-        $checkGoogle = 'nullable';
-        $checkFacebook = 'nullable';
+        // Base validation rules
+        $rules = [
+            'google_client_id' => 'nullable|string|max:255',
+            'google_client_secret' => 'nullable|string|max:255',
+            'google_redirect' => 'nullable|string|max:255',
+            'facebook_client_id' => 'nullable|string|max:255',
+            'facebook_client_secret' => 'nullable|string|max:255',
+            'facebook_redirect' => 'nullable|string|max:255',
+        ];
 
+        // Additional validation when services are active
         if ($request->has('google_active')) {
-            $checkGoogle = 'required';
+            $rules['google_client_id'] = 'required|string|max:255';
+            $rules['google_client_secret'] = 'required|string|max:255';
+            $rules['google_redirect'] = 'required|string|max:255';
         }
 
         if ($request->has('facebook_active')) {
-            $checkFacebook = 'required';
+            $rules['facebook_client_id'] = 'required|string|max:255';
+            $rules['facebook_client_secret'] = 'required|string|max:255';
+            $rules['facebook_redirect'] = 'required|string|max:255';
         }
 
-        $request->validate([
-            'google_client_id' => $checkGoogle . '|string',
-            'google_client_secret' => $checkGoogle . '|string',
-            'google_redirect' => $checkGoogle . '|string',
-            'google_active' => 'nullable|boolean',
-            'facebook_client_id' => $checkFacebook . '|string',
-            'facebook_client_secret' => $checkFacebook . '|string',
-            'facebook_redirect' => $checkFacebook . '|string',
-            'facebook_active' => 'nullable|boolean',
-        ]);
+        $messages = [
+            'required' => ':attribute không được để trống khi kích hoạt dịch vụ',
+            'string' => ':attribute phải là chuỗi',
+            'max' => ':attribute không được vượt quá :max ký tự',
+            'url' => ':attribute phải là một URL hợp lệ',
+        ];
+
+        $attributes = [
+            'google_client_id' => 'Google Client ID',
+            'google_client_secret' => 'Google Client Secret',
+            'google_redirect' => 'Google Redirect URL',
+            'facebook_client_id' => 'Facebook App ID',
+            'facebook_client_secret' => 'Facebook App Secret',
+            'facebook_redirect' => 'Facebook Redirect URL',
+        ];
+
+        $request->validate($rules, $messages, $attributes);
 
         try {
             DB::beginTransaction();
 
             // Google Login
-            config_set('login_social.google.client_id', $request->google_client_id);
-            config_set('login_social.google.client_secret', $request->google_client_secret);
-            config_set('login_social.google.redirect', $request->google_redirect);
+            config_set('login_social.google.client_id', $request->google_client_id ?: '');
+            config_set('login_social.google.client_secret', $request->google_client_secret ?: '');
+            config_set('login_social.google.redirect', $request->google_redirect ?: '');
             config_set('login_social.google.active', $request->has('google_active') ? '1' : '0');
 
             // Facebook Login
-            config_set('login_social.facebook.client_id', $request->facebook_client_id);
-            config_set('login_social.facebook.client_secret', $request->facebook_client_secret);
-            config_set('login_social.facebook.redirect', $request->facebook_redirect);
+            config_set('login_social.facebook.client_id', $request->facebook_client_id ?: '');
+            config_set('login_social.facebook.client_secret', $request->facebook_client_secret ?: '');
+            config_set('login_social.facebook.redirect', $request->facebook_redirect ?: '');
             config_set('login_social.facebook.active', $request->has('facebook_active') ? '1' : '0');
 
             // Xóa cache để cập nhật cài đặt
             config_clear_cache();
 
             DB::commit();
+
             return redirect()->route('admin.settings.login')
                 ->with('success', 'Cài đặt đăng nhập đã được cập nhật thành công.');
         } catch (\Exception $e) {

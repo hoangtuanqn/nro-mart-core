@@ -123,7 +123,7 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-sm-12">
                                         <div class="form-group">
-                                            <label for="facebook_client_id">App ID</label>
+                                            <label for="facebook_client_id">App ID</label>  
                                             <input id="facebook_client_id" name="facebook_client_id" type="text"
                                                 class="form-control @error('facebook_client_id') is-invalid @enderror"
                                                 value="{{ old('facebook_client_id', $configs['facebook_client_id']) }}">
