@@ -18,9 +18,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use App\Helpers\UploadHelper;
 
 class ConfigController extends Controller
 {
+    /**
+     * Đường dẫn thư mục lưu ảnh
+     */
+    private const UPLOAD_DIR = 'config';
+
     /**
      * Hiển thị và cập nhật cài đặt chung
      */
@@ -67,6 +73,8 @@ class ConfigController extends Controller
 
         try {
             DB::beginTransaction();
+
+            // Xử lý upload các file ảnh
             $fieldImages = [
                 'logo',
                 'logo_footer',
@@ -74,12 +82,18 @@ class ConfigController extends Controller
                 'favicon',
                 'share_image',
             ];
+
             foreach ($fieldImages as $key) {
                 if ($request->hasFile('site_' . $key)) {
-                    $logo = $request->file('site_' . $key);
-                    $logoName = $key . '.' . $logo->getClientOriginalExtension();
-                    $logo->move(public_path('assets/img'), $logoName);
-                    config_set('site_' . $key, asset('assets/img/' . $logoName));
+                    // Xóa file cũ nếu có
+                    $oldImage = config_get('site_' . $key);
+                    if ($oldImage) {
+                        UploadHelper::deleteByUrl($oldImage);
+                    }
+
+                    // Upload file mới
+                    $imageUrl = UploadHelper::upload($request->file('site_' . $key), self::UPLOAD_DIR);
+                    config_set('site_' . $key, $imageUrl);
                 }
             }
 
@@ -94,9 +108,7 @@ class ConfigController extends Controller
             ];
             foreach ($listConfig as $key) {
                 config_set($key, $request->$key);
-
             }
-
 
             // Xóa cache để cập nhật cài đặt
             config_clear_cache();

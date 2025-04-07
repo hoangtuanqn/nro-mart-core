@@ -11,12 +11,19 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\GameCategory;
+use App\Helpers\UploadHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class GameCategoryController extends Controller
 {
+    /**
+     * Đường dẫn thư mục lưu ảnh
+     */
+    private const UPLOAD_DIR = 'categories';
+
     public function index()
     {
         $title = "Danh sách danh mục game";
@@ -32,27 +39,36 @@ class GameCategoryController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|unique:game_categories,name',
-            'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif',
-            'description' => 'required|string',
-            'active' => 'boolean'
-        ]);
+        try {
+            $request->validate([
+                'name' => 'required|string|unique:game_categories,name',
+                'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif',
+                'description' => 'required|string',
+                'active' => 'boolean'
+            ]);
 
-        $data = $request->all();
-        $data['slug'] = Str::slug($request->name);
+            DB::beginTransaction();
 
-        if ($request->hasFile('thumbnail')) {
-            $file = $request->file('thumbnail');
-            $filename = time() . '_' . md5($file->getClientOriginalName()) . '.' . $file->getClientOriginalExtension();
-            $path = $file->storeAs('public/categories', $filename);
-            $data['thumbnail'] = Storage::url($path);
+            $data = $request->all();
+            $data['slug'] = Str::slug($request->name);
+
+            if ($request->hasFile('thumbnail')) {
+                $data['thumbnail'] = UploadHelper::upload($request->file('thumbnail'), self::UPLOAD_DIR);
+            }
+
+            GameCategory::create($data);
+
+            DB::commit();
+
+            return redirect()->route('admin.categories.index')
+                ->with('success', 'Danh mục game đã được thêm thành công!');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('Error creating game category: ' . $e->getMessage());
+            return redirect()->back()
+                ->withInput()
+                ->with('error', 'Có lỗi xảy ra: ' . $e->getMessage());
         }
-
-        GameCategory::create($data);
-
-        return redirect()->route('admin.categories.index')
-            ->with('success', 'Danh mục game đã được thêm thành công!');
     }
 
     public function edit(GameCategory $category)
@@ -72,47 +88,27 @@ class GameCategoryController extends Controller
                 'active' => 'boolean'
             ]);
 
+            DB::beginTransaction();
+
             $data = $request->all();
             $data['slug'] = Str::slug($request->name);
-            $oldThumbnail = null;
 
             if ($request->hasFile('thumbnail')) {
-                try {
-                    // Lưu đường dẫn ảnh cũ để xóa sau khi update thành công
-                    if ($category->thumbnail) {
-                        $oldThumbnail = str_replace('/storage', 'public', $category->thumbnail);
-                    }
-
-                    // Upload ảnh mới
-                    $file = $request->file('thumbnail');
-                    $filename = time() . '_' . md5($file->getClientOriginalName()) . '.' . $file->getClientOriginalExtension();
-                    $path = $file->storeAs('public/categories', $filename);
-                    if (!$path) {
-                        throw new \Exception('Không thể tải lên ảnh mới');
-                    }
-                    $data['thumbnail'] = Storage::url($path);
-                } catch (\Exception $e) {
-                    return redirect()->back()
-                        ->withInput()
-                        ->withErrors(['thumbnail' => 'Lỗi khi tải lên ảnh: ' . $e->getMessage()]);
+                // Delete old thumbnail if exists
+                if ($category->thumbnail) {
+                    UploadHelper::deleteByUrl($category->thumbnail);
                 }
+
+                // Upload new thumbnail
+                $data['thumbnail'] = UploadHelper::upload($request->file('thumbnail'), self::UPLOAD_DIR);
             }
 
-            // Cập nhật dữ liệu
-            // dd($data['description']);
+            // Update category
             if (!$category->update($data)) {
                 throw new \Exception('Không thể cập nhật danh mục');
             }
 
-            // Xóa ảnh cũ sau khi cập nhật thành công
-            if ($oldThumbnail) {
-                try {
-                    Storage::delete($oldThumbnail);
-                } catch (\Exception $e) {
-                    // Log lỗi nhưng không ảnh hưởng đến kết quả cập nhật
-                    \Log::error('Lỗi xóa ảnh cũ: ' . $e->getMessage());
-                }
-            }
+            DB::commit();
 
             return redirect()->route('admin.categories.index')
                 ->with('success', 'Cập nhật danh mục thành công!');
@@ -122,25 +118,35 @@ class GameCategoryController extends Controller
                 ->withErrors($e->errors())
                 ->withInput();
         } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('Error updating game category: ' . $e->getMessage());
             return redirect()->back()
                 ->withInput()
-                ->withErrors(['error' => 'Có lỗi xảy ra: ' . $e->getMessage()]);
+                ->with('error', 'Có lỗi xảy ra: ' . $e->getMessage());
         }
     }
 
     public function destroy(GameCategory $category)
     {
         try {
+            DB::beginTransaction();
+
+            // Delete thumbnail if exists
             if ($category->thumbnail) {
-                Storage::delete(str_replace('/storage', 'public', $category->thumbnail));
+                UploadHelper::deleteByUrl($category->thumbnail);
             }
 
             $category->delete();
+
+            DB::commit();
+
             return response()->json([
                 'success' => true,
                 'message' => 'Xóa danh mục thành công!'
             ]);
         } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error('Error deleting game category: ' . $e->getMessage());
             return response()->json([
                 'success' => false,
                 'message' => 'Có lỗi xảy ra khi xóa danh mục: ' . $e->getMessage()

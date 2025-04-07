@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\LuckyWheel;
 use App\Models\LuckyWheelHistory;
+use App\Helpers\UploadHelper;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -20,6 +21,11 @@ use Illuminate\Validation\Rule;
 
 class LuckyWheelController extends Controller
 {
+    /**
+     * Đường dẫn thư mục lưu ảnh
+     */
+    private const UPLOAD_DIR = 'lucky-wheels';
+
     /**
      * Hiển thị danh sách vòng quay may mắn
      */
@@ -82,18 +88,23 @@ class LuckyWheelController extends Controller
                 return back()->withInput()->withErrors(['config' => 'Tổng xác suất phải bằng 100%']);
             }
 
-            // Xử lý upload ảnh đại diện
-            $thumbnailPath = $request->file(key: 'thumbnail')->store('lucky-wheels/thumbnails', 'public');
-            $wheelImagePath = $request->file('wheel_image')->store('lucky-wheels/wheel-images', 'public');
-
             DB::beginTransaction();
 
             $luckyWheel = new LuckyWheel();
             $luckyWheel->name = $request->name;
             $luckyWheel->slug = Str::slug($request->name);
             $luckyWheel->price_per_spin = $request->price_per_spin;
-            $luckyWheel->thumbnail = asset('storage/' . $thumbnailPath);
-            $luckyWheel->wheel_image = asset('storage/' . $wheelImagePath);
+
+            // Xử lý upload ảnh đại diện
+            if ($request->hasFile('thumbnail')) {
+                $luckyWheel->thumbnail = UploadHelper::upload($request->file('thumbnail'), self::UPLOAD_DIR . '/thumbnails');
+            }
+
+            // Xử lý upload ảnh vòng quay
+            if ($request->hasFile('wheel_image')) {
+                $luckyWheel->wheel_image = UploadHelper::upload($request->file('wheel_image'), self::UPLOAD_DIR . '/wheel-images');
+            }
+
             $luckyWheel->description = $request->description;
             $luckyWheel->rules = $request->rules;
             $luckyWheel->active = $request->active;
@@ -177,14 +188,20 @@ class LuckyWheelController extends Controller
 
             // Xử lý upload ảnh đại diện nếu có
             if ($request->hasFile('thumbnail')) {
-                $thumbnailPath = $request->file('thumbnail')->store('lucky-wheels/thumbnails', 'public');
-                $luckyWheel->thumbnail = asset('storage/' . $thumbnailPath);
+                // Delete old thumbnail if exists
+                if ($luckyWheel->thumbnail) {
+                    UploadHelper::deleteByUrl($luckyWheel->thumbnail);
+                }
+                $luckyWheel->thumbnail = UploadHelper::upload($request->file('thumbnail'), self::UPLOAD_DIR . '/thumbnails');
             }
 
             // Xử lý upload ảnh vòng quay nếu có
             if ($request->hasFile('wheel_image')) {
-                $wheelImagePath = $request->file('wheel_image')->store('lucky-wheels/wheel-images', 'public');
-                $luckyWheel->wheel_image = asset('storage/' . $wheelImagePath);
+                // Delete old wheel image if exists
+                if ($luckyWheel->wheel_image) {
+                    UploadHelper::deleteByUrl($luckyWheel->wheel_image);
+                }
+                $luckyWheel->wheel_image = UploadHelper::upload($request->file('wheel_image'), self::UPLOAD_DIR . '/wheel-images');
             }
 
             $luckyWheel->description = $request->description;
@@ -210,13 +227,19 @@ class LuckyWheelController extends Controller
     public function destroy(LuckyWheel $luckyWheel)
     {
         try {
-            // Bắt đầu transaction
             DB::beginTransaction();
 
-            // Xóa vòng quay
+            // Delete images if exists
+            if ($luckyWheel->thumbnail) {
+                UploadHelper::deleteByUrl($luckyWheel->thumbnail);
+            }
+            if ($luckyWheel->wheel_image) {
+                UploadHelper::deleteByUrl($luckyWheel->wheel_image);
+            }
+
+            // Delete lucky wheel
             $luckyWheel->delete();
 
-            // Commit transaction
             DB::commit();
 
             return response()->json([
@@ -225,10 +248,7 @@ class LuckyWheelController extends Controller
             ]);
 
         } catch (\Exception $e) {
-            // Rollback transaction
             DB::rollBack();
-
-            // Log error
             Log::error('Error deleting lucky wheel: ' . $e->getMessage());
 
             return response()->json([
@@ -248,6 +268,6 @@ class LuckyWheelController extends Controller
             ->orderBy('created_at', 'desc')
             ->paginate(20);
 
-        return view('admin.lucky-wheels.history', compact('history', 'title'));
+        return view('admin.lucky-wheels.history', compact('title', 'history'));
     }
 }

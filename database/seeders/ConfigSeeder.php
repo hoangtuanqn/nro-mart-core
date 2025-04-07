@@ -10,7 +10,6 @@
 namespace Database\Seeders;
 
 use App\Models\Config;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class ConfigSeeder extends Seeder
@@ -33,7 +32,7 @@ class ConfigSeeder extends Seeder
             'site_keywords' => 'shop game, ngọc rồng, tài khoản game, game online, mua bán tài khoản game',
             'site_logo' => 'https://imgur.com/hIFVXRo.png',
             'site_logo_footer' => 'https://imgur.com/YAwjTGo.png',
-            'site_share_image' => 'https://i.imgur.com/example.jpg', // Ảnh hiển thị khi chia sẻ trên mạng xã hội
+            'site_share_image' => 'https://i.postimg.cc/wvp3pq7C/474896014-1024022223074598-3821624009370803646-n.jpg', // Ảnh hiển thị khi chia sẻ trên mạng xã hội
             'site_banner' => 'https://123nick.vn/upload-usr/images/8jElw7OK4i_1629517832.gif',
             'site_favicon' => 'https://i.postimg.cc/sg1tCBGL/favicon.png',
 
@@ -42,7 +41,7 @@ class ConfigSeeder extends Seeder
             'email' => $contactEmail,
 
             // Social media settings
-            'facebook' => 'https://facebook.com/example',
+            'facebook' => 'https://facebook.com/tuanori.vn',
             'zalo' => $contactPhone, // Reusing phone number for Zalo
             'youtube' => 'https://www.youtube.com/@htuanqn',
             'discord' => 'https://discord.gg/example',
