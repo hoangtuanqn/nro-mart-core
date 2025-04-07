@@ -82,29 +82,16 @@
                                         <td>{{ $account->buyer ? $account->buyer->name : 'Chưa có' }}</td>
                                         <td>{{ $account->created_at->format('d/m/Y') }}</td>
                                         <td class="text-center">
-                                            <a class="action-set" href="javascript:void(0);" data-bs-toggle="dropdown"
-                                                aria-expanded="false">
-                                                <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                            <a class="me-3"
+                                                href="{{ route('admin.random-accounts.edit', $account->id) }}">
+                                                <img src="{{ asset('assets/img/icons/edit.svg') }}" alt="img">
                                             </a>
-                                            <ul class="dropdown-menu">
-                                                <li>
-                                                    <a href="{{ route('admin.random-accounts.edit', $account->id) }}"
-                                                        class="dropdown-item">
-                                                        <img src="{{ asset('assets/img/icons/edit.svg') }}" class="me-2"
-                                                            alt="img">
-                                                        Sửa tài khoản
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:void(0);" class="dropdown-item"
-                                                        onclick="showDeleteModal({{ $account->id }})">
-                                                        <img src="{{ asset('assets/img/icons/delete.svg') }}"
-                                                            class="me-2" alt="img">
-                                                        Xóa tài khoản
-                                                    </a>
-                                                </li>
-                                            </ul>
+                                            <a class="me-3 confirm-delete" href="javascript:void(0);"
+                                                onclick="showDeleteModal({{ $account->id }})">
+                                                <img src="{{ asset('assets/img/icons/delete.svg') }}" alt="img">
+                                            </a>
                                         </td>
+
                                     </tr>
                                 @endforeach
                             </tbody>
