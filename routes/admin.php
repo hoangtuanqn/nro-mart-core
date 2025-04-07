@@ -107,7 +107,7 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
         Route::post('/store', [BankAccountController::class, 'store'])->name('store');
         Route::get('/edit/{bankAccount}', [BankAccountController::class, 'edit'])->name('edit');
         Route::put('/update/{bankAccount}', [BankAccountController::class, 'update'])->name('update');
-        Route::delete('/    /{bankAccount}', [BankAccountController::class, 'destroy'])->name('destroy');
+        Route::delete('/delete/{bankAccount}', [BankAccountController::class, 'destroy'])->name('destroy');
     });
 
     // History section

@@ -102,7 +102,7 @@
     </div>
 
     <x-modal-confirm-delete
-    message="Bạn có chắc chắn muốn xóa vòng quay may mắn này không? Tất cả dữ liệu có liên quan đến nó sẽ
+        message="Bạn có chắc chắn muốn xóa vòng quay may mắn này không? Tất cả dữ liệu có liên quan đến nó sẽ
                 biến mất khỏi hệ thống!" />
 @endsection
 
@@ -136,7 +136,7 @@
                             // Show success message
                             Swal.fire({
                                 icon: 'success',
-                                title: 'Thành công!', 
+                                title: 'Thành công!',
                                 text: response.message,
                                 showConfirmButton: false,
                                 timer: 1500
@@ -157,9 +157,10 @@
                         $('#deleteModal').modal('hide');
                         // Show error message
                         Swal.fire({
-                            icon: 'error', 
+                            icon: 'error',
                             title: 'Lỗi!',
-                            text: xhr.responseJSON?.message || 'Có lỗi xảy ra khi xóa vòng quay may mắn'
+                            text: xhr.responseJSON?.message ||
+                                'Có lỗi xảy ra khi xóa vòng quay may mắn'
                         });
                     }
                 });

@@ -115,8 +115,8 @@
                                             <a class="me-3" href="{{ route('admin.bank-accounts.edit', $account->id) }}">
                                                 <img src="{{ asset('assets/img/icons/edit.svg') }}" alt="img">
                                             </a>
-                                            <a class="me-3" href="javascript:void(0);"
-                                                onclick="showDeleteModal({{ $account->id }})">
+                                            <a class="me-3 confirm-delete" href="javascript:void(0);" data-bs-toggle="modal"
+                                                data-bs-target="#deleteModal" data-id="{{ $account->id }}">
                                                 <img src="{{ asset('assets/img/icons/delete.svg') }}" alt="img">
                                             </a>
                                         </td>
@@ -135,5 +135,60 @@
                     biến mất khỏi hệ thống!" />
 @endsection
 @push('scripts')
-    <x-js-delete-data url="{{ route('admin.bank-accounts.destroy') }}" />
+    <script>
+        $(document).ready(function() {
+            let accountId;
+
+            // Lưu ID tài khoản khi click nút xóa
+            $('.confirm-delete').on('click', function() {
+                accountId = $(this).data('id');
+            });
+
+            // Xử lý sự kiện click nút xác nhận xóa
+            $('#confirmDelete').on('click', function() {
+                $.ajax({
+                    url: '/admin/bank-accounts/delete/' + accountId,
+                    type: 'DELETE',
+                    dataType: 'json',
+                    data: {
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        $('#deleteModal').modal('hide');
+                        if (response.status) {
+                            // Hiển thị thông báo thành công
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Thành công!',
+                                text: response.message ||
+                                    'Đã xóa tài khoản ngân hàng thành công',
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then(() => {
+                                // Reload trang
+                                window.location.reload();
+                            });
+                        } else {
+                            // Hiển thị thông báo lỗi
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Lỗi!',
+                                text: response.message ||
+                                    'Có lỗi xảy ra khi xóa tài khoản ngân hàng',
+                            });
+                        }
+                    },
+                    error: function(xhr) {
+                        $('#deleteModal').modal('hide');
+                        // Hiển thị thông báo lỗi
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Lỗi!',
+                            text: 'Có lỗi xảy ra khi xóa tài khoản ngân hàng',
+                        });
+                    }
+                });
+            });
+        });
+    </script>
 @endpush

@@ -114,3 +114,62 @@
         message="Bạn có chắc chắn muốn xóa dịch vụ game này không? Tất cả dữ liệu có liên quan đến nó sẽ
                 biến mất khỏi hệ thống!" />
 @endsection
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            let serviceId;
+
+            // Lưu ID service khi click nút xóa
+            $('.confirm-delete').on('click', function() {
+                serviceId = $(this).data('id');
+            });
+
+            // Xử lý sự kiện click nút xác nhận xóa
+            $('#confirmDelete').on('click', function() {
+                $.ajax({
+                    url: '/admin/services/delete/' + serviceId,
+                    type: 'DELETE',
+                    dataType: 'json',
+                    data: {
+                        _token: '{{ csrf_token() }}'
+                    },
+                    success: function(response) {
+                        $('#deleteModal').modal('hide');
+                        if (response.status) {
+                            // Hiển thị thông báo thành công
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Thành công!',
+                                text: response.message ||
+                                    'Đã xóa dịch vụ game thành công',
+                                showConfirmButton: false,
+                                timer: 1500
+                            }).then(() => {
+                                // Reload trang
+                                window.location.reload();
+                            });
+                        } else {
+                            // Hiển thị thông báo lỗi
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Lỗi!',
+                                text: response.message ||
+                                    'Có lỗi xảy ra khi xóa dịch vụ game',
+                            });
+                        }
+                    },
+                    error: function(xhr) {
+                        $('#deleteModal').modal('hide');
+                        // Hiển thị thông báo lỗi
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Lỗi!',
+                            text: 'Có lỗi xảy ra khi xóa dịch vụ game',
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+@endpush

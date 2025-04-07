@@ -108,7 +108,7 @@ class GameServiceController extends Controller
                 return response()->json([
                     'success' => false,
                     'message' => 'Không thể xóa dịch vụ này vì có gói dịch vụ liên kết với nó'
-                ], 400);
+                ]);
             }
 
             // Delete thumbnail if exists
@@ -119,12 +119,15 @@ class GameServiceController extends Controller
             // Delete the service record
             $service->delete();
 
-            return response()->json(['success' => true]);
+            return response()->json([
+                'success' => true,
+                'message' => 'Dịch vụ game đã được xóa thành công'
+            ]);
         } catch (\Exception $e) {
             return response()->json([
                 'success' => false,
                 'message' => 'Có lỗi xảy ra khi xóa dịch vụ game: ' . $e->getMessage()
-            ], 500);
+            ]);
         }
     }
 }

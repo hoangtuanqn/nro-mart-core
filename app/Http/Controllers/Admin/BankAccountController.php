@@ -111,7 +111,7 @@ class BankAccountController extends Controller
 
             if (request()->ajax()) {
                 return response()->json([
-                    'success' => true,
+                    'status' => true,
                     'message' => 'Tài khoản ngân hàng đã được xóa thành công.'
                 ]);
             }
@@ -121,7 +121,7 @@ class BankAccountController extends Controller
         } catch (\Exception $e) {
             if (request()->ajax()) {
                 return response()->json([
-                    'success' => false,
+                    'status' => false,
                     'message' => 'Không thể xóa tài khoản ngân hàng. Lỗi: ' . $e->getMessage()
                 ], 500);
             }
