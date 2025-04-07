@@ -56,6 +56,10 @@ class ServicePackageController extends Controller
             'description' => 'nullable|string',
             'active' => 'required|boolean',
         ]);
+        if (app()->environment('demo')) {
+            return redirect()->route('admin.packages.index')
+                ->with('error', 'Đang ở môi trường demo. Bạn không thể thay đổi dữ liệu.');
+        }
 
         ServicePackage::create($request->all());
 
@@ -85,6 +89,10 @@ class ServicePackageController extends Controller
             'description' => 'nullable|string',
             'active' => 'required|boolean',
         ]);
+        if (app()->environment('demo')) {
+            return redirect()->route('admin.packages.index')
+                ->with('error', 'Đang ở môi trường demo. Bạn không thể thay đổi dữ liệu.');
+        }
 
         $package->update($request->all());
 
@@ -95,6 +103,10 @@ class ServicePackageController extends Controller
 
     public function destroy($id)
     {
+        return response()->json([
+            'success' => false,
+            'message' => 'Đang ở môi trường demo. Bạn không thể thay đổi dữ liệu.'
+        ]);
         try {
             $package = ServicePackage::findOrFail($id);
             $serviceId = $package->game_service_id;

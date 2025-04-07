@@ -39,13 +39,17 @@ class GameCategoryController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|string|unique:game_categories,name',
+            'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif',
+            'description' => 'required|string',
+            'active' => 'boolean'
+        ]);
+        if (app()->environment('demo')) {
+            return redirect()->route('admin.categories.index')
+                ->with('error', 'Đang ở môi trường demo. Bạn không thể thay đổi dữ liệu.');
+        }
         try {
-            $request->validate([
-                'name' => 'required|string|unique:game_categories,name',
-                'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif',
-                'description' => 'required|string',
-                'active' => 'boolean'
-            ]);
 
             DB::beginTransaction();
 
@@ -79,14 +83,18 @@ class GameCategoryController extends Controller
 
     public function update(Request $request, GameCategory $category)
     {
+        // Validate request data
+        $request->validate([
+            'name' => 'required|string|unique:game_categories,name,' . $category->id,
+            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            'description' => 'nullable|string',
+            'active' => 'boolean'
+        ]);
+        if (app()->environment('demo')) {
+            return redirect()->route('admin.categories.index')
+                ->with('error', 'Đang ở môi trường demo. Bạn không thể thay đổi dữ liệu.');
+        }
         try {
-            // Validate request data
-            $request->validate([
-                'name' => 'required|string|unique:game_categories,name,' . $category->id,
-                'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif',
-                'description' => 'nullable|string',
-                'active' => 'boolean'
-            ]);
 
             DB::beginTransaction();
 
@@ -128,6 +136,12 @@ class GameCategoryController extends Controller
 
     public function destroy(GameCategory $category)
     {
+        if (app()->environment('demo')) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Đang ở môi trường demo. Bạn không thể thay đổi dữ liệu.'
+            ]);
+        }
         try {
             DB::beginTransaction();
 

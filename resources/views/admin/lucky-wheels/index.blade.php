@@ -132,7 +132,7 @@
                     dataType: 'json',
                     success: function(response) {
                         $('#deleteModal').modal('hide');
-                        if (response.status === true) {
+                        if (response.success === true) {
                             // Show success message
                             Swal.fire({
                                 icon: 'success',

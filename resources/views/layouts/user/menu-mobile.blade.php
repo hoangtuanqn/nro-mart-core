@@ -64,7 +64,7 @@
                 @else
                     <li>
                         <a href="{{ route('profile.index') }}" class="mobile-overlay-menu__link">
-                            <i class="fas fa-user-circle"></i> {{ Auth::user()->username }}
+                            <i class="fas fa-user-circle"></i> Tài khoản: {{ Auth::user()->username }}
                         </a>
                     </li>
                     <li>
@@ -101,6 +101,22 @@
                         <i class="fas fa-cogs"></i> Dịch vụ Game
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('lucky.show-all') }}" class="mobile-overlay-menu__link">
+                        <i class="fas fa-dharmachakra"></i> Vòng quay may mắn
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="mobile-overlay-menu__section">
+            <h3 class="mobile-overlay-menu__section-title">Quản trị</h3>
+            <ul class="mobile-overlay-menu__links">
+                <li>
+                    <a href="{{ route('admin.index') }}" class="mobile-overlay-menu__link">
+                        <i class="fas fa-shield-alt"></i> AMDIN PANEL
+                    </a>
+                </li>
+
             </ul>
         </div>
     </div>

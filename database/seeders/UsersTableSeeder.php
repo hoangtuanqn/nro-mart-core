@@ -24,7 +24,7 @@ class UsersTableSeeder extends Seeder
                 'password' => Hash::make('admin123456'), // Mật khẩu đã mã hóa
                 'email' => 'example@example.com',
                 'role' => 'admin',
-                'balance' => 1000000,
+                'balance' => 0,
                 'total_deposited' => 5000000,
                 'banned' => false,
                 'ip_address' => '192.168.1.1',
@@ -38,7 +38,7 @@ class UsersTableSeeder extends Seeder
                 'password' => Hash::make('admin123456'), // Mật khẩu đã mã hóa
                 'email' => 'moderator@example.com',
                 'role' => 'admin',
-                'balance' => 1000000,
+                'balance' => 0,
                 'total_deposited' => 5000000,
                 'banned' => false,
                 'ip_address' => '192.168.1.1',
@@ -46,12 +46,13 @@ class UsersTableSeeder extends Seeder
                 'email_verified_at' => now(),
                 'created_at' => now(),
                 'updated_at' => now(),
-            ],[
+            ],
+            [
                 'username' => 'staff',
                 'password' => Hash::make('admin123456'), // Mật khẩu đã mã hóa
-                'email' => 'staff@example.com', 
+                'email' => 'staff@example.com',
                 'role' => 'admin',
-                'balance' => 1000000,
+                'balance' => 0,
                 'total_deposited' => 5000000,
                 'banned' => false,
                 'ip_address' => '192.168.1.1',

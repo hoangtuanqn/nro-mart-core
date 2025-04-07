@@ -35,7 +35,9 @@
                     <div class="form-group">
                         <label for="username" class="form-label">Tên tài khoản hoặc Email</label>
                         <input id="username" type="text" class="form-input @error('username') is-invalid @enderror"
-                            name="username" value="{{ old('username') }}" required autofocus>
+                            name="username"
+                            value="{{ old('username') ? old('username') : (app()->environment('demo') ? 'admin' : '') }}"
+                            required autofocus>
                         @error('username')
                             <span class="form-error">{{ $message }}</span>
                         @enderror
@@ -44,7 +46,8 @@
                     <div class="form-group">
                         <label for="password" class="form-label">Mật khẩu</label>
                         <input id="password" type="password" class="form-input @error('password') is-invalid @enderror"
-                            name="password" required autocomplete="current-password">
+                            value={{ app()->environment('demo') ? 'admin123456' : '' }} name="password" required
+                            autocomplete="current-password">
                         @error('password')
                             <span class="form-error">{{ $message }}</span>
                         @enderror

@@ -29,7 +29,10 @@ class RandomAccountController extends Controller
 
     public function purchase(Request $request, $id)
     {
-        // : SQLSTATE[42S02]: Base table or view not found: 1146 Table 'gameshop.accounts' doesn't exist (Connection: mysql, SQL: update `accounts` set `status` = sold, `buyer_id` = 1 where `id` = 5)
+        return response()->json([
+            'success' => false,
+            'message' => 'Đang ở môi trường demo. Bạn không thể thay đổi dữ liệu.'
+        ]);
         try {
             DB::beginTransaction();
 
@@ -64,7 +67,7 @@ class RandomAccountController extends Controller
                         'message' => 'Mã giảm giá đã hết hạn'
                     ]);
                 }
-               
+
 
                 // Check if the code has reached its usage limit
                 if ($discountCode->usage_limit && $discountCode->usage_count >= $discountCode->usage_limit) {

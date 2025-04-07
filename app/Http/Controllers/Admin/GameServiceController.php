@@ -39,14 +39,18 @@ class GameServiceController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'required|string',
+            'type' => 'required|in:gold,gem,leveling',
+            'active' => 'required|boolean',
+            'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif',
+        ]);
+        if (app()->environment('demo')) {
+            return redirect()->route('admin.services.index')
+                ->with('error', 'Đang ở môi trường demo. Bạn không thể thay đổi dữ liệu.');
+        }
         try {
-            $request->validate([
-                'name' => 'required|string|max:255',
-                'description' => 'required|string',
-                'type' => 'required|in:gold,gem,leveling',
-                'active' => 'required|boolean',
-                'thumbnail' => 'required|image|mimes:jpeg,png,jpg,gif',
-            ]);
 
             DB::beginTransaction();
 
@@ -92,6 +96,10 @@ class GameServiceController extends Controller
                 'active' => 'required|boolean',
                 'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif',
             ]);
+            if (app()->environment('demo')) {
+                return redirect()->route('admin.services.index')
+                    ->with('error', 'Đang ở môi trường demo. Bạn không thể thay đổi dữ liệu.');
+            }
 
             DB::beginTransaction();
 
@@ -125,6 +133,12 @@ class GameServiceController extends Controller
 
     public function destroy($id)
     {
+        if (app()->environment('demo')) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Đang ở môi trường demo. Bạn không thể thay đổi dữ liệu.'
+            ]);
+        }
         try {
             DB::beginTransaction();
 

@@ -50,7 +50,10 @@ class NotificationController extends Controller
             'class_favicon.required' => 'Vui lòng nhập class biểu tượng',
             'content.required' => 'Vui lòng nhập nội dung thông báo',
         ]);
-
+        if (app()->environment('demo')) {
+            return redirect()->route('admin.settings.notifications')
+                ->with('error', 'Đang ở môi trường demo. Bạn không thể thay đổi dữ liệu.');
+        }
         try {
             DB::beginTransaction();
 
@@ -103,6 +106,10 @@ class NotificationController extends Controller
             'class_favicon.required' => 'Vui lòng nhập class biểu tượng',
             'content.required' => 'Vui lòng nhập nội dung thông báo',
         ]);
+        if (app()->environment('demo')) {
+            return redirect()->route('admin.settings.notifications')
+                ->with('error', 'Đang ở môi trường demo. Bạn không thể thay đổi dữ liệu.');
+        }
 
         try {
             DB::beginTransaction();
@@ -139,6 +146,10 @@ class NotificationController extends Controller
      */
     public function destroy($id)
     {
+        if (app()->environment('demo')) {
+            return redirect()->route('admin.settings.notifications')
+                ->with('error', 'Đang ở môi trường demo. Bạn không thể thay đổi dữ liệu.');
+        }
         try {
             DB::beginTransaction();
 

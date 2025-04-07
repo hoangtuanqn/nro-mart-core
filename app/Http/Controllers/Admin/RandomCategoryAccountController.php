@@ -41,16 +41,20 @@ class RandomCategoryAccountController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'random_category_id' => 'required|exists:random_categories,id',
+            'accounts' => 'required|string',
+            'server' => 'required|integer|min:1',
+            'price' => 'required|numeric|min:0',
+            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+            'note' => 'nullable|string',
+            'note_buyer' => 'nullable|string',
+        ]);
+        if (app()->environment('demo')) {
+            return redirect()->route('admin.random-accounts.index')
+                ->with('error', 'Đang ở môi trường demo. Bạn không thể thay đổi dữ liệu.');
+        }
         try {
-            $request->validate([
-                'random_category_id' => 'required|exists:random_categories,id',
-                'accounts' => 'required|string',
-                'server' => 'required|integer|min:1',
-                'price' => 'required|numeric|min:0',
-                'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif',
-                'note' => 'nullable|string',
-                'note_buyer' => 'nullable|string',
-            ]);
 
             DB::beginTransaction();
 
@@ -138,16 +142,20 @@ class RandomCategoryAccountController extends Controller
 
     public function update(Request $request, RandomCategoryAccount $account)
     {
+        $request->validate([
+            'random_category_id' => 'required|exists:random_categories,id',
+            'account_name' => 'nullable|string|max:100',
+            'password' => 'nullable|string|max:100',
+            'price' => 'required|numeric|min:0',
+            'server' => 'required|integer|min:1',
+            'note' => 'nullable|string',
+            'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif',
+        ]);
+        if (app()->environment('demo')) {
+            return redirect()->route('admin.random-accounts.index')
+                ->with('error', 'Đang ở môi trường demo. Bạn không thể thay đổi dữ liệu.');
+        }
         try {
-            $request->validate([
-                'random_category_id' => 'required|exists:random_categories,id',
-                'account_name' => 'nullable|string|max:100',
-                'password' => 'nullable|string|max:100',
-                'price' => 'required|numeric|min:0',
-                'server' => 'required|integer|min:1',
-                'note' => 'nullable|string',
-                'thumbnail' => 'nullable|image|mimes:jpeg,png,jpg,gif',
-            ]);
 
             DB::beginTransaction();
 
@@ -180,6 +188,10 @@ class RandomCategoryAccountController extends Controller
 
     public function destroy(RandomCategoryAccount $account)
     {
+        if (app()->environment('demo')) {
+            return redirect()->route('admin.random-accounts.index')
+                ->with('error', 'Đang ở môi trường demo. Bạn không thể thay đổi dữ liệu.');
+        }
         // Only allow deleting accounts that haven't been sold
         if ($account->status === 'sold') {
             if (request()->ajax()) {

@@ -50,9 +50,15 @@ class BankAccountController extends Controller
             'access_token' => 'nullable|string',
         ]);
 
+        if (app()->environment('demo')) {
+            return redirect()->route('admin.bank-accounts.index')
+                ->with('error', 'Đang ở môi trường demo. Bạn không thể thay đổi dữ liệu.');
+        }
+
         // Xử lý các trường boolean
         $validated['is_active'] = $request->has('is_active');
         $validated['auto_confirm'] = $request->has('auto_confirm');
+
 
         BankAccount::create($validated);
 
@@ -91,12 +97,17 @@ class BankAccountController extends Controller
             'access_token' => 'nullable|string',
         ]);
 
+        if (app()->environment('demo')) {
+            return redirect()->route('admin.bank-accounts.index')
+                ->with('error', 'Đang ở môi trường demo. Bạn không thể thay đổi dữ liệu.');
+        }
+
         // Xử lý các trường boolean
         $validated['is_active'] = $request->has('is_active');
         $validated['auto_confirm'] = $request->has('auto_confirm');
 
-        $bankAccount->update($validated);
 
+        $bankAccount->update($validated);
         return redirect()->route('admin.bank-accounts.index')
             ->with('success', 'Tài khoản ngân hàng đã được cập nhật thành công.');
     }
@@ -106,12 +117,18 @@ class BankAccountController extends Controller
      */
     public function destroy(BankAccount $bankAccount)
     {
+        if (app()->environment('demo')) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Đang ở môi trường demo. Bạn không thể thay đổi dữ liệu.'
+            ]);
+        }
         try {
             $bankAccount->delete();
 
             if (request()->ajax()) {
                 return response()->json([
-                    'status' => true,
+                    'success' => true,
                     'message' => 'Tài khoản ngân hàng đã được xóa thành công.'
                 ]);
             }
@@ -121,7 +138,7 @@ class BankAccountController extends Controller
         } catch (\Exception $e) {
             if (request()->ajax()) {
                 return response()->json([
-                    'status' => false,
+                    'success' => false,
                     'message' => 'Không thể xóa tài khoản ngân hàng. Lỗi: ' . $e->getMessage()
                 ], 500);
             }

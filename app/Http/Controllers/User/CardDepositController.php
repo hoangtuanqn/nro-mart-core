@@ -38,9 +38,10 @@ class CardDepositController extends Controller
             'serial' => 'required|string|min:5|max:20',
             'pin' => 'required|string|min:5|max:20'
         ]);
-        // dd(123);
-
-
+        if (app()->environment('demo')) {
+            return redirect()->route('profile.deposit-card')
+                ->with('error', 'Đang ở môi trường demo. Bạn không thể thay đổi dữ liệu.')->withInput();
+        }
         if (CardDeposit::where('status', 'processing')->where('user_id', Auth::id())->count() >= 5) {
             return redirect()->route('profile.deposit-card')
                 ->with('error', 'Bạn có quá nhiều thẻ đang chờ xử lý. Vui lòng đợi!')->withInput();

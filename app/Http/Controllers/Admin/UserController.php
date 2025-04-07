@@ -58,6 +58,10 @@ class UserController extends Controller
                 'banned.required' => 'Trạng thái không được để trống',
                 'banned.in' => 'Trạng thái không hợp lệ'
             ]);
+            if (app()->environment('demo')) {
+                return redirect()->route('admin.users.index')
+                    ->with('error', 'Đang ở môi trường demo. Bạn không thể thay đổi dữ liệu.');
+            }
 
             DB::beginTransaction();
 
@@ -106,6 +110,12 @@ class UserController extends Controller
 
     public function destroy($id)
     {
+        if (app()->environment('demo')) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Đang ở môi trường demo. Bạn không thể thay đổi dữ liệu.'
+            ]);
+        }
         // Prevent deleting own account
         if ($id == auth()->id()) {
             if (request()->ajax()) {

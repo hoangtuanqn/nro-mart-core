@@ -155,7 +155,7 @@
                     },
                     success: function(response) {
                         $('#deleteModal').modal('hide');
-                        if (response.status) {
+                        if (response.success) {
                             // Hiển thị thông báo thành công
                             Swal.fire({
                                 icon: 'success',

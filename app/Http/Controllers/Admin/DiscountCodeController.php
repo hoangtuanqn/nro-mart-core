@@ -44,6 +44,10 @@ class DiscountCodeController extends Controller
             'applicable_to' => 'nullable|in:account,random_account,service',
             'expires_at' => 'nullable|date',
         ]);
+        if (app()->environment('demo')) {
+            return redirect()->route('admin.discount-codes.index')
+                ->with('error', 'Đang ở môi trường demo. Bạn không thể thay đổi dữ liệu.');
+        }
 
         $data = $request->all();
 
@@ -93,6 +97,10 @@ class DiscountCodeController extends Controller
             'applicable_to' => 'nullable|in:account,random_account,service',
             'expires_at' => 'nullable|date',
         ]);
+        if (app()->environment('demo')) {
+            return redirect()->route('admin.discount-codes.index')
+                ->with('error', 'Đang ở môi trường demo. Bạn không thể thay đổi dữ liệu.');
+        }
 
         $data = $request->all();
 
@@ -116,6 +124,12 @@ class DiscountCodeController extends Controller
 
     public function destroy(DiscountCode $discountCode)
     {
+        if (app()->environment('demo')) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Đang ở môi trường demo. Bạn không thể thay đổi dữ liệu.'
+            ]);
+        }
         try {
             $discountCode->delete();
 

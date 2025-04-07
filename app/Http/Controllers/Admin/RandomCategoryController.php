@@ -55,6 +55,10 @@ class RandomCategoryController extends Controller
             'description' => 'nullable|string',
             'active' => 'boolean'
         ]);
+        if (app()->environment('demo')) {
+            return redirect()->route('admin.random-categories.index')
+                ->with('error', 'Đang ở môi trường demo. Bạn không thể thay đổi dữ liệu.');
+        }
 
         try {
             DB::beginTransaction();
@@ -101,6 +105,10 @@ class RandomCategoryController extends Controller
             'description' => 'nullable|string',
             'active' => 'boolean'
         ]);
+        if (app()->environment('demo')) {
+            return redirect()->route('admin.random-categories.index')
+                ->with('error', 'Đang ở môi trường demo. Bạn không thể thay đổi dữ liệu.');
+        }
 
         try {
             DB::beginTransaction();
@@ -140,6 +148,12 @@ class RandomCategoryController extends Controller
      */
     public function destroy(RandomCategory $category)
     {
+        if (app()->environment('demo')) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Đang ở môi trường demo. Bạn không thể thay đổi dữ liệu.'
+            ]);
+        }
         try {
             DB::beginTransaction();
 

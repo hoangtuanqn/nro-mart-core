@@ -70,7 +70,10 @@ class ConfigController extends Controller
             'site_banner' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'site_favicon' => 'nullable|image|mimes:ico,png|max:1024',
         ]);
-
+        if (app()->environment('demo')) {
+            return redirect()->route('admin.settings.general')
+                ->with('error', 'Đang ở môi trường demo. Bạn không thể thay đổi dữ liệu.');
+        }
         try {
             DB::beginTransaction();
 
@@ -164,7 +167,10 @@ class ConfigController extends Controller
             'home_notification' => 'nullable|string',
             'welcome_modal' => 'nullable|boolean',
         ]);
-
+        if (app()->environment('demo')) {
+            return redirect()->route('admin.settings.social')
+                ->with('error', 'Đang ở môi trường demo. Bạn không thể thay đổi dữ liệu.');
+        }
         try {
             DB::beginTransaction();
 
@@ -231,6 +237,10 @@ class ConfigController extends Controller
             'mail_from_address' => 'required|email|max:255',
             'mail_from_name' => 'required|string|max:255',
         ]);
+        if (app()->environment('demo')) {
+            return redirect()->route('admin.settings.email')
+                ->with('error', 'Đang ở môi trường demo. Bạn không thể thay đổi dữ liệu.');
+        }
 
         try {
             DB::beginTransaction();
@@ -299,6 +309,10 @@ class ConfigController extends Controller
         ], [
             'partner_website_card.in' => 'Chọn đối tác chưa hợp lệ. Bạn muốn thêm đối tác hãy liên hệ chúng tôi.'
         ]);
+        if (app()->environment('demo')) {
+            return redirect()->route('admin.settings.payment')
+                ->with('error', 'Đang ở môi trường demo. Bạn không thể thay đổi dữ liệu.');
+        }
 
         try {
             DB::beginTransaction();
@@ -367,6 +381,10 @@ class ConfigController extends Controller
             'facebook_client_secret' => 'nullable|string|max:255',
             'facebook_redirect' => 'nullable|string|max:255',
         ];
+        if (app()->environment('demo')) {
+            return redirect()->route('admin.settings.login')
+                ->with('error', 'Đang ở môi trường demo. Bạn không thể thay đổi dữ liệu.');
+        }
 
         // Additional validation when services are active
         if ($request->has('google_active')) {

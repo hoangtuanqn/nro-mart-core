@@ -33,6 +33,10 @@ class GameAccountController extends Controller
 
     public function purchase(Request $request, $id)
     {
+        return response()->json([
+            'success' => false,
+            'message' => 'Đang ở môi trường demo. Bạn không thể thay đổi dữ liệu.'
+        ]);
         try {
             DB::beginTransaction();
 

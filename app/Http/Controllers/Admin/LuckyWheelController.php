@@ -79,6 +79,7 @@ class LuckyWheelController extends Controller
                 'config.*.probability' => 'required|numeric|min:0|max:100',
             ]);
 
+
             $totalProbability = 0;
             foreach ($request->config as $item) {
                 $totalProbability += $item['probability'];
@@ -86,6 +87,11 @@ class LuckyWheelController extends Controller
 
             if ($totalProbability != 100) {
                 return back()->withInput()->withErrors(['config' => 'Tổng xác suất phải bằng 100%']);
+            }
+
+            if (app()->environment('demo')) {
+                return redirect()->route('admin.lucky-wheels.index')
+                    ->with('error', 'Đang ở môi trường demo. Bạn không thể thay đổi dữ liệu.');
             }
 
             DB::beginTransaction();
@@ -178,6 +184,10 @@ class LuckyWheelController extends Controller
             if ($totalProbability != 100) {
                 return back()->withInput()->withErrors(['config' => 'Tổng xác suất phải bằng 100%']);
             }
+            if (app()->environment('demo')) {
+                return redirect()->route('admin.lucky-wheels.index')
+                    ->with('error', 'Đang ở môi trường demo. Bạn không thể thay đổi dữ liệu.');
+            }
 
             DB::beginTransaction();
 
@@ -226,6 +236,12 @@ class LuckyWheelController extends Controller
      */
     public function destroy(LuckyWheel $luckyWheel)
     {
+        if (app()->environment('demo')) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Đang ở môi trường demo. Bạn không thể thay đổi dữ liệu.'
+            ]);
+        }
         try {
             DB::beginTransaction();
 
@@ -243,7 +259,7 @@ class LuckyWheelController extends Controller
             DB::commit();
 
             return response()->json([
-                'status' => true,
+                'success' => true,
                 'message' => 'Xóa vòng quay may mắn thành công'
             ]);
 
@@ -252,7 +268,7 @@ class LuckyWheelController extends Controller
             Log::error('Error deleting lucky wheel: ' . $e->getMessage());
 
             return response()->json([
-                'status' => false,
+                'success' => false,
                 'message' => 'Đã xảy ra lỗi ' . $e->getMessage()
             ]);
         }

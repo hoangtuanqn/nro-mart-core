@@ -39,6 +39,11 @@ class ServiceOrderController extends Controller
                 ->withErrors($validator)
                 ->withInput();
         }
+        if (app()->environment('demo')) {
+            return redirect()->back()
+                ->with('error', 'Đang ở môi trường demo. Bạn không thể thay đổi dữ liệu.')
+                ->withInput();
+        }
 
         // Lấy thông tin package
         $package = ServicePackage::findOrFail($request->input('package_id'));
