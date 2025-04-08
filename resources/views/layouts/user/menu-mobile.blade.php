@@ -108,6 +108,7 @@
                 </li>
             </ul>
         </div>
+        @if(Auth::check() && Auth::user()->role === 'admin')
         <div class="mobile-overlay-menu__section">
             <h3 class="mobile-overlay-menu__section-title">Quản trị</h3>
             <ul class="mobile-overlay-menu__links">
@@ -119,6 +120,7 @@
 
             </ul>
         </div>
+        @endif
     </div>
 </div>
 

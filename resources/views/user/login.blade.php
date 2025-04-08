@@ -46,7 +46,7 @@
                     <div class="form-group">
                         <label for="password" class="form-label">Mật khẩu</label>
                         <input id="password" type="password" class="form-input @error('password') is-invalid @enderror"
-                            value={{ app()->environment('demo') ? 'admin123456' : '' }} name="password" required
+                            value="{{ old('password') ? old('password') : (app()->environment('demo') ? 'admin123456' : '') }}" name="password" required
                             autocomplete="current-password">
                         @error('password')
                             <span class="form-error">{{ $message }}</span>
