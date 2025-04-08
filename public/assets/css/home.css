@@ -14,7 +14,7 @@
     overflow: hidden;
     box-shadow: var(--shadow-md);
     position: relative;
-    height: 350px;
+    height: 100%;
 }
 
 .hero-banner__img {
@@ -271,6 +271,7 @@
 }
 
 .hero-banner a {
+    display: flex;
     background: linear-gradient(135deg, var(--second-light), var(--second-color));
     color: white;
     border-radius: 30px;
@@ -279,7 +280,6 @@
     box-shadow: 0 5px 15px rgba(244, 115, 185, 0.3);
     transition: all 0.3s ease;
     text-decoration: none;
-    margin-top: 15px;
 }
 
 .hero-banner a:hover {

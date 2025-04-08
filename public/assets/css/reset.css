@@ -121,3 +121,13 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 }
+
+
+select {
+    color: inherit;
+    background-color: inherit;
+}
+
+select::-ms-expand {
+    display: none;
+}
