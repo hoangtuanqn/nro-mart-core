@@ -32,9 +32,9 @@ class ConfigSeeder extends Seeder
             'site_keywords' => 'shop game, ngọc rồng, tài khoản game, game online, mua bán tài khoản game',
             'site_logo' => 'https://imgur.com/hIFVXRo.png',
             'site_logo_footer' => 'https://imgur.com/YAwjTGo.png',
-            'site_share_image' => 'https://i.postimg.cc/wvp3pq7C/474896014-1024022223074598-3821624009370803646-n.jpg', // Ảnh hiển thị khi chia sẻ trên mạng xã hội
-            'site_banner' => 'https://123nick.vn/upload-usr/images/8jElw7OK4i_1629517832.gif',
-            'site_favicon' => 'https://i.postimg.cc/sg1tCBGL/favicon.png',
+            'site_share_image' => 'https://i.imgur.com/LFjJOxc.jpeg', // Ảnh hiển thị khi chia sẻ trên mạng xã hội
+            'site_banner' => 'https://i.imgur.com/Z7OuMCq.png',
+            'site_favicon' => 'https://i.imgur.com/J46gSIO.png',
 
             'address' => 'TPHCM, Việt Nam', // Cập nhật địa chỉ mới
             'phone' => $contactPhone,
@@ -69,14 +69,14 @@ class ConfigSeeder extends Seeder
             'payment.bank.active' => '1',
             'payment.momo.active' => '1',
             // Login social settings (stored as JSON)
-            'login_social.google.active' => '1',
-            'login_social.google.client_id' => '695655624016-tnn916t7g53oqulsiq0d9vvn7bof1568.apps.googleusercontent.com',
-            'login_social.google.client_secret' => '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',
-            'login_social.google.redirect' => 'http://localhost:8000/auth/google/callback',
-            'login_social.facebook.active' => '1',
-            'login_social.facebook.client_id' => '713944317580357',
-            'login_social.facebook.client_secret' => '481beed7538a8b7318c45e94401f4e3c',
-            'login_social.facebook.redirect' => 'http://localhost:8000/auth/facebook/callback',
+            'login_social.google.active' => '0',
+            'login_social.google.client_id' => '',
+            'login_social.google.client_secret' => '',
+            'login_social.google.redirect' => '',
+            'login_social.facebook.active' => '0',
+            'login_social.facebook.client_id' => '',
+            'login_social.facebook.client_secret' => '',
+            'login_social.facebook.redirect' => '',
         ];
 
         // Process and save the configs

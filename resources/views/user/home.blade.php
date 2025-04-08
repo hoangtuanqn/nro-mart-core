@@ -108,25 +108,25 @@
             <div class="transaction__list">
                 <a href="{{ route('profile.deposit-card') }}" class="transaction__item">
                     <div class="transaction__icon">
-                        <img src="https://i.postimg.cc/0yBm8jjB/NapThe.png" alt="Nạp thẻ" class="transaction__img" />
+                        <img src="https://i.imgur.com/cZ8R4uz.png" alt="Nạp thẻ" class="transaction__img" />
                     </div>
                     <p class="text text__transaction__item">NẠP THẺ</p>
                 </a>
                 <a href="/profile" class="transaction__item">
                     <div class="transaction__icon">
-                        <img src="https://i.postimg.cc/25LW3YB8/TaiKhoan.png" alt="Tài khoản" class="transaction__img" />
+                        <img src="https://i.imgur.com/R40n5E3.png" alt="Tài khoản" class="transaction__img" />
                     </div>
                     <p class="text text__transaction__item">TÀI KHOẢN</p>
                 </a>
                 <a href="{{ route('service.show-all') }}" class="transaction__item">
                     <div class="transaction__icon">
-                        <img src="https://i.postimg.cc/MTkQQLy0/DichVu.png" alt="Dịch vụ" class="transaction__img" />
+                        <img src="https://i.imgur.com/R9AiElQ.png" alt="Dịch vụ" class="transaction__img" />
                     </div>
                     <p class="text text__transaction__item">DỊCH VỤ</p>
                 </a>
                 <a href="{{ route('lucky.show-all') }}" class="transaction__item">
                     <div class="transaction__icon">
-                        <img src="https://i.postimg.cc/hj97b0rk/Nick-Random.png" alt="Vòng quay" class="transaction__img" />
+                        <img src="https://i.imgur.com/kNeAzbA.png" alt="Vòng quay" class="transaction__img" />
                     </div>
                     <p class="text text__transaction__item">VÒNG QUAY</p>
                 </a>

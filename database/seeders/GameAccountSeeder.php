@@ -29,13 +29,13 @@ class GameAccountSeeder extends Seeder
                 'planet' => 'earth',
                 'buyer_id' => null,
                 'note' => 'Tài khoản VIP',
-                'thumb' => 'https://i.postimg.cc/8kJvtYgW/20250328090315screenshot-2025-03-26-091731.jpg',
+                'thumb' => 'https://i.imgur.com/m14ohyq.jpeg',
                 'images' => json_encode([
-                    "https://i.postimg.cc/8kJvtYgW/20250328090315screenshot-2025-03-26-091731.jpg",
-                    "https://i.postimg.cc/8kJvtYgW/20250328090315screenshot-2025-03-26-091731.jpg",
-                    "https://i.postimg.cc/8kJvtYgW/20250328090315screenshot-2025-03-26-091731.jpg",
-                    "https://i.postimg.cc/8kJvtYgW/20250328090315screenshot-2025-03-26-091731.jpg",
-                    "https://i.postimg.cc/8kJvtYgW/20250328090315screenshot-2025-03-26-091731.jpg"
+                    "https://i.imgur.com/m14ohyq.jpeg",
+                    "https://i.imgur.com/m14ohyq.jpeg",
+                    "https://i.imgur.com/m14ohyq.jpeg",
+                    "https://i.imgur.com/m14ohyq.jpeg",
+                    "https://i.imgur.com/m14ohyq.jpeg"
                 ]),
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -52,13 +52,13 @@ class GameAccountSeeder extends Seeder
                 'planet' => 'namek',
                 'buyer_id' => 3,
                 'note' => 'Đã bán cho user 3',
-                'thumb' => 'https://i.postimg.cc/8kJvtYgW/20250328090315screenshot-2025-03-26-091731.jpg',
+                'thumb' => 'https://i.imgur.com/m14ohyq.jpeg',
                 'images' => json_encode([
-                    "https://i.postimg.cc/8kJvtYgW/20250328090315screenshot-2025-03-26-091731.jpg",
-                    "https://i.postimg.cc/8kJvtYgW/20250328090315screenshot-2025-03-26-091731.jpg",
-                    "https://i.postimg.cc/8kJvtYgW/20250328090315screenshot-2025-03-26-091731.jpg",
-                    "https://i.postimg.cc/8kJvtYgW/20250328090315screenshot-2025-03-26-091731.jpg",
-                    "https://i.postimg.cc/8kJvtYgW/20250328090315screenshot-2025-03-26-091731.jpg"
+                    "https://i.imgur.com/m14ohyq.jpeg",
+                    "https://i.imgur.com/m14ohyq.jpeg",
+                    "https://i.imgur.com/m14ohyq.jpeg",
+                    "https://i.imgur.com/m14ohyq.jpeg",
+                    "https://i.imgur.com/m14ohyq.jpeg"
                 ]),
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -75,13 +75,13 @@ class GameAccountSeeder extends Seeder
                 'planet' => 'xayda',
                 'buyer_id' => null,
                 'note' => 'Tài khoản mới',
-                'thumb' => 'https://i.postimg.cc/8kJvtYgW/20250328090315screenshot-2025-03-26-091731.jpg',
+                'thumb' => 'https://i.imgur.com/m14ohyq.jpeg',
                 'images' => json_encode([
-                    "https://i.postimg.cc/8kJvtYgW/20250328090315screenshot-2025-03-26-091731.jpg",
-                    "https://i.postimg.cc/8kJvtYgW/20250328090315screenshot-2025-03-26-091731.jpg",
-                    "https://i.postimg.cc/8kJvtYgW/20250328090315screenshot-2025-03-26-091731.jpg",
-                    "https://i.postimg.cc/8kJvtYgW/20250328090315screenshot-2025-03-26-091731.jpg",
-                    "https://i.postimg.cc/8kJvtYgW/20250328090315screenshot-2025-03-26-091731.jpg"
+                    "https://i.imgur.com/m14ohyq.jpeg",
+                    "https://i.imgur.com/m14ohyq.jpeg",
+                    "https://i.imgur.com/m14ohyq.jpeg",
+                    "https://i.imgur.com/m14ohyq.jpeg",
+                    "https://i.imgur.com/m14ohyq.jpeg"
                 ]),
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -98,13 +98,13 @@ class GameAccountSeeder extends Seeder
                 'planet' => 'earth',
                 'buyer_id' => 2,
                 'note' => 'Người chơi cấp 10',
-                'thumb' => 'https://i.postimg.cc/8kJvtYgW/20250328090315screenshot-2025-03-26-091731.jpg',
+                'thumb' => 'https://i.imgur.com/m14ohyq.jpeg',
                 'images' => json_encode([
-                    "https://i.postimg.cc/8kJvtYgW/20250328090315screenshot-2025-03-26-091731.jpg",
-                    "https://i.postimg.cc/8kJvtYgW/20250328090315screenshot-2025-03-26-091731.jpg",
-                    "https://i.postimg.cc/8kJvtYgW/20250328090315screenshot-2025-03-26-091731.jpg",
-                    "https://i.postimg.cc/8kJvtYgW/20250328090315screenshot-2025-03-26-091731.jpg",
-                    "https://i.postimg.cc/8kJvtYgW/20250328090315screenshot-2025-03-26-091731.jpg"
+                    "https://i.imgur.com/m14ohyq.jpeg",
+                    "https://i.imgur.com/m14ohyq.jpeg",
+                    "https://i.imgur.com/m14ohyq.jpeg",
+                    "https://i.imgur.com/m14ohyq.jpeg",
+                    "https://i.imgur.com/m14ohyq.jpeg"
                 ]),
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -121,13 +121,13 @@ class GameAccountSeeder extends Seeder
                 'planet' => 'namek',
                 'buyer_id' => null,
                 'note' => 'Tài khoản mạnh',
-                'thumb' => 'https://i.postimg.cc/8kJvtYgW/20250328090315screenshot-2025-03-26-091731.jpg',
+                'thumb' => 'https://i.imgur.com/m14ohyq.jpeg',
                 'images' => json_encode([
-                    "https://i.postimg.cc/8kJvtYgW/20250328090315screenshot-2025-03-26-091731.jpg",
-                    "https://i.postimg.cc/8kJvtYgW/20250328090315screenshot-2025-03-26-091731.jpg",
-                    "https://i.postimg.cc/8kJvtYgW/20250328090315screenshot-2025-03-26-091731.jpg",
-                    "https://i.postimg.cc/8kJvtYgW/20250328090315screenshot-2025-03-26-091731.jpg",
-                    "https://i.postimg.cc/8kJvtYgW/20250328090315screenshot-2025-03-26-091731.jpg"
+                    "https://i.imgur.com/m14ohyq.jpeg",
+                    "https://i.imgur.com/m14ohyq.jpeg",
+                    "https://i.imgur.com/m14ohyq.jpeg",
+                    "https://i.imgur.com/m14ohyq.jpeg",
+                    "https://i.imgur.com/m14ohyq.jpeg"
                 ]),
                 'created_at' => now(),
                 'updated_at' => now(),

@@ -21,8 +21,8 @@ class LuckyWheelsTableSeeder extends Seeder
             [
                 'name' => 'Vòng Quay Vàng',
                 'slug' => Str::slug('Vòng Quay Vàng'),
-                'thumbnail' => 'https://i.postimg.cc/xTNX3NHP/u-KLBf-Y8j-Wr-1630159016.gif',
-                'wheel_image' => 'https://img.upanh.tv/2025/04/03/LVNwJbtFqU_1599464163-removebg-preview6c5e709413be5b98.png',
+                'thumbnail' => 'https://i.imgur.com/UpS2KMl.gif',
+                'wheel_image' => 'https://i.imgur.com/jbzj9kD.png',
                 'description' => 'Bạn có thể tham gia vòng quay để có cơ hội nhận được vàng hoặc ngọc. Mỗi lần bạn quay sẽ tốn 10,000 VNĐ, và đây là một cơ hội tuyệt vời để thử vận may của mình. Hãy tham gia ngay để không bỏ lỡ những phần thưởng hấp dẫn đang chờ đón bạn.',
                 'rules' => '<p>Quay để nhận vàng hoặc ngọc. Mỗi lần quay tốn 10,000 VNĐ.</p>',
                 'active' => true,
@@ -43,8 +43,8 @@ class LuckyWheelsTableSeeder extends Seeder
             [
                 'name' => 'Vòng Quay Ngọc',
                 'slug' => Str::slug('Vòng Quay Ngọc'),
-                'thumbnail' => 'https://i.postimg.cc/vZWDpR0g/z5986105444643-1bf089311b9e3a012cb4659a7e46fd7c.gif',
-                'wheel_image' => 'https://i.postimg.cc/vmbDyPKP/spinTYOI.png',
+                'thumbnail' => 'https://i.imgur.com/mii6D3l.gif',
+                'wheel_image' => 'https://i.imgur.com/IaKoV6D.png',
                 'description' => 'Quay để nhận vàng hoặc ngọc. Mỗi lần quay sẽ tốn 10,000 VNĐ. Hãy tham gia để có cơ hội nhận được những phần thưởng giá trị từ vòng quay này. Mỗi lượt quay sẽ mang đến cho bạn những trải nghiệm thú vị và cơ hội trúng thưởng hấp dẫn.',
 
                 'rules' => '<p>Quay để nhận vàng hoặc ngọc. Mỗi lần quay tốn 10,000 VNĐ.</p>',

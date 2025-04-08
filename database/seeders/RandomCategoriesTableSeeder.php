@@ -22,7 +22,7 @@ class RandomCategoriesTableSeeder extends Seeder
             [
                 'name' => 'THỬ VẬN MAY NGỌC RỒNG VIP 1',
                 'slug' => Str::slug('THỬ VẬN MAY NGỌC RỒNG VIP 1'),
-                'thumbnail' => 'https://i.postimg.cc/htqt8yKS/Th-V-n-May-Ng-c-R-ng-Vip-1.jpg',
+                'thumbnail' => 'https://i.imgur.com/keSGFbn.jpeg',
                 'description' => 'Danh mục chứa tài khoản thử vận may Ngọc Rồng VIP 1.',
                 'active' => true,
                 'created_at' => now(),
@@ -31,7 +31,7 @@ class RandomCategoriesTableSeeder extends Seeder
             [
                 'name' => 'THỬ VẬN MAY NGỌC RỒNG VIP 2',
                 'slug' => Str::slug('THỬ VẬN MAY NGỌC RỒNG VIP 2'),
-                'thumbnail' => 'https://i.postimg.cc/8PvC6QQK/Th-V-n-May-Ng-c-R-ng-Vip-2.jpg',
+                'thumbnail' => 'https://i.imgur.com/nB7Q1Y1.jpeg',
                 'description' => 'Danh mục chứa tài khoản thử vận may Ngọc Rồng VIP 2.',
                 'active' => true,
                 'created_at' => now(),
@@ -40,7 +40,7 @@ class RandomCategoriesTableSeeder extends Seeder
             [
                 'name' => 'THỬ VẬN MAY NGỌC RỒNG VIP 3',
                 'slug' => Str::slug('THỬ VẬN MAY NGỌC RỒNG VIP 3'),
-                'thumbnail' => 'https://i.postimg.cc/d3kV6g70/Th-V-n-May-Ng-c-R-ng-Vip-3.jpg',
+                'thumbnail' => 'https://i.imgur.com/A3I2Syn.jpeg',
                 'description' => 'Danh mục chứa tài khoản thử vận may Ngọc Rồng VIP 3.',
                 'active' => true,
                 'created_at' => now(),
