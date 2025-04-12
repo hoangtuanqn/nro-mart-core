@@ -21,7 +21,7 @@
                                 <div class="form-group">
                                     <label>Danh mục <span class="text-danger">*</span></label>
                                     <select name="random_category_id"
-                                        class="form-select @error('random_category_id') is-invalid @enderror">
+                                        class="select @error('random_category_id') is-invalid @enderror">
                                         <option value="">-- Chọn danh mục --</option>
                                         @foreach ($categories as $category)
                                             <option value="{{ $category->id }}"
@@ -38,7 +38,7 @@
                             <div class="col-lg-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Máy chủ <span class="text-danger">*</span></label>
-                                    <select name="server" class="form-select @error('server') is-invalid @enderror">
+                                    <select name="server" class="select @error('server') is-invalid @enderror">
                                         <option value="">-- Chọn máy chủ --</option>
                                         @for ($i = 1; $i <= 13; $i++)
                                             <option value="{{ $i }}"
@@ -86,7 +86,7 @@
                             <div class="col-lg-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Trạng thái <span class="text-danger">*</span></label>
-                                    <select name="status" class="form-select @error('status') is-invalid @enderror">
+                                    <select name="status" class="select @error('status') is-invalid @enderror">
                                         <option value="available"
                                             {{ old('status', $account->status) == 'available' ? 'selected' : '' }}>
                                             Chưa bán

@@ -15,11 +15,11 @@
                     <form action="{{ route('admin.random-accounts.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
-                            <div class="col-lg-6 col-sm-6 col-12">
+                            <div class="col-lg-4 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Danh mục <span class="text-danger">*</span></label>
                                     <select name="random_category_id"
-                                        class="form-select @error('random_category_id') is-invalid @enderror">
+                                        class="select @error('random_category_id') is-invalid @enderror">
                                         <option value="">-- Chọn danh mục --</option>
                                         @foreach ($categories as $category)
                                             <option value="{{ $category->id }}"
@@ -33,10 +33,10 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-sm-6 col-12">
+                            <div class="col-lg-4 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Máy chủ <span class="text-danger">*</span></label>
-                                    <select name="server" class="form-select @error('server') is-invalid @enderror">
+                                    <select name="server" class="select @error('server') is-invalid @enderror">
                                         <option value="">-- Chọn máy chủ --</option>
                                         @for ($i = 1; $i <= 13; $i++)
                                             <option value="{{ $i }}" {{ old('server') == $i ? 'selected' : '' }}>
@@ -50,7 +50,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-sm-6 col-12">
+                            <div class="col-lg-4 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Giá <span class="text-danger">*</span></label>
                                     <input type="number" name="price" value="{{ old('price') }}"

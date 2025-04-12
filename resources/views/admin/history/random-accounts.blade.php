@@ -37,9 +37,7 @@
                                     <th>Tài khoản</th>
                                     <th>Danh mục</th>
                                     <th>Máy chủ</th>
-                                    <th>Giá gốc</th>
-                                    <th>Giá đã giảm</th>
-                                    <th>Mã giảm giá</th>
+                                    <th>Giá</th>
                                     <th>Thời gian</th>
                                 </tr>
                             </thead>
@@ -48,42 +46,35 @@
                                     <tr>
                                         <td>{{ $key + 1 }}</td>
                                         <td>
-                                            <a href="{{ route('admin.users.show', $purchase->user_id) }}">
-                                                {{ $purchase->user->username ?? 'N/A' }}
+                                            <a href="{{ route('admin.users.show', $purchase->buyer_id) }}">
+                                                {{ $purchase->buyer->username ?? 'N/A' }}
                                             </a>
                                         </td>
                                         <td>
-                                            @if ($purchase->account)
-                                                <a href="{{ route('admin.random-accounts.edit', $purchase->account_id) }}">
-                                                    {{ $purchase->account->account_name ?? 'ACC#' . $purchase->account_id }}
+                                            @if ($purchase->account_name)
+                                                <a href="{{ route('admin.random-accounts.edit', $purchase->id) }}">
+                                                    {{ $purchase->account_name ?? 'ACC#' . $purchase->id }}
                                                 </a>
                                             @else
                                                 <span class="text-danger">Đã xóa</span>
                                             @endif
                                         </td>
                                         <td>
-                                            @if ($purchase->account && $purchase->account->category)
-                                                {{ $purchase->account->category->name }}
+                                            @if ($purchase->category)
+                                                {{ $purchase->category->name }}
                                             @else
                                                 <span class="text-danger">Không có</span>
                                             @endif
                                         </td>
                                         <td>
-                                            @if ($purchase->account)
-                                                {{ $purchase->account->server ?? 'N/A' }}
+                                            @if ($purchase->server)
+                                                {{ $purchase->server ?? 'N/A' }}
                                             @else
                                                 <span class="text-danger">Không có</span>
                                             @endif
                                         </td>
-                                        <td>{{ number_format($purchase->original_price) }} đ</td>
-                                        <td>{{ number_format($purchase->final_price) }} đ</td>
-                                        <td>
-                                            @if ($purchase->discount_code)
-                                                <span class="badges bg-lightgreen">{{ $purchase->discount_code }}</span>
-                                            @else
-                                                <span class="text-muted">Không có</span>
-                                            @endif
-                                        </td>
+                                        <td>{{ number_format($purchase->price) }} đ</td>
+
                                         <td>{{ $purchase->created_at->format('d/m/Y H:i:s') }}</td>
                                     </tr>
                                 @endforeach

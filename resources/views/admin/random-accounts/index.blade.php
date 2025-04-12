@@ -79,7 +79,7 @@
                                         <td><span
                                                 class="badges {{ $account->status === 'available' ? 'bg-lightgreen' : 'bg-lightred' }}">{{ $account->status === 'available' ? 'Chưa bán' : 'Đã bán' }}</span>
                                         </td>
-                                        <td>{{ $account->buyer ? $account->buyer->name : 'Chưa có' }}</td>
+                                        <td>{{ $account->buyer ? $account->buyer->username : 'Chưa có' }}</td>
                                         <td>{{ $account->created_at->format('d/m/Y') }}</td>
                                         <td class="text-center">
                                             <a class="me-3"

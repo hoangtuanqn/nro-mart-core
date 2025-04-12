@@ -105,12 +105,11 @@
                             <div class="service__contact-info">
                                 <div class="service__contact-item">
                                     <i class="fab fa-facebook"></i>
-                                    <a href="https://facebook.com/octiiu957.official/"
-                                        target="_blank">facebook.com/octiiu957.official/</a>
+                                    <a href="{{ config_get('facebook') }}" target="_blank">{{ config_get('facebook') }}</a>
                                 </div>
                                 <div class="service__contact-item">
                                     <i class="fab fa-whatsapp"></i>
-                                    <a href="tel:0396498015">ZALO: 0396498015</a>
+                                    <a href="tel:{{ config_get('zalo') }}">{{ config_get('zalo') }}</a>
                                 </div>
                             </div>
                         </div>

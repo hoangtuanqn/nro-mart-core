@@ -31,7 +31,7 @@
                             <div class="col-lg-6 col-sm-6 col-12">
                                 <div class="form-group">
                                     <label>Tên ngân hàng <span class="text-danger">*</span></label>
-                                    <select name="bank_name" class="form-control @error('bank_name') is-invalid @enderror">
+                                    <select name="bank_name" class="select @error('bank_name') is-invalid @enderror">
                                         <option value="">-- Chọn ngân hàng --</option>
                                         <option value="Vietcombank"
                                             {{ old('bank_name', $bankAccount->bank_name) == 'Vietcombank' ? 'selected' : '' }}>

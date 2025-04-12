@@ -10,13 +10,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\RandomAccountPurchase;
-use App\Models\ServiceOrder;
+
 use App\Models\BankDeposit;
 use App\Models\CardDeposit;
 use App\Models\DiscountCodeUsage;
 use App\Models\MoneyTransaction;
 use App\Models\GameAccount;
+use App\Models\RandomCategoryAccount;
 use App\Models\ServiceHistory;
 use Illuminate\Http\Request;
 
@@ -54,7 +54,11 @@ class HistoryController extends Controller
     public function randomAccounts()
     {
         $title = 'Lịch sử mua tài khoản random';
-        $purchases = RandomAccountPurchase::with(['user', 'account'])->orderBy('created_at', 'desc')->paginate(20);
+        $purchases = RandomCategoryAccount::with(['buyer', 'category'])
+            ->whereNotNull('buyer_id')
+            ->where('status', 'sold')
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         return view('admin.history.random-accounts', compact('title', 'purchases'));
     }

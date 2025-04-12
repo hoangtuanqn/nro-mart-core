@@ -67,8 +67,8 @@ class LuckyWheelController extends Controller
             $request->validate([
                 'name' => 'required|string|max:255',
                 'price_per_spin' => 'required|numeric|min:1000',
-                'thumbnail' => 'nullable|image',
-                'wheel_image' => 'nullable|image',
+                'thumbnail' => 'required|image',
+                'wheel_image' => 'required|image',
                 'description' => 'nullable|string',
                 'rules' => 'required|string',
                 'active' => 'required|boolean',
