@@ -18,7 +18,7 @@
                         @method('PUT')
                         @if ($account->status == 'sold' && $account->buyer_id)
                             <h4 class="text-danger">Tài khoản này đã được bán cho <a
-                                    href="{{ route('admin.users.edit', $account->buyer_id) }}" target="_blank"
+                                    href="{{ route('admin.users.show', $account->buyer_id) }}" target="_blank"
                                     class="text-bold">{{ $account->buyer->username }}</a></h4>
                         @endif
                         <div class="row">

@@ -103,10 +103,12 @@ class ServicePackageController extends Controller
 
     public function destroy($id)
     {
-        return response()->json([
-            'success' => false,
-            'message' => 'Đang ở môi trường demo. Bạn không thể thay đổi dữ liệu.'
-        ]);
+        if (app()->environment('demo')) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Đang ở môi trường demo. Bạn không thể thay đổi dữ liệu.'
+            ]);
+        }
         try {
             $package = ServicePackage::findOrFail($id);
             $serviceId = $package->game_service_id;
