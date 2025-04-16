@@ -56,7 +56,7 @@ class ServiceHistory extends Model
     // Mã hóa mật khẩu game khi lưu
     public function setGamePasswordAttribute($value)
     {
-        $this->attributes['game_password'] = encrypt($value);
+        $this->attributes['game_password'] = $value;
     }
 
     // Giải mã mật khẩu game khi lấy ra

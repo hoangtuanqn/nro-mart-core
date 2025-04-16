@@ -20,7 +20,7 @@
                     100K).
                     <br>
                     Địa chỉ nhận Callback theo phương thức GET hoặc POST đều được:
-                    <b><strong>{{ url(route('callback.card', [], '')) }}</strong></b>
+                    <b><strong>{{ url('api'.route('callback.card', [], '')) }}</strong></b>
 
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>

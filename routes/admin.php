@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\HistoryController;
 use App\Http\Controllers\Admin\MoneyWithdrawalController;
 use App\Http\Controllers\Admin\ResourceWithdrawalController;
+use App\Http\Controllers\Admin\ServiceHistoryController;
 use App\Http\Controllers\Admin\LuckyWheelController;
 
 Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(function () {
@@ -119,6 +120,12 @@ Route::prefix('admin')->middleware(['auth', 'admin'])->name('admin.')->group(fun
         Route::get('deposits/bank', [HistoryController::class, 'bankDeposits'])->name('deposits.bank');
         Route::get('deposits/card', [HistoryController::class, 'cardDeposits'])->name('deposits.card');
         Route::get('discount-usages', [HistoryController::class, 'discountUsages'])->name('discount-usages');
+    });
+
+    // Service history
+    Route::prefix('service-history')->name('service-history.')->group(function () {
+        Route::post('/{service}/approve', [ServiceHistoryController::class, 'approve'])->name('approve');
+        Route::post('/{service}/reject', [ServiceHistoryController::class, 'reject'])->name('reject');
     });
 
     // Withdrawal section

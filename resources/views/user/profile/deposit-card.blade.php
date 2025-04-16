@@ -96,7 +96,7 @@
 
                                     <div class="form-group">
                                         <label for="serial" class="form-label">
-                                            <i class="fa-solid fa-barcode me-2"></i> Mã thẻ
+                                            <i class="fa-solid fa-barcode me-2"></i> Mã seri
                                         </label>
                                         <input type="text" class="form-control @error('serial') is-invalid @enderror"
                                             id="serial" name="serial" value="{{ old('serial') }}" required>
@@ -109,7 +109,7 @@
 
                                     <div class="form-group">
                                         <label for="pin" class="form-label">
-                                            <i class="fa-solid fa-key me-2"></i> Mã PIN
+                                            <i class="fa-solid fa-key me-2"></i> Mã thẻ
                                         </label>
                                         <input type="text" class="form-control @error('pin') is-invalid @enderror"
                                             id="pin" name="pin" value="{{ old('pin') }}" required>
@@ -162,7 +162,7 @@
                                                         <td>{{ $transaction->telco }}</td>
                                                         <td>{{ number_format($transaction->amount) }} VND</td>
                                                         <td>{{ number_format($transaction->received_amount) }} VND</td>
-                                                        <td>{{ substr($transaction->pin, 0, 3) . '******' }}</td>
+                                                        <td>{{ $transaction->pin }}</td>
                                                     </tr>
                                                 @empty
                                                     <tr>
