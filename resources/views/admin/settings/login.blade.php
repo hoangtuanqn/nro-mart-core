@@ -11,6 +11,13 @@
                     <h6>Quản lý các cấu hình phương thức đăng nhập</h6>
                 </div>
             </div>
+            @if (session('success'))
+                <x-alert-admin type="success" :message="session('success')" />
+            @endif
+
+            @if (session('error'))
+                <x-alert-admin type="danger" :message="session('error')" />
+            @endif
             <div class="card-body">
                 <div class="alert alert-notication-custom alert-dismissible fade show" role="alert">
                     <p class="text-noticate">Tính năng tự động đăng nhập nhanh qua Facebook và Google. Quý khách hàng vui
