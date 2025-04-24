@@ -176,7 +176,8 @@ class RandomAccountController extends Controller
                 ->where('id', $account->id)
                 ->update([
                     'status' => 'sold',
-                    'buyer_id' => $user->id
+                    'buyer_id' => $user->id,
+                    'updated_at'    => now()
                 ]);
 
             // Add transaction history

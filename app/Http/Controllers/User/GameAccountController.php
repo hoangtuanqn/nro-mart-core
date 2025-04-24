@@ -122,7 +122,8 @@ class GameAccountController extends Controller
                 ->where('id', $account->id)
                 ->update([
                     'status' => 'sold',
-                    'buyer_id' => $user->id
+                    'buyer_id' => $user->id,
+                    'updated_at' => now()
                 ]);
 
             // Thêm lịch sử biến động số dư

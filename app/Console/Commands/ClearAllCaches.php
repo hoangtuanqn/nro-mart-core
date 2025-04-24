@@ -26,9 +26,10 @@ class ClearAllCaches extends Command
     public function handle()
     {
         $this->call('config:clear');
-        $this->call('cache:clear');
+        $this->call('cache:clear'); 
         $this->call('route:clear');
         $this->call('view:clear');
+        $this->call('event:clear');
         $this->info('Đã xóa toàn bộ cache!');
     }
 }

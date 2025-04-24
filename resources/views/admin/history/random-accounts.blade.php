@@ -75,7 +75,7 @@
                                         </td>
                                         <td>{{ number_format($purchase->price) }} đ</td>
 
-                                        <td>{{ $purchase->created_at->format('d/m/Y H:i:s') }}</td>
+                                        <td>{{ $purchase->updated_at->format('d/m/Y H:i:s') }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>

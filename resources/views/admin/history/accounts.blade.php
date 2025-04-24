@@ -69,7 +69,7 @@
                                             @if ($account->planet === 'earth')
                                                 <span class="badges bg-lightgreen">Trái Đất</span>
                                             @elseif ($account->planet === 'namek')
-                                                <span class="badges bg-lightblue">Namek</span>
+                                                <span class="badges bg-dark">Namek</span>
                                             @elseif ($account->planet === 'xayda')
                                                 <span class="badges bg-lightred">Xayda</span>
                                             @else
