@@ -230,7 +230,7 @@ a:hover {
 
 .action__link {
     text-align: center;
-    padding: 10px 22px;
+    padding: 8px 22px;
     border: 2px solid var(--primary-color);
 }
 
@@ -896,6 +896,7 @@ body.no-scroll {
     .container {
         max-width: calc(100% - 16px);
     }
+    
 
     .nav__action {
         gap: 10px;

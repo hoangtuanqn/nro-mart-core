@@ -722,4 +722,10 @@
     .welcome-modal__btn {
         width: 100%;
     }
+    .hero-sidebar__header {
+        font-size: 1.4rem;
+    }
+    .hero-sidebar__btn {
+        font-size: 1.2rem;
+    }
 }
