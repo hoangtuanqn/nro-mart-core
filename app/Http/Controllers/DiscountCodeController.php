@@ -10,6 +10,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Account;
+use App\Models\BankAccount;
 use App\Models\DiscountCode;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -220,4 +221,55 @@ class DiscountCodeController extends Controller
             Log::error('Error applying discount code: ' . $e->getMessage());
         }
     }
+
+    public function modalAtm()
+    {
+        if (!auth()->check()) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Unauthorized'
+            ]);
+        }
+
+        try {
+            $bankAccounts = BankAccount::where('is_active', 1)
+                ->orderBy('id', 'asc')
+                ->get();
+
+            if ($bankAccounts->isEmpty()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Không có tài khoản ngân hàng nào được cấu hình'
+                ]);
+            }
+
+            $formattedAccounts = $bankAccounts->map(function ($account) {
+                $prefix = $account->prefix ?: 'NAP';
+
+                return [
+                    'id' => $account->id,
+                    'bank_name' => $account->bank_name,
+                    'account_name' => $account->account_name,
+                    'account_number' => $account->account_number,
+                    'branch' => $account->branch,
+                    'note' => $account->note,
+                    'prefix' => $prefix,
+                    'auto_confirm' => $account->auto_confirm,
+                    'user_id' => auth()->id(),
+                    'content' => $prefix . auth()->id()
+                ];
+            });
+
+            return response()->json([
+                'success' => true,
+                'bankAccounts' => $formattedAccounts
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Lỗi khi tải dữ liệu: ' . $e->getMessage()
+            ], 500);
+        }
+    }
+
 }

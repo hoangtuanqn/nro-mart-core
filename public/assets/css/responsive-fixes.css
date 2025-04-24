@@ -162,6 +162,9 @@ img {
     .welcome-modal__body {
         font-size: 1.3rem !important;
     }
+    #depositModal {
+        font-size: 1.4rem !important;
+    }
     .welcome-modal__btn {
         font-size: 1.2rem;
     }

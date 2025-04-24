@@ -1052,3 +1052,16 @@ body.no-scroll {
     background-color: var(--primary-color);
     color: white;
 }
+
+.header__deposit {
+    display: none;
+    padding: 5px 10px;
+    background: var(--primary-color);
+    color: #fff;
+    border-radius: 5px;
+    font-size: 1.4rem;
+}
+.header__mobile {
+    display: flex;
+    gap: 20px;
+}

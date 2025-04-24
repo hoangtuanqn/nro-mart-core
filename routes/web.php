@@ -107,3 +107,9 @@ Route::prefix('lucky')->name('lucky.')->group(function () {
 
 // Discount code routes
 Route::post('/discount-code/validate', [DiscountCodeController::class, 'validateCode'])->name('discount.validate');
+
+
+Route::prefix('api/web')->group(function () {
+    // Bank accounts API for deposit modal
+    Route::get('/bank-accounts', [DiscountCodeController::class, 'modalAtm'])->name('');
+});

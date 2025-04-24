@@ -27,7 +27,7 @@
         </a>
         <div class="nav__menu">
             <a href="/" class="text menu__item {{ request()->is('/') ? 'active' : '' }}">Trang chủ</a>
-            <a href="{{ route('profile.deposit-card') }}"
+            <a href="javascript:void(0)" onclick="openDepositOptionsModal()"
                 class="text menu__item {{ request()->routeIs('profile.deposit-card') ? 'active' : '' }}">Nạp tiền</a>
             <a href="{{ route('service.show-all') }}"
                 class="text menu__item {{ request()->routeIs('service.*') ? 'active' : '' }}">Dịch vụ</a>
@@ -42,9 +42,17 @@
                 <a href="{{ route('admin.index') }}" target="_blank" class="text menu__item">ADMIN PANEL</a>
             @endif
         </div>
-        <button class="menu-toggle" aria-label="Toggle Menu">
-            <i class="fas fa-bars"></i>
-        </button>
+        <div class="header__mobile">
+            @auth
+                <a class="header__deposit" href="javascript:void(0)" onclick="openDepositOptionsModal()"><i
+                        class="fas fa-wallet"></i> Nạp tiền</a>
+                <button class="menu-toggle" aria-label="Toggle Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            @else
+                <a class="header__deposit" href="{{ route('login') }}"><i class="fa-solid fa-user"></i> Đăng nhập</a>
+            @endauth
+        </div>
         <div class="nav__action">
             @guest
                 <a href="{{ route('login') }}" class="text action__link"><i class="fa-solid fa-user"></i> Đăng nhập</a>
