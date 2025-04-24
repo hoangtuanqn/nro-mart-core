@@ -142,15 +142,17 @@
             </header>
             <div class="category__list">
                 @foreach ($categories as $category)
-                    <a href="{{ route('category.index', ['slug' => $category->slug]) }}" class="category__item">
-                        <img src="{{ $category->thumbnail }}" alt="{{ $category->name }}" class="category__img" />
-                        <h2 class="category__title">{{ $category->name }}</h2>
-                        <div class="category__stats">
-                            <span class="badge">{{ number_format($category->allAccount) }} Tài khoản</span>
-                            <span class="badge">Đã bán: {{ number_format($category->soldCount) }}</span>
-                        </div>
-                        <p class="category__action">XEM CHI TIẾT</p>
-                    </a>
+                    @if($category->active)
+                        <a href="{{ route('category.index', ['slug' => $category->slug]) }}" class="category__item">
+                            <img src="{{ $category->thumbnail }}" alt="{{ $category->name }}" class="category__img" />
+                            <h2 class="category__title">{{ $category->name }}</h2>
+                            <div class="category__stats">
+                                <span class="badge">{{ number_format($category->allAccount) }} Tài khoản</span>
+                                <span class="badge">Đã bán: {{ number_format($category->soldCount) }}</span>
+                            </div>
+                            <p class="category__action">XEM CHI TIẾT</p>
+                        </a>
+                    @endif
                 @endforeach
             </div>
         </div>

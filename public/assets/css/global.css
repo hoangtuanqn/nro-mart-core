@@ -94,7 +94,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Utilities */
 .container {
-    max-width: 1200px;
+    max-width: 1280px;
     margin: 0 auto;
     padding: 0 15px;
 }
@@ -137,8 +137,8 @@ a:hover {
 
 .badge {
     display: inline-block;
-    padding: 5px 12px;
-    font-size: 1.3rem;
+    padding: 5px 18px;
+    font-size: 1.1rem;
     font-weight: 700;
     text-transform: uppercase;
     border-radius: var(--border-radius-pill);
@@ -257,10 +257,10 @@ a:hover {
     background-color: var(--primary-color) !important;
     color: white !important;
     border: 2px solid var(--primary-color) !important;
-    font-size: 1.4rem;
+    font-size: 1.1rem;
     font-weight: 600;
     text-align: center;
-    padding: 10px 22px;
+    padding: 8px 18px;
     border-radius: var(--border-radius-pill);
     transition: var(--transition);
     cursor: pointer;
@@ -894,7 +894,7 @@ body.no-scroll {
 
 @media (max-width: 480px) {
     .container {
-        max-width: calc(100% - 30px);
+        max-width: calc(100% - 16px);
     }
 
     .nav__action {

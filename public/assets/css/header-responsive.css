@@ -23,7 +23,7 @@
 }
 
 .nav__logo {
-    height: 50px;
+    height: 40px;
     object-fit: contain;
 }
 
@@ -34,7 +34,7 @@
 }
 
 .menu__item {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     color: #333;
     text-decoration: none;
     font-weight: 500;

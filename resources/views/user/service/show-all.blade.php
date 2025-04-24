@@ -19,9 +19,11 @@
                         @if ($service->active)
                             <a href="{{ route('service.show', ['slug' => $service->slug]) }}" class="category__item">
                                 <img src="{{ $service->thumbnail }}" alt="{{ $service->name }}" class="category__img" />
-                                <h2 class="category__title">{{ strtoupper($service->name) }}</h2>
-                                <p class="category__desc">Tổng giao dịch: {{ number_format($service->orderCount) }}</p>
-                                <p class="text category__action">Thuê ngay</p>
+                                <h2 class="category__title">{{ $service->name }}</h2>
+                                <div class="category__stats">
+                                    <span class="badge">{{ number_format($service->orderCount) }} giao dịch</span>
+                                </div>
+                                <p class="category__action">ĐẶT NGAY</p>
                             </a>
                         @endif
                     @endforeach

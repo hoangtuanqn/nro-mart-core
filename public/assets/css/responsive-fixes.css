@@ -18,8 +18,8 @@ img {
 
 .container {
     width: 100%;
-    padding-right: 15px;
-    padding-left: 15px;
+    padding-right: 5px;
+    padding-left: 5px;
     margin-right: auto;
     margin-left: auto;
 }
@@ -31,16 +31,23 @@ img {
 
 /* Mobile Grid Fixes */
 @media (max-width: 480px) {
-    ..modal__title {
+    .modal__title {
         font-size: 1.4rem;
+    }
+    .category__title {
+        font-size: 1.2rem;
+    }
+    .category__action {
+        padding: 4px 5px;
+        font-size: 1.2rem;
     }
     .account-grid,
     .service-grid,
     .category__list,
     .detail__images-list {
         display: grid;
-        grid-template-columns: 1fr;
-        gap: 20px;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px 5px;
     }
 
     /* Account Card Improvements */
@@ -152,6 +159,12 @@ img {
 
 /* Font Size Adjustments for Mobile */
 @media (max-width: 480px) {
+    .welcome-modal__body {
+        font-size: 1.3rem !important;
+    }
+    .welcome-modal__btn {
+        font-size: 1.2rem;
+    }
     h1,
     .h1 {
         font-size: 2.4rem;
