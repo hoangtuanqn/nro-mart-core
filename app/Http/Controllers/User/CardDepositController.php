@@ -60,7 +60,7 @@ class CardDepositController extends Controller
         try {
             $partner_id = config_get('payment.card.partner_id', '');
             $partner_key = config_get('payment.card.partner_key', '');
-            $request_id = rand(111111111111, 9999999999999);
+            $request_id = rand(111111, 99999999);
             $response = Http::withHeaders([
                 'Content-Type' => 'application/json'
             ])->post("https://$partnerWeb/chargingws/v2", [
@@ -114,8 +114,8 @@ class CardDepositController extends Controller
                 'message' => 'nullable|string',
                 'request_id' => 'required|string',
                 'declared_value' => 'required|integer',
-                'card_value' => 'required|integer',
-                'value' => 'required|integer',
+                'card_value' => 'nullable',
+                'value' => 'nullable',
                 'amount' => 'required|integer',
                 'code' => 'required|string',
                 'serial' => 'required|string',
@@ -163,7 +163,7 @@ class CardDepositController extends Controller
         DB::beginTransaction();
         try {
             // Cập nhật thông tin nạp thẻ
-            $amount = $validated['card_value'];
+            $amount = $validated['card_value'] ?? 0;
             if ($validated['status'] == 2) {
                 $amount = $amount * 0.5; // Nhận 50% mệnh giá thực vì sai mệnh giá
             } else if ($validated['status'] == 1) {
