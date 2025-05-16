@@ -1,424 +1,472 @@
 /* Game Account Cards Styling */
 .account-list {
-    padding: 40px 0;
-    background-color: #f8f9fa;
+  padding: 40px 0;
+  background-color: #f8f9fa;
 }
 
 .account-list__content {
-    margin-bottom: 40px;
+  margin-bottom: 40px;
 }
 
 /* Grid Layout */
 .account-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 20px 8px;
-    margin-bottom: 40px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px 8px;
+  margin-bottom: 40px;
 }
 
 /* Account Card */
 .account-card {
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    transition: all 0.3s ease;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    border: 1px solid #eaeaea;
+  height: 100%;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #eaeaea;
 }
 
 .account-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.1);
-    border-color: #d1d1d1;
+  transform: translateY(-6px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+  border-color: #d1d1d1;
 }
 
 /* Account Card Image */
 .account-media {
-    position: relative;
-    width: 100%;
-    height: 180px;
-    overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 180px;
+  overflow: hidden;
 }
 
 .account-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.5s ease;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
 }
 
 .account-card:hover .account-img {
-    transform: scale(1.05);
+  transform: scale(1.05);
 }
 
 .account-code {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
-    color: white;
-    padding: 5px 10px;
-    border-radius: 20px;
-    font-size: 1.3rem;
-    font-weight: 700;
-    display: inline-block;
-    box-shadow: 0 2px 5px rgba(14, 62, 218, 0.2);
-    z-index: 1;
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: linear-gradient(
+    135deg,
+    var(--primary-light),
+    var(--primary-color)
+  );
+  color: white;
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  display: inline-block;
+  box-shadow: 0 2px 5px rgba(14, 62, 218, 0.2);
+  z-index: 1;
 }
 
 .account-price-top {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    text-align: center;
-    color: white;
-    font-size: 1.3rem;
-    font-weight: 700;
-    background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0));
-    padding: 20px 5px 5px;
-    z-index: 1;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: white;
+  font-size: 1.3rem;
+  font-weight: 700;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0));
+  padding: 20px 5px 5px;
+  z-index: 1;
 }
 
 /* Account Info */
 .account-info {
-    padding: 20px;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
+  padding: 20px;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .account-row {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 15px;
-    margin-bottom: 15px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  margin-bottom: 15px;
 }
 
 .info-item {
-    display: flex;
-    align-items: center;
-    gap: 2px;
-    padding: 4px;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 4px;
 }
 
 .info-item__title {
-    color: #666;
-    font-size: 1.4rem;
+  color: #666;
+  font-size: 1.4rem;
 }
 
 .info-value.highlight {
-    color: var(--second-color);
+  color: var(--second-color);
 }
 
 /* Account Actions */
 .account-actions {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    padding: 15px;
-    margin-top: auto;
-    border-top: 1px solid #eaeaea;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  padding: 15px;
+  margin-top: auto;
+  border-top: 1px solid #eaeaea;
+  text-align: center;
 }
 
 .action-btn {
-    border-radius: 8px;
-    font-size: 1.2rem;
-    font-weight: 600;
-    text-align: center;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
+  padding: 12px 25px;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-align: center;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
 
 .action-btn i {
-    font-size: 1.3rem;
-    transition: transform 0.3s ease;
+  font-size: 1.3rem;
+  transition: transform 0.3s ease;
 }
 
 .action-btn--card {
-    background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
-    color: white;
-    border: none;
-    box-shadow: 0 3px 8px rgba(14, 62, 218, 0.2);
+  background: linear-gradient(
+    135deg,
+    var(--primary-light),
+    var(--primary-color)
+  );
+  color: white;
+  border: none;
+  box-shadow: 0 3px 8px rgba(14, 62, 218, 0.2);
 }
 
 .action-btn--card:hover {
-    box-shadow: 0 5px 15px rgba(14, 62, 218, 0.3);
-    transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(14, 62, 218, 0.3);
+  transform: translateY(-2px);
 }
 
 .action-btn--card:hover i {
-    transform: translateX(3px);
+  transform: translateX(3px);
 }
 
-
-
-
-
 .action-btn--detail:hover i {
-    transform: translateX(3px);
+  transform: translateX(3px);
 }
 
 /* Filter Bar Styles */
 .account-filter {
-    background: white;
-    padding: 25px;
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    margin-bottom: 30px;
-    border: 1px solid #eaeaea;
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+  margin-bottom: 30px;
+  border: 1px solid #eaeaea;
 }
 
 .account-filter__row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    margin-bottom: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 20px;
 }
 
 .account-filter__group {
-    position: relative;
+  position: relative;
 }
 
 .account-filter__label {
-    display: block;
-    font-weight: 600;
-    color: #333;
-    font-size: 1.4rem;
-    margin-bottom: 8px;
+  display: block;
+  font-weight: 600;
+  color: #333;
+  font-size: 1.4rem;
+  margin-bottom: 8px;
 }
 
 .account-filter__input {
-    width: 100%;
-    height: 45px;
-    padding: 8px 16px;
-    border: 2px solid #e0e0e0;
-    border-radius: 8px;
-    font-size: 1.4rem;
-    transition: all 0.3s ease;
-    background-color: #f8f9fa;
-    color: #333;
+  width: 100%;
+  height: 45px;
+  padding: 8px 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1.4rem;
+  transition: all 0.3s ease;
+  background-color: #f8f9fa;
+  color: #333;
 }
 
 .account-filter__input:hover {
-    border-color: #d1d1d1;
+  border-color: #d1d1d1;
 }
 
 .account-filter__input:focus {
-    outline: none;
-    border-color: var(--primary-color);
-    background-color: #fff;
-    box-shadow: 0 0 0 3px rgba(14, 62, 218, 0.1);
+  outline: none;
+  border-color: var(--primary-color);
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(14, 62, 218, 0.1);
 }
 
 .account-filter__input--select {
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 12px center;
-    padding-right: 40px;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 40px;
 }
 
 .account-filter__actions {
-    display: flex;
-    gap: 15px;
-    justify-content: flex-end;
-    padding-top: 25px;
-    margin-top: 5px;
-    border-top: 1px solid #eee;
+  display: flex;
+  gap: 15px;
+  justify-content: flex-end;
+  padding-top: 25px;
+  margin-top: 5px;
+  border-top: 1px solid #eee;
 }
 
 .account-filter__button {
-    border-radius: 8px;
-    cursor: pointer;
-    min-width: 180px;
-    height: 45px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    transition: all 0.3s ease;
+  border-radius: 8px;
+  cursor: pointer;
+  min-width: 180px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
 }
 
 .account-filter__button--primary {
-    background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
-    color: white;
-    border: none;
-    box-shadow: 0 3px 8px rgba(14, 62, 218, 0.2);
+  background: linear-gradient(
+    135deg,
+    var(--primary-light),
+    var(--primary-color)
+  );
+  color: white;
+  border: none;
+  box-shadow: 0 3px 8px rgba(14, 62, 218, 0.2);
 }
 
 .account-filter__button--primary:hover {
-    box-shadow: 0 5px 15px rgba(14, 62, 218, 0.3);
-    transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(14, 62, 218, 0.3);
+  transform: translateY(-2px);
 }
 
 .account-filter__button--outline {
-    border: 2px solid #333;
-    color: #333;
-    background: transparent;
+  border: 2px solid #333;
+  color: #333;
+  background: transparent;
 }
 
 .account-filter__button--outline:hover {
-    background: #333;
-    color: white;
-    transform: translateY(-2px);
+  background: #333;
+  color: white;
+  transform: translateY(-2px);
 }
 
 /* No Results */
 .no-results {
-    background: white;
-    border-radius: 12px;
-    padding: 40px;
-    text-align: center;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+  background: white;
+  border-radius: 12px;
+  padding: 40px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
 
 .no-results__icon {
-    font-size: 4rem;
-    color: var(--second-color);
-    margin-bottom: 20px;
+  font-size: 4rem;
+  color: var(--second-color);
+  margin-bottom: 20px;
 }
 
 .no-results__title {
-    font-size: 2.2rem;
-    font-weight: 700;
-    color: #333;
-    margin-bottom: 10px;
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 10px;
 }
 
 .no-results__message {
-    font-size: 1.6rem;
-    color: #666;
+  font-size: 1.6rem;
+  color: #666;
 }
 
 /* Pagination */
 .pagination {
-    display: flex;
-    justify-content: center;
-    margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
 }
 
 .pagination .page-item {
-    margin: 0 5px;
+  margin: 0 5px;
 }
 
 .pagination .page-link {
-    border-radius: 8px;
-    border: none;
-    padding: 10px 15px;
-    color: #555;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    background: white;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+  border-radius: 8px;
+  border: none;
+  padding: 10px 15px;
+  color: #555;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  background: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 .pagination .page-item.active .page-link {
-    background: var(--second-color);
-    color: white;
+  background: var(--second-color);
+  color: white;
 }
 
 .pagination .page-link:hover {
-    background: #f8f9fa;
-    transform: translateY(-2px);
+  background: #f8f9fa;
+  transform: translateY(-2px);
 }
 
 .pagination .page-item.active .page-link:hover {
-    background: var(--second-color);
+  background: var(--second-color);
 }
 
 /* Responsive */
 @media (max-width: 992px) {
-    .account-grid {
-        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-        gap: 20px;
-    }
+  .account-grid {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+  }
 
-    .account-filter__row {
-        grid-template-columns: repeat(2, 1fr);
-    }
+  .account-filter__row {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 768px) {
-    .account-grid {
-        grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-        gap: 15px;
-    }
+  .account-grid {
+    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+    gap: 15px;
+  }
 
-    .account-filter__row {
-        grid-template-columns: 1fr;
-    }
+  .account-filter__row {
+    grid-template-columns: 1fr;
+  }
 
-    .account-media {
-        height: 160px;
-    }
+  .account-media {
+    height: 160px;
+  }
 
-    .account-info {
-        padding: 15px;
-    }
+  .account-info {
+    padding: 15px;
+  }
 
-
-    .account-filter__button {
-        min-width: 150px;
-    }
+  .account-filter__button {
+    min-width: 150px;
+  }
 }
 
 @media (max-width: 480px) {
-    .account-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
+  .account-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .account-code {
+    font-size: 1.2rem;
+  }
+  .info-item__title {
+    font-size: 1.2rem;
+  }
+  .info-item {
+    padding: 4px 8px;
+  }
+  .account-info {
+    padding: 8px;
+  }
+  .account-price-top {
+    font-size: 1.2rem;
+  }
+  .account-row {
+    gap: 6px;
+  }
+  .account-actions {
+    grid-template-columns: 1fr;
+    padding: 10px 15px 20px;
+  }
 
-    .account-media {
-        height: 200px;
-    }
+  .account-media {
+    height: 200px;
+  }
 
-    .account-filter__actions {
-        flex-direction: column;
-    }
+  .account-filter__actions {
+    flex-direction: column;
+  }
 
-    .account-filter__button {
-        width: 100%;
-    }
+  .account-filter__button {
+    width: 100%;
+  }
 }
 
 .filter-btn {
-    background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
-    color: white;
-    border: none;
-    padding: 10px 25px;
-    border-radius: 30px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 10px rgba(14, 62, 218, 0.3);
+  background: linear-gradient(
+    135deg,
+    var(--primary-light),
+    var(--primary-color)
+  );
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 10px rgba(14, 62, 218, 0.3);
 }
 
 .filter-btn:hover {
-    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(14, 62, 218, 0.4);
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--primary-dark)
+  );
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(14, 62, 218, 0.4);
 }
 
 .account-action__btn--buy {
-    background: linear-gradient(135deg, var(--primary-light), var(--primary-color));
-    color: white;
-    border: none;
-    box-shadow: 0 4px 10px rgba(14, 62, 218, 0.3);
+  background: linear-gradient(
+    135deg,
+    var(--primary-light),
+    var(--primary-color)
+  );
+  color: white;
+  border: none;
+  box-shadow: 0 4px 10px rgba(14, 62, 218, 0.3);
 }
 
 .account-action__btn--buy:hover {
-    background: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(14, 62, 218, 0.4);
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--primary-dark)
+  );
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(14, 62, 218, 0.4);
 }

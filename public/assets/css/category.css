@@ -161,22 +161,7 @@
   margin-bottom: 40px;
 }
 
-.account-card {
-  background: white;
-  border-radius: var(--border-radius-lg);
-  box-shadow: var(--shadow-md);
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: none;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
 
-.account-card:hover {
-  transform: translateY(-10px);
-  box-shadow: var(--shadow-lg);
-}
 
 .account-media {
   position: relative;
@@ -184,50 +169,15 @@
   height: 200px;
 }
 
-.account-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
 
-.account-code {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  background: var(--primary-color);
-  color: white;
-  padding: 5px 12px;
-  border-radius: var(--border-radius-pill);
-  font-size: 1.4rem;
-  font-weight: 700;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-}
 
-.account-price-top {
-  position: absolute;
-  bottom: 10px;
-  left: 0;
-  right: 0;
-  text-align: center;
-  color: white;
-  font-size: 1.5rem;
-  font-weight: 700;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
-  background: rgba(0, 0, 0, 0.6);
-  padding: 8px 5px;
-}
+
 
 .account-info {
   padding: 20px;
   flex-grow: 1;
 }
 
-.account-row {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 15px;
-  margin-bottom: 15px;
-}
 
 .info-item {
   display: flex;
@@ -235,10 +185,6 @@
   gap: 5px;
 }
 
-.info-item__title {
-  color: var(--text-light);
-  font-size: 1.3rem;
-}
 
 .info-value {
   display: flex;
@@ -252,13 +198,6 @@
   color: var(--accent-color);
 }
 
-.account-actions {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 15px;
-  padding: 0 20px 20px;
-  text-align: center;
-}
 
 .card-price {
   display: flex;
@@ -269,17 +208,7 @@
   padding: 8px 0;
 }
 
-.action-btn {
-  padding: 12px 25px;
-  border-radius: var(--border-radius-pill);
-  font-size: 1.5rem;
-  font-weight: 700;
-  text-align: center;
-  transition: all 0.3s ease;
-  text-decoration: none;
-  display: inline-block;
-  width: 100%;
-}
+
 
 .action-btn--card {
   background: var(--primary-color);
@@ -354,6 +283,9 @@
 @media (max-width: 480px) {
   .account-grid {
     grid-template-columns: 1fr;
+  }
+  .info-value {
+    font-size: 1.2rem;
   }
 }
 

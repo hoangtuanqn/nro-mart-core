@@ -17,23 +17,6 @@
 }
 
 /* Account Card */
-.account-card {
-    background: white;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    transition: all 0.3s ease;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    border: 1px solid #eaeaea;
-}
-
-.account-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.1);
-    border-color: #d1d1d1;
-}
 
 /* Account Card Image */
 .account-card__image {

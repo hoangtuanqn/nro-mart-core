@@ -54,13 +54,13 @@ img {
     .account-card,
     .service-card {
         width: 100%;
-        margin: 0 auto 20px;
+        margin: 0;
     }
 
     .account-card__image,
     .service-card__image,
     .account-media {
-        height: 200px;
+        height: 140px;
     }
 
     /* Buttons and Actions */
