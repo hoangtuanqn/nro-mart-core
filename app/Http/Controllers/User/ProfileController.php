@@ -72,6 +72,9 @@ class ProfileController extends Controller
             'new_password.min' => 'Mật khẩu mới phải có ít nhất 8 ký tự.',
             'new_password.confirmed' => 'Xác nhận mật khẩu mới không khớp.',
         ]);
+        if (app()->environment('demo')) {
+            return redirect()->route('profile.change-password')->with('error', 'Đang ở môi trường demo. Bạn không thể thay đổi dữ liệu.');
+        }
 
         $user = $request->user();
         $user->password = Hash::make($request->new_password);
